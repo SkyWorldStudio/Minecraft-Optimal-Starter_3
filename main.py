@@ -1,16 +1,20 @@
-# 这是一个示例 Python 脚本。
+import sys
 
-# 按 ⌃R 执行或将其替换为您的代码。
-# 按 双击 ⇧ 在所有地方搜索类、文件、工具窗口、操作和设置。
+from PyQt6 import QtWidgets
+from PyQt6.QtWidgets import QApplication
 
+from UI.MainWindow.MainWindow import Ui_MainWindow
 
-def print_hi(name):
-    # 在下面的代码行中使用断点来调试脚本。
-    print(f'Hi, {name}')  # 按 ⌘F8 切换断点。
-
-
-# 按间距中的绿色按钮以运行脚本。
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# 访问 https://www.jetbrains.com/help/pycharm/ 获取 PyCharm 帮助
+    print ("程序已开始运行！")
+    app = QtWidgets.QApplication(sys.argv)
+    print ("请稍等...")
+    MainWindow = QtWidgets.QMainWindow()
+    print ("创建窗口对象成功！")
+    ui = Ui_MainWindow()
+    print ("创建PyQt窗口对象成功！")
+    ui.setupUi(MainWindow)
+    print ("初始化设置成功！")
+    MainWindow.show()
+    print ("已成功显示窗体")
+    sys.exit(app.exec())

@@ -1,0 +1,10 @@
+<RCC>
+  <qresource prefix="widget_Sidebar">
+    <file>../../images/Shrink.png</file>
+    <file>../../images/Home.png</file>
+    <file>../../images/User.png</file>
+    <file>../../images/Download.png</file>
+    <file>../../images/Settings.png</file>
+    <file>../../images/Online.png</file>
+  </qresource>
+</RCC>
