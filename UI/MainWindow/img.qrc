@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="widget_Sidebar">
+    <file>../../images/MOS_Logo_gif.gif</file>
+    <file>../../images/loading_2.gif</file>
     <file>../../images/Shrink.png</file>
     <file>../../images/Home.png</file>
     <file>../../images/User.png</file>
