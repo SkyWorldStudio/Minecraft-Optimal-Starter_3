@@ -331,7 +331,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="page_hello">
+      <widget class="QWidget" name="page_initialize">
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="1" column="0">
          <spacer name="horizontalSpacer">
@@ -384,7 +384,7 @@
            <item row="4" column="0">
             <widget class="QLabel" name="label_hello_text_2">
              <property name="text">
-              <string>正在读取设置(1/10)</string>
+              <string>正在读取设置(1/2)</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -445,6 +445,28 @@
            </size>
           </property>
          </spacer>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="page_hello">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QStackedWidget" name="stackedWidget_2">
+          <widget class="QWidget" name="page_3"/>
+          <widget class="QWidget" name="page_4"/>
+         </widget>
         </item>
        </layout>
       </widget>

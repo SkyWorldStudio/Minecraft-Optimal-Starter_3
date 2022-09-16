@@ -29,7 +29,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             InitializeFirst()
         a = JsonRead(F)
         print('Json读取完成')
-        self.label_hello_text_2.setText('正在设置启动器(2/10)')
+        self.label_hello_text_2.setText('正在设置启动器(2/2)')
 
 
 def Run():
