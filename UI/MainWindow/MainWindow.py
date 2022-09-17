@@ -29,7 +29,7 @@ class Ui_MainWindow(object):
 "    background-color: rgb(115, 250, 121);\n"
 "}\n"
 "#stackedWidget_main #page_initialize{\n"
-"    background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 255, 255, 255), stop:1 rgba(239, 239, 239, 255));\n"
+"    background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 255, 255, 255), stop:1 rgba(233, 233, 233, 255));\n"
 "}\n"
 "\n"
 "/*\n"
@@ -39,11 +39,9 @@ class Ui_MainWindow(object):
 "    background-color: rgba(255, 255, 255,0);\n"
 "}\n"
 "#widget_page_loading{\n"
-"    background-color: rgba(255, 255, 255, 128);\n"
-"    border-top: 7px solid qlineargradient(y0:0, y1:1,stop: 0 rgba(214, 214, 214, 128), stop: 1 white);\n"
-"    border-left: 7px solid qlineargradient(x0:0, x1:1,stop: 0 rgba(214, 214, 214, 128), stop: 1 white);\n"
-"     border-bottom: 7px solid qlineargradient(y0:0, y1:1,stop: 0 white, stop: 1  rgba(214, 214, 214, 128));\n"
-"    border-right: 7px solid qlineargradient(x0:0, x1:1,stop:  0 white, stop: 1 rgba(214, 214, 214, 128));\n"
+"    border-radius: 20px;\n"
+"    background-color: rgba(255, 255, 255,0);\n"
+"    border-image: url(:/widget_Sidebar/images/Loading_BlackGround.gif);\n"
 "}\n"
 "\n"
 "/*\n"
@@ -189,9 +187,10 @@ class Ui_MainWindow(object):
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.gridLayout_3.addItem(spacerItem3, 1, 3, 1, 1)
         self.widget_page_loading = QtWidgets.QWidget(self.page_initialize)
-        self.widget_page_loading.setMinimumSize(QtCore.QSize(0, 0))
+        self.widget_page_loading.setMinimumSize(QtCore.QSize(161, 172))
         self.widget_page_loading.setObjectName("widget_page_loading")
         self.gridLayout_4 = QtWidgets.QGridLayout(self.widget_page_loading)
+        self.gridLayout_4.setContentsMargins(22, 22, 22, 22)
         self.gridLayout_4.setObjectName("gridLayout_4")
         self.label_loading_text_2 = QtWidgets.QLabel(self.widget_page_loading)
         self.label_loading_text_2.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)

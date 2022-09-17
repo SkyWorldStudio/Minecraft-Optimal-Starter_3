@@ -1,18 +1,22 @@
 <RCC>
   <qresource prefix="widget_Sidebar">
-    <file>../../images/Hello_Text_Start.png</file>
-    <file>../../images/Hello_Line_Vertical.png</file>
-    <file>../../images/Hello_Logo.png</file>
-    <file>../../images/Hello_Text.png</file>
-    <file>../../images/Hello_Line.png</file>
+    <file>../../images/Loading_BlackGround.gif</file>
     <file>../../images/Hello_BlackGround.png</file>
+    <file>../../images/Hello_Text_Start.png</file>
+    <file>../../images/Hello_Logo.png</file>
+    <file>../../images/Hello_Line_Vertical.png</file>
+    <file>../../images/Hello_Text.png</file>
+    <file>../../images/Hello_Text_1.png</file>
+    <file>../../images/Hello_Text_2.png</file>
+    <file>../../images/Hello_Line.png</file>
     <file>../../images/MOS_Logo_gif.gif</file>
-    <file>../../images/loading_2.gif</file>
-    <file>../../images/Shrink.png</file>
-    <file>../../images/Home.png</file>
+    <file>../../images/Loading_2_Black.gif</file>
+    <file>../../images/Loading_2.gif</file>
     <file>../../images/User.png</file>
-    <file>../../images/Download.png</file>
+    <file>../../images/Shrink.png</file>
     <file>../../images/Settings.png</file>
     <file>../../images/Online.png</file>
+    <file>../../images/Home.png</file>
+    <file>../../images/Download.png</file>
   </qresource>
 </RCC>

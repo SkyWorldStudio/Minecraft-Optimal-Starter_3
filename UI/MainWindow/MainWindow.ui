@@ -30,7 +30,7 @@
 	background-color: rgb(115, 250, 121);
 }
 #stackedWidget_main #page_initialize{
-	background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 255, 255, 255), stop:1 rgba(239, 239, 239, 255));
+	background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 255, 255, 255), stop:1 rgba(233, 233, 233, 255));
 }
 
 /*
@@ -40,11 +40,9 @@
 	background-color: rgba(255, 255, 255,0);
 }
 #widget_page_loading{
-	background-color: rgba(255, 255, 255, 128);
-	border-top: 7px solid qlineargradient(y0:0, y1:1,stop: 0 rgba(214, 214, 214, 128), stop: 1 white);
-	border-left: 7px solid qlineargradient(x0:0, x1:1,stop: 0 rgba(214, 214, 214, 128), stop: 1 white);
-	 border-bottom: 7px solid qlineargradient(y0:0, y1:1,stop: 0 white, stop: 1  rgba(214, 214, 214, 128));
-	border-right: 7px solid qlineargradient(x0:0, x1:1,stop:  0 white, stop: 1 rgba(214, 214, 214, 128));
+	border-radius: 20px;
+	background-color: rgba(255, 255, 255,0);
+	border-image: url(:/widget_Sidebar/images/Loading_BlackGround.gif);
 }
 
 /*
@@ -409,11 +407,23 @@
          <widget class="QWidget" name="widget_page_loading" native="true">
           <property name="minimumSize">
            <size>
-            <width>0</width>
-            <height>0</height>
+            <width>161</width>
+            <height>172</height>
            </size>
           </property>
           <layout class="QGridLayout" name="gridLayout_4">
+           <property name="leftMargin">
+            <number>22</number>
+           </property>
+           <property name="topMargin">
+            <number>22</number>
+           </property>
+           <property name="rightMargin">
+            <number>22</number>
+           </property>
+           <property name="bottomMargin">
+            <number>22</number>
+           </property>
            <item row="4" column="0">
             <widget class="QLabel" name="label_loading_text_2">
              <property name="text">

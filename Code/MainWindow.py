@@ -2,7 +2,7 @@
 import os.path
 
 from PyQt6 import QtWidgets
-from PyQt6.QtWidgets import QMainWindow
+from PyQt6.QtWidgets import QMainWindow, QGraphicsOpacityEffect
 from PyQt6.QtCore import QTimer
 import sys
 from UI.MainWindow.MainWindow import Ui_MainWindow
@@ -33,6 +33,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             a = JsonRead(F)
             print('Json读取完成')
             self.label_loading_text_2.setText('正在设置启动器(2/2)')
+            self.Animation_ToMainWindow()
 
     def FirstStartInitialize(self):
         """在第一次启动时 初始化(缓存)"""
@@ -40,6 +41,50 @@ class RunUi(QMainWindow, Ui_MainWindow):
         InitializeFirst()
         self.stackedWidget_main.setCurrentIndex(1)
 
+    def Animation_ToMainWindow(self):
+        """动画函数-加载页面->主页面"""
+        # 设置透明度
+        self.Opacity = QGraphicsOpacityEffect()  # 透明度对象
+        self.Opacity.setOpacity(1)  # 初始化设置透明度为，即不透明
+        # self.label.setGraphicsEffect(self.Opacity)  # 把标签的透明度设置为为self.opacity
+
+        self.Animation_ToMainWindow_Int_Original = 1  # 原来多少
+        self.Animation_ToMainWindow_Int = 0.05  # 每次淡化多少
+
+        def Animation():
+            """淡出"""
+            self.Animation_ToMainWindow_Int_Original -= self.Animation_ToMainWindow_Int
+            if self.Animation_ToMainWindow_Int_Original < 0:
+                self.Animation_ToMainWindow_Run.stop()
+                self.stackedWidget_main.setCurrentIndex(0)
+
+                # 开始淡入
+                self.Animation_ToMainWindow_Int_Original = 0  # 原来多少
+                self.Animation_ToMainWindow_Int = 0.05  # 每次淡入多少
+                self.Opacity.setOpacity(0)  # 为了防止出现负数 所以重新设置
+
+                # 触发切换动画(淡入)
+                self.Animation_ToMainWindow_Run_In = QTimer()
+                self.Animation_ToMainWindow_Run_In.start(2)
+                self.Animation_ToMainWindow_Run_In.timeout.connect(AnimationIn)
+
+            else:
+                self.Opacity.setOpacity(self.Animation_ToMainWindow_Int_Original)
+                self.stackedWidget_main.setGraphicsEffect(self.Opacity)
+
+        def AnimationIn():
+            """淡入"""
+            self.Animation_ToMainWindow_Int_Original += self.Animation_ToMainWindow_Int
+            if self.Animation_ToMainWindow_Int_Original > 1:
+                self.Animation_ToMainWindow_Run_In.stop()
+            else:
+                self.Opacity.setOpacity(self.Animation_ToMainWindow_Int_Original)
+                self.stackedWidget_main.setGraphicsEffect(self.Opacity)
+
+        # 触发切换动画(淡出)
+        self.Animation_ToMainWindow_Run = QTimer()
+        self.Animation_ToMainWindow_Run.start(2)
+        self.Animation_ToMainWindow_Run.timeout.connect(Animation)
 
 def Run():
     print("程序已开始运行！")
