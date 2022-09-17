@@ -12,8 +12,11 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1000, 600)
-        MainWindow.setStyleSheet("#widget_Sidebar{\n"
+        MainWindow.resize(1168, 612)
+        MainWindow.setStyleSheet("/*\n"
+"    主页面qss\n"
+"*/\n"
+"#widget_Sidebar{\n"
 "    background-color: rgb(204, 204, 204);\n"
 "}\n"
 "#widget_Sidebar QPushButton{\n"
@@ -25,24 +28,54 @@ class Ui_MainWindow(object):
 "#widget_Sidebar QPushButton::pressed{\n"
 "    background-color: rgb(115, 250, 121);\n"
 "}\n"
-"#stackedWidget_main #page_hello{\n"
+"#stackedWidget_main #page_initialize{\n"
 "    background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 255, 255, 255), stop:1 rgba(239, 239, 239, 255));\n"
 "}\n"
-"#pushButton_hello_gif{\n"
+"\n"
+"/*\n"
+"    加载页面qss\n"
+"*/\n"
+"#pushButton_loading_gif{\n"
 "    background-color: rgba(255, 255, 255,0);\n"
 "}\n"
-"#widget_page_hello{\n"
+"#widget_page_loading{\n"
 "    background-color: rgba(255, 255, 255, 128);\n"
 "    border-top: 7px solid qlineargradient(y0:0, y1:1,stop: 0 rgba(214, 214, 214, 128), stop: 1 white);\n"
 "    border-left: 7px solid qlineargradient(x0:0, x1:1,stop: 0 rgba(214, 214, 214, 128), stop: 1 white);\n"
 "     border-bottom: 7px solid qlineargradient(y0:0, y1:1,stop: 0 white, stop: 1  rgba(214, 214, 214, 128));\n"
 "    border-right: 7px solid qlineargradient(x0:0, x1:1,stop:  0 white, stop: 1 rgba(214, 214, 214, 128));\n"
+"}\n"
+"\n"
+"/*\n"
+"    欢迎页面qss\n"
+"*/\n"
+"#page_hello{\n"
+"    \n"
+"    background-color: rgb(255, 255, 255);\n"
+"    border-image: url(:/widget_Sidebar/images/Hello_BlackGround.png);\n"
+"}\n"
+"#pushButton_hello_icon{\n"
+"    background-color: rgba(255, 255, 255, 0);\n"
+"}\n"
+"#label_hello_text_1{\n"
+"    border-image: url(:/widget_Sidebar/images/Hello_Text_1.png);\n"
+"}\n"
+"#pushButton_hello_text{\n"
+"    background-color: rgba(255, 255, 255, 0);\n"
+"}\n"
+"#pushButton_hello_start{\n"
+"    background-color: rgb(129, 182, 243);\n"
+"    color: rgb(229, 229, 229);\n"
+"    border-style:none;\n"
+"}\n"
+"#pushButton_hello_line{\n"
+"    background-color: rgba(255, 255, 255, 0);\n"
 "}")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.gridLayout_2 = QtWidgets.QGridLayout(self.centralwidget)
-        self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.gridLayout_2.setObjectName("gridLayout_2")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.centralwidget)
+        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.stackedWidget_main = QtWidgets.QStackedWidget(self.centralwidget)
         self.stackedWidget_main.setObjectName("stackedWidget_main")
         self.page_main = QtWidgets.QWidget()
@@ -145,9 +178,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addWidget(self.stackedWidget)
         self.gridLayout.addWidget(self.widget_Middle, 0, 1, 1, 1)
         self.stackedWidget_main.addWidget(self.page_main)
-        self.page_hello = QtWidgets.QWidget()
-        self.page_hello.setObjectName("page_hello")
-        self.gridLayout_3 = QtWidgets.QGridLayout(self.page_hello)
+        self.page_initialize = QtWidgets.QWidget()
+        self.page_initialize.setObjectName("page_initialize")
+        self.gridLayout_3 = QtWidgets.QGridLayout(self.page_initialize)
         self.gridLayout_3.setObjectName("gridLayout_3")
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.gridLayout_3.addItem(spacerItem1, 1, 0, 1, 1)
@@ -155,40 +188,103 @@ class Ui_MainWindow(object):
         self.gridLayout_3.addItem(spacerItem2, 0, 2, 1, 1)
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.gridLayout_3.addItem(spacerItem3, 1, 3, 1, 1)
-        self.widget_page_hello = QtWidgets.QWidget(self.page_hello)
-        self.widget_page_hello.setMinimumSize(QtCore.QSize(0, 0))
-        self.widget_page_hello.setObjectName("widget_page_hello")
-        self.gridLayout_4 = QtWidgets.QGridLayout(self.widget_page_hello)
+        self.widget_page_loading = QtWidgets.QWidget(self.page_initialize)
+        self.widget_page_loading.setMinimumSize(QtCore.QSize(0, 0))
+        self.widget_page_loading.setObjectName("widget_page_loading")
+        self.gridLayout_4 = QtWidgets.QGridLayout(self.widget_page_loading)
         self.gridLayout_4.setObjectName("gridLayout_4")
-        self.label_hello_text_2 = QtWidgets.QLabel(self.widget_page_hello)
-        self.label_hello_text_2.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.label_hello_text_2.setObjectName("label_hello_text_2")
-        self.gridLayout_4.addWidget(self.label_hello_text_2, 4, 0, 1, 1)
-        self.pushButton_hello_gif = QtWidgets.QPushButton(self.widget_page_hello)
-        self.pushButton_hello_gif.setText("")
+        self.label_loading_text_2 = QtWidgets.QLabel(self.widget_page_loading)
+        self.label_loading_text_2.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.label_loading_text_2.setObjectName("label_loading_text_2")
+        self.gridLayout_4.addWidget(self.label_loading_text_2, 4, 0, 1, 1)
+        self.pushButton_loading_gif = QtWidgets.QPushButton(self.widget_page_loading)
+        self.pushButton_loading_gif.setText("")
         icon6 = QtGui.QIcon()
         icon6.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/MOS_Logo_gif.gif"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.pushButton_hello_gif.setIcon(icon6)
-        self.pushButton_hello_gif.setIconSize(QtCore.QSize(80, 80))
-        self.pushButton_hello_gif.setObjectName("pushButton_hello_gif")
-        self.gridLayout_4.addWidget(self.pushButton_hello_gif, 1, 0, 1, 1)
-        self.label_hello_text_1 = QtWidgets.QLabel(self.widget_page_hello)
+        self.pushButton_loading_gif.setIcon(icon6)
+        self.pushButton_loading_gif.setIconSize(QtCore.QSize(80, 80))
+        self.pushButton_loading_gif.setObjectName("pushButton_loading_gif")
+        self.gridLayout_4.addWidget(self.pushButton_loading_gif, 1, 0, 1, 1)
+        self.label_loading_text_1 = QtWidgets.QLabel(self.widget_page_loading)
         font = QtGui.QFont()
         font.setPointSize(14)
-        self.label_hello_text_1.setFont(font)
-        self.label_hello_text_1.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.label_hello_text_1.setObjectName("label_hello_text_1")
-        self.gridLayout_4.addWidget(self.label_hello_text_1, 2, 0, 1, 1)
-        self.line = QtWidgets.QFrame(self.widget_page_hello)
+        self.label_loading_text_1.setFont(font)
+        self.label_loading_text_1.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.label_loading_text_1.setObjectName("label_loading_text_1")
+        self.gridLayout_4.addWidget(self.label_loading_text_1, 2, 0, 1, 1)
+        self.line = QtWidgets.QFrame(self.widget_page_loading)
         self.line.setFrameShape(QtWidgets.QFrame.Shape.HLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.line.setObjectName("line")
         self.gridLayout_4.addWidget(self.line, 3, 0, 1, 1)
-        self.gridLayout_3.addWidget(self.widget_page_hello, 1, 2, 1, 1)
+        self.gridLayout_3.addWidget(self.widget_page_loading, 1, 2, 1, 1)
         spacerItem4 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         self.gridLayout_3.addItem(spacerItem4, 2, 2, 1, 1)
+        self.stackedWidget_main.addWidget(self.page_initialize)
+        self.page_hello = QtWidgets.QWidget()
+        self.page_hello.setObjectName("page_hello")
+        self.gridLayout_5 = QtWidgets.QGridLayout(self.page_hello)
+        self.gridLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.gridLayout_5.setSpacing(0)
+        self.gridLayout_5.setObjectName("gridLayout_5")
+        spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.gridLayout_5.addItem(spacerItem5, 2, 1, 1, 1)
+        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.gridLayout_5.addItem(spacerItem6, 0, 2, 3, 1)
+        spacerItem7 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.gridLayout_5.addItem(spacerItem7, 0, 1, 1, 1)
+        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.gridLayout_5.addItem(spacerItem8, 0, 0, 3, 1)
+        self.widget_hello = QtWidgets.QWidget(self.page_hello)
+        self.widget_hello.setObjectName("widget_hello")
+        self.gridLayout_6 = QtWidgets.QGridLayout(self.widget_hello)
+        self.gridLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.gridLayout_6.setHorizontalSpacing(0)
+        self.gridLayout_6.setObjectName("gridLayout_6")
+        spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.gridLayout_6.addItem(spacerItem9, 3, 4, 1, 1)
+        spacerItem10 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.gridLayout_6.addItem(spacerItem10, 0, 3, 1, 1)
+        spacerItem11 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.gridLayout_6.addItem(spacerItem11, 3, 2, 1, 1)
+        self.pushButton_hello_text = QtWidgets.QPushButton(self.widget_hello)
+        self.pushButton_hello_text.setText("")
+        icon7 = QtGui.QIcon()
+        icon7.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/Hello_Text.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.pushButton_hello_text.setIcon(icon7)
+        self.pushButton_hello_text.setIconSize(QtCore.QSize(327, 153))
+        self.pushButton_hello_text.setObjectName("pushButton_hello_text")
+        self.gridLayout_6.addWidget(self.pushButton_hello_text, 1, 2, 2, 3)
+        self.pushButton_hello_start = QtWidgets.QPushButton(self.widget_hello)
+        self.pushButton_hello_start.setMinimumSize(QtCore.QSize(173, 43))
+        self.pushButton_hello_start.setText("")
+        icon8 = QtGui.QIcon()
+        icon8.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/Hello_Text_Start.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.pushButton_hello_start.setIcon(icon8)
+        self.pushButton_hello_start.setIconSize(QtCore.QSize(173, 43))
+        self.pushButton_hello_start.setObjectName("pushButton_hello_start")
+        self.gridLayout_6.addWidget(self.pushButton_hello_start, 3, 3, 2, 1)
+        self.pushButton_hello_icon = QtWidgets.QPushButton(self.widget_hello)
+        self.pushButton_hello_icon.setText("")
+        icon9 = QtGui.QIcon()
+        icon9.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/Hello_Logo.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.pushButton_hello_icon.setIcon(icon9)
+        self.pushButton_hello_icon.setIconSize(QtCore.QSize(253, 253))
+        self.pushButton_hello_icon.setObjectName("pushButton_hello_icon")
+        self.gridLayout_6.addWidget(self.pushButton_hello_icon, 0, 0, 6, 1)
+        self.pushButton_hello_line = QtWidgets.QPushButton(self.widget_hello)
+        self.pushButton_hello_line.setText("")
+        icon10 = QtGui.QIcon()
+        icon10.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/Hello_Line_Vertical.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.pushButton_hello_line.setIcon(icon10)
+        self.pushButton_hello_line.setIconSize(QtCore.QSize(21, 253))
+        self.pushButton_hello_line.setObjectName("pushButton_hello_line")
+        self.gridLayout_6.addWidget(self.pushButton_hello_line, 0, 1, 6, 1)
+        spacerItem12 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.gridLayout_6.addItem(spacerItem12, 5, 2, 1, 3)
+        self.gridLayout_5.addWidget(self.widget_hello, 1, 1, 1, 1)
         self.stackedWidget_main.addWidget(self.page_hello)
-        self.gridLayout_2.addWidget(self.stackedWidget_main, 0, 0, 1, 1)
+        self.horizontalLayout_2.addWidget(self.stackedWidget_main)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -198,5 +294,5 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MOS Ⅲ 启动器"))
-        self.label_hello_text_2.setText(_translate("MainWindow", "正在读取设置(1/10)"))
-        self.label_hello_text_1.setText(_translate("MainWindow", "正在初始化启动器……"))
+        self.label_loading_text_2.setText(_translate("MainWindow", "正在读取设置(1/2)"))
+        self.label_loading_text_1.setText(_translate("MainWindow", "正在初始化启动器……"))

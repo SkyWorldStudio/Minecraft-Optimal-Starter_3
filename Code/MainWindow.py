@@ -17,19 +17,28 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.RunInitialize_ = QTimer()
         self.RunInitialize_.start(10)
         self.RunInitialize_.timeout.connect(self.RunInitialize)
+        self.pushButton_hello_start.clicked.connect(self.FirstStartInitialize)
 
     def RunInitialize(self):
-        """初始化"""
+        """在启动器启动后初始化启动器(读取设置+设置启动器)"""
         self.RunInitialize_.stop()
         self.JsonFile = os.path.join('')
         from Code.Code import JsonRead, JsonFile, InitializeFirst
         F = JsonFile()
         if os.path.isfile(F) == False:
-            """如果没有Json这个目录 就读取初始化"""
-            InitializeFirst()
-        a = JsonRead(F)
-        print('Json读取完成')
-        self.label_hello_text_2.setText('正在设置启动器(2/2)')
+            """如果没有Json这个目录 就转到欢迎(初始化)页面"""
+            self.stackedWidget_main.setCurrentIndex(2)
+        else:
+            # 如果有 就进行下一步
+            a = JsonRead(F)
+            print('Json读取完成')
+            self.label_loading_text_2.setText('正在设置启动器(2/2)')
+
+    def FirstStartInitialize(self):
+        """在第一次启动时 初始化(缓存)"""
+        from Code.Code import InitializeFirst
+        InitializeFirst()
+        self.stackedWidget_main.setCurrentIndex(1)
 
 
 def Run():
