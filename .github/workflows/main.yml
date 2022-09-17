@@ -6,7 +6,7 @@
     # Directory containing source code (optional requirements.txt).
     path: # default is src
     # Specify a custom URL for PYPI
-    pypi_url: # optional, default is https://pypi.python.org/
+    pypi_url: 'https://pypi.python.org/'
     # Specify a custom URL for PYPI Index
     pypi_index_url: # optional, default is https://pypi.python.org/simple
     # Specify a file path for .spec file
