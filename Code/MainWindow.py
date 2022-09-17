@@ -25,7 +25,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
     def RunInitialize(self,First=True):
         """在启动器启动后初始化启动器(读取设置+设置启动器)"""
-        if First:
+        if First == True:
             self.RunInitialize_.stop()
         self.JsonFile = os.path.join('')
         from Code.Code import JsonRead, JsonFile, InitializeFirst
@@ -76,7 +76,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 self.Animation_ToMainWindow_Run.stop()
                 self.stackedWidget_main.setCurrentIndex(self.Animation_ToMainWindow_Int_Page)
 
-                # 开始淡入
+                # 初始化淡出
                 self.Animation_ToMainWindow_Int_Original = 0  # 原来多少
                 self.Opacity.setOpacity(0)  # 为了防止出现负数 所以重新设置
 
@@ -92,18 +92,18 @@ class RunUi(QMainWindow, Ui_MainWindow):
         def AnimationIn():
             """淡入"""
             self.Animation_ToMainWindow_Int_Original += self.Animation_ToMainWindow_Int
-            print('cccccc' + str(self.Animation_ToMainWindow_Int_Original))
             if self.Animation_ToMainWindow_Int_Original > 1:
-                print('ssssss' + str(self.Animation_ToMainWindow_Int_Original))
                 self.Animation_ToMainWindow_Run_In.stop()
-                self.FirstStartInitializeOk()
+                if HelloToMainLoading == True:
+                    # 如果是从欢迎页面渐变的 就重新加载json
+                    self.FirstStartInitializeOk()
             else:
                 self.Opacity.setOpacity(self.Animation_ToMainWindow_Int_Original)
                 self.stackedWidget_main.setGraphicsEffect(self.Opacity)
 
         # 触发切换动画(淡出)
         self.Animation_ToMainWindow_Run = QTimer()
-        self.Animation_ToMainWindow_Run.start(200)
+        self.Animation_ToMainWindow_Run.start(2)
         self.Animation_ToMainWindow_Run.timeout.connect(Animation)
 
 
