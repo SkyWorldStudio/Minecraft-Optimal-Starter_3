@@ -1,0 +1,15 @@
+- name: Python Build for Windows(PyInstaller)
+  # You may pin to the exact commit or the version.
+  # uses: vednig/pyinstaller-action-windows@0afdb67a4e28dda36b3032446f39f40bf5c53973
+  uses: vednig/pyinstaller-action-windows@v0.1.5
+  with:
+    # Directory containing source code (optional requirements.txt).
+    path: # default is src
+    # Specify a custom URL for PYPI
+    pypi_url: # optional, default is https://pypi.python.org/
+    # Specify a custom URL for PYPI Index
+    pypi_index_url: # optional, default is https://pypi.python.org/simple
+    # Specify a file path for .spec file
+    spec: # optional, default is 
+    # Specify a file path for requirements.txt file
+    requirements: # optional, default is requirements.txt
