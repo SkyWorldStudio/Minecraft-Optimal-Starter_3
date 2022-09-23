@@ -3,7 +3,7 @@ import os.path
 
 from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QMainWindow, QGraphicsOpacityEffect
-from PyQt6.QtCore import QTimer, QThread
+from PyQt6.QtCore import QTimer, QThread, Qt
 import sys
 from UI.MainWindow.MainWindow import Ui_MainWindow
 
@@ -20,10 +20,9 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.RunInitialize_.timeout.connect(self.RunInitialize)
         self.RunInitialize_.start()
 
-
         self.pushButton_hello_start.clicked.connect(self.FirstStartInitialize)
 
-    def RunInitialize(self,First=True):
+    def RunInitialize(self, First=True):
         """在启动器启动后初始化启动器(读取设置+设置启动器)"""
         if First == True:
             self.RunInitialize_.stop()
@@ -50,7 +49,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         """在第一次启动时 初始化(缓存) 的页面切换动画完成后"""
         self.RunInitialize(First=False)  # 重新读取配置
 
-    def Animation_ToMainWindow(self,HelloToMainLoading=False):
+    def Animation_ToMainWindow(self, HelloToMainLoading=False):
         """动画函数-……(默认 加载)页面->主页面"""
 
         # 切换为第……页
@@ -59,7 +58,6 @@ class RunUi(QMainWindow, Ui_MainWindow):
         elif HelloToMainLoading == True:
             # 欢迎页切换为加载页
             self.Animation_ToMainWindow_Int_Page = 1
-
 
         # 设置透明度
         self.Opacity = QGraphicsOpacityEffect()  # 透明度对象
@@ -107,14 +105,12 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.Animation_ToMainWindow_Run.timeout.connect(Animation)
 
 
-
 class RunInitializeThread(QThread):
     def __init__(self):
         super(RunInitializeThread, self).__init__()
+
     def run(self) -> None:
         pass
-
-
 
 
 def Run():

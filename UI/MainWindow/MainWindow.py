@@ -16,20 +16,27 @@ class Ui_MainWindow(object):
         MainWindow.setStyleSheet("/*\n"
 "    主页面qss\n"
 "*/\n"
-"#widget_Sidebar{\n"
-"    background-color: rgb(204, 204, 204);\n"
-"}\n"
-"#widget_Sidebar QPushButton{\n"
-"    border-radius: 14px;\n"
-"}\n"
-"#widget_Middle{\n"
+"#page_main{\n"
+"    /*主页面背景*/\n"
 "    background-color: rgb(255, 255, 255);\n"
 "}\n"
-"#widget_Sidebar QPushButton::pressed{\n"
-"    background-color: rgb(115, 250, 121);\n"
+"#widget_Sidebar{\n"
+"    /*左边栏背景*/\n"
+"    border-image: url(:/Scrub/images/Scrub_B10_V.png);\n"
+"    background: rgba(255, 255, 255, 0.5);\n"
+"    /*阴影 不生效 已经该用图片*/\n"
+"    /*\n"
+"    border-top: 5px solid qlineargradient(y0:0, y1:1,stop: 0 #ececef, stop: 1 white);\n"
+"    border-left: 5px solid qlineargradient(x0:0, x1:1,stop: 0 #ececef, stop: 1 white);\n"
+"     border-bottom: 5px solid qlineargradient(y0:0, y1:1,stop: 0 white, stop: 1  rgb(0, 0, 0));\n"
+"    border-right: 5px solid qlineargradient(x0:0, x1:1,stop:  0 white, stop: 1 rgb(0, 0, 0));\n"
+"    */\n"
 "}\n"
-"#stackedWidget_main #page_initialize{\n"
-"    background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 255, 255, 255), stop:1 rgba(233, 233, 233, 255));\n"
+"#widget_Sidebar QPushButton{\n"
+"    border-radius: 5px;\n"
+"}\n"
+"#stackedWidget_main_2{\n"
+"    border-image: url(:/Scrub/images/Scrub_B2_FFFFFF-50_Main-M-B.png);\n"
 "}\n"
 "\n"
 "/*\n"
@@ -41,22 +48,24 @@ class Ui_MainWindow(object):
 "#widget_page_loading{\n"
 "    border-radius: 20px;\n"
 "    background-color: rgba(255, 255, 255,0);\n"
-"    border-image: url(:/widget_Sidebar/images/Loading_BlackGround.gif);\n"
+"    border-image: url(:/helo_loading/images/Loading_BlackGround.gif);\n"
 "}\n"
 "\n"
 "/*\n"
 "    欢迎页面qss\n"
 "*/\n"
+"#stackedWidget_main #page_initialize{\n"
+"    background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 255, 255, 255), stop:1 rgba(233, 233, 233, 255));\n"
+"}\n"
 "#page_hello{\n"
-"    \n"
 "    background-color: rgb(255, 255, 255);\n"
-"    border-image: url(:/widget_Sidebar/images/Hello_BlackGround.png);\n"
+"    border-image: url(:/hello/images/Hello_BlackGround.png);\n"
 "}\n"
 "#pushButton_hello_icon{\n"
 "    background-color: rgba(255, 255, 255, 0);\n"
 "}\n"
 "#label_hello_text_1{\n"
-"    border-image: url(:/widget_Sidebar/images/Hello_Text_1.png);\n"
+"    border-image: url(:/hello/images/Hello_Text_1.png);\n"
 "}\n"
 "#pushButton_hello_text{\n"
 "    background-color: rgba(255, 255, 255, 0);\n"
@@ -88,9 +97,19 @@ class Ui_MainWindow(object):
         self.widget_Sidebar.setStyleSheet("")
         self.widget_Sidebar.setObjectName("widget_Sidebar")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.widget_Sidebar)
-        self.verticalLayout.setContentsMargins(8, 15, 8, 15)
-        self.verticalLayout.setSpacing(10)
+        self.verticalLayout.setContentsMargins(0, 5, 0, 5)
+        self.verticalLayout.setSpacing(5)
         self.verticalLayout.setObjectName("verticalLayout")
+        self.pushButton_Sidebar_Back = QtWidgets.QPushButton(self.widget_Sidebar)
+        self.pushButton_Sidebar_Back.setMinimumSize(QtCore.QSize(49, 47))
+        self.pushButton_Sidebar_Back.setMaximumSize(QtCore.QSize(49, 47))
+        self.pushButton_Sidebar_Back.setText("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/Back.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.pushButton_Sidebar_Back.setIcon(icon)
+        self.pushButton_Sidebar_Back.setIconSize(QtCore.QSize(47, 47))
+        self.pushButton_Sidebar_Back.setObjectName("pushButton_Sidebar_Back")
+        self.verticalLayout.addWidget(self.pushButton_Sidebar_Back)
         self.pushButton_Sidebar_User = QtWidgets.QPushButton(self.widget_Sidebar)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -100,9 +119,9 @@ class Ui_MainWindow(object):
         self.pushButton_Sidebar_User.setMinimumSize(QtCore.QSize(49, 47))
         self.pushButton_Sidebar_User.setMaximumSize(QtCore.QSize(49, 47))
         self.pushButton_Sidebar_User.setText("")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.pushButton_Sidebar_User.setIcon(icon)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.pushButton_Sidebar_User.setIcon(icon1)
         self.pushButton_Sidebar_User.setIconSize(QtCore.QSize(47, 47))
         self.pushButton_Sidebar_User.setObjectName("pushButton_Sidebar_User")
         self.verticalLayout.addWidget(self.pushButton_Sidebar_User)
@@ -110,9 +129,9 @@ class Ui_MainWindow(object):
         self.pushButton_Sidebar_Home.setMinimumSize(QtCore.QSize(49, 47))
         self.pushButton_Sidebar_Home.setMaximumSize(QtCore.QSize(49, 47))
         self.pushButton_Sidebar_Home.setText("")
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/Home.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.pushButton_Sidebar_Home.setIcon(icon1)
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/Home.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.pushButton_Sidebar_Home.setIcon(icon2)
         self.pushButton_Sidebar_Home.setIconSize(QtCore.QSize(47, 47))
         self.pushButton_Sidebar_Home.setObjectName("pushButton_Sidebar_Home")
         self.verticalLayout.addWidget(self.pushButton_Sidebar_Home)
@@ -120,9 +139,9 @@ class Ui_MainWindow(object):
         self.pushButton_Sidebar_OnLine.setMinimumSize(QtCore.QSize(49, 47))
         self.pushButton_Sidebar_OnLine.setMaximumSize(QtCore.QSize(49, 47))
         self.pushButton_Sidebar_OnLine.setText("")
-        icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/Online.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.pushButton_Sidebar_OnLine.setIcon(icon2)
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/Online.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.pushButton_Sidebar_OnLine.setIcon(icon3)
         self.pushButton_Sidebar_OnLine.setIconSize(QtCore.QSize(47, 47))
         self.pushButton_Sidebar_OnLine.setObjectName("pushButton_Sidebar_OnLine")
         self.verticalLayout.addWidget(self.pushButton_Sidebar_OnLine)
@@ -130,9 +149,9 @@ class Ui_MainWindow(object):
         self.pushButton_Sidebar_Download.setMinimumSize(QtCore.QSize(49, 47))
         self.pushButton_Sidebar_Download.setMaximumSize(QtCore.QSize(49, 47))
         self.pushButton_Sidebar_Download.setText("")
-        icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/Download.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.pushButton_Sidebar_Download.setIcon(icon3)
+        icon4 = QtGui.QIcon()
+        icon4.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/Download.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.pushButton_Sidebar_Download.setIcon(icon4)
         self.pushButton_Sidebar_Download.setIconSize(QtCore.QSize(47, 47))
         self.pushButton_Sidebar_Download.setObjectName("pushButton_Sidebar_Download")
         self.verticalLayout.addWidget(self.pushButton_Sidebar_Download)
@@ -142,22 +161,12 @@ class Ui_MainWindow(object):
         self.pushButton_Sidebar_Settings.setMinimumSize(QtCore.QSize(49, 47))
         self.pushButton_Sidebar_Settings.setMaximumSize(QtCore.QSize(49, 47))
         self.pushButton_Sidebar_Settings.setText("")
-        icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/Settings.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.pushButton_Sidebar_Settings.setIcon(icon4)
+        icon5 = QtGui.QIcon()
+        icon5.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/Settings.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.pushButton_Sidebar_Settings.setIcon(icon5)
         self.pushButton_Sidebar_Settings.setIconSize(QtCore.QSize(47, 47))
         self.pushButton_Sidebar_Settings.setObjectName("pushButton_Sidebar_Settings")
         self.verticalLayout.addWidget(self.pushButton_Sidebar_Settings)
-        self.pushButton_Sidebar_Unfold = QtWidgets.QPushButton(self.widget_Sidebar)
-        self.pushButton_Sidebar_Unfold.setMinimumSize(QtCore.QSize(49, 47))
-        self.pushButton_Sidebar_Unfold.setMaximumSize(QtCore.QSize(49, 47))
-        self.pushButton_Sidebar_Unfold.setText("")
-        icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/Shrink.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.pushButton_Sidebar_Unfold.setIcon(icon5)
-        self.pushButton_Sidebar_Unfold.setIconSize(QtCore.QSize(47, 47))
-        self.pushButton_Sidebar_Unfold.setObjectName("pushButton_Sidebar_Unfold")
-        self.verticalLayout.addWidget(self.pushButton_Sidebar_Unfold)
         self.gridLayout.addWidget(self.widget_Sidebar, 0, 0, 1, 1)
         self.widget_Middle = QtWidgets.QWidget(self.page_main)
         self.widget_Middle.setObjectName("widget_Middle")
@@ -165,15 +174,15 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setSpacing(0)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.stackedWidget = QtWidgets.QStackedWidget(self.widget_Middle)
-        self.stackedWidget.setObjectName("stackedWidget")
+        self.stackedWidget_main_2 = QtWidgets.QStackedWidget(self.widget_Middle)
+        self.stackedWidget_main_2.setObjectName("stackedWidget_main_2")
         self.page = QtWidgets.QWidget()
         self.page.setObjectName("page")
-        self.stackedWidget.addWidget(self.page)
+        self.stackedWidget_main_2.addWidget(self.page)
         self.page_2 = QtWidgets.QWidget()
         self.page_2.setObjectName("page_2")
-        self.stackedWidget.addWidget(self.page_2)
-        self.horizontalLayout.addWidget(self.stackedWidget)
+        self.stackedWidget_main_2.addWidget(self.page_2)
+        self.horizontalLayout.addWidget(self.stackedWidget_main_2)
         self.gridLayout.addWidget(self.widget_Middle, 0, 1, 1, 1)
         self.stackedWidget_main.addWidget(self.page_main)
         self.page_initialize = QtWidgets.QWidget()
@@ -249,7 +258,7 @@ class Ui_MainWindow(object):
         self.pushButton_hello_text = QtWidgets.QPushButton(self.widget_hello)
         self.pushButton_hello_text.setText("")
         icon7 = QtGui.QIcon()
-        icon7.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/Hello_Text.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon7.addPixmap(QtGui.QPixmap(":/hello/images/Hello_Text.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton_hello_text.setIcon(icon7)
         self.pushButton_hello_text.setIconSize(QtCore.QSize(327, 153))
         self.pushButton_hello_text.setObjectName("pushButton_hello_text")
@@ -258,7 +267,7 @@ class Ui_MainWindow(object):
         self.pushButton_hello_start.setMinimumSize(QtCore.QSize(173, 43))
         self.pushButton_hello_start.setText("")
         icon8 = QtGui.QIcon()
-        icon8.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/Hello_Text_Start.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon8.addPixmap(QtGui.QPixmap(":/hello/images/Hello_Text_Start.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton_hello_start.setIcon(icon8)
         self.pushButton_hello_start.setIconSize(QtCore.QSize(173, 43))
         self.pushButton_hello_start.setObjectName("pushButton_hello_start")
@@ -266,7 +275,7 @@ class Ui_MainWindow(object):
         self.pushButton_hello_icon = QtWidgets.QPushButton(self.widget_hello)
         self.pushButton_hello_icon.setText("")
         icon9 = QtGui.QIcon()
-        icon9.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/Hello_Logo.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon9.addPixmap(QtGui.QPixmap(":/hello/images/Hello_Logo.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton_hello_icon.setIcon(icon9)
         self.pushButton_hello_icon.setIconSize(QtCore.QSize(253, 253))
         self.pushButton_hello_icon.setObjectName("pushButton_hello_icon")
@@ -274,7 +283,7 @@ class Ui_MainWindow(object):
         self.pushButton_hello_line = QtWidgets.QPushButton(self.widget_hello)
         self.pushButton_hello_line.setText("")
         icon10 = QtGui.QIcon()
-        icon10.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/Hello_Line_Vertical.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon10.addPixmap(QtGui.QPixmap(":/hello/images/Hello_Line_Vertical.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton_hello_line.setIcon(icon10)
         self.pushButton_hello_line.setIconSize(QtCore.QSize(21, 253))
         self.pushButton_hello_line.setObjectName("pushButton_hello_line")
@@ -287,7 +296,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget_main.setCurrentIndex(1)
+        self.stackedWidget_main.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

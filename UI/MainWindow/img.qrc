@@ -1,22 +1,32 @@
 <RCC>
   <qresource prefix="widget_Sidebar">
-    <file>../../images/Loading_BlackGround.gif</file>
-    <file>../../images/Hello_BlackGround.png</file>
-    <file>../../images/Hello_Text_Start.png</file>
-    <file>../../images/Hello_Logo.png</file>
-    <file>../../images/Hello_Line_Vertical.png</file>
-    <file>../../images/Hello_Text.png</file>
-    <file>../../images/Hello_Text_1.png</file>
-    <file>../../images/Hello_Text_2.png</file>
-    <file>../../images/Hello_Line.png</file>
+    <file>../../images/Back.png</file>
     <file>../../images/MOS_Logo_gif.gif</file>
     <file>../../images/Loading_2_Black.gif</file>
     <file>../../images/Loading_2.gif</file>
     <file>../../images/User.png</file>
-    <file>../../images/Shrink.png</file>
     <file>../../images/Settings.png</file>
     <file>../../images/Online.png</file>
     <file>../../images/Home.png</file>
     <file>../../images/Download.png</file>
+  </qresource>
+  <qresource prefix="Scrub">
+    <file>../../images/Scrub_B2_FFFFFF-50_Main-M-B.png</file>
+    <file>../../images/Scrub_B10_V.png</file>
+    <file>../../images/Scrub_B10.png</file>
+    <file>../../images/Scrub_B4.png</file>
+  </qresource>
+  <qresource prefix="helo_loading">
+    <file>../../images/Loading_BlackGround.gif</file>
+  </qresource>
+  <qresource prefix="hello">
+    <file>../../images/Hello_Text_Start.png</file>
+    <file>../../images/Hello_Text_2.png</file>
+    <file>../../images/Hello_Text_1.png</file>
+    <file>../../images/Hello_Text.png</file>
+    <file>../../images/Hello_Logo.png</file>
+    <file>../../images/Hello_Line.png</file>
+    <file>../../images/Hello_Line_Vertical.png</file>
+    <file>../../images/Hello_BlackGround.png</file>
   </qresource>
 </RCC>

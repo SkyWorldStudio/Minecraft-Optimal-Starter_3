@@ -17,20 +17,27 @@
    <string notr="true">/*
 	主页面qss
 */
-#widget_Sidebar{
-	background-color: rgb(204, 204, 204);
-}
-#widget_Sidebar QPushButton{
-	border-radius: 14px;
-}
-#widget_Middle{
+#page_main{
+	/*主页面背景*/
 	background-color: rgb(255, 255, 255);
 }
-#widget_Sidebar QPushButton::pressed{
-	background-color: rgb(115, 250, 121);
+#widget_Sidebar{
+	/*左边栏背景*/
+	border-image: url(:/Scrub/images/Scrub_B10_V.png);
+	background: rgba(255, 255, 255, 0.5);
+	/*阴影 不生效 已经该用图片*/
+	/*
+	border-top: 5px solid qlineargradient(y0:0, y1:1,stop: 0 #ececef, stop: 1 white);
+	border-left: 5px solid qlineargradient(x0:0, x1:1,stop: 0 #ececef, stop: 1 white);
+ 	border-bottom: 5px solid qlineargradient(y0:0, y1:1,stop: 0 white, stop: 1  rgb(0, 0, 0));
+	border-right: 5px solid qlineargradient(x0:0, x1:1,stop:  0 white, stop: 1 rgb(0, 0, 0));
+	*/
 }
-#stackedWidget_main #page_initialize{
-	background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 255, 255, 255), stop:1 rgba(233, 233, 233, 255));
+#widget_Sidebar QPushButton{
+	border-radius: 5px;
+}
+#stackedWidget_main_2{
+	border-image: url(:/Scrub/images/Scrub_B2_FFFFFF-50_Main-M-B.png);
 }
 
 /*
@@ -42,22 +49,24 @@
 #widget_page_loading{
 	border-radius: 20px;
 	background-color: rgba(255, 255, 255,0);
-	border-image: url(:/widget_Sidebar/images/Loading_BlackGround.gif);
+	border-image: url(:/helo_loading/images/Loading_BlackGround.gif);
 }
 
 /*
 	欢迎页面qss
 */
+#stackedWidget_main #page_initialize{
+	background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 255, 255, 255), stop:1 rgba(233, 233, 233, 255));
+}
 #page_hello{
-	
 	background-color: rgb(255, 255, 255);
-	border-image: url(:/widget_Sidebar/images/Hello_BlackGround.png);
+	border-image: url(:/hello/images/Hello_BlackGround.png);
 }
 #pushButton_hello_icon{
 	background-color: rgba(255, 255, 255, 0);
 }
 #label_hello_text_1{
-	border-image: url(:/widget_Sidebar/images/Hello_Text_1.png);
+	border-image: url(:/hello/images/Hello_Text_1.png);
 }
 #pushButton_hello_text{
 	background-color: rgba(255, 255, 255, 0);
@@ -88,7 +97,7 @@
     <item>
      <widget class="QStackedWidget" name="stackedWidget_main">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="page_main">
        <layout class="QGridLayout" name="gridLayout">
@@ -123,20 +132,49 @@
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">
            <property name="spacing">
-            <number>10</number>
+            <number>5</number>
            </property>
            <property name="leftMargin">
-            <number>8</number>
+            <number>0</number>
            </property>
            <property name="topMargin">
-            <number>15</number>
+            <number>5</number>
            </property>
            <property name="rightMargin">
-            <number>8</number>
+            <number>0</number>
            </property>
            <property name="bottomMargin">
-            <number>15</number>
+            <number>5</number>
            </property>
+           <item>
+            <widget class="QPushButton" name="pushButton_Sidebar_Back">
+             <property name="minimumSize">
+              <size>
+               <width>49</width>
+               <height>47</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>49</width>
+               <height>47</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="img.qrc">
+               <normaloff>:/widget_Sidebar/images/Back.png</normaloff>:/widget_Sidebar/images/Back.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>47</width>
+               <height>47</height>
+              </size>
+             </property>
+            </widget>
+           </item>
            <item>
             <widget class="QPushButton" name="pushButton_Sidebar_User">
              <property name="sizePolicy">
@@ -301,35 +339,6 @@
              </property>
             </widget>
            </item>
-           <item>
-            <widget class="QPushButton" name="pushButton_Sidebar_Unfold">
-             <property name="minimumSize">
-              <size>
-               <width>49</width>
-               <height>47</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>49</width>
-               <height>47</height>
-              </size>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset resource="img.qrc">
-               <normaloff>:/widget_Sidebar/images/Shrink.png</normaloff>:/widget_Sidebar/images/Shrink.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>47</width>
-               <height>47</height>
-              </size>
-             </property>
-            </widget>
-           </item>
           </layout>
          </widget>
         </item>
@@ -352,7 +361,7 @@
             <number>0</number>
            </property>
            <item>
-            <widget class="QStackedWidget" name="stackedWidget">
+            <widget class="QStackedWidget" name="stackedWidget_main_2">
              <widget class="QWidget" name="page"/>
              <widget class="QWidget" name="page_2"/>
             </widget>
@@ -639,7 +648,7 @@
              </property>
              <property name="icon">
               <iconset resource="img.qrc">
-               <normaloff>:/widget_Sidebar/images/Hello_Text.png</normaloff>:/widget_Sidebar/images/Hello_Text.png</iconset>
+               <normaloff>:/hello/images/Hello_Text.png</normaloff>:/hello/images/Hello_Text.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -662,7 +671,7 @@
              </property>
              <property name="icon">
               <iconset resource="img.qrc">
-               <normaloff>:/widget_Sidebar/images/Hello_Text_Start.png</normaloff>:/widget_Sidebar/images/Hello_Text_Start.png</iconset>
+               <normaloff>:/hello/images/Hello_Text_Start.png</normaloff>:/hello/images/Hello_Text_Start.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -679,7 +688,7 @@
              </property>
              <property name="icon">
               <iconset resource="img.qrc">
-               <normaloff>:/widget_Sidebar/images/Hello_Logo.png</normaloff>:/widget_Sidebar/images/Hello_Logo.png</iconset>
+               <normaloff>:/hello/images/Hello_Logo.png</normaloff>:/hello/images/Hello_Logo.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -696,7 +705,7 @@
              </property>
              <property name="icon">
               <iconset resource="img.qrc">
-               <normaloff>:/widget_Sidebar/images/Hello_Line_Vertical.png</normaloff>:/widget_Sidebar/images/Hello_Line_Vertical.png</iconset>
+               <normaloff>:/hello/images/Hello_Line_Vertical.png</normaloff>:/hello/images/Hello_Line_Vertical.png</iconset>
              </property>
              <property name="iconSize">
               <size>
