@@ -24,4 +24,4 @@ jobs:
         pip list
     - name: Analysing the code with pylint
       run: |
-        pylint --rcfile=pylint.conf .github/pylint.conf $(git ls-files '*.py')
+        pylint --rcfile=.github/pylint.conf $(git ls-files '*.py')
