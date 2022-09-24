@@ -1,5 +1,11 @@
 <RCC>
   <qresource prefix="widget_Sidebar">
+    <file>../../images/User-B-Black.png</file>
+    <file>../../images/Settings-B-Black.png</file>
+    <file>../../images/Online-B-Black.png</file>
+    <file>../../images/Home-B-Black.png</file>
+    <file>../../images/Download-B-Black.png</file>
+    <file>../../images/Back-B-Black.png</file>
     <file>../../images/Back.png</file>
     <file>../../images/MOS_Logo_gif.gif</file>
     <file>../../images/Loading_2_Black.gif</file>

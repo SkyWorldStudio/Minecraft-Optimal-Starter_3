@@ -33,9 +33,31 @@
 	border-right: 5px solid qlineargradient(x0:0, x1:1,stop:  0 white, stop: 1 rgb(0, 0, 0));
 	*/
 }
+
+/*左边边栏按钮设置*/
+#pushButton_Sidebar_Back{
+	border-image: url(:/widget_Sidebar/images/Back.png);
+}
+#pushButton_Sidebar_User{
+	border-image: url(:/widget_Sidebar/images/User.png);
+}
+#pushButton_Sidebar_Home{
+	border-image: url(:/widget_Sidebar/images/Home.png);
+}
+#pushButton_Sidebar_OnLine{
+	border-image: url(:/widget_Sidebar/images/Online.png);
+}
+#pushButton_Sidebar_Download{
+	border-image: url(:/widget_Sidebar/images/Download.png);
+}
+#pushButton_Sidebar_Settings{
+	border-image: url(:/widget_Sidebar/images/Settings.png);
+}
 #widget_Sidebar QPushButton{
 	border-radius: 5px;
 }
+
+/*左边边栏“阴影”*/
 #stackedWidget_main_2{
 	border-image: url(:/Scrub/images/Scrub_B2_FFFFFF-50_Main-M-B.png);
 }
@@ -128,7 +150,10 @@
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">/*这个地方是点击按钮之后自动刷新(修改)的*/
+#pushButton_Sidebar_Home{
+	border-image: url(:/widget_Sidebar/images/Home-B-Black.png);
+}</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">
            <property name="spacing">
@@ -163,10 +188,6 @@
              <property name="text">
               <string/>
              </property>
-             <property name="icon">
-              <iconset resource="img.qrc">
-               <normaloff>:/widget_Sidebar/images/Back.png</normaloff>:/widget_Sidebar/images/Back.png</iconset>
-             </property>
              <property name="iconSize">
               <size>
                <width>47</width>
@@ -198,10 +219,6 @@
              <property name="text">
               <string/>
              </property>
-             <property name="icon">
-              <iconset resource="img.qrc">
-               <normaloff>:/widget_Sidebar/images/User.png</normaloff>:/widget_Sidebar/images/User.png</iconset>
-             </property>
              <property name="iconSize">
               <size>
                <width>47</width>
@@ -226,10 +243,6 @@
              </property>
              <property name="text">
               <string/>
-             </property>
-             <property name="icon">
-              <iconset resource="img.qrc">
-               <normaloff>:/widget_Sidebar/images/Home.png</normaloff>:/widget_Sidebar/images/Home.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -256,10 +269,6 @@
              <property name="text">
               <string/>
              </property>
-             <property name="icon">
-              <iconset resource="img.qrc">
-               <normaloff>:/widget_Sidebar/images/Online.png</normaloff>:/widget_Sidebar/images/Online.png</iconset>
-             </property>
              <property name="iconSize">
               <size>
                <width>47</width>
@@ -284,10 +293,6 @@
              </property>
              <property name="text">
               <string/>
-             </property>
-             <property name="icon">
-              <iconset resource="img.qrc">
-               <normaloff>:/widget_Sidebar/images/Download.png</normaloff>:/widget_Sidebar/images/Download.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -326,10 +331,6 @@
              </property>
              <property name="text">
               <string/>
-             </property>
-             <property name="icon">
-              <iconset resource="img.qrc">
-               <normaloff>:/widget_Sidebar/images/Settings.png</normaloff>:/widget_Sidebar/images/Settings.png</iconset>
              </property>
              <property name="iconSize">
               <size>
