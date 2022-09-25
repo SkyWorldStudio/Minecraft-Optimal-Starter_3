@@ -434,34 +434,55 @@
            <property name="bottomMargin">
             <number>22</number>
            </property>
-           <item row="4" column="0">
-            <widget class="QLabel" name="label_loading_text_2">
-             <property name="text">
-              <string>正在读取设置(1/2)</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QPushButton" name="pushButton_loading_gif">
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset resource="img.qrc">
-               <normaloff>:/widget_Sidebar/images/MOS_Logo_gif.gif</normaloff>:/widget_Sidebar/images/MOS_Logo_gif.gif</iconset>
-             </property>
-             <property name="iconSize">
+           <item row="1" column="1">
+            <widget class="QLabel" name="label_loading_gif">
+             <property name="maximumSize">
               <size>
                <width>80</width>
                <height>80</height>
               </size>
              </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="img.qrc">:/widget_Sidebar/images/MOS_Logo_gif.gif</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
+             </property>
             </widget>
            </item>
-           <item row="2" column="0">
+           <item row="1" column="0">
+            <spacer name="horizontalSpacer_7">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Expanding</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="1" column="2">
+            <spacer name="horizontalSpacer_8">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="2" column="0" colspan="3">
             <widget class="QLabel" name="label_loading_text_1">
              <property name="font">
               <font>
@@ -476,10 +497,20 @@
              </property>
             </widget>
            </item>
-           <item row="3" column="0">
+           <item row="3" column="0" colspan="3">
             <widget class="Line" name="line">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0" colspan="3">
+            <widget class="QLabel" name="label_loading_text_2">
+             <property name="text">
+              <string>正在读取设置(1/2)</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
              </property>
             </widget>
            </item>
