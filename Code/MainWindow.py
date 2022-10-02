@@ -4,7 +4,6 @@ import os.path
 from PyQt6 import QtWidgets, QtGui
 from PyQt6.QtWidgets import QMainWindow, QGraphicsOpacityEffect
 from PyQt6.QtCore import QTimer, QThread, Qt, QRect, QPropertyAnimation
-from PyQt6.QtGui import QPainter, QPen, QColor, QBrush
 import sys
 from UI.MainWindow.MainWindow import Ui_MainWindow
 
@@ -12,7 +11,10 @@ from UI.MainWindow.MainWindow import Ui_MainWindow
 class RunUi(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super(RunUi, self).__init__()
+
         import UI.MainWindow.img_rc
+        import UI.Gif_rc
+
         self.setupUi(self)
         self.show()
         print("已成功显示窗体")
@@ -24,7 +26,28 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
         self.pushButton_hello_start.clicked.connect(self.FirstStartInitialize)
 
+        self.label_Sidebar_User.clicked.connect(self.User_Clicked)
 
+    def User_Clicked(self):
+        print("用户点击'用户'按钮")
+
+        self.label_Sidebar_User_QTime_B = -1  # 步长
+        self.label_Sidebar_User_QTime_Start = 30  # 最小(起始数值)
+        self.label_Sidebar_User_QTime_Stop = 0  # 最大(终止数值)
+        self.label_Sidebar_User_QTime_N = int(self.label_Sidebar_User_QTime_Start)  # 记录第几
+
+        def label_Sidebar_User_QTime_():
+            self.label_Sidebar_User_QTime_N += self.label_Sidebar_User_QTime_B
+            if self.label_Sidebar_User_QTime_N > self.label_Sidebar_User_QTime_Stop:
+                # 如果没小于终止数值 就运行
+                self.label_Sidebar_User.setPixmap(QtGui.QPixmap(":/Gif_User/images/User/"+ str(self.label_Sidebar_User_QTime_N) + ".png"))
+                print(":/Gif_User/images/User/"+ str(self.label_Sidebar_User_QTime_N) + ".png")
+            else:
+                self.label_Sidebar_User_QTime.stop()
+
+        self.label_Sidebar_User_QTime = QTimer()
+        self.label_Sidebar_User_QTime.start(30)
+        self.label_Sidebar_User_QTime.timeout.connect(label_Sidebar_User_QTime_)
 
     def RunInitialize(self, First=True):
         """在启动器启动后初始化启动器(读取设置+设置启动器)"""
@@ -32,9 +55,9 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.RunInitialize_.stop()
 
         # 开始播放动图
-        self.gif = QtGui.QMovie(":/widget_Sidebar/images/MOS_Logo_gif.gif")
-        self.label_loading_gif.setMovie(self.gif)
-        self.gif.start()
+        self.Page_Loading = QtGui.QMovie(":/widget_Sidebar/images/MOS_Logo_gif.gif")
+        self.label_loading_gif.setMovie(self.Page_Loading)
+        self.Page_Loading.start()
 
         self.JsonFile = os.path.join('')
         from Code.Code import JsonRead, JsonFile, InitializeFirst
@@ -48,15 +71,13 @@ class RunUi(QMainWindow, Ui_MainWindow):
             print('Json读取完成')
             self.label_loading_text_2.setText('正在设置启动器(2/2)')
             self.Animation_ToMainWindow()
-            self.gif.stop()
+            self.Page_Loading.stop()
 
     def FirstStartInitialize(self):
         """在第一次启动时 初始化(缓存)"""
         from Code.Code import InitializeFirst
         InitializeFirst()
         self.Animation_ToMainWindow(HelloToMainLoading=True)
-
-
 
     def FirstStartInitializeOk(self):
         """在第一次启动时 初始化(缓存) 的页面切换动画完成后"""
