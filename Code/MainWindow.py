@@ -26,28 +26,105 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
         self.pushButton_hello_start.clicked.connect(self.FirstStartInitialize)
 
+        # 左边栏
+        self.Sidebar_Click_ = ''  # 当前点击的控件
         self.label_Sidebar_User.clicked.connect(self.User_Clicked)
+        self.label_Sidebar_Back.clicked.connect(self.Back_Clicked)
+        self.label_Sidebar_Home.clicked.connect(self.Home_Clicked)
+        self.label_Sidebar_Download.clicked.connect(self.Download_Clicked)
+        self.label_Sidebar_OnLine.clicked.connect(self.Online_Clicked)
+        self.label_Sidebar_Settings.clicked.connect(self.Settings_Clicked)
+
+
+    def Back_Clicked(self):
+        self.Sidebar_Clicked(Want='Back')
 
     def User_Clicked(self):
-        print("用户点击'用户'按钮")
+        self.Sidebar_Clicked(Want='User')
 
-        self.label_Sidebar_User_QTime_B = -1  # 步长
-        self.label_Sidebar_User_QTime_Start = 30  # 最小(起始数值)
-        self.label_Sidebar_User_QTime_Stop = 0  # 最大(终止数值)
-        self.label_Sidebar_User_QTime_N = int(self.label_Sidebar_User_QTime_Start)  # 记录第几
+    def Home_Clicked(self):
+        self.Sidebar_Clicked(Want='Home')
 
-        def label_Sidebar_User_QTime_():
-            self.label_Sidebar_User_QTime_N += self.label_Sidebar_User_QTime_B
-            if self.label_Sidebar_User_QTime_N > self.label_Sidebar_User_QTime_Stop:
+    def Online_Clicked(self):
+        self.Sidebar_Clicked(Want='Online')
+
+    def Download_Clicked(self):
+        self.Sidebar_Clicked(Want='Download')
+
+    def Settings_Clicked(self):
+        self.Sidebar_Clicked(Want='Settings')
+
+    def Sidebar_Clicked(self,Want=None):
+        """
+            用户点击左边栏按钮后…\n
+            Want: 被点击的"按钮"
+        """
+        print("用户点击左边栏按钮")
+
+        self.label_Sidebar_QTime_Go_B = -1  # 步长
+        self.label_Sidebar_QTime_Go_Start = 30  # 最小(起始数值)
+        self.label_Sidebar_QTime_Go_Stop = 0  # 最大(终止数值)
+        self.label_Sidebar_QTime_Go_N = int(self.label_Sidebar_QTime_Go_Start)  # 记录第几
+
+        # ========= #
+
+        self.label_Sidebar_QTime_Back_B = 1  # 步长
+        self.label_Sidebar_QTime_Back_Start = 0  # 最小(起始数值)
+        self.label_Sidebar_QTime_Back_Stop = 30  # 最大(终止数值)
+        self.label_Sidebar_QTime_Back_N = int(self.label_Sidebar_QTime_Back_Start)  # 记录第几
+
+        def label_Sidebar_Go_QTime_():
+            self.label_Sidebar_QTime_Go_N += self.label_Sidebar_QTime_Go_B
+            if self.label_Sidebar_QTime_Go_N > self.label_Sidebar_QTime_Go_Stop:
                 # 如果没小于终止数值 就运行
-                self.label_Sidebar_User.setPixmap(QtGui.QPixmap(":/Gif_User/images/User/"+ str(self.label_Sidebar_User_QTime_N) + ".png"))
-                print(":/Gif_User/images/User/"+ str(self.label_Sidebar_User_QTime_N) + ".png")
-            else:
-                self.label_Sidebar_User_QTime.stop()
+                if Want == 'Home':
+                    self.label_Sidebar_Home.setPixmap(QtGui.QPixmap(":/Gif_Home/images/Home/" + str(self.label_Sidebar_QTime_Go_N) + ".png"))
+                elif Want == 'User':
+                    self.label_Sidebar_User.setPixmap(QtGui.QPixmap(":/Gif_User/images/User/" + str(self.label_Sidebar_QTime_Go_N) + ".png"))
+                elif Want == 'Online':
+                    self.label_Sidebar_OnLine.setPixmap(QtGui.QPixmap(":/Gif_Online/images/Online/" + str(self.label_Sidebar_QTime_Go_N) + ".png"))
+                elif Want == 'Download':
+                    self.label_Sidebar_Download.setPixmap(QtGui.QPixmap(":/Gif_Download/images/Download/" + str(self.label_Sidebar_QTime_Go_N) + ".png"))
+                elif Want == 'Settings':
+                    self.label_Sidebar_Settings.setPixmap(QtGui.QPixmap(":/Gif_Settings/images/Settings/" + str(self.label_Sidebar_QTime_Go_N) + ".png"))
 
-        self.label_Sidebar_User_QTime = QTimer()
-        self.label_Sidebar_User_QTime.start(30)
-        self.label_Sidebar_User_QTime.timeout.connect(label_Sidebar_User_QTime_)
+                label_Sidebar_Back_QTime_()
+
+            elif self.label_Sidebar_QTime_Go_N == self.label_Sidebar_QTime_Go_Stop:
+                label_Sidebar_Back_QTime_()
+
+            else:
+                self.Sidebar_Click_ = str(Want)
+                self.label_Sidebar_QTime.stop()
+
+        def label_Sidebar_Back_QTime_():
+            if self.label_Sidebar_QTime_Back_N <= self.label_Sidebar_QTime_Back_Stop:
+                # 如果小于等于终止数值 就运行
+                self.label_Sidebar_QTime_Back_N += self.label_Sidebar_QTime_Back_B
+                if self.Sidebar_Click_ == 'Home':
+                    self.label_Sidebar_Home.setPixmap(QtGui.QPixmap(":/Gif_Home/images/Home/" + str(self.label_Sidebar_QTime_Back_N) + ".png"))
+                    print(":/Gif_Home/images/Home/" + str(self.label_Sidebar_QTime_Back_N) + ".png")
+                elif self.Sidebar_Click_ == 'User':
+                    self.label_Sidebar_User.setPixmap(QtGui.QPixmap(":/Gif_User/images/User/" + str(self.label_Sidebar_QTime_Back_N) + ".png"))
+                    print(":/Gif_User/images/User/" + str(self.label_Sidebar_QTime_Back_N) + ".png")
+                elif self.Sidebar_Click_ == 'Online':
+                    self.label_Sidebar_OnLine.setPixmap(QtGui.QPixmap(":/Gif_Online/images/Online/" + str(self.label_Sidebar_QTime_Back_N) + ".png"))
+                    print(":/Gif_Online/images/Online/" + str(self.label_Sidebar_QTime_Back_N) + ".png")
+                elif self.Sidebar_Click_ == 'Download':
+                    self.label_Sidebar_Download.setPixmap(QtGui.QPixmap(":/Gif_Download/images/Download/" + str(self.label_Sidebar_QTime_Back_N) + ".png"))
+                elif self.Sidebar_Click_ == 'Settings':
+                    self.label_Sidebar_Settings.setPixmap(QtGui.QPixmap(":/Gif_Settings/images/Settings/" + str(self.label_Sidebar_QTime_Back_N) + ".png"))
+
+            else:
+                pass
+
+        if Want == self.Sidebar_Click_:
+            # 如果用户又点了一次同样的按钮
+            self.Sidebar_Click_ = ''
+
+        self.label_Sidebar_QTime = QTimer()
+        self.label_Sidebar_QTime.start(30)
+        self.label_Sidebar_QTime.timeout.connect(label_Sidebar_Go_QTime_)
 
     def RunInitialize(self, First=True):
         """在启动器启动后初始化启动器(读取设置+设置启动器)"""
