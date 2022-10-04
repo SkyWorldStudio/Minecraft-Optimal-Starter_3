@@ -231,7 +231,7 @@
               <string/>
              </property>
              <property name="pixmap">
-              <pixmap resource="img.qrc">:/widget_Sidebar/images/Home-B-Black.png</pixmap>
+              <pixmap resource="img.qrc">:/widget_Sidebar/images/Home.png</pixmap>
              </property>
              <property name="scaledContents">
               <bool>true</bool>
@@ -362,7 +362,166 @@
              <widget class="QWidget" name="page_home"/>
              <widget class="QWidget" name="page_online"/>
              <widget class="QWidget" name="page_download"/>
-             <widget class="QWidget" name="page_settings"/>
+             <widget class="QWidget" name="page_settings">
+              <layout class="QVBoxLayout" name="verticalLayout_3">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QScrollArea" name="scrollArea">
+                 <property name="widgetResizable">
+                  <bool>true</bool>
+                 </property>
+                 <widget class="QWidget" name="scrollAreaWidgetContents">
+                  <property name="geometry">
+                   <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>1117</width>
+                    <height>610</height>
+                   </rect>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_2">
+                   <item>
+                    <widget class="QLabel" name="label_page_settings_h1">
+                     <property name="text">
+                      <string>个性化外观设置</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QWidget" name="widget_page_settings_subject" native="true">
+                     <layout class="QHBoxLayout" name="horizontalLayout_3">
+                      <item>
+                       <widget class="QLabel" name="label_page_settings_subject_h2">
+                        <property name="text">
+                         <string>主题</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <spacer name="horizontalSpacer_9">
+                        <property name="orientation">
+                         <enum>Qt::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item>
+                       <widget class="QRadioButton" name="radioButton">
+                        <property name="text">
+                         <string>RadioButton</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QRadioButton" name="radioButton_2">
+                        <property name="text">
+                         <string>RadioButton</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QRadioButton" name="radioButton_3">
+                        <property name="text">
+                         <string>RadioButton</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QWidget" name="widget_page_settings_background" native="true">
+                     <layout class="QGridLayout" name="gridLayout_2">
+                      <item row="2" column="1" colspan="2">
+                       <widget class="QRadioButton" name="radioButton_4">
+                        <property name="text">
+                         <string>RadioButton</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="1" colspan="2">
+                       <widget class="QRadioButton" name="radioButton_5">
+                        <property name="text">
+                         <string>RadioButton</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="3" column="1" colspan="2">
+                       <widget class="QRadioButton" name="radioButton_6">
+                        <property name="text">
+                         <string>RadioButton</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="0" colspan="3">
+                       <widget class="QLabel" name="label_page_settings_background_h2">
+                        <property name="text">
+                         <string>背景</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="3">
+                       <widget class="QRadioButton" name="radioButton_7">
+                        <property name="text">
+                         <string>RadioButton</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="2" column="3">
+                       <widget class="QRadioButton" name="radioButton_8">
+                        <property name="text">
+                         <string>RadioButton</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="3" column="3">
+                       <widget class="QRadioButton" name="radioButton_9">
+                        <property name="text">
+                         <string>RadioButton</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="verticalSpacer_8">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>40</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </widget>
+                </widget>
+               </item>
+              </layout>
+             </widget>
             </widget>
            </item>
           </layout>
