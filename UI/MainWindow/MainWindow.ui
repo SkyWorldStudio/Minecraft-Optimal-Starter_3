@@ -168,6 +168,9 @@
                <height>47</height>
               </size>
              </property>
+             <property name="toolTip">
+              <string>返回</string>
+             </property>
              <property name="text">
               <string/>
              </property>
@@ -192,6 +195,9 @@
                <width>49</width>
                <height>47</height>
               </size>
+             </property>
+             <property name="toolTip">
+              <string>用户</string>
              </property>
              <property name="text">
               <string/>
@@ -218,6 +224,9 @@
                <height>47</height>
               </size>
              </property>
+             <property name="toolTip">
+              <string>主页</string>
+             </property>
              <property name="text">
               <string/>
              </property>
@@ -243,6 +252,9 @@
                <height>47</height>
               </size>
              </property>
+             <property name="toolTip">
+              <string>联机</string>
+             </property>
              <property name="text">
               <string/>
              </property>
@@ -267,6 +279,9 @@
                <width>49</width>
                <height>47</height>
               </size>
+             </property>
+             <property name="toolTip">
+              <string>下载</string>
              </property>
              <property name="text">
               <string/>
@@ -305,6 +320,9 @@
                <width>49</width>
                <height>47</height>
               </size>
+             </property>
+             <property name="toolTip">
+              <string>设置</string>
              </property>
              <property name="text">
               <string/>

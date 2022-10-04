@@ -305,6 +305,12 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MOS Ⅲ 启动器"))
+        self.label_Sidebar_Back.setToolTip(_translate("MainWindow", "返回"))
+        self.label_Sidebar_User.setToolTip(_translate("MainWindow", "用户"))
+        self.label_Sidebar_Home.setToolTip(_translate("MainWindow", "主页"))
+        self.label_Sidebar_OnLine.setToolTip(_translate("MainWindow", "联机"))
+        self.label_Sidebar_Download.setToolTip(_translate("MainWindow", "下载"))
+        self.label_Sidebar_Settings.setToolTip(_translate("MainWindow", "设置"))
         self.label_loading_text_1.setText(_translate("MainWindow", "正在初始化启动器……"))
         self.label_loading_text_2.setText(_translate("MainWindow", "正在读取设置(1/2)"))
 from UI.Custom_UI.QLabel import MyQLabel

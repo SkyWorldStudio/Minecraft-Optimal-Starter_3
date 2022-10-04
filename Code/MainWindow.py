@@ -3,9 +3,10 @@ import os.path
 import sys
 
 from PyQt6 import QtWidgets, QtGui
-from PyQt6.QtCore import QTimer, QThread
+from PyQt6.QtCore import QTimer, QThread, QEvent, QPoint
 from PyQt6.QtWidgets import QMainWindow, QGraphicsOpacityEffect
 
+from UI.Custom_UI.QToolTip import ToolTip
 from UI.MainWindow.MainWindow import Ui_MainWindow
 
 
@@ -31,12 +32,29 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.Sidebar_Click_ = ''  # 当前点击的控件
         self.Sidebar_Click_Ok = True  # 记录动画是否完成
         self.Sidebar_Click_C = 'Home'  # 彻底完成后……
-        self.label_Sidebar_User.clicked.connect(self.User_Clicked)
         self.label_Sidebar_Back.clicked.connect(self.Back_Clicked)
+        self.label_Sidebar_User.clicked.connect(self.User_Clicked)
         self.label_Sidebar_Home.clicked.connect(self.Home_Clicked)
-        self.label_Sidebar_Download.clicked.connect(self.Download_Clicked)
         self.label_Sidebar_OnLine.clicked.connect(self.Online_Clicked)
+        self.label_Sidebar_Download.clicked.connect(self.Download_Clicked)
         self.label_Sidebar_Settings.clicked.connect(self.Settings_Clicked)
+
+        self._toolTip = ToolTip(parent=self)
+        self.label_Sidebar_Back.setToolTipDuration(1000)
+        self.label_Sidebar_User.setToolTipDuration(1000)
+        self.label_Sidebar_Home.setToolTipDuration(1000)
+        self.label_Sidebar_OnLine.setToolTipDuration(1000)
+        self.label_Sidebar_Download.setToolTipDuration(1000)
+        self.label_Sidebar_Settings.setToolTipDuration(1000)
+
+        self.label_Sidebar_Back.installEventFilter(self)
+        self.label_Sidebar_User.installEventFilter(self)
+        self.label_Sidebar_Home.installEventFilter(self)
+        self.label_Sidebar_OnLine.installEventFilter(self)
+        self.label_Sidebar_Download.installEventFilter(self)
+        self.label_Sidebar_Settings.installEventFilter(self)
+
+        self._toolTip.hide()
 
     def Back_Clicked(self):
         self.Sidebar_Clicked(Want='Back')
@@ -218,9 +236,6 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 self.Sidebar_Click_I = False  # 正在变回去的
                 self.Sidebar_Click_C = str(Want)  # 彻底完成后……
 
-        if Want == self.Sidebar_Click_:
-            # 如果用户又点了一次同样的按钮
-            self.Sidebar_Click_ = ''
 
         print("用户点击左边栏按钮")
 
@@ -228,6 +243,11 @@ class RunUi(QMainWindow, Ui_MainWindow):
             Go()
             self.Sidebar_Click_Ok = False
             self.Sidebar_Click_ = str(Want)
+
+            if Want == self.Sidebar_Click_C:
+                # 如果用户又点了一次同样的按钮
+                self.Sidebar_Click_ = ''
+                self.Sidebar_Click_I = ''
 
             self.label_Sidebar_QTime = QTimer()
             self.label_Sidebar_QTime.start(15)
@@ -322,6 +342,9 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 if HelloToMainLoading == True:
                     # 如果是从欢迎页面渐变的 就重新加载json
                     self.FirstStartInitializeOk()
+                else:
+                    # 不是就播放左边栏动画
+                    self.Sidebar_Clicked(Want='Home')
             else:
                 self.Opacity.setOpacity(self.Animation_ToMainWindow_Int_Original)
                 self.stackedWidget_main.setGraphicsEffect(self.Opacity)
@@ -331,6 +354,22 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.Animation_ToMainWindow_Run.start(1)
         self.Animation_ToMainWindow_Run.timeout.connect(Animation)
 
+    def eventFilter(self, obj, e: QEvent):
+        if obj is self:
+            return super().eventFilter(obj, e)
+
+        tip = self._toolTip
+        if e.type() == QEvent.Type.Enter:
+            tip.setText(obj.toolTip())
+            tip.setDuration(obj.toolTipDuration())
+            tip.adjustPos(obj.mapToGlobal(QPoint()), obj.size())
+            tip.show()
+        elif e.type() == QEvent.Type.Leave:
+            tip.hide()
+        elif e.type() == QEvent.Type.ToolTip:
+            return True
+
+        return super().eventFilter(obj, e)
 
 class RunInitializeThread(QThread):
     def __init__(self):
