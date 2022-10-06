@@ -39,6 +39,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.label_Sidebar_Download.clicked.connect(self.Download_Clicked)
         self.label_Sidebar_Settings.clicked.connect(self.Settings_Clicked)
 
+        # 悬浮提示窗
         self._toolTip = ToolTip(parent=self)
         self.label_Sidebar_Back.setToolTipDuration(1000)
         self.label_Sidebar_User.setToolTipDuration(1000)
@@ -62,6 +63,17 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
         self._toolTip.hide()
 
+        # 设置页面
+        self.radioButton_settings_background_none.clicked()
+        self.radioButton_settings_background_1.clicked()
+        self.radioButton_settings_background_2.clicked()
+        self.radioButton_settings_background_3.clicked()
+        self.radioButton_settings_background_4.clicked()
+        self.radioButton_settings_background_5.clicked()
+        self.radioButton_settings_background_6.clicked()
+        self.radioButton_settings_background_7.clicked()
+
+    # 左边栏"按钮"被点击后（槽）
     def Back_Clicked(self):
         self.Sidebar_Clicked(Want='Back')
 
@@ -80,11 +92,43 @@ class RunUi(QMainWindow, Ui_MainWindow):
     def Settings_Clicked(self):
         self.Sidebar_Clicked(Want='Settings')
 
+    def SettingsPage_Background_None_Clicked(self):
+        """设置页面 -> 背景设置:选择：无"""
+        pass
+
+    def SettingsPage_Background_1_Clicked(self):
+        """设置页面 -> 背景设置:选择：1(清爽橙黄)"""
+        pass
+
+    def SettingsPage_Background_2_Clicked(self):
+        """设置页面 -> 背景设置:选择：2(梦幻浅蓝)"""
+        pass
+
+    def SettingsPage_Background_3_Clicked(self):
+        """设置页面 -> 背景设置:选择：3(梦幻浅红)"""
+        pass
+
+    def SettingsPage_Background_4_Clicked(self):
+        """设置页面 -> 背景设置:选择：4(三彩斑斓)"""
+        pass
+
+    def SettingsPage_Background_5_Clicked(self):
+        """设置页面 -> 背景设置:选择：5(蓝白相照)"""
+        pass
+
+    def SettingsPage_Background_6_Clicked(self):
+        """设置页面 -> 背景设置:选择：6(深蓝天空)"""
+        pass
+    def SettingsPage_Background_7_Clicked(self):
+        """设置页面 -> 背景设置:选择：7(粉色迷雾)"""
+        pass
+
     def Sidebar_Clicked(self, Want=None):
         """
             用户点击左边栏按钮后…\n
             Want: 被点击的"按钮"
         """
+
         def Go():
             """动画开始运行后 初始化"""
             # 线条动画属性
@@ -217,22 +261,28 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 IfOk()
                 self.label_Sidebar_B_QTime_Ok = True
                 self.label_Sidebar_B_QTime.stop()
+
         def label_Sidebar_B_Back_QTime_():
             self.label_Sidebar_B_QTime_Back_N += self.label_Sidebar_B_QTime_Back_B
             if self.label_Sidebar_B_QTime_Back_N >= self.label_Sidebar_B_QTime_Back_Stop:
                 # 如果没小于终止数值 就运行
                 if self.Sidebar_Click_I == 'Home':
-                    self.label_Sidebar_Home.setStyleSheet("background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Back_N) + "%);")
+                    self.label_Sidebar_Home.setStyleSheet(
+                        "background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Back_N) + "%);")
                     print("background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Back_N) + "%);")
                 elif self.Sidebar_Click_I == 'User':
-                    self.label_Sidebar_User.setStyleSheet("background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Back_N) + "%);")
+                    self.label_Sidebar_User.setStyleSheet(
+                        "background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Back_N) + "%);")
                     print("background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Back_N) + "%);")
                 elif self.Sidebar_Click_I == 'Online':
-                    self.label_Sidebar_OnLine.setStyleSheet("background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Back_N) + "%);")
+                    self.label_Sidebar_OnLine.setStyleSheet(
+                        "background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Back_N) + "%);")
                 elif self.Sidebar_Click_I == 'Download':
-                    self.label_Sidebar_Download.setStyleSheet("background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Back_N) + "%);")
+                    self.label_Sidebar_Download.setStyleSheet(
+                        "background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Back_N) + "%);")
                 elif self.Sidebar_Click_I == 'Settings':
-                    self.label_Sidebar_Settings.setStyleSheet("background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Back_N) + "%);")
+                    self.label_Sidebar_Settings.setStyleSheet(
+                        "background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Back_N) + "%);")
 
         def IfOk():
             """检查动画是否完全完成"""
@@ -241,7 +291,6 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 self.Sidebar_Click_Ok = True
                 self.Sidebar_Click_I = False  # 正在变回去的
                 self.Sidebar_Click_C = str(Want)  # 彻底完成后……
-
 
         print("用户点击左边栏按钮")
 
@@ -274,11 +323,27 @@ class RunUi(QMainWindow, Ui_MainWindow):
             elif Want == 'Settings':
                 self.stackedWidget_main_2.setCurrentIndex(4)
 
-
     def RunInitialize(self, First=True):
         """在启动器启动后初始化启动器(读取设置+设置启动器)"""
+
+        def Settings_():
+            """设置启动器"""
+            # 导入
+            # 读取阶段(读取配置等)
+            self.Systeam = Systeam()
+            print('系统：' + self.Systeam)
+            a = JsonRead(F)
+            print('Json读取完成')
+            # 设置阶段
+            if self.Systeam != 'Mac':
+                self.radioButton_settings_subject_automatic.setEnabled(False)
+                self.radioButton_settings_subject_automatic.setToolTip('跟随系统(只限于Mac系统)-当前不可用')
+
+
         if First == True:
             self.RunInitialize_.stop()
+
+        from Code.Code import JsonRead, JsonFile, Systeam
 
         # 开始播放动图
         self.Page_Loading = QtGui.QMovie(":/widget_Sidebar/images/MOS_Logo_gif.gif")
@@ -286,18 +351,18 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.Page_Loading.start()
 
         self.JsonFile = os.path.join('')
-        from Code.Code import JsonRead, JsonFile
-        F = JsonFile()
+        F = JsonFile()  # 读取Json路径
+
         if os.path.isfile(F) == False:
             """如果没有Json这个目录 就转到欢迎(初始化)页面"""
             self.stackedWidget_main.setCurrentIndex(2)
         else:
             # 如果有 就进行下一步
-            a = JsonRead(F)
-            print('Json读取完成')
             self.label_loading_text_2.setText('正在设置启动器(2/2)')
+            Settings_()
+            self.label_loading_text_2.setText('设置完成')
             self.Animation_ToMainWindow()
-            self.Page_Loading.stop()
+            self.Page_Loading.stop()  # 暂停动图
 
     def FirstStartInitialize(self):
         """在第一次启动时 初始化(缓存)"""
@@ -387,6 +452,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             return True
 
         return super().eventFilter(obj, e)
+
 
 class RunInitializeThread(QThread):
     def __init__(self):

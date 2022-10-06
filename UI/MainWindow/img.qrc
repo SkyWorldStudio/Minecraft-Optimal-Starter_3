@@ -18,6 +18,15 @@
     <file>../../images/Home.png</file>
     <file>../../images/Download.png</file>
   </qresource>
+  <qresource prefix="BackGround">
+    <file>../../images/BackGround/7.png</file>
+    <file>../../images/BackGround/6.png</file>
+    <file>../../images/BackGround/5.png</file>
+    <file>../../images/BackGround/4.png</file>
+    <file>../../images/BackGround/3.png</file>
+    <file>../../images/BackGround/2.png</file>
+    <file>../../images/BackGround/1.png</file>
+  </qresource>
   <qresource prefix="Scrub">
     <file>../../images/Scrub_B2_FFFFFF-50_Main-M-B.png</file>
     <file>../../images/Scrub_B10_V.png</file>
