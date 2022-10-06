@@ -46,6 +46,9 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.label_Sidebar_OnLine.setToolTipDuration(1000)
         self.label_Sidebar_Download.setToolTipDuration(1000)
         self.label_Sidebar_Settings.setToolTipDuration(1000)
+        self.radioButton_settings_subject_light.setToolTipDuration(1000)
+        self.radioButton_settings_subject_dark.setToolTipDuration(1000)
+        self.radioButton_settings_subject_automatic.setToolTipDuration(1000)
 
         self.label_Sidebar_Back.installEventFilter(self)
         self.label_Sidebar_User.installEventFilter(self)
@@ -53,6 +56,9 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.label_Sidebar_OnLine.installEventFilter(self)
         self.label_Sidebar_Download.installEventFilter(self)
         self.label_Sidebar_Settings.installEventFilter(self)
+        self.radioButton_settings_subject_light.installEventFilter(self)
+        self.radioButton_settings_subject_dark.installEventFilter(self)
+        self.radioButton_settings_subject_automatic.installEventFilter(self)
 
         self._toolTip.hide()
 
@@ -256,6 +262,17 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.label_Sidebar_B_QTime = QTimer()
             self.label_Sidebar_B_QTime.start(15)
             self.label_Sidebar_B_QTime.timeout.connect(label_Sidebar_B_Go_QTime_)
+
+            if Want == 'Home':
+                self.stackedWidget_main_2.setCurrentIndex(1)
+            elif Want == 'User':
+                self.stackedWidget_main_2.setCurrentIndex(0)
+            elif Want == 'Online':
+                self.stackedWidget_main_2.setCurrentIndex(2)
+            elif Want == 'Download':
+                self.stackedWidget_main_2.setCurrentIndex(3)
+            elif Want == 'Settings':
+                self.stackedWidget_main_2.setCurrentIndex(4)
 
 
     def RunInitialize(self, First=True):

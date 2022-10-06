@@ -25,7 +25,7 @@
 	/*左边栏背景*/
 	border-image: url(:/Scrub/images/Scrub_B10_V.png);
 	background: rgba(255, 255, 255, 0.5);
-	/*阴影 不生效 已经该用图片*/
+	/*阴影 不生效 已经使用图片*/
 	/*
 	border-top: 5px solid qlineargradient(y0:0, y1:1,stop: 0 #ececef, stop: 1 white);
 	border-left: 5px solid qlineargradient(x0:0, x1:1,stop: 0 #ececef, stop: 1 white);
@@ -44,6 +44,14 @@
 #stackedWidget_main_2{
 	border-image: url(:/Scrub/images/Scrub_B2_FFFFFF-50_Main-M-B.png);
 }
+
+/*设置页面*/
+#scrollAreaWidgetContents_page_settings &gt; QWidget
+{
+	border-image: url(:/widget_Sidebar/images/Scrub_Settings-Z_B15.png);
+}
+
+
 
 /*
 	加载页面qss
@@ -83,6 +91,59 @@
 }
 #pushButton_hello_line{
 	background-color: rgba(255, 255, 255, 0);
+}
+
+
+/*单独控件qss*/
+/*选择控件*/
+QRadioButton {
+    spacing: 10px;
+    color: black;
+    background-color:  rgba(255, 255, 255,0);
+}
+QRadioButton::indicator {
+    background-color: rgba(255, 255, 255,0);
+}
+QRadioButton::indicator:unchecked {
+    height: 18px;
+    width: 18px;
+    border: 2px solid rgb(154, 154, 154);
+    border-radius: 10px;
+}
+QRadioButton::indicator:checked {
+    height: 8px;
+    width: 8px;
+    border: 7px solid rgb(42, 130, 228);
+    border-radius: 10px;
+}
+QRadioButton::indicator:unchecked:hover {
+    height: 18px;
+    width: 18px;
+    border: 2px solid rgb(120, 120, 120);
+    border-radius: 10px;
+}
+QRadioButton::indicator:checked:hover {
+    height: 8px;
+    width: 8px;
+    border: 7px solid rgb(47, 144, 255);
+    border-radius: 10px;
+}
+QRadioButton::indicator:unchecked:pressed {
+    height: 18px;
+    width: 18px;
+    background-color: rgb(153, 153, 153);
+    border: 2px solid rgb(84, 84, 84);
+    border-radius: 10px;
+}
+QRadioButton::indicator:checked:pressed {
+    height: 8px;
+    width: 8px;
+    border: 7px solid rgb(83, 163, 255);
+    border-radius: 10px;
+}
+
+*{
+	background-color: rgba(255, 255, 255, 0);
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -101,10 +162,16 @@
     </property>
     <item>
      <widget class="QStackedWidget" name="stackedWidget_main">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="currentIndex">
        <number>1</number>
       </property>
       <widget class="QWidget" name="page_main">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
        <layout class="QGridLayout" name="gridLayout">
         <property name="leftMargin">
          <number>0</number>
@@ -363,6 +430,9 @@
              <widget class="QWidget" name="page_online"/>
              <widget class="QWidget" name="page_download"/>
              <widget class="QWidget" name="page_settings">
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
               <layout class="QVBoxLayout" name="verticalLayout_3">
                <property name="leftMargin">
                 <number>0</number>
@@ -377,11 +447,11 @@
                 <number>0</number>
                </property>
                <item>
-                <widget class="QScrollArea" name="scrollArea">
+                <widget class="QScrollArea" name="scrollArea_page_settings">
                  <property name="widgetResizable">
                   <bool>true</bool>
                  </property>
-                 <widget class="QWidget" name="scrollAreaWidgetContents">
+                 <widget class="QWidget" name="scrollAreaWidgetContents_page_settings">
                   <property name="geometry">
                    <rect>
                     <x>0</x>
@@ -396,6 +466,9 @@
                      <property name="text">
                       <string>个性化外观设置</string>
                      </property>
+                     <property name="scaledContents">
+                      <bool>false</bool>
+                     </property>
                      <property name="alignment">
                       <set>Qt::AlignCenter</set>
                      </property>
@@ -404,8 +477,16 @@
                    <item>
                     <widget class="QWidget" name="widget_page_settings_subject" native="true">
                      <layout class="QHBoxLayout" name="horizontalLayout_3">
+                      <property name="spacing">
+                       <number>25</number>
+                      </property>
                       <item>
                        <widget class="QLabel" name="label_page_settings_subject_h2">
+                        <property name="font">
+                         <font>
+                          <pointsize>15</pointsize>
+                         </font>
+                        </property>
                         <property name="text">
                          <string>主题</string>
                         </property>
@@ -425,23 +506,32 @@
                        </spacer>
                       </item>
                       <item>
-                       <widget class="QRadioButton" name="radioButton">
+                       <widget class="QRadioButton" name="radioButton_settings_subject_light">
+                        <property name="toolTip">
+                         <string>浅色模式</string>
+                        </property>
                         <property name="text">
-                         <string>RadioButton</string>
+                         <string>浅色</string>
                         </property>
                        </widget>
                       </item>
                       <item>
-                       <widget class="QRadioButton" name="radioButton_2">
+                       <widget class="QRadioButton" name="radioButton_settings_subject_dark">
+                        <property name="toolTip">
+                         <string>深色模式</string>
+                        </property>
                         <property name="text">
-                         <string>RadioButton</string>
+                         <string>深色</string>
                         </property>
                        </widget>
                       </item>
                       <item>
-                       <widget class="QRadioButton" name="radioButton_3">
+                       <widget class="QRadioButton" name="radioButton_settings_subject_automatic">
+                        <property name="toolTip">
+                         <string>跟随系统(只限于Mac系统)</string>
+                        </property>
                         <property name="text">
-                         <string>RadioButton</string>
+                         <string>跟随系统</string>
                         </property>
                        </widget>
                       </item>
@@ -451,52 +541,77 @@
                    <item>
                     <widget class="QWidget" name="widget_page_settings_background" native="true">
                      <layout class="QGridLayout" name="gridLayout_2">
-                      <item row="2" column="1" colspan="2">
-                       <widget class="QRadioButton" name="radioButton_4">
+                      <property name="horizontalSpacing">
+                       <number>0</number>
+                      </property>
+                      <property name="verticalSpacing">
+                       <number>15</number>
+                      </property>
+                      <item row="1" column="0">
+                       <widget class="QRadioButton" name="radioButton_settings_background_none">
                         <property name="text">
-                         <string>RadioButton</string>
+                         <string>无</string>
                         </property>
                        </widget>
                       </item>
-                      <item row="1" column="1" colspan="2">
-                       <widget class="QRadioButton" name="radioButton_5">
+                      <item row="1" column="1">
+                       <widget class="QRadioButton" name="radioButton_settings_background_1">
                         <property name="text">
-                         <string>RadioButton</string>
+                         <string>清爽橙黄</string>
                         </property>
                        </widget>
                       </item>
-                      <item row="3" column="1" colspan="2">
-                       <widget class="QRadioButton" name="radioButton_6">
+                      <item row="1" column="2">
+                       <widget class="QRadioButton" name="radioButton_settings_background_2">
                         <property name="text">
-                         <string>RadioButton</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="0" column="0" colspan="3">
-                       <widget class="QLabel" name="label_page_settings_background_h2">
-                        <property name="text">
-                         <string>背景</string>
+                         <string>梦幻浅蓝</string>
                         </property>
                        </widget>
                       </item>
                       <item row="1" column="3">
-                       <widget class="QRadioButton" name="radioButton_7">
+                       <widget class="QRadioButton" name="radioButton_settings_background_3">
                         <property name="text">
-                         <string>RadioButton</string>
+                         <string>梦幻浅红</string>
                         </property>
                        </widget>
                       </item>
-                      <item row="2" column="3">
-                       <widget class="QRadioButton" name="radioButton_8">
+                      <item row="3" column="0">
+                       <widget class="QRadioButton" name="radioButton_settings_background_4">
                         <property name="text">
-                         <string>RadioButton</string>
+                         <string>三彩斑斓</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="3" column="1">
+                       <widget class="QRadioButton" name="radioButton_settings_background_5">
+                        <property name="text">
+                         <string>深蓝天空</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="3" column="2">
+                       <widget class="QRadioButton" name="radioButton_settings_background_6">
+                        <property name="text">
+                         <string>蓝白相照</string>
                         </property>
                        </widget>
                       </item>
                       <item row="3" column="3">
-                       <widget class="QRadioButton" name="radioButton_9">
+                       <widget class="QRadioButton" name="radioButton_settings_background_7">
                         <property name="text">
-                         <string>RadioButton</string>
+                         <string>粉色迷雾</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="0" colspan="4">
+                       <widget class="QLabel" name="label_page_settings_background_h2">
+                        <property name="font">
+                         <font>
+                          <pointsize>15</pointsize>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>背景</string>
                         </property>
                        </widget>
                       </item>

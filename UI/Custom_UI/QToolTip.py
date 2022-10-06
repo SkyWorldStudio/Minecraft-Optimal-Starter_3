@@ -92,8 +92,8 @@ class ToolTip(QFrame):
             y = pos.y()
             x = pos.x() + 3*size.width()//2 + size.width()//6.3 - self.width() // 2
         else:
-            x = pos.x() + size.width() // 2 - self.width() // 2
-            y = pos.y() + self.height() // 2 + self.height() // 4
+            x = pos.x() + size.width()//2 - self.width()//2
+            y = pos.y() + self.height() - 35
 
         # size.width() 为控件宽
         # size.height() 为控件高

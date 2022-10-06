@@ -24,7 +24,7 @@ class Ui_MainWindow(object):
 "    /*左边栏背景*/\n"
 "    border-image: url(:/Scrub/images/Scrub_B10_V.png);\n"
 "    background: rgba(255, 255, 255, 0.5);\n"
-"    /*阴影 不生效 已经该用图片*/\n"
+"    /*阴影 不生效 已经使用图片*/\n"
 "    /*\n"
 "    border-top: 5px solid qlineargradient(y0:0, y1:1,stop: 0 #ececef, stop: 1 white);\n"
 "    border-left: 5px solid qlineargradient(x0:0, x1:1,stop: 0 #ececef, stop: 1 white);\n"
@@ -43,6 +43,14 @@ class Ui_MainWindow(object):
 "#stackedWidget_main_2{\n"
 "    border-image: url(:/Scrub/images/Scrub_B2_FFFFFF-50_Main-M-B.png);\n"
 "}\n"
+"\n"
+"/*设置页面*/\n"
+"#scrollAreaWidgetContents_page_settings > QWidget\n"
+"{\n"
+"    border-image: url(:/widget_Sidebar/images/Scrub_Settings-Z_B15.png);\n"
+"}\n"
+"\n"
+"\n"
 "\n"
 "/*\n"
 "    加载页面qss\n"
@@ -82,6 +90,59 @@ class Ui_MainWindow(object):
 "}\n"
 "#pushButton_hello_line{\n"
 "    background-color: rgba(255, 255, 255, 0);\n"
+"}\n"
+"\n"
+"\n"
+"/*单独控件qss*/\n"
+"/*选择控件*/\n"
+"QRadioButton {\n"
+"    spacing: 10px;\n"
+"    color: black;\n"
+"    background-color:  rgba(255, 255, 255,0);\n"
+"}\n"
+"QRadioButton::indicator {\n"
+"    background-color: rgba(255, 255, 255,0);\n"
+"}\n"
+"QRadioButton::indicator:unchecked {\n"
+"    height: 18px;\n"
+"    width: 18px;\n"
+"    border: 2px solid rgb(154, 154, 154);\n"
+"    border-radius: 10px;\n"
+"}\n"
+"QRadioButton::indicator:checked {\n"
+"    height: 8px;\n"
+"    width: 8px;\n"
+"    border: 7px solid rgb(42, 130, 228);\n"
+"    border-radius: 10px;\n"
+"}\n"
+"QRadioButton::indicator:unchecked:hover {\n"
+"    height: 18px;\n"
+"    width: 18px;\n"
+"    border: 2px solid rgb(120, 120, 120);\n"
+"    border-radius: 10px;\n"
+"}\n"
+"QRadioButton::indicator:checked:hover {\n"
+"    height: 8px;\n"
+"    width: 8px;\n"
+"    border: 7px solid rgb(47, 144, 255);\n"
+"    border-radius: 10px;\n"
+"}\n"
+"QRadioButton::indicator:unchecked:pressed {\n"
+"    height: 18px;\n"
+"    width: 18px;\n"
+"    background-color: rgb(153, 153, 153);\n"
+"    border: 2px solid rgb(84, 84, 84);\n"
+"    border-radius: 10px;\n"
+"}\n"
+"QRadioButton::indicator:checked:pressed {\n"
+"    height: 8px;\n"
+"    width: 8px;\n"
+"    border: 7px solid rgb(83, 163, 255);\n"
+"    border-radius: 10px;\n"
+"}\n"
+"\n"
+"*{\n"
+"    background-color: rgba(255, 255, 255, 0);\n"
 "}")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -89,8 +150,10 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.stackedWidget_main = QtWidgets.QStackedWidget(self.centralwidget)
+        self.stackedWidget_main.setStyleSheet("")
         self.stackedWidget_main.setObjectName("stackedWidget_main")
         self.page_main = QtWidgets.QWidget()
+        self.page_main.setStyleSheet("")
         self.page_main.setObjectName("page_main")
         self.gridLayout = QtWidgets.QGridLayout(self.page_main)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
@@ -180,71 +243,88 @@ class Ui_MainWindow(object):
         self.page_download.setObjectName("page_download")
         self.stackedWidget_main_2.addWidget(self.page_download)
         self.page_settings = QtWidgets.QWidget()
+        self.page_settings.setStyleSheet("")
         self.page_settings.setObjectName("page_settings")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.page_settings)
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.scrollArea = QtWidgets.QScrollArea(self.page_settings)
-        self.scrollArea.setWidgetResizable(True)
-        self.scrollArea.setObjectName("scrollArea")
-        self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 1117, 610))
-        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
+        self.scrollArea_page_settings = QtWidgets.QScrollArea(self.page_settings)
+        self.scrollArea_page_settings.setWidgetResizable(True)
+        self.scrollArea_page_settings.setObjectName("scrollArea_page_settings")
+        self.scrollAreaWidgetContents_page_settings = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents_page_settings.setGeometry(QtCore.QRect(0, 0, 1117, 610))
+        self.scrollAreaWidgetContents_page_settings.setObjectName("scrollAreaWidgetContents_page_settings")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_page_settings)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.label_page_settings_h1 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
+        self.label_page_settings_h1 = QtWidgets.QLabel(self.scrollAreaWidgetContents_page_settings)
+        self.label_page_settings_h1.setScaledContents(False)
         self.label_page_settings_h1.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label_page_settings_h1.setObjectName("label_page_settings_h1")
         self.verticalLayout_2.addWidget(self.label_page_settings_h1)
-        self.widget_page_settings_subject = QtWidgets.QWidget(self.scrollAreaWidgetContents)
+        self.widget_page_settings_subject = QtWidgets.QWidget(self.scrollAreaWidgetContents_page_settings)
         self.widget_page_settings_subject.setObjectName("widget_page_settings_subject")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.widget_page_settings_subject)
+        self.horizontalLayout_3.setSpacing(25)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.label_page_settings_subject_h2 = QtWidgets.QLabel(self.widget_page_settings_subject)
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        self.label_page_settings_subject_h2.setFont(font)
         self.label_page_settings_subject_h2.setObjectName("label_page_settings_subject_h2")
         self.horizontalLayout_3.addWidget(self.label_page_settings_subject_h2)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem1)
-        self.radioButton = QtWidgets.QRadioButton(self.widget_page_settings_subject)
-        self.radioButton.setObjectName("radioButton")
-        self.horizontalLayout_3.addWidget(self.radioButton)
-        self.radioButton_2 = QtWidgets.QRadioButton(self.widget_page_settings_subject)
-        self.radioButton_2.setObjectName("radioButton_2")
-        self.horizontalLayout_3.addWidget(self.radioButton_2)
-        self.radioButton_3 = QtWidgets.QRadioButton(self.widget_page_settings_subject)
-        self.radioButton_3.setObjectName("radioButton_3")
-        self.horizontalLayout_3.addWidget(self.radioButton_3)
+        self.radioButton_settings_subject_light = QtWidgets.QRadioButton(self.widget_page_settings_subject)
+        self.radioButton_settings_subject_light.setObjectName("radioButton_settings_subject_light")
+        self.horizontalLayout_3.addWidget(self.radioButton_settings_subject_light)
+        self.radioButton_settings_subject_dark = QtWidgets.QRadioButton(self.widget_page_settings_subject)
+        self.radioButton_settings_subject_dark.setObjectName("radioButton_settings_subject_dark")
+        self.horizontalLayout_3.addWidget(self.radioButton_settings_subject_dark)
+        self.radioButton_settings_subject_automatic = QtWidgets.QRadioButton(self.widget_page_settings_subject)
+        self.radioButton_settings_subject_automatic.setObjectName("radioButton_settings_subject_automatic")
+        self.horizontalLayout_3.addWidget(self.radioButton_settings_subject_automatic)
         self.verticalLayout_2.addWidget(self.widget_page_settings_subject)
-        self.widget_page_settings_background = QtWidgets.QWidget(self.scrollAreaWidgetContents)
+        self.widget_page_settings_background = QtWidgets.QWidget(self.scrollAreaWidgetContents_page_settings)
         self.widget_page_settings_background.setObjectName("widget_page_settings_background")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.widget_page_settings_background)
+        self.gridLayout_2.setHorizontalSpacing(0)
+        self.gridLayout_2.setVerticalSpacing(15)
         self.gridLayout_2.setObjectName("gridLayout_2")
-        self.radioButton_4 = QtWidgets.QRadioButton(self.widget_page_settings_background)
-        self.radioButton_4.setObjectName("radioButton_4")
-        self.gridLayout_2.addWidget(self.radioButton_4, 2, 1, 1, 2)
-        self.radioButton_5 = QtWidgets.QRadioButton(self.widget_page_settings_background)
-        self.radioButton_5.setObjectName("radioButton_5")
-        self.gridLayout_2.addWidget(self.radioButton_5, 1, 1, 1, 2)
-        self.radioButton_6 = QtWidgets.QRadioButton(self.widget_page_settings_background)
-        self.radioButton_6.setObjectName("radioButton_6")
-        self.gridLayout_2.addWidget(self.radioButton_6, 3, 1, 1, 2)
+        self.radioButton_settings_background_none = QtWidgets.QRadioButton(self.widget_page_settings_background)
+        self.radioButton_settings_background_none.setObjectName("radioButton_settings_background_none")
+        self.gridLayout_2.addWidget(self.radioButton_settings_background_none, 1, 0, 1, 1)
+        self.radioButton_settings_background_1 = QtWidgets.QRadioButton(self.widget_page_settings_background)
+        self.radioButton_settings_background_1.setObjectName("radioButton_settings_background_1")
+        self.gridLayout_2.addWidget(self.radioButton_settings_background_1, 1, 1, 1, 1)
+        self.radioButton_settings_background_2 = QtWidgets.QRadioButton(self.widget_page_settings_background)
+        self.radioButton_settings_background_2.setObjectName("radioButton_settings_background_2")
+        self.gridLayout_2.addWidget(self.radioButton_settings_background_2, 1, 2, 1, 1)
+        self.radioButton_settings_background_3 = QtWidgets.QRadioButton(self.widget_page_settings_background)
+        self.radioButton_settings_background_3.setObjectName("radioButton_settings_background_3")
+        self.gridLayout_2.addWidget(self.radioButton_settings_background_3, 1, 3, 1, 1)
+        self.radioButton_settings_background_4 = QtWidgets.QRadioButton(self.widget_page_settings_background)
+        self.radioButton_settings_background_4.setObjectName("radioButton_settings_background_4")
+        self.gridLayout_2.addWidget(self.radioButton_settings_background_4, 3, 0, 1, 1)
+        self.radioButton_settings_background_5 = QtWidgets.QRadioButton(self.widget_page_settings_background)
+        self.radioButton_settings_background_5.setObjectName("radioButton_settings_background_5")
+        self.gridLayout_2.addWidget(self.radioButton_settings_background_5, 3, 1, 1, 1)
+        self.radioButton_settings_background_6 = QtWidgets.QRadioButton(self.widget_page_settings_background)
+        self.radioButton_settings_background_6.setObjectName("radioButton_settings_background_6")
+        self.gridLayout_2.addWidget(self.radioButton_settings_background_6, 3, 2, 1, 1)
+        self.radioButton_settings_background_7 = QtWidgets.QRadioButton(self.widget_page_settings_background)
+        self.radioButton_settings_background_7.setObjectName("radioButton_settings_background_7")
+        self.gridLayout_2.addWidget(self.radioButton_settings_background_7, 3, 3, 1, 1)
         self.label_page_settings_background_h2 = QtWidgets.QLabel(self.widget_page_settings_background)
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        self.label_page_settings_background_h2.setFont(font)
         self.label_page_settings_background_h2.setObjectName("label_page_settings_background_h2")
-        self.gridLayout_2.addWidget(self.label_page_settings_background_h2, 0, 0, 1, 3)
-        self.radioButton_7 = QtWidgets.QRadioButton(self.widget_page_settings_background)
-        self.radioButton_7.setObjectName("radioButton_7")
-        self.gridLayout_2.addWidget(self.radioButton_7, 1, 3, 1, 1)
-        self.radioButton_8 = QtWidgets.QRadioButton(self.widget_page_settings_background)
-        self.radioButton_8.setObjectName("radioButton_8")
-        self.gridLayout_2.addWidget(self.radioButton_8, 2, 3, 1, 1)
-        self.radioButton_9 = QtWidgets.QRadioButton(self.widget_page_settings_background)
-        self.radioButton_9.setObjectName("radioButton_9")
-        self.gridLayout_2.addWidget(self.radioButton_9, 3, 3, 1, 1)
+        self.gridLayout_2.addWidget(self.label_page_settings_background_h2, 0, 0, 1, 4)
         self.verticalLayout_2.addWidget(self.widget_page_settings_background)
         spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         self.verticalLayout_2.addItem(spacerItem2)
-        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
-        self.verticalLayout_3.addWidget(self.scrollArea)
+        self.scrollArea_page_settings.setWidget(self.scrollAreaWidgetContents_page_settings)
+        self.verticalLayout_3.addWidget(self.scrollArea_page_settings)
         self.stackedWidget_main_2.addWidget(self.page_settings)
         self.horizontalLayout.addWidget(self.stackedWidget_main_2)
         self.gridLayout.addWidget(self.widget_Middle, 0, 1, 1, 1)
@@ -377,16 +457,21 @@ class Ui_MainWindow(object):
         self.label_Sidebar_Settings.setToolTip(_translate("MainWindow", "设置"))
         self.label_page_settings_h1.setText(_translate("MainWindow", "个性化外观设置"))
         self.label_page_settings_subject_h2.setText(_translate("MainWindow", "主题"))
-        self.radioButton.setText(_translate("MainWindow", "RadioButton"))
-        self.radioButton_2.setText(_translate("MainWindow", "RadioButton"))
-        self.radioButton_3.setText(_translate("MainWindow", "RadioButton"))
-        self.radioButton_4.setText(_translate("MainWindow", "RadioButton"))
-        self.radioButton_5.setText(_translate("MainWindow", "RadioButton"))
-        self.radioButton_6.setText(_translate("MainWindow", "RadioButton"))
+        self.radioButton_settings_subject_light.setToolTip(_translate("MainWindow", "浅色模式"))
+        self.radioButton_settings_subject_light.setText(_translate("MainWindow", "浅色"))
+        self.radioButton_settings_subject_dark.setToolTip(_translate("MainWindow", "深色模式"))
+        self.radioButton_settings_subject_dark.setText(_translate("MainWindow", "深色"))
+        self.radioButton_settings_subject_automatic.setToolTip(_translate("MainWindow", "跟随系统(只限于Mac系统)"))
+        self.radioButton_settings_subject_automatic.setText(_translate("MainWindow", "跟随系统"))
+        self.radioButton_settings_background_none.setText(_translate("MainWindow", "无"))
+        self.radioButton_settings_background_1.setText(_translate("MainWindow", "清爽橙黄"))
+        self.radioButton_settings_background_2.setText(_translate("MainWindow", "梦幻浅蓝"))
+        self.radioButton_settings_background_3.setText(_translate("MainWindow", "梦幻浅红"))
+        self.radioButton_settings_background_4.setText(_translate("MainWindow", "三彩斑斓"))
+        self.radioButton_settings_background_5.setText(_translate("MainWindow", "深蓝天空"))
+        self.radioButton_settings_background_6.setText(_translate("MainWindow", "蓝白相照"))
+        self.radioButton_settings_background_7.setText(_translate("MainWindow", "粉色迷雾"))
         self.label_page_settings_background_h2.setText(_translate("MainWindow", "背景"))
-        self.radioButton_7.setText(_translate("MainWindow", "RadioButton"))
-        self.radioButton_8.setText(_translate("MainWindow", "RadioButton"))
-        self.radioButton_9.setText(_translate("MainWindow", "RadioButton"))
         self.label_loading_text_1.setText(_translate("MainWindow", "正在初始化启动器……"))
         self.label_loading_text_2.setText(_translate("MainWindow", "正在读取设置(1/2)"))
 from UI.Custom_UI.QLabel import MyQLabel

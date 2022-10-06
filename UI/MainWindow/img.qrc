@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="widget_Sidebar">
+    <file>../../images/Whith-0%_2.png</file>
+    <file>../../images/Scrub_Settings-Z_B15.png</file>
     <file>../../images/User-B-Black.png</file>
     <file>../../images/Settings-B-Black.png</file>
     <file>../../images/Online-B-Black.png</file>
