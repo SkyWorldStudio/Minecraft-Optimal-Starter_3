@@ -39,10 +39,7 @@ class Ui_MainWindow(object):
 "    border-radius: 5px;\n"
 "}\n"
 "\n"
-"/*左边边栏“阴影”*/\n"
-"#stackedWidget_main_2{\n"
-"    border-image: url(:/Scrub/images/Scrub_B2_FFFFFF-50_Main-M-B.png);\n"
-"}\n"
+"\n"
 "\n"
 "/*设置页面*/\n"
 "#scrollAreaWidgetContents_page_settings > QWidget\n"
@@ -153,7 +150,8 @@ class Ui_MainWindow(object):
         self.stackedWidget_main.setStyleSheet("")
         self.stackedWidget_main.setObjectName("stackedWidget_main")
         self.page_main = QtWidgets.QWidget()
-        self.page_main.setStyleSheet("")
+        self.page_main.setStyleSheet("/*模拟阴影*/\n"
+"#widget_Middle > #stackedWidget_main_2{border-image: url(:/Scrub/images/Scrub_B2_FFFFFF-50_Main-M-B.png);}")
         self.page_main.setObjectName("page_main")
         self.gridLayout = QtWidgets.QGridLayout(self.page_main)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
@@ -229,6 +227,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setSpacing(0)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.stackedWidget_main_2 = QtWidgets.QStackedWidget(self.widget_Middle)
+        self.stackedWidget_main_2.setStyleSheet("")
         self.stackedWidget_main_2.setObjectName("stackedWidget_main_2")
         self.page_users = QtWidgets.QWidget()
         self.page_users.setObjectName("page_users")

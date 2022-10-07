@@ -40,10 +40,7 @@
 	border-radius: 5px;
 }
 
-/*左边边栏“阴影”*/
-#stackedWidget_main_2{
-	border-image: url(:/Scrub/images/Scrub_B2_FFFFFF-50_Main-M-B.png);
-}
+
 
 /*设置页面*/
 #scrollAreaWidgetContents_page_settings &gt; QWidget
@@ -170,7 +167,8 @@ QRadioButton::indicator:checked:pressed {
       </property>
       <widget class="QWidget" name="page_main">
        <property name="styleSheet">
-        <string notr="true"/>
+        <string notr="true">/*模拟阴影*/
+#widget_Middle &gt; #stackedWidget_main_2{border-image: url(:/Scrub/images/Scrub_B2_FFFFFF-50_Main-M-B.png);}</string>
        </property>
        <layout class="QGridLayout" name="gridLayout">
         <property name="leftMargin">
@@ -425,6 +423,9 @@ QRadioButton::indicator:checked:pressed {
            </property>
            <item>
             <widget class="QStackedWidget" name="stackedWidget_main_2">
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
              <widget class="QWidget" name="page_users"/>
              <widget class="QWidget" name="page_home"/>
              <widget class="QWidget" name="page_online"/>

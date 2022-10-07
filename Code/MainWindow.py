@@ -64,14 +64,14 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self._toolTip.hide()
 
         # 设置页面
-        self.radioButton_settings_background_none.clicked()
-        self.radioButton_settings_background_1.clicked()
-        self.radioButton_settings_background_2.clicked()
-        self.radioButton_settings_background_3.clicked()
-        self.radioButton_settings_background_4.clicked()
-        self.radioButton_settings_background_5.clicked()
-        self.radioButton_settings_background_6.clicked()
-        self.radioButton_settings_background_7.clicked()
+        self.radioButton_settings_background_none.clicked.connect(self.SettingsPage_Background_None_Clicked)
+        self.radioButton_settings_background_1.clicked.connect(self.SettingsPage_Background_1_Clicked)
+        self.radioButton_settings_background_2.clicked.connect(self.SettingsPage_Background_2_Clicked)
+        self.radioButton_settings_background_3.clicked.connect(self.SettingsPage_Background_3_Clicked)
+        self.radioButton_settings_background_4.clicked.connect(self.SettingsPage_Background_4_Clicked)
+        self.radioButton_settings_background_5.clicked.connect(self.SettingsPage_Background_5_Clicked)
+        self.radioButton_settings_background_6.clicked.connect(self.SettingsPage_Background_6_Clicked)
+        self.radioButton_settings_background_7.clicked.connect(self.SettingsPage_Background_7_Clicked)
 
     # 左边栏"按钮"被点击后（槽）
     def Back_Clicked(self):
@@ -94,34 +94,45 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
     def SettingsPage_Background_None_Clicked(self):
         """设置页面 -> 背景设置:选择：无"""
-        pass
+        self.MainWinowMainBackground(None)
 
     def SettingsPage_Background_1_Clicked(self):
         """设置页面 -> 背景设置:选择：1(清爽橙黄)"""
-        pass
+        self.MainWinowMainBackground(1)
 
     def SettingsPage_Background_2_Clicked(self):
         """设置页面 -> 背景设置:选择：2(梦幻浅蓝)"""
-        pass
+        self.MainWinowMainBackground(2)
 
     def SettingsPage_Background_3_Clicked(self):
         """设置页面 -> 背景设置:选择：3(梦幻浅红)"""
-        pass
+        self.MainWinowMainBackground(3)
 
     def SettingsPage_Background_4_Clicked(self):
         """设置页面 -> 背景设置:选择：4(三彩斑斓)"""
-        pass
+        self.MainWinowMainBackground(4)
 
     def SettingsPage_Background_5_Clicked(self):
         """设置页面 -> 背景设置:选择：5(蓝白相照)"""
-        pass
+        self.MainWinowMainBackground(5)
 
     def SettingsPage_Background_6_Clicked(self):
         """设置页面 -> 背景设置:选择：6(深蓝天空)"""
-        pass
+        self.MainWinowMainBackground(6)
     def SettingsPage_Background_7_Clicked(self):
         """设置页面 -> 背景设置:选择：7(粉色迷雾)"""
-        pass
+        self.MainWinowMainBackground(7)
+
+    def MainWinowMainBackground(self,Want):
+        """主窗口背景"""
+        if Want == None:
+            self.centralwidget.setStyleSheet('')
+            self.page_main.setStyleSheet('/*模拟阴影*/\n#widget_Middle > #stackedWidget_main_2{border-image: url(:/Scrub/images/Scrub_B2_FFFFFF-50_Main-M-B.png);}')
+        else:
+            self.centralwidget.setStyleSheet('#stackedWidget_main > #page_main{border-image: url(:/BackGround/images/BackGround/' + str(Want) + '.png);}')
+            self.page_main.setStyleSheet('')
+
+
 
     def Sidebar_Clicked(self, Want=None):
         """
