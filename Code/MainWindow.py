@@ -104,19 +104,19 @@ class RunUi(QMainWindow, Ui_MainWindow):
         """设置页面 -> 背景设置:选择：7(粉色迷雾)"""
         self.MainWinowMainBackground(7)
 
-    def MainWinowMainBackground(self,Want,__init = False):
+    def MainWinowMainBackground(self,Want,_init_=False):
         """主窗口背景"""
         if Want == None:
             self.centralwidget.setStyleSheet('')
             self.page_main.setStyleSheet('/*模拟阴影*/\n#widget_Middle > #stackedWidget_main_2{border-image: url(:/Scrub/images/Scrub_B2_FFFFFF-50_Main-M-B.png);}')
-            if __init == False:
+            if _init_ == False:
                 # 如果不是初始化 就改变json配置
                 self.Json_MOS['BackGround'] = False
                 JsonWrite(self.Json_MOS,self.JsonFile)
         else:
             self.centralwidget.setStyleSheet('#stackedWidget_main > #page_main{border-image: url(:/BackGround/images/BackGround/' + str(Want) + '.png);}')
             self.page_main.setStyleSheet('')
-            if __init == False:
+            if _init_ == False:
                 # 如果不是初始化 就改变json配置
                 self.Json_MOS['BackGround'] = Want
                 JsonWrite(self.Json_MOS, self.JsonFile)
@@ -346,25 +346,28 @@ class RunUi(QMainWindow, Ui_MainWindow):
             elif self.Json_MOS['Subject'] == 'Automatic':
                 self.radioButton_settings_subject_automatic.setChecked(True)
 
+            print('设置背景……')
+            self.label_loading_text_2.setText('正在设置启动器(3/3)')
+
             if self.Json_MOS['BackGround'] == False:
                 self.MainWinowMainBackground(None)
                 self.radioButton_settings_background_none.setClecked(True)
             else:
-                self.MainWinowMainBackground(self.Json_MOS['BackGround'])
+                self.MainWinowMainBackground(self.Json_MOS['BackGround'], _init_=True)
                 if self.Json_MOS['BackGround'] == 1:
                     self.radioButton_settings_background_1.setChecked(True)
                 elif self.Json_MOS['BackGround'] == 2:
-                    self.radioButton_settings_background_2.setClecked(True)
+                    self.radioButton_settings_background_2.setChecked(True)
                 elif self.Json_MOS['BackGround'] == 3:
-                    self.radioButton_settings_background_3.setClecked(True)
+                    self.radioButton_settings_background_3.setChecked(True)
                 elif self.Json_MOS['BackGround'] == 4:
-                    self.radioButton_settings_background_4.setClecked(True)
+                    self.radioButton_settings_background_4.setChecked(True)
                 elif self.Json_MOS['BackGround'] == 5:
-                    self.radioButton_settings_background_5.setClecked(True)
+                    self.radioButton_settings_background_5.setChecked(True)
                 elif self.Json_MOS['BackGround'] == 6:
-                    self.radioButton_settings_background_6.setClecked(True)
+                    self.radioButton_settings_background_6.setChecked(True)
                 elif self.Json_MOS['BackGround'] == 7:
-                    self.radioButton_settings_background_7.setClicked(True)
+                    self.radioButton_settings_background_7.setChecked(True)
 
 
 
@@ -385,7 +388,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.stackedWidget_main.setCurrentIndex(2)
         else:
             # 如果有 就进行下一步
-            self.label_loading_text_2.setText('正在设置启动器(2/2)')
+            self.label_loading_text_2.setText('正在设置启动器(2/3)')
             Settings_()
             self.label_loading_text_2.setText('设置完成')
             self.Animation_ToMainWindow()

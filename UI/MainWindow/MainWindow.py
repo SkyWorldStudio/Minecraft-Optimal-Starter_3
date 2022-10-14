@@ -251,7 +251,7 @@ class Ui_MainWindow(object):
         self.scrollArea_page_settings.setWidgetResizable(True)
         self.scrollArea_page_settings.setObjectName("scrollArea_page_settings")
         self.scrollAreaWidgetContents_page_settings = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_page_settings.setGeometry(QtCore.QRect(0, 0, 1117, 610))
+        self.scrollAreaWidgetContents_page_settings.setGeometry(QtCore.QRect(0, 0, 380, 216))
         self.scrollAreaWidgetContents_page_settings.setObjectName("scrollAreaWidgetContents_page_settings")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_page_settings)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
@@ -473,5 +473,5 @@ class Ui_MainWindow(object):
         self.radioButton_settings_background_7.setText(_translate("MainWindow", "粉色迷雾"))
         self.label_page_settings_background_h2.setText(_translate("MainWindow", "背景"))
         self.label_loading_text_1.setText(_translate("MainWindow", "正在初始化启动器……"))
-        self.label_loading_text_2.setText(_translate("MainWindow", "正在读取设置(1/2)"))
+        self.label_loading_text_2.setText(_translate("MainWindow", "正在读取设置(1/3)"))
 from UI.Custom_UI.QLabel import MyQLabel
