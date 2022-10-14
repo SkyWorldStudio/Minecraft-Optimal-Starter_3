@@ -8,6 +8,7 @@ from PyQt6.QtWidgets import QMainWindow, QGraphicsOpacityEffect
 
 from UI.Custom_UI.QToolTip import ToolTip
 from UI.MainWindow.MainWindow import Ui_MainWindow
+from Code.Code import JsonRead, JsonFile, Systeam, JsonWrite
 
 
 class RunUi(QMainWindow, Ui_MainWindow):
@@ -39,29 +40,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.label_Sidebar_Download.clicked.connect(self.Download_Clicked)
         self.label_Sidebar_Settings.clicked.connect(self.Settings_Clicked)
 
-        # 悬浮提示窗
-        self._toolTip = ToolTip(parent=self)
-        self.label_Sidebar_Back.setToolTipDuration(1000)
-        self.label_Sidebar_User.setToolTipDuration(1000)
-        self.label_Sidebar_Home.setToolTipDuration(1000)
-        self.label_Sidebar_OnLine.setToolTipDuration(1000)
-        self.label_Sidebar_Download.setToolTipDuration(1000)
-        self.label_Sidebar_Settings.setToolTipDuration(1000)
-        self.radioButton_settings_subject_light.setToolTipDuration(1000)
-        self.radioButton_settings_subject_dark.setToolTipDuration(1000)
-        self.radioButton_settings_subject_automatic.setToolTipDuration(1000)
 
-        self.label_Sidebar_Back.installEventFilter(self)
-        self.label_Sidebar_User.installEventFilter(self)
-        self.label_Sidebar_Home.installEventFilter(self)
-        self.label_Sidebar_OnLine.installEventFilter(self)
-        self.label_Sidebar_Download.installEventFilter(self)
-        self.label_Sidebar_Settings.installEventFilter(self)
-        self.radioButton_settings_subject_light.installEventFilter(self)
-        self.radioButton_settings_subject_dark.installEventFilter(self)
-        self.radioButton_settings_subject_automatic.installEventFilter(self)
-
-        self._toolTip.hide()
 
         # 设置页面
         self.radioButton_settings_background_none.clicked.connect(self.SettingsPage_Background_None_Clicked)
@@ -72,6 +51,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.radioButton_settings_background_5.clicked.connect(self.SettingsPage_Background_5_Clicked)
         self.radioButton_settings_background_6.clicked.connect(self.SettingsPage_Background_6_Clicked)
         self.radioButton_settings_background_7.clicked.connect(self.SettingsPage_Background_7_Clicked)
+
+        self.__init__setToolTipDuration()
 
     # 左边栏"按钮"被点击后（槽）
     def Back_Clicked(self):
@@ -123,14 +104,22 @@ class RunUi(QMainWindow, Ui_MainWindow):
         """设置页面 -> 背景设置:选择：7(粉色迷雾)"""
         self.MainWinowMainBackground(7)
 
-    def MainWinowMainBackground(self,Want):
+    def MainWinowMainBackground(self,Want,__init = False):
         """主窗口背景"""
         if Want == None:
             self.centralwidget.setStyleSheet('')
             self.page_main.setStyleSheet('/*模拟阴影*/\n#widget_Middle > #stackedWidget_main_2{border-image: url(:/Scrub/images/Scrub_B2_FFFFFF-50_Main-M-B.png);}')
+            if __init == False:
+                # 如果不是初始化 就改变json配置
+                self.Json_MOS['BackGround'] = False
+                JsonWrite(self.Json_MOS,self.JsonFile)
         else:
             self.centralwidget.setStyleSheet('#stackedWidget_main > #page_main{border-image: url(:/BackGround/images/BackGround/' + str(Want) + '.png);}')
             self.page_main.setStyleSheet('')
+            if __init == False:
+                # 如果不是初始化 就改变json配置
+                self.Json_MOS['BackGround'] = Want
+                JsonWrite(self.Json_MOS, self.JsonFile)
 
 
 
@@ -343,7 +332,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             # 读取阶段(读取配置等)
             self.Systeam = Systeam()
             print('系统：' + self.Systeam)
-            self.Json_MOS = JsonRead(F)
+            self.Json_MOS = JsonRead(self.JsonFile)
             print('Json读取完成')
             # 设置阶段
             if self.Systeam != 'Mac':
@@ -359,24 +348,39 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
             if self.Json_MOS['BackGround'] == False:
                 self.MainWinowMainBackground(None)
+                self.radioButton_settings_background_none.setClecked(True)
             else:
                 self.MainWinowMainBackground(self.Json_MOS['BackGround'])
+                if self.Json_MOS['BackGround'] == 1:
+                    self.radioButton_settings_background_1.setChecked(True)
+                elif self.Json_MOS['BackGround'] == 2:
+                    self.radioButton_settings_background_2.setClecked(True)
+                elif self.Json_MOS['BackGround'] == 3:
+                    self.radioButton_settings_background_3.setClecked(True)
+                elif self.Json_MOS['BackGround'] == 4:
+                    self.radioButton_settings_background_4.setClecked(True)
+                elif self.Json_MOS['BackGround'] == 5:
+                    self.radioButton_settings_background_5.setClecked(True)
+                elif self.Json_MOS['BackGround'] == 6:
+                    self.radioButton_settings_background_6.setClecked(True)
+                elif self.Json_MOS['BackGround'] == 7:
+                    self.radioButton_settings_background_7.setClicked(True)
+
 
 
         if First == True:
             self.RunInitialize_.stop()
 
-        from Code.Code import JsonRead, JsonFile, Systeam
 
         # 开始播放动图
         self.Page_Loading = QtGui.QMovie(":/widget_Sidebar/images/MOS_Logo_gif.gif")
         self.label_loading_gif.setMovie(self.Page_Loading)
         self.Page_Loading.start()
 
-        self.JsonFile = os.path.join('')
-        F = JsonFile()  # 读取Json路径
+        self.JsonFile_Q = os.path.join('')
+        self.JsonFile = JsonFile()  # 读取Json路径
 
-        if os.path.isfile(F) == False:
+        if os.path.isfile(self.JsonFile) == False:
             """如果没有Json这个目录 就转到欢迎(初始化)页面"""
             self.stackedWidget_main.setCurrentIndex(2)
         else:
@@ -458,6 +462,33 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.Animation_ToMainWindow_Run = QTimer()
         self.Animation_ToMainWindow_Run.start(1)
         self.Animation_ToMainWindow_Run.timeout.connect(Animation)
+
+
+    def __init__setToolTipDuration(self):
+        """初始化设置: 设置提示框"""
+        # 悬浮提示窗
+        self._toolTip = ToolTip(parent=self)
+        self.label_Sidebar_Back.setToolTipDuration(1000)
+        self.label_Sidebar_User.setToolTipDuration(1000)
+        self.label_Sidebar_Home.setToolTipDuration(1000)
+        self.label_Sidebar_OnLine.setToolTipDuration(1000)
+        self.label_Sidebar_Download.setToolTipDuration(1000)
+        self.label_Sidebar_Settings.setToolTipDuration(1000)
+        self.radioButton_settings_subject_light.setToolTipDuration(1000)
+        self.radioButton_settings_subject_dark.setToolTipDuration(1000)
+        self.radioButton_settings_subject_automatic.setToolTipDuration(1000)
+
+        self.label_Sidebar_Back.installEventFilter(self)
+        self.label_Sidebar_User.installEventFilter(self)
+        self.label_Sidebar_Home.installEventFilter(self)
+        self.label_Sidebar_OnLine.installEventFilter(self)
+        self.label_Sidebar_Download.installEventFilter(self)
+        self.label_Sidebar_Settings.installEventFilter(self)
+        self.radioButton_settings_subject_light.installEventFilter(self)
+        self.radioButton_settings_subject_dark.installEventFilter(self)
+        self.radioButton_settings_subject_automatic.installEventFilter(self)
+
+        self._toolTip.hide()
 
     def eventFilter(self, obj, e: QEvent):
         """重写 悬浮提示 方法"""

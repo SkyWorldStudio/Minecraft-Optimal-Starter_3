@@ -19,6 +19,12 @@ def JsonFile():
     b = os.path.join(a,'MOS.json')
     return b
 
+def JsonWrite(Json_,JsonFile):
+    """写入Json"""
+    with open(JsonFile, 'w+', encoding='utf_8') as f:
+        json.dump(Json_, f, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
+
+
 def InitializeFirst():
     """在第一次运行时，初始化"""
     f = ['Download','Music','Java','Html','Mod','Logs']
