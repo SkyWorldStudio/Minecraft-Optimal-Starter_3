@@ -1,4 +1,5 @@
 # coding=utf-8
+import json
 import os
 from sys import platform
 
@@ -9,7 +10,7 @@ def JsonRead(JsonFile):
         JsonFile = Json的目录
     """
     with open(JsonFile,'r',encoding='utf_8') as f:
-        r = f.read()
+        r = json.load(f)
     return r
 
 def JsonFile():
@@ -27,8 +28,14 @@ def InitializeFirst():
         os.makedirs(file,exist_ok=True)
 
     JsonFile_ = JsonFile()
-    with open(JsonFile_,'w',encoding='utf-8'):
-        pass
+
+    J = {
+        'Subject':'Light',
+        'BackGround':False
+         }
+
+    with open(JsonFile_,'w',encoding='utf-8') as f:
+        json.dump(J,f, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
 
 def File():

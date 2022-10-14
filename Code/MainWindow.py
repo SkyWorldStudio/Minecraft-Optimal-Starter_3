@@ -343,12 +343,24 @@ class RunUi(QMainWindow, Ui_MainWindow):
             # 读取阶段(读取配置等)
             self.Systeam = Systeam()
             print('系统：' + self.Systeam)
-            a = JsonRead(F)
+            self.Json_MOS = JsonRead(F)
             print('Json读取完成')
             # 设置阶段
             if self.Systeam != 'Mac':
                 self.radioButton_settings_subject_automatic.setEnabled(False)
                 self.radioButton_settings_subject_automatic.setToolTip('跟随系统(只限于Mac系统)-当前不可用')
+
+            if self.Json_MOS['Subject'] == 'Light':
+                self.radioButton_settings_subject_light.setChecked(True)
+            elif self.Json_MOS['Subject'] == 'Dark':
+                self.radioButton_settings_subject_dark.setChecked(True)
+            elif self.Json_MOS['Subject'] == 'Automatic':
+                self.radioButton_settings_subject_automatic.setChecked(True)
+
+            if self.Json_MOS['BackGround'] == False:
+                self.MainWinowMainBackground(None)
+            else:
+                self.MainWinowMainBackground(self.Json_MOS['BackGround'])
 
 
         if First == True:
@@ -448,6 +460,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.Animation_ToMainWindow_Run.timeout.connect(Animation)
 
     def eventFilter(self, obj, e: QEvent):
+        """重写 悬浮提示 方法"""
         if obj is self:
             return super().eventFilter(obj, e)
 
@@ -463,14 +476,6 @@ class RunUi(QMainWindow, Ui_MainWindow):
             return True
 
         return super().eventFilter(obj, e)
-
-
-class RunInitializeThread(QThread):
-    def __init__(self):
-        super(RunInitializeThread, self).__init__()
-
-    def run(self) -> None:
-        pass
 
 
 def Run():

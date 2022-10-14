@@ -550,6 +550,9 @@ QRadioButton::indicator:checked:pressed {
                       </property>
                       <item row="1" column="0">
                        <widget class="QRadioButton" name="radioButton_settings_background_none">
+                        <property name="enabled">
+                         <bool>true</bool>
+                        </property>
                         <property name="text">
                          <string>无</string>
                         </property>

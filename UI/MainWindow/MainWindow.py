@@ -290,6 +290,7 @@ class Ui_MainWindow(object):
         self.gridLayout_2.setVerticalSpacing(15)
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.radioButton_settings_background_none = QtWidgets.QRadioButton(self.widget_page_settings_background)
+        self.radioButton_settings_background_none.setEnabled(True)
         self.radioButton_settings_background_none.setObjectName("radioButton_settings_background_none")
         self.gridLayout_2.addWidget(self.radioButton_settings_background_none, 1, 0, 1, 1)
         self.radioButton_settings_background_1 = QtWidgets.QRadioButton(self.widget_page_settings_background)
