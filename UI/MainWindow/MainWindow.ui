@@ -139,9 +139,144 @@ QRadioButton::indicator:checked:pressed {
     border-radius: 10px;
 }
 
+
+
+/*QSlider*/
+QSlider::groove:horizontal {
+	/*滑条*/
+    border: 1px solid #bbb;
+    background: white;
+    height: 3px;
+    border-radius: 1px;
+}
+  
+QSlider::sub-page:horizontal {
+	/*已经划过的*/
+    background: rgb(0, 150, 255);
+    border: 1px solid rgba(255, 255, 255, 0);
+    height: 3px;
+    border-radius: 1px;
+}
+
+QSlider::add-page:horizontal {
+	/*没有划过的*/
+    background: rgb(235, 235, 235);  
+    border: 1px solid rgba(255, 255, 255, 0);
+    height: 3px;
+    border-radius: 1px;
+}
+ 
+QSlider::handle:horizontal {
+	/* 上下边距和左右边距(中间的“提手”)*/
+    background: rgb(0, 150, 255);
+    border: 5px solid rgb(0, 150, 255);
+    width: 8px;
+    margin-top: -8px;
+    margin-bottom: -8px;
+    border-radius: 9px;
+}
+
+QSlider::handle:horizontal:hover {
+    background: rgb(0, 150, 255);
+    border: 5px solid rgb(0, 150, 255);
+    border-radius: 9px;
+}
+
+QSlider::sub-page:horizontal:disabled {
+    background: #bbb;
+    border-color: #999;
+}
+
+QSlider::add-page:horizontal:disabled {
+    background: #eee;
+    border-color: #999;
+}
+
+QSlider::handle:horizontal:disabled {
+    background: #eee;
+    border: 1px solid #aaa;
+    border-radius: 1px;
+}
+
+
+/*QSpinBox*/
+QSpinBox {
+	/* 为箭头保留空间 */
+	padding-right:25px;
+	border:2px solid rgb(33, 33, 33);
+	background: rgba(255, 255, 255, 128);
+	min-width:40px;
+	border-radius: 5px;
+	padding: -1;  /*改变焦点框*/
+}
+
+QSpinBox:focus{
+	/*出现光标后*/
+	border:2px solid rgb(4, 51, 255);
+}
+
+
+/* 向上按钮 */
+QSpinBox::up-button {
+	subcontrol-origin:border;
+	subcontrol-position:top right;
+	width:18px;
+	border-image:url(:/widget_Sidebar/images/Up.png);
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0.985075, y2:0, stop:0 rgba(235, 235, 235, 255), stop:1 rgba(255, 255, 255, 0));
+	border-top-right-radius:5px;
+	border-width:1px;
+}
+ 
+/* 向上按钮 */
+QSpinBox::up-button:hover {
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(225, 225, 225, 255), stop:1 rgba(255, 255, 255, 0));
+}
+ 
+/* 向上按钮 */
+QSpinBox::up-button:pressed {
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(190, 190, 190, 255), stop:1 rgba(255, 255, 255, 0));
+}
+ 
+/* 向上按钮里的小箭头 */
+QSpinBox::up-arrow {
+	image:url(:/images/333.bmp);
+	width:7px;
+	height:7px;
+}
+ 
+/* 向下按钮 */
+QSpinBox::down-button {
+	subcontrol-origin:border;
+	subcontrol-position:bottom right;
+	width:18px;
+	border-image:url(:/widget_Sidebar/images/Dowe.png);
+	border-bottom-right-radius:5px;
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(235, 235, 235, 255), stop:1 rgba(255, 255, 255, 0));
+	border-width:1px;
+	border-top-width:0;
+}
+ 
+/* 向下按钮 */
+QSpinBox::down-button:hover {
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(225, 225, 225, 255), stop:1 rgba(255, 255, 255, 0));
+}
+ 
+/* 向下按钮 */
+QSpinBox::down-button:pressed {
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(190, 190, 190, 255), stop:1 rgba(255, 255, 255, 0));
+}
+ 
+/* 向下按钮里的小箭头 */
+QSpinBox::down-arrow {
+	image:url(:/images/333.bmp);
+	width:7px;
+	height:7px;
+}
+
 *{
 	background-color: rgba(255, 255, 255, 0);
-}</string>
+}
+*{outline:0px;}</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -426,6 +561,9 @@ QRadioButton::indicator:checked:pressed {
              <property name="styleSheet">
               <string notr="true"/>
              </property>
+             <property name="currentIndex">
+              <number>1</number>
+             </property>
              <widget class="QWidget" name="page_users"/>
              <widget class="QWidget" name="page_home"/>
              <widget class="QWidget" name="page_online"/>
@@ -457,8 +595,8 @@ QRadioButton::indicator:checked:pressed {
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>380</width>
-                    <height>216</height>
+                    <width>1117</width>
+                    <height>588</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -616,6 +754,112 @@ QRadioButton::indicator:checked:pressed {
                         </property>
                         <property name="text">
                          <string>背景</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QWidget" name="widget" native="true">
+                     <property name="styleSheet">
+                      <string notr="true"/>
+                     </property>
+                     <layout class="QGridLayout" name="gridLayout_7">
+                      <item row="0" column="0" colspan="2">
+                       <widget class="QLabel" name="label_page_settings_background_h2_2">
+                        <property name="font">
+                         <font>
+                          <pointsize>15</pointsize>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>左边栏动画设置</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="0" colspan="2">
+                       <widget class="QLabel" name="label">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="text">
+                         <string>每帧间隔 (毫秒-mm)：</string>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="2">
+                       <widget class="QLabel" name="label_2">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="text">
+                         <string>预计 450mm (0.45s)完成</string>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignCenter</set>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="2" column="2">
+                       <widget class="QSpinBox" name="spinBox">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="minimumSize">
+                         <size>
+                          <width>42</width>
+                          <height>30</height>
+                         </size>
+                        </property>
+                        <property name="mouseTracking">
+                         <bool>false</bool>
+                        </property>
+                        <property name="focusPolicy">
+                         <enum>Qt::StrongFocus</enum>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true"/>
+                        </property>
+                        <property name="suffix">
+                         <string> mm</string>
+                        </property>
+                        <property name="minimum">
+                         <number>1</number>
+                        </property>
+                        <property name="maximum">
+                         <number>1000</number>
+                        </property>
+                        <property name="value">
+                         <number>15</number>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="2" column="0" colspan="2">
+                       <widget class="QSlider" name="horizontalSlider">
+                        <property name="maximum">
+                         <number>1000</number>
+                        </property>
+                        <property name="value">
+                         <number>15</number>
+                        </property>
+                        <property name="sliderPosition">
+                         <number>15</number>
+                        </property>
+                        <property name="orientation">
+                         <enum>Qt::Horizontal</enum>
                         </property>
                        </widget>
                       </item>

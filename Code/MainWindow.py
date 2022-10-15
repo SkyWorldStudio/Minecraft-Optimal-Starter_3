@@ -26,7 +26,6 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.RunInitialize_.setInterval(20)
         self.RunInitialize_.timeout.connect(self.RunInitialize)
         self.RunInitialize_.start()
-
         self.pushButton_hello_start.clicked.connect(self.FirstStartInitialize)
 
         # 左边栏

@@ -138,9 +138,144 @@ class Ui_MainWindow(object):
 "    border-radius: 10px;\n"
 "}\n"
 "\n"
+"\n"
+"\n"
+"/*QSlider*/\n"
+"QSlider::groove:horizontal {\n"
+"    /*滑条*/\n"
+"    border: 1px solid #bbb;\n"
+"    background: white;\n"
+"    height: 3px;\n"
+"    border-radius: 1px;\n"
+"}\n"
+"  \n"
+"QSlider::sub-page:horizontal {\n"
+"    /*已经划过的*/\n"
+"    background: rgb(0, 150, 255);\n"
+"    border: 1px solid rgba(255, 255, 255, 0);\n"
+"    height: 3px;\n"
+"    border-radius: 1px;\n"
+"}\n"
+"\n"
+"QSlider::add-page:horizontal {\n"
+"    /*没有划过的*/\n"
+"    background: rgb(235, 235, 235);  \n"
+"    border: 1px solid rgba(255, 255, 255, 0);\n"
+"    height: 3px;\n"
+"    border-radius: 1px;\n"
+"}\n"
+" \n"
+"QSlider::handle:horizontal {\n"
+"    /* 上下边距和左右边距(中间的“提手”)*/\n"
+"    background: rgb(0, 150, 255);\n"
+"    border: 5px solid rgb(0, 150, 255);\n"
+"    width: 8px;\n"
+"    margin-top: -8px;\n"
+"    margin-bottom: -8px;\n"
+"    border-radius: 9px;\n"
+"}\n"
+"\n"
+"QSlider::handle:horizontal:hover {\n"
+"    background: rgb(0, 150, 255);\n"
+"    border: 5px solid rgb(0, 150, 255);\n"
+"    border-radius: 9px;\n"
+"}\n"
+"\n"
+"QSlider::sub-page:horizontal:disabled {\n"
+"    background: #bbb;\n"
+"    border-color: #999;\n"
+"}\n"
+"\n"
+"QSlider::add-page:horizontal:disabled {\n"
+"    background: #eee;\n"
+"    border-color: #999;\n"
+"}\n"
+"\n"
+"QSlider::handle:horizontal:disabled {\n"
+"    background: #eee;\n"
+"    border: 1px solid #aaa;\n"
+"    border-radius: 1px;\n"
+"}\n"
+"\n"
+"\n"
+"/*QSpinBox*/\n"
+"QSpinBox {\n"
+"    /* 为箭头保留空间 */\n"
+"    padding-right:25px;\n"
+"    border:2px solid rgb(33, 33, 33);\n"
+"    background: rgba(255, 255, 255, 128);\n"
+"    min-width:40px;\n"
+"    border-radius: 5px;\n"
+"    padding: -1;  /*改变焦点框*/\n"
+"}\n"
+"\n"
+"QSpinBox:focus{\n"
+"    /*出现光标后*/\n"
+"    border:2px solid rgb(4, 51, 255);\n"
+"}\n"
+"\n"
+"\n"
+"/* 向上按钮 */\n"
+"QSpinBox::up-button {\n"
+"    subcontrol-origin:border;\n"
+"    subcontrol-position:top right;\n"
+"    width:18px;\n"
+"    border-image:url(:/widget_Sidebar/images/Up.png);\n"
+"    background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0.985075, y2:0, stop:0 rgba(235, 235, 235, 255), stop:1 rgba(255, 255, 255, 0));\n"
+"    border-top-right-radius:5px;\n"
+"    border-width:1px;\n"
+"}\n"
+" \n"
+"/* 向上按钮 */\n"
+"QSpinBox::up-button:hover {\n"
+"    background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(225, 225, 225, 255), stop:1 rgba(255, 255, 255, 0));\n"
+"}\n"
+" \n"
+"/* 向上按钮 */\n"
+"QSpinBox::up-button:pressed {\n"
+"    background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(190, 190, 190, 255), stop:1 rgba(255, 255, 255, 0));\n"
+"}\n"
+" \n"
+"/* 向上按钮里的小箭头 */\n"
+"QSpinBox::up-arrow {\n"
+"    image:url(:/images/333.bmp);\n"
+"    width:7px;\n"
+"    height:7px;\n"
+"}\n"
+" \n"
+"/* 向下按钮 */\n"
+"QSpinBox::down-button {\n"
+"    subcontrol-origin:border;\n"
+"    subcontrol-position:bottom right;\n"
+"    width:18px;\n"
+"    border-image:url(:/widget_Sidebar/images/Dowe.png);\n"
+"    border-bottom-right-radius:5px;\n"
+"    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(235, 235, 235, 255), stop:1 rgba(255, 255, 255, 0));\n"
+"    border-width:1px;\n"
+"    border-top-width:0;\n"
+"}\n"
+" \n"
+"/* 向下按钮 */\n"
+"QSpinBox::down-button:hover {\n"
+"    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(225, 225, 225, 255), stop:1 rgba(255, 255, 255, 0));\n"
+"}\n"
+" \n"
+"/* 向下按钮 */\n"
+"QSpinBox::down-button:pressed {\n"
+"    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(190, 190, 190, 255), stop:1 rgba(255, 255, 255, 0));\n"
+"}\n"
+" \n"
+"/* 向下按钮里的小箭头 */\n"
+"QSpinBox::down-arrow {\n"
+"    image:url(:/images/333.bmp);\n"
+"    width:7px;\n"
+"    height:7px;\n"
+"}\n"
+"\n"
 "*{\n"
 "    background-color: rgba(255, 255, 255, 0);\n"
-"}")
+"}\n"
+"*{outline:0px;}")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.centralwidget)
@@ -251,7 +386,7 @@ class Ui_MainWindow(object):
         self.scrollArea_page_settings.setWidgetResizable(True)
         self.scrollArea_page_settings.setObjectName("scrollArea_page_settings")
         self.scrollAreaWidgetContents_page_settings = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_page_settings.setGeometry(QtCore.QRect(0, 0, 380, 216))
+        self.scrollAreaWidgetContents_page_settings.setGeometry(QtCore.QRect(0, 0, 1117, 588))
         self.scrollAreaWidgetContents_page_settings.setObjectName("scrollAreaWidgetContents_page_settings")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_page_settings)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
@@ -321,6 +456,58 @@ class Ui_MainWindow(object):
         self.label_page_settings_background_h2.setObjectName("label_page_settings_background_h2")
         self.gridLayout_2.addWidget(self.label_page_settings_background_h2, 0, 0, 1, 4)
         self.verticalLayout_2.addWidget(self.widget_page_settings_background)
+        self.widget = QtWidgets.QWidget(self.scrollAreaWidgetContents_page_settings)
+        self.widget.setStyleSheet("")
+        self.widget.setObjectName("widget")
+        self.gridLayout_7 = QtWidgets.QGridLayout(self.widget)
+        self.gridLayout_7.setObjectName("gridLayout_7")
+        self.label_page_settings_background_h2_2 = QtWidgets.QLabel(self.widget)
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        self.label_page_settings_background_h2_2.setFont(font)
+        self.label_page_settings_background_h2_2.setObjectName("label_page_settings_background_h2_2")
+        self.gridLayout_7.addWidget(self.label_page_settings_background_h2_2, 0, 0, 1, 2)
+        self.label = QtWidgets.QLabel(self.widget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
+        self.label.setSizePolicy(sizePolicy)
+        self.label.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignVCenter)
+        self.label.setObjectName("label")
+        self.gridLayout_7.addWidget(self.label, 1, 0, 1, 2)
+        self.label_2 = QtWidgets.QLabel(self.widget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_2.sizePolicy().hasHeightForWidth())
+        self.label_2.setSizePolicy(sizePolicy)
+        self.label_2.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.label_2.setObjectName("label_2")
+        self.gridLayout_7.addWidget(self.label_2, 1, 2, 1, 1)
+        self.spinBox = QtWidgets.QSpinBox(self.widget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.spinBox.sizePolicy().hasHeightForWidth())
+        self.spinBox.setSizePolicy(sizePolicy)
+        self.spinBox.setMinimumSize(QtCore.QSize(42, 30))
+        self.spinBox.setMouseTracking(False)
+        self.spinBox.setFocusPolicy(QtCore.Qt.FocusPolicy.StrongFocus)
+        self.spinBox.setStyleSheet("")
+        self.spinBox.setMinimum(1)
+        self.spinBox.setMaximum(1000)
+        self.spinBox.setProperty("value", 15)
+        self.spinBox.setObjectName("spinBox")
+        self.gridLayout_7.addWidget(self.spinBox, 2, 2, 1, 1)
+        self.horizontalSlider = QtWidgets.QSlider(self.widget)
+        self.horizontalSlider.setMaximum(1000)
+        self.horizontalSlider.setProperty("value", 15)
+        self.horizontalSlider.setSliderPosition(15)
+        self.horizontalSlider.setOrientation(QtCore.Qt.Orientation.Horizontal)
+        self.horizontalSlider.setObjectName("horizontalSlider")
+        self.gridLayout_7.addWidget(self.horizontalSlider, 2, 0, 1, 2)
+        self.verticalLayout_2.addWidget(self.widget)
         spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         self.verticalLayout_2.addItem(spacerItem2)
         self.scrollArea_page_settings.setWidget(self.scrollAreaWidgetContents_page_settings)
@@ -444,6 +631,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.stackedWidget_main.setCurrentIndex(1)
+        self.stackedWidget_main_2.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -472,6 +660,10 @@ class Ui_MainWindow(object):
         self.radioButton_settings_background_6.setText(_translate("MainWindow", "蓝白相照"))
         self.radioButton_settings_background_7.setText(_translate("MainWindow", "粉色迷雾"))
         self.label_page_settings_background_h2.setText(_translate("MainWindow", "背景"))
+        self.label_page_settings_background_h2_2.setText(_translate("MainWindow", "左边栏动画设置"))
+        self.label.setText(_translate("MainWindow", "每帧间隔 (毫秒-mm)："))
+        self.label_2.setText(_translate("MainWindow", "预计 450mm (0.45s)完成"))
+        self.spinBox.setSuffix(_translate("MainWindow", " mm"))
         self.label_loading_text_1.setText(_translate("MainWindow", "正在初始化启动器……"))
         self.label_loading_text_2.setText(_translate("MainWindow", "正在读取设置(1/3)"))
 from UI.Custom_UI.QLabel import MyQLabel
