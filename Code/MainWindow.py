@@ -52,6 +52,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.radioButton_settings_background_7.clicked.connect(self.SettingsPage_Background_7_Clicked)
 
         self.horizontalSlider_page_settings_sidebar.sliderMoved.connect(self.SettingsPage_Sidebar_horizontalSlider)
+        self.horizontalSlider_page_settings_sidebar.sliderReleased.connect(self.SettingsPage_Sidebar_horizontalSlider_sliderReleased)
 
         self.__init__setToolTipDuration()
 
@@ -106,11 +107,16 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.MainWinowMainBackground(7)
 
     def SettingsPage_Sidebar_horizontalSlider(self):
-        """设置页面 -> 左边栏动画设置 -> 滑动控件"""
+        """设置页面 -> 左边栏动画设置 -> 滑动控件: 拖动"""
         i = self.horizontalSlider_page_settings_sidebar.value()
         i_2 = i*30
         self.spinBox_page_settings_sidebar.setValue(i)
         self.label_page_settings_background_h3_2.setText('预计 ' + str(i_2) + 'mm' + ' (' + str(i_2/1000) + 's)完成')
+
+    def SettingsPage_Sidebar_horizontalSlider_sliderReleased(self):
+        """设置页面 -> 左边栏动画设置 -> 滑动控件: 拖动抬起后"""
+        self.Json_MOS['Sidebar_Sidebar_Time'] = self.horizontalSlider_page_settings_sidebar.value()
+        JsonWrite(self.Json_MOS, self.JsonFile)
 
     def MainWinowMainBackground(self,Want,_init_=False):
         """主窗口背景"""
@@ -312,12 +318,13 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 self.Sidebar_Click_ = ''
                 self.Sidebar_Click_I = ''
 
+            Time_ = self.Json_MOS['Sidebar_Sidebar_Time']
             self.label_Sidebar_QTime = QTimer()
-            self.label_Sidebar_QTime.start(15)
+            self.label_Sidebar_QTime.start(Time_)
             self.label_Sidebar_QTime.timeout.connect(label_Sidebar_Go_QTime_)
 
             self.label_Sidebar_B_QTime = QTimer()
-            self.label_Sidebar_B_QTime.start(15)
+            self.label_Sidebar_B_QTime.start(Time_)
             self.label_Sidebar_B_QTime.timeout.connect(label_Sidebar_B_Go_QTime_)
 
             if Want == 'Home':
