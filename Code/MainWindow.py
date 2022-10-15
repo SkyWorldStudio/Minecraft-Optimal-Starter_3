@@ -51,6 +51,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.radioButton_settings_background_6.clicked.connect(self.SettingsPage_Background_6_Clicked)
         self.radioButton_settings_background_7.clicked.connect(self.SettingsPage_Background_7_Clicked)
 
+        self.horizontalSlider_page_settings_sidebar.sliderMoved.connect(self.SettingsPage_Sidebar_horizontalSlider)
+
         self.__init__setToolTipDuration()
 
     # 左边栏"按钮"被点击后（槽）
@@ -102,6 +104,13 @@ class RunUi(QMainWindow, Ui_MainWindow):
     def SettingsPage_Background_7_Clicked(self):
         """设置页面 -> 背景设置:选择：7(粉色迷雾)"""
         self.MainWinowMainBackground(7)
+
+    def SettingsPage_Sidebar_horizontalSlider(self):
+        """设置页面 -> 左边栏动画设置 -> 滑动控件"""
+        i = self.horizontalSlider_page_settings_sidebar.value()
+        i_2 = i*30
+        self.spinBox_page_settings_sidebar.setValue(i)
+        self.label_page_settings_background_h3_2.setText('预计 ' + str(i_2) + 'mm' + ' (' + str(i_2/1000) + 's)完成')
 
     def MainWinowMainBackground(self,Want,_init_=False):
         """主窗口背景"""

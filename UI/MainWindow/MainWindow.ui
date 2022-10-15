@@ -596,7 +596,7 @@ QSpinBox::down-arrow {
                     <x>0</x>
                     <y>0</y>
                     <width>1117</width>
-                    <height>588</height>
+                    <height>610</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -761,25 +761,13 @@ QSpinBox::down-arrow {
                     </widget>
                    </item>
                    <item>
-                    <widget class="QWidget" name="widget" native="true">
+                    <widget class="QWidget" name="widget_page_settings_Sidebar" native="true">
                      <property name="styleSheet">
                       <string notr="true"/>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_7">
-                      <item row="0" column="0" colspan="2">
-                       <widget class="QLabel" name="label_page_settings_background_h2_2">
-                        <property name="font">
-                         <font>
-                          <pointsize>15</pointsize>
-                         </font>
-                        </property>
-                        <property name="text">
-                         <string>左边栏动画设置</string>
-                        </property>
-                       </widget>
-                      </item>
                       <item row="1" column="0" colspan="2">
-                       <widget class="QLabel" name="label">
+                       <widget class="QLabel" name="label_page_settings_background_h3">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
                           <horstretch>0</horstretch>
@@ -794,33 +782,45 @@ QSpinBox::down-arrow {
                         </property>
                        </widget>
                       </item>
-                      <item row="1" column="2">
-                       <widget class="QLabel" name="label_2">
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
+                      <item row="0" column="0" colspan="2">
+                       <widget class="QLabel" name="label_page_settings_sidebar_h2">
+                        <property name="font">
+                         <font>
+                          <pointsize>15</pointsize>
+                         </font>
                         </property>
                         <property name="text">
-                         <string>预计 450mm (0.45s)完成</string>
+                         <string>左边栏动画设置</string>
                         </property>
-                        <property name="alignment">
-                         <set>Qt::AlignCenter</set>
+                       </widget>
+                      </item>
+                      <item row="2" column="0" colspan="2">
+                       <widget class="QSlider" name="horizontalSlider_page_settings_sidebar">
+                        <property name="maximum">
+                         <number>70</number>
+                        </property>
+                        <property name="value">
+                         <number>15</number>
+                        </property>
+                        <property name="sliderPosition">
+                         <number>15</number>
+                        </property>
+                        <property name="orientation">
+                         <enum>Qt::Horizontal</enum>
                         </property>
                        </widget>
                       </item>
                       <item row="2" column="2">
-                       <widget class="QSpinBox" name="spinBox">
+                       <widget class="QSpinBox" name="spinBox_page_settings_sidebar">
                         <property name="sizePolicy">
-                         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                           <horstretch>0</horstretch>
                           <verstretch>0</verstretch>
                          </sizepolicy>
                         </property>
                         <property name="minimumSize">
                          <size>
-                          <width>42</width>
+                          <width>165</width>
                           <height>30</height>
                          </size>
                         </property>
@@ -847,19 +847,31 @@ QSpinBox::down-arrow {
                         </property>
                        </widget>
                       </item>
-                      <item row="2" column="0" colspan="2">
-                       <widget class="QSlider" name="horizontalSlider">
-                        <property name="maximum">
-                         <number>1000</number>
+                      <item row="1" column="2">
+                       <widget class="QLabel" name="label_page_settings_background_h3_2">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
                         </property>
-                        <property name="value">
-                         <number>15</number>
+                        <property name="minimumSize">
+                         <size>
+                          <width>165</width>
+                          <height>16</height>
+                         </size>
                         </property>
-                        <property name="sliderPosition">
-                         <number>15</number>
+                        <property name="maximumSize">
+                         <size>
+                          <width>165</width>
+                          <height>16</height>
+                         </size>
                         </property>
-                        <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
+                        <property name="text">
+                         <string>预计 450mm (0.45s)完成</string>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignCenter</set>
                         </property>
                        </widget>
                       </item>
