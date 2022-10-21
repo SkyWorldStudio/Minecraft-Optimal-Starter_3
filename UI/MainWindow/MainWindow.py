@@ -489,12 +489,12 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.spinBox_page_settings_sidebar.sizePolicy().hasHeightForWidth())
         self.spinBox_page_settings_sidebar.setSizePolicy(sizePolicy)
-        self.spinBox_page_settings_sidebar.setMinimumSize(QtCore.QSize(165, 30))
+        self.spinBox_page_settings_sidebar.setMinimumSize(QtCore.QSize(42, 30))
         self.spinBox_page_settings_sidebar.setMouseTracking(False)
         self.spinBox_page_settings_sidebar.setFocusPolicy(QtCore.Qt.FocusPolicy.StrongFocus)
         self.spinBox_page_settings_sidebar.setStyleSheet("")
         self.spinBox_page_settings_sidebar.setMinimum(1)
-        self.spinBox_page_settings_sidebar.setMaximum(1000)
+        self.spinBox_page_settings_sidebar.setMaximum(70)
         self.spinBox_page_settings_sidebar.setProperty("value", 15)
         self.spinBox_page_settings_sidebar.setObjectName("spinBox_page_settings_sidebar")
         self.gridLayout_7.addWidget(self.spinBox_page_settings_sidebar, 2, 2, 1, 1)
@@ -633,7 +633,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.stackedWidget_main.setCurrentIndex(1)
-        self.stackedWidget_main_2.setCurrentIndex(1)
+        self.stackedWidget_main_2.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

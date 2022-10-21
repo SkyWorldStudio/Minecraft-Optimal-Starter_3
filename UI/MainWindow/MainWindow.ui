@@ -562,7 +562,7 @@ QSpinBox::down-arrow {
               <string notr="true"/>
              </property>
              <property name="currentIndex">
-              <number>1</number>
+              <number>2</number>
              </property>
              <widget class="QWidget" name="page_users"/>
              <widget class="QWidget" name="page_home"/>
@@ -820,7 +820,7 @@ QSpinBox::down-arrow {
                         </property>
                         <property name="minimumSize">
                          <size>
-                          <width>165</width>
+                          <width>42</width>
                           <height>30</height>
                          </size>
                         </property>
@@ -840,7 +840,7 @@ QSpinBox::down-arrow {
                          <number>1</number>
                         </property>
                         <property name="maximum">
-                         <number>1000</number>
+                         <number>70</number>
                         </property>
                         <property name="value">
                          <number>15</number>

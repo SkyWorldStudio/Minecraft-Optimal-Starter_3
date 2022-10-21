@@ -53,6 +53,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
         self.horizontalSlider_page_settings_sidebar.sliderMoved.connect(self.SettingsPage_Sidebar_horizontalSlider)
         self.horizontalSlider_page_settings_sidebar.sliderReleased.connect(self.SettingsPage_Sidebar_horizontalSlider_sliderReleased)
+        self.spinBox_page_settings_sidebar.valueChanged.connect(self.SettingsPage_Sidebar_spinBox)
 
         self.__init__setToolTipDuration()
 
@@ -117,6 +118,13 @@ class RunUi(QMainWindow, Ui_MainWindow):
         """设置页面 -> 左边栏动画设置 -> 滑动控件: 拖动抬起后"""
         self.Json_MOS['Sidebar_Sidebar_Time'] = self.horizontalSlider_page_settings_sidebar.value()
         JsonWrite(self.Json_MOS, self.JsonFile)
+
+    def SettingsPage_Sidebar_spinBox(self):
+        i = self.spinBox_page_settings_sidebar.value()
+        self.horizontalSlider_page_settings_sidebar.setValue(i)
+        i_2 = i * 30
+        self.label_page_settings_background_h3_2.setText('预计 ' + str(i_2) + 'mm' + ' (' + str(i_2 / 1000) + 's)完成')
+        self.SettingsPage_Sidebar_horizontalSlider_sliderReleased()
 
     def MainWinowMainBackground(self,Want,_init_=False):
         """主窗口背景"""
@@ -360,6 +368,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 self.radioButton_settings_subject_dark.setChecked(True)
             elif self.Json_MOS['Subject'] == 'Automatic':
                 self.radioButton_settings_subject_automatic.setChecked(True)
+            self.horizontalSlider_page_settings_sidebar.setValue(self.Json_MOS['Sidebar_Sidebar_Time'])
+            self.spinBox_page_settings_sidebar.setValue(self.Json_MOS['Sidebar_Sidebar_Time'])
 
             print('设置背景……')
             self.label_loading_text_2.setText('正在设置启动器(3/3)')
