@@ -10,7 +10,7 @@ def JsonRead(JsonFile):
         JsonFile = Json的目录
     """
     with open(JsonFile,'r',encoding='utf_8') as f:
-        r = json.load(f)
+        r = json.load(f, strict=False)
     return r
 
 def JsonFile():
