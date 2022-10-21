@@ -20,6 +20,14 @@ class Ui_MainWindow(object):
 "    /*主页面背景*/\n"
 "    background-color: rgb(255, 255, 255);\n"
 "}\n"
+"\n"
+"/*取消中间页面的边框*/\n"
+"#stackedWidget_main_2 > QWidget\n"
+"{\n"
+"    border-style:none;\n"
+"}\n"
+"#scrollArea_page_settings{border-style:none;}\n"
+"#widget_Middle{border-style:none;}\n"
 "#widget_Sidebar{\n"
 "    /*左边栏背景*/\n"
 "    border-image: url(:/Scrub/images/Scrub_B10_V.png);\n"
@@ -46,7 +54,6 @@ class Ui_MainWindow(object):
 "{\n"
 "    border-image: url(:/widget_Sidebar/images/Scrub_Settings-Z_B15.png);\n"
 "}\n"
-"\n"
 "\n"
 "\n"
 "/*\n"
@@ -386,7 +393,7 @@ class Ui_MainWindow(object):
         self.scrollArea_page_settings.setWidgetResizable(True)
         self.scrollArea_page_settings.setObjectName("scrollArea_page_settings")
         self.scrollAreaWidgetContents_page_settings = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_page_settings.setGeometry(QtCore.QRect(0, 0, 1117, 610))
+        self.scrollAreaWidgetContents_page_settings.setGeometry(QtCore.QRect(0, 0, 1119, 612))
         self.scrollAreaWidgetContents_page_settings.setObjectName("scrollAreaWidgetContents_page_settings")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_page_settings)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
@@ -633,7 +640,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.stackedWidget_main.setCurrentIndex(1)
-        self.stackedWidget_main_2.setCurrentIndex(2)
+        self.stackedWidget_main_2.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

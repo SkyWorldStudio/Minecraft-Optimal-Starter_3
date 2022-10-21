@@ -21,6 +21,14 @@
 	/*主页面背景*/
 	background-color: rgb(255, 255, 255);
 }
+
+/*取消中间页面的边框*/
+#stackedWidget_main_2 &gt; QWidget
+{
+	border-style:none;
+}
+#scrollArea_page_settings{border-style:none;}
+#widget_Middle{border-style:none;}
 #widget_Sidebar{
 	/*左边栏背景*/
 	border-image: url(:/Scrub/images/Scrub_B10_V.png);
@@ -47,7 +55,6 @@
 {
 	border-image: url(:/widget_Sidebar/images/Scrub_Settings-Z_B15.png);
 }
-
 
 
 /*
@@ -562,7 +569,7 @@ QSpinBox::down-arrow {
               <string notr="true"/>
              </property>
              <property name="currentIndex">
-              <number>2</number>
+              <number>1</number>
              </property>
              <widget class="QWidget" name="page_users"/>
              <widget class="QWidget" name="page_home"/>
@@ -595,8 +602,8 @@ QSpinBox::down-arrow {
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>1117</width>
-                    <height>610</height>
+                    <width>1119</width>
+                    <height>612</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_2">

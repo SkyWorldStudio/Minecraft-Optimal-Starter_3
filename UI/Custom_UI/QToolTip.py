@@ -3,7 +3,8 @@ from PyQt6.QtCore import QFile, QPropertyAnimation, QTimer, Qt, QPoint, QSize
 from PyQt6.QtGui import QColor
 from PyQt6.QtWidgets import (QApplication, QFrame, QGraphicsDropShadowEffect,
                              QHBoxLayout, QLabel)
-
+import os
+from UI.Custom_UI.QToolTip_Qss import Back
 
 class ToolTip(QFrame):
 
@@ -61,8 +62,11 @@ class ToolTip(QFrame):
 
     def __setQss(self):
         """ set style sheet """
-        with open("UI/Custom_UI/QToolTip.qss",'r') as f:
-            self.setStyleSheet(f.read())
+        #file = os.path.join("UI","Custom_UI","QToolTip.qss")
+        #with open(file,'r') as f:
+        #    self.setStyleSheet(f.read())
+
+        self.setStyleSheet(Back())
 
         self.label.adjustSize()
         self.adjustSize()

@@ -53,7 +53,7 @@ def File():
         UserFile = os.path.expanduser('~')
         file = os.path.join(UserFile,'Documents','.MOS')
     else:
-        file = ''
+        file = '.MOS'
     return file
 
 def Systeam():
