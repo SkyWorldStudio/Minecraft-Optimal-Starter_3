@@ -376,7 +376,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
             if self.Json_MOS['BackGround'] == False:
                 self.MainWinowMainBackground(None)
-                self.radioButton_settings_background_none.setClecked(True)
+                self.radioButton_settings_background_none.setChecked(True)
             else:
                 self.MainWinowMainBackground(self.Json_MOS['BackGround'], _init_=True)
                 if self.Json_MOS['BackGround'] == 1:
