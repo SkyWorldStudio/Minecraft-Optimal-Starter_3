@@ -1,3 +1,0 @@
-def Back():
-    a = "ToolTip[dark=false]>QFrame { border: 1px solid rgba(0, 0, 0, 0.06); border-radius: 5px; background-color: rgb(243, 243, 243); }  ToolTip[dark=true]>QFrame { border: 1px solid rgb(28, 28, 28); border-radius: 5px; background-color: rgb(43, 43, 43); }  QLabel { background-color: transparent; }  QLabel[dark=false] { color: black; }  QLabel[dark=true] { color: white; }'"
-    return a
