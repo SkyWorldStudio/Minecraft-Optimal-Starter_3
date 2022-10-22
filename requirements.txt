@@ -12,13 +12,7 @@ mccabe==0.7.0
 platformdirs==2.5.2
 pylint==2.15.3
 PyQt6==6.3.1
-pyqt6-plugins==6.1.0.2.2
-PyQt6-Qt6==6.3.1
-PyQt6-sip==13.4.0
-pyqt6-tools==6.1.0.3.2
 python-dotenv==0.21.0
-qt6-applications==6.1.0.2.2
-qt6-tools==6.1.0.1.2
 requests==2.28.1
 tomli==2.0.1
 tomlkit==0.11.4
