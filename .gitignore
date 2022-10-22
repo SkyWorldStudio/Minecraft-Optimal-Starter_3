@@ -4,3 +4,4 @@ MOS_1
 venv
 .idea
 __pycache__/
+/.vscode/

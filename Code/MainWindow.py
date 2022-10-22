@@ -1,4 +1,5 @@
 # coding=utf-8
+import datetime
 import os.path
 import sys
 
@@ -6,9 +7,12 @@ from PyQt6 import QtWidgets, QtGui
 from PyQt6.QtCore import QTimer, QThread, QEvent, QPoint
 from PyQt6.QtWidgets import QMainWindow, QGraphicsOpacityEffect
 
+import pytz
+
+from Code.Log import print_,Log_Clear,Log_Return
 from UI.Custom_UI.QToolTip import ToolTip
 from UI.MainWindow.MainWindow import Ui_MainWindow
-from Code.Code import JsonRead, JsonFile, Systeam, JsonWrite
+from Code.Code import JsonRead, JsonFile, Systeam, JsonWrite, File
 
 
 class RunUi(QMainWindow, Ui_MainWindow):
@@ -20,7 +24,12 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
         self.setupUi(self)
         self.show()
-        print("已成功显示窗体")
+        print_('Info',"已成功显示窗体")
+
+        self.Log_QTime = QTimer()
+        self.Log_QTime.setInterval(2000) # 2秒
+        self.Log_QTime.timeout.connect(self.Log_QTime_)
+        self.Log_QTime.start()
 
         self.RunInitialize_ = QTimer()
         self.RunInitialize_.setInterval(20)
@@ -236,15 +245,15 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 if self.Sidebar_Click_I == 'Home':
                     self.label_Sidebar_Home.setPixmap(
                         QtGui.QPixmap(":/Gif_Home/images/Home/" + str(self.label_Sidebar_QTime_Back_N) + ".png"))
-                    print(":/Gif_Home/images/Home/" + str(self.label_Sidebar_QTime_Back_N) + ".png")
+                    print_('Info',":/Gif_Home/images/Home/" + str(self.label_Sidebar_QTime_Back_N) + ".png")
                 elif self.Sidebar_Click_I == 'User':
                     self.label_Sidebar_User.setPixmap(
                         QtGui.QPixmap(":/Gif_User/images/User/" + str(self.label_Sidebar_QTime_Back_N) + ".png"))
-                    print(":/Gif_User/images/User/" + str(self.label_Sidebar_QTime_Back_N) + ".png")
+                    print_('Info',":/Gif_User/images/User/" + str(self.label_Sidebar_QTime_Back_N) + ".png")
                 elif self.Sidebar_Click_I == 'Online':
                     self.label_Sidebar_OnLine.setPixmap(
                         QtGui.QPixmap(":/Gif_Online/images/Online/" + str(self.label_Sidebar_QTime_Back_N) + ".png"))
-                    print(":/Gif_Online/images/Online/" + str(self.label_Sidebar_QTime_Back_N) + ".png")
+                    print_('Info',":/Gif_Online/images/Online/" + str(self.label_Sidebar_QTime_Back_N) + ".png")
                 elif self.Sidebar_Click_I == 'Download':
                     self.label_Sidebar_Download.setPixmap(QtGui.QPixmap(
                         ":/Gif_Download/images/Download/" + str(self.label_Sidebar_QTime_Back_N) + ".png"))
@@ -262,11 +271,11 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 if Want == 'Home':
                     self.label_Sidebar_Home.setStyleSheet(
                         "background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Go_N) + "%);")
-                    print("background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Go_N) + "%);")
+                    print_('Info',"background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Go_N) + "%);")
                 elif Want == 'User':
                     self.label_Sidebar_User.setStyleSheet(
                         "background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Go_N) + "%);")
-                    print("background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Go_N) + "%);")
+                    print_('Info',"background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Go_N) + "%);")
                 elif Want == 'Online':
                     self.label_Sidebar_OnLine.setStyleSheet(
                         "background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Go_N) + "%);")
@@ -291,11 +300,11 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 if self.Sidebar_Click_I == 'Home':
                     self.label_Sidebar_Home.setStyleSheet(
                         "background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Back_N) + "%);")
-                    print("background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Back_N) + "%);")
+                    print_('Info',"background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Back_N) + "%);")
                 elif self.Sidebar_Click_I == 'User':
                     self.label_Sidebar_User.setStyleSheet(
                         "background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Back_N) + "%);")
-                    print("background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Back_N) + "%);")
+                    print_('Info',"background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Back_N) + "%);")
                 elif self.Sidebar_Click_I == 'Online':
                     self.label_Sidebar_OnLine.setStyleSheet(
                         "background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Back_N) + "%);")
@@ -314,7 +323,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 self.Sidebar_Click_I = False  # 正在变回去的
                 self.Sidebar_Click_C = str(Want)  # 彻底完成后……
 
-        print("用户点击左边栏按钮")
+        print_('Info',"用户点击左边栏按钮")
 
         if self.Sidebar_Click_Ok:
             Go()
@@ -354,9 +363,9 @@ class RunUi(QMainWindow, Ui_MainWindow):
             # 导入
             # 读取阶段(读取配置等)
             self.Systeam = Systeam()
-            print('系统：' + self.Systeam)
+            print_('Info','系统：' + self.Systeam)
             self.Json_MOS = JsonRead(self.JsonFile)
-            print('Json读取完成')
+            print_('Info','Json读取完成')
             # 设置阶段
             if self.Systeam != 'Mac':
                 self.radioButton_settings_subject_automatic.setEnabled(False)
@@ -371,7 +380,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.horizontalSlider_page_settings_sidebar.setValue(self.Json_MOS['Sidebar_Sidebar_Time'])
             self.spinBox_page_settings_sidebar.setValue(self.Json_MOS['Sidebar_Sidebar_Time'])
 
-            print('设置背景……')
+            print_('Info','设置背景……')
             self.label_loading_text_2.setText('正在设置启动器(3/3)')
 
             if self.Json_MOS['BackGround'] == False:
@@ -407,6 +416,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
         self.JsonFile_Q = os.path.join('')
         self.JsonFile = JsonFile()  # 读取Json路径
+
+        self.File = File()  # 获取缓存目录
 
         if os.path.isfile(self.JsonFile) == False:
             """如果没有Json这个目录 就转到欢迎(初始化)页面"""
@@ -517,6 +528,23 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.radioButton_settings_subject_automatic.installEventFilter(self)
 
         self._toolTip.hide()
+    
+    def Log_QTime_(self):
+        """定时将日志写入文件"""
+        logs = Log_Return()
+        time_2 = datetime.datetime.now(pytz.timezone('Etc/GMT-8')).strftime('%Y%m%d')
+        time = time_2 + '.log'
+        file = os.path.join(self.File, 'Logs', time)
+
+        if os.path.exists(file):
+            with open(file, 'a', encoding='utf-8') as f:
+                for log_ in logs:
+                    f.write(log_)
+        else:
+            with open(file, 'w', encoding='utf-8') as f:
+                for log_ in logs:
+                    f.write(log_)
+        Log_Clear()
 
     def eventFilter(self, obj, e: QEvent):
         """重写 悬浮提示 方法"""
@@ -538,9 +566,9 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
 
 def Run():
-    print("程序已开始运行！")
+    print_('Info',"程序已开始运行！")
     app = QtWidgets.QApplication(sys.argv)
-    print("创建窗口对象成功！")
+    print_('Info',"创建窗口对象成功！")
     ui = RunUi()
-    print("创建PyQt窗口对象成功！")
+    print_('Info',"创建PyQt窗口对象成功！")
     sys.exit(app.exec())
