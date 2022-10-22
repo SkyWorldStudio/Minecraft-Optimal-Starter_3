@@ -48,7 +48,13 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.label_Sidebar_Download.clicked.connect(self.Download_Clicked)
         self.label_Sidebar_Settings.clicked.connect(self.Settings_Clicked)
 
-
+        # 账户页面
+        self.pushButton_page_users_up_addUser.clicked.connect(self.UserPage_Up_AddUser)
+        self.pushButton_page_users_up_refreshUser.clicked.connect(self.UserPage_Up_RefreshUser)
+        self.pushButton_page_users_up_deleteUser.clicked.connect(self.UserPage_Up_DeleteUser)
+        self.widget_page_users_up_setChoice.clicked.connect(self.UserPage_Up_SetChoiceUser)
+        self.label_page_users_up_setChoice_icon.clicked.connect(self.UserPage_Up_SetChoiceUser)
+        self.label_page_users_up_setChoice.clicked.connect(self.UserPage_Up_SetChoiceUser)
 
         # 设置页面
         self.radioButton_settings_background_none.clicked.connect(self.SettingsPage_Background_None_Clicked)
@@ -84,6 +90,35 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
     def Settings_Clicked(self):
         self.Sidebar_Clicked(Want='Settings')
+
+    def UserPage_Up_AddUser(self):
+        pass
+    def UserPage_Up_RefreshUser(self):
+        pass
+    def UserPage_Up_DeleteUser(self):
+        pass
+    def UserPage_Up_SetChoiceUser(self):
+        if self.UserPage_setChoice == 'Choice':
+            self.UserPage_Up_SetChoiceUser_Set('Choices')
+        else:
+            self.UserPage_Up_SetChoiceUser_Set('Choice')
+    def UserPage_Up_SetChoiceUser_Set(self,a):
+        """
+            设置"账户"页面的 多选和单选
+            a --> 设置为单选还是多选 传入值:'Choice' or' Choices'
+        """
+        if a == 'Choice':
+            # 如果是要设置为单选
+            self.UserPage_setChoice = 'Choice'
+            self.label_page_users_up_setChoice.setText('<html><head/><body><p><span style=" font-size:16pt;">单选</span>/<span style=" font-size:12pt;">多选</span></p></body></html>')
+            self.Json_MOS['UserPage_setChoice'] = 'Choice'
+            JsonWrite(self.Json_MOS,self.JsonFile)
+        else:
+            # 如果是要设置为多选
+            self.UserPage_setChoice = 'Choices'
+            self.label_page_users_up_setChoice.setText('<html><head/><body><p><span style=" font-size:16pt;">多选</span>/<span style=" font-size:12pt;">单选</span></p></body></html>')
+            self.Json_MOS['UserPage_setChoice'] = 'Choices'
+            JsonWrite(self.Json_MOS,self.JsonFile)
 
     def SettingsPage_Background_None_Clicked(self):
         """设置页面 -> 背景设置:选择：无"""
@@ -379,6 +414,11 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 self.radioButton_settings_subject_automatic.setChecked(True)
             self.horizontalSlider_page_settings_sidebar.setValue(self.Json_MOS['Sidebar_Sidebar_Time'])
             self.spinBox_page_settings_sidebar.setValue(self.Json_MOS['Sidebar_Sidebar_Time'])
+
+            self.UserPage_setChoice = self.Json_MOS['UserPage_setChoice']
+            if self.UserPage_setChoice == 'Choice':
+                # 如果是单选 就设置为单选
+                self.UserPage_Up_SetChoiceUser_Set('Choice')
 
             print_('Info','设置背景……')
             self.label_loading_text_2.setText('正在设置启动器(3/3)')

@@ -1,5 +1,14 @@
 <RCC>
   <qresource prefix="widget_Sidebar">
+    <file>../../images/User_Page_Add-pressed.png</file>
+    <file>../../images/User_Page_Refresh-pressed.png</file>
+    <file>../../images/User_Page_setChoice_Choice-pressed.png</file>
+    <file>../../images/User_Page_setChoice_Choice.png</file>
+    <file>../../images/User_Page_setChoice_Choices-pressed.png</file>
+    <file>../../images/User_Page_setChoice_Choices.png</file>
+    <file>../../images/User_Page_Delete.png</file>
+    <file>../../images/User_Page_Refresh.png</file>
+    <file>../../images/User_Page_Add.png</file>
     <file>../../images/Up.png</file>
     <file>../../images/Dowe.png</file>
     <file>../../images/Whith-0%_2.png</file>
@@ -30,6 +39,8 @@
     <file>../../images/BackGround/1.png</file>
   </qresource>
   <qresource prefix="Scrub">
+    <file>../../images/Scrub_B15_FFFFFF-60_Main-User-2.png</file>
+    <file>../../images/Scrub_B15_FFFFFF-60_Main-User.png</file>
     <file>../../images/Scrub_B2_FFFFFF-50_Main-M-B.png</file>
     <file>../../images/Scrub_B10_V.png</file>
     <file>../../images/Scrub_B10.png</file>

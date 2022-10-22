@@ -39,6 +39,7 @@ def InitializeFirst():
         'Subject':'Light',
         'BackGround':False,
         'Sidebar_Sidebar_Time':15,  # 左边栏动画延迟
+        'UserPage_setChoice':'Choices'
          }
 
     with open(JsonFile_,'w',encoding='utf-8') as f:

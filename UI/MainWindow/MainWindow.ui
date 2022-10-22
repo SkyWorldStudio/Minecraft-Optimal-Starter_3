@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>MOS Ⅲ 启动器</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="img.qrc">
+    <normaloff>:/widget_Sidebar/images/MOS_Logo_gif.gif</normaloff>:/widget_Sidebar/images/MOS_Logo_gif.gif</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">/*
 	主页面qss
@@ -48,7 +52,53 @@
 	border-radius: 5px;
 }
 
+/*账户管理页面*/
+#widget_page_users_up{
+	border-image: url(:/Scrub/images/Scrub_B15_FFFFFF-60_Main-User.png);
+}
+#widget_page_users_down{
+	border-image: url(:/Scrub/images/Scrub_B15_FFFFFF-60_Main-User-2.png);
+}
+#treeWidget_users_down{border-radius: 8px;border: 1px solid rgb(33, 33, 33);}
+#treeWidget_users_down::item {
+    height: 10px;
+	padding: 12px;
+	border-left: 0px solid rgba(214, 214, 214,0);
+	border-top: 1px solid rgb(169, 169, 169);
+	border-bottom: 1px solid rgb(169, 169, 169);
+}
+#treeWidget_users_down::item:hover {
+	background-color: rgba(235, 235, 235,0);
+	border-left: 0px solid rgba(214, 214, 214,0);
+	border-top: 1px solid rgb(214, 214, 214);
+	border-bottom: 1px solid rgb(214, 214, 214);
+}
+#treeWidget_users_down::item:selected {
+	background-color: rgba(235, 235, 235,0);
+	border-left: 0px solid rgba(214, 214, 214,0);
+	border-top: 1px solid rgba(214, 214, 214,0);
+	border-bottom: 1px solid rgba(214, 214, 214,0);
+}
+#widget_page_users_up &gt; QPushButton{
+	border-radius: 5px;
+}
+#widget_page_users_up_setChoice{
+	border-radius: 5px;
+}
 
+#widget_page_users_up &gt; QPushButton::hover{
+	background-color: rgba(192, 192, 192, 15%);
+}
+#widget_page_users_up_setChoice::hover{
+	background-color: rgba(192, 192, 192, 15%);
+}
+#widget_page_users_up &gt; QPushButton::pressed{
+	background-color: rgba(192, 192, 192, 10%);
+	color: rgb(103, 103, 103);
+}
+#widget_page_users_up_setChoice::pressed{
+	background-color: rgb(115, 253, 255);
+}
 
 /*设置页面*/
 #scrollAreaWidgetContents_page_settings &gt; QWidget
@@ -278,6 +328,75 @@ QSpinBox::down-arrow {
 	image:url(:/images/333.bmp);
 	width:7px;
 	height:7px;
+}
+
+/*设置垂直滚动条基本样式*/
+QScrollBar:vertical
+{
+    width:8px;
+    background:rgba(0,0,0,0%);
+    margin:0px,0px,0px,0px;
+    padding-top:9px;   /*留出9px给上面和下面的箭头*/
+    padding-bottom:9px;
+}
+QScrollBar::handle:vertical
+{
+    width:8px;
+    background:rgba(0,0,0,25%);
+    border-radius:4px;   /*滚动条两端变成椭圆*/
+    min-height:;
+}
+QScrollBar::handle:vertical:hover
+{
+    width:8px;
+    background:rgba(0,0,0,50%);   /* 鼠标放到滚动条上的时候，颜色变深*/
+    border-radius:4px;
+    min-height:;
+}
+QScrollBar::add-line:vertical   /*这个应该是设置下箭头的，3.png就是箭头*/
+{
+    height:9px;width:8px;
+    border-image:url(:/img/caret-down_1.png);
+    subcontrol-position:bottom;
+}
+QScrollBar::sub-line:vertical   /*设置上箭头*/
+{
+    height:9px;width:8px;
+    border-image:url(:/img/caret-up_1.png);
+    subcontrol-position:top;
+}
+QScrollBar::add-line:vertical:hover   /*当鼠标放到下箭头上的时候*/
+{
+    height:9px;width:8px;
+    border-image:url(:/img/caret-down.png);
+    subcontrol-position:bottom;
+}
+QScrollBar::sub-line:vertical:hover  /*当鼠标放到下箭头上的时候*/
+{
+    height:9px;width:8px;
+    border-image:url(:/img/caret-up.png);
+    subcontrol-position:top;
+}
+QScrollBar::add-page:vertical,QScrollBar::sub-page:vertical   /*当滚动条滚动的时候，上面的部分和下面的部分*/
+{
+    background:rgba(0,0,0,10%);
+    border-radius:4px;
+}
+
+QTreeWidget::item {
+    height: 20px;
+	padding: 8px;
+	border-left: 3px solid rgba(214, 214, 214,0);
+}
+QTreeWidget::item:hover {
+	border-left: 3px solid rgb(214, 214, 214);
+	background-color: transparent;
+}
+QTreeWidget::item:selected {
+	background-color: transparent;
+	color: black;
+	background-color: rgb(235, 235, 235);
+	border-left: 3px solid rgb(0, 150, 255);
 }
 
 *{
@@ -571,7 +690,257 @@ QSpinBox::down-arrow {
              <property name="currentIndex">
               <number>1</number>
              </property>
-             <widget class="QWidget" name="page_users"/>
+             <widget class="QWidget" name="page_users">
+              <layout class="QVBoxLayout" name="verticalLayout_4">
+               <property name="leftMargin">
+                <number>10</number>
+               </property>
+               <property name="rightMargin">
+                <number>10</number>
+               </property>
+               <property name="bottomMargin">
+                <number>10</number>
+               </property>
+               <item>
+                <widget class="QWidget" name="widget_page_users_up" native="true">
+                 <layout class="QHBoxLayout" name="horizontalLayout_4">
+                  <property name="spacing">
+                   <number>5</number>
+                  </property>
+                  <property name="leftMargin">
+                   <number>17</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>12</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>12</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>16</number>
+                  </property>
+                  <item>
+                   <widget class="QPushButton" name="pushButton_page_users_up_addUser">
+                    <property name="minimumSize">
+                     <size>
+                      <width>110</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>添加新账号</string>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="img.qrc">
+                      <normaloff>:/widget_Sidebar/images/User_Page_Add.png</normaloff>:/widget_Sidebar/images/User_Page_Add.png</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>30</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="pushButton_page_users_up_refreshUser">
+                    <property name="minimumSize">
+                     <size>
+                      <width>96</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>刷新所选</string>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="img.qrc">
+                      <normaloff>:/widget_Sidebar/images/User_Page_Refresh.png</normaloff>:/widget_Sidebar/images/User_Page_Refresh.png</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>30</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="pushButton_page_users_up_deleteUser">
+                    <property name="minimumSize">
+                     <size>
+                      <width>96</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>删除所选</string>
+                    </property>
+                    <property name="icon">
+                     <iconset resource="img.qrc">
+                      <normaloff>:/widget_Sidebar/images/User_Page_Delete.png</normaloff>:/widget_Sidebar/images/User_Page_Delete.png</iconset>
+                    </property>
+                    <property name="iconSize">
+                     <size>
+                      <width>30</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_10">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
+                   <widget class="MyQWidget" name="widget_page_users_up_setChoice" native="true">
+                    <property name="minimumSize">
+                     <size>
+                      <width>114</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                    <layout class="QHBoxLayout" name="horizontalLayout_5">
+                     <property name="spacing">
+                      <number>0</number>
+                     </property>
+                     <property name="leftMargin">
+                      <number>7</number>
+                     </property>
+                     <property name="topMargin">
+                      <number>2</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>7</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>2</number>
+                     </property>
+                     <item>
+                      <widget class="MyQLabel" name="label_page_users_up_setChoice_icon">
+                       <property name="maximumSize">
+                        <size>
+                         <width>30</width>
+                         <height>30</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="pixmap">
+                        <pixmap resource="img.qrc">:/widget_Sidebar/images/User_Page_setChoice_Choices.png</pixmap>
+                       </property>
+                       <property name="scaledContents">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="MyQLabel" name="label_page_users_up_setChoice">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="text">
+                        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;多选&lt;/span&gt;/&lt;span style=&quot; font-size:12pt;&quot;&gt;单选&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="QWidget" name="widget_page_users_down" native="true">
+                 <layout class="QVBoxLayout" name="verticalLayout_5">
+                  <property name="leftMargin">
+                   <number>3</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>3</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>6</number>
+                  </property>
+                  <item>
+                   <widget class="QTreeWidget" name="treeWidget_users_down">
+                    <property name="font">
+                     <font>
+                      <pointsize>15</pointsize>
+                     </font>
+                    </property>
+                    <property name="indentation">
+                     <number>0</number>
+                    </property>
+                    <property name="rootIsDecorated">
+                     <bool>true</bool>
+                    </property>
+                    <property name="allColumnsShowFocus">
+                     <bool>false</bool>
+                    </property>
+                    <property name="headerHidden">
+                     <bool>true</bool>
+                    </property>
+                    <attribute name="headerCascadingSectionResizes">
+                     <bool>false</bool>
+                    </attribute>
+                    <attribute name="headerShowSortIndicator" stdset="0">
+                     <bool>false</bool>
+                    </attribute>
+                    <attribute name="headerStretchLastSection">
+                     <bool>true</bool>
+                    </attribute>
+                    <column>
+                     <property name="text">
+                      <string notr="true">1</string>
+                     </property>
+                    </column>
+                    <item>
+                     <property name="text">
+                      <string>[微软]dddd</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>[离线]mmm</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>[离线]mmm</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>[离线]mmm</string>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </widget>
              <widget class="QWidget" name="page_home"/>
              <widget class="QWidget" name="page_online"/>
              <widget class="QWidget" name="page_download"/>
@@ -602,8 +971,8 @@ QSpinBox::down-arrow {
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>1119</width>
-                    <height>612</height>
+                    <width>380</width>
+                    <height>336</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -1314,6 +1683,12 @@ QSpinBox::down-arrow {
    <class>MyQLabel</class>
    <extends>QLabel</extends>
    <header location="global">UI.Custom_UI.QLabel</header>
+  </customwidget>
+  <customwidget>
+   <class>MyQWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">UI.Custom_UI.QWidget</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>
