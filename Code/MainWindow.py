@@ -12,7 +12,7 @@ import pytz
 from Code.Log import print_,Log_Clear,Log_Return
 from UI.Custom_UI.QToolTip import ToolTip
 from UI.MainWindow.MainWindow import Ui_MainWindow
-from Code.Code import JsonRead, JsonFile, Systeam, JsonWrite, File
+from Code.Code import JsonRead, JsonFile, Systeam, JsonWrite, File, Json_Cheak
 
 
 class RunUi(QMainWindow, Ui_MainWindow):
@@ -401,6 +401,15 @@ class RunUi(QMainWindow, Ui_MainWindow):
             print_('Info','系统：' + self.Systeam)
             self.Json_MOS = JsonRead(self.JsonFile)
             print_('Info','Json读取完成')
+            C = Json_Cheak(self.JsonFile)
+            if C:
+                # 如果返回为True(已补全文件)
+                self.Json_MOS = JsonRead(self.JsonFile)
+                print_('Info', 'Json不完整, 以补全')
+            else:
+                print_('Info', 'Json完整')
+            print_('Info', 'Json验证完成')
+            self.label_loading_text_2.setText('正在设置启动器(3/4)')
             # 设置阶段
             if self.Systeam != 'Mac':
                 self.radioButton_settings_subject_automatic.setEnabled(False)
@@ -421,7 +430,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 self.UserPage_Up_SetChoiceUser_Set('Choice')
 
             print_('Info','设置背景……')
-            self.label_loading_text_2.setText('正在设置启动器(3/3)')
+            self.label_loading_text_2.setText('正在设置启动器(4/4)')
 
             if self.Json_MOS['BackGround'] == False:
                 self.MainWinowMainBackground(None)
@@ -464,7 +473,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.stackedWidget_main.setCurrentIndex(2)
         else:
             # 如果有 就进行下一步
-            self.label_loading_text_2.setText('正在设置启动器(2/3)')
+            self.label_loading_text_2.setText('正在设置启动器(2/4)')
             Settings_()
             self.label_loading_text_2.setText('设置完成')
             self.Animation_ToMainWindow()

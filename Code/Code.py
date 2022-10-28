@@ -25,6 +25,32 @@ def JsonWrite(Json_,JsonFile):
         json.dump(Json_, f, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
 
+def Json_Cheak(JsonFile):
+    """检查Json是否所有值都有"""
+    J_C = Json_InitializeFirst()
+    J = JsonRead(JsonFile)
+    C = 0  # 存储C中是否少参数
+    for J_C_1 in J_C:
+        if J_C_1 not in J:
+            J[J_C_1] = J_C[J_C_1]
+            C = 1
+    if C == 1:
+        # 如果少参数
+        JsonWrite(J,JsonFile)
+        return True  # 需要进行补全,补全文件
+    else:
+        return False  # 不需要进行补全
+
+def Json_InitializeFirst():
+    """返回Json默认(字典)"""
+    J = {
+        'Subject':'Light',
+        'BackGround':False,
+        'Sidebar_Sidebar_Time':15,  # 左边栏动画延迟
+        'UserPage_setChoice':'Choices'
+         }
+    return J
+
 def InitializeFirst():
     """在第一次运行时，初始化"""
     f = ['Download','Music','Java','Html','Mod','Logs']
@@ -35,12 +61,7 @@ def InitializeFirst():
 
     JsonFile_ = JsonFile()
 
-    J = {
-        'Subject':'Light',
-        'BackGround':False,
-        'Sidebar_Sidebar_Time':15,  # 左边栏动画延迟
-        'UserPage_setChoice':'Choices'
-         }
+    J = Json_InitializeFirst()
 
     with open(JsonFile_,'w',encoding='utf-8') as f:
         json.dump(J,f, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
