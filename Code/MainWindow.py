@@ -1,5 +1,5 @@
 # coding=utf-8
-import datetime
+from datetime import datetime
 import os.path
 from sys import argv, exit
 
@@ -621,7 +621,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
     def Log_QTime_(self):
         """定时将日志写入文件"""
         logs = Log_Return()
-        time_2 = datetime.datetime.now(timezone('Etc/GMT-8')).strftime('%Y%m%d')
+        time_2 = datetime.now(timezone('Etc/GMT-8')).strftime('%Y%m%d')
         time = time_2 + '.log'
         file = os.path.join(self.File, 'Logs', time)
 
