@@ -101,5 +101,4 @@ class ToolTip(QFrame):
 
         # size.width() 为控件宽
         # size.height() 为控件高
-        print(x," ",y)
         self.move(round(x), round(y))

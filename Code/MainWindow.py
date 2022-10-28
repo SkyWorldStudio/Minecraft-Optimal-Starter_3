@@ -1,18 +1,17 @@
 # coding=utf-8
 import datetime
 import os.path
-import sys
+from sys import argv, exit
 
 from PyQt6 import QtWidgets, QtGui
-from PyQt6.QtCore import QTimer, QThread, QEvent, QPoint
+from PyQt6.QtCore import QTimer, QEvent, QPoint
 from PyQt6.QtWidgets import QMainWindow, QGraphicsOpacityEffect
-
-import pytz
+from pytz import timezone
 
 from Code.Log import print_,Log_Clear,Log_Return
-from UI.Custom_UI.QToolTip import ToolTip
 from UI.MainWindow.MainWindow import Ui_MainWindow
 from Code.Code import JsonRead, JsonFile, Systeam, JsonWrite, File, Json_Cheak
+
 
 
 class RunUi(QMainWindow, Ui_MainWindow):
@@ -20,56 +19,10 @@ class RunUi(QMainWindow, Ui_MainWindow):
         super(RunUi, self).__init__()
 
         import UI.MainWindow.img_rc
-        import UI.Gif_rc
-
         self.setupUi(self)
         self.show()
         print_('Info',"已成功显示窗体")
-
-        self.Log_QTime = QTimer()
-        self.Log_QTime.setInterval(2000) # 2秒
-        self.Log_QTime.timeout.connect(self.Log_QTime_)
-        self.Log_QTime.start()
-
-        self.RunInitialize_ = QTimer()
-        self.RunInitialize_.setInterval(20)
-        self.RunInitialize_.timeout.connect(self.RunInitialize)
-        self.RunInitialize_.start()
-        self.pushButton_hello_start.clicked.connect(self.FirstStartInitialize)
-
-        # 左边栏
-        self.Sidebar_Click_ = ''  # 当前点击的控件
-        self.Sidebar_Click_Ok = True  # 记录动画是否完成
-        self.Sidebar_Click_C = 'Home'  # 彻底完成后……
-        self.label_Sidebar_Back.clicked.connect(self.Back_Clicked)
-        self.label_Sidebar_User.clicked.connect(self.User_Clicked)
-        self.label_Sidebar_Home.clicked.connect(self.Home_Clicked)
-        self.label_Sidebar_OnLine.clicked.connect(self.Online_Clicked)
-        self.label_Sidebar_Download.clicked.connect(self.Download_Clicked)
-        self.label_Sidebar_Settings.clicked.connect(self.Settings_Clicked)
-
-        # 账户页面
-        self.pushButton_page_users_up_addUser.clicked.connect(self.UserPage_Up_AddUser)
-        self.pushButton_page_users_up_refreshUser.clicked.connect(self.UserPage_Up_RefreshUser)
-        self.pushButton_page_users_up_deleteUser.clicked.connect(self.UserPage_Up_DeleteUser)
-        self.widget_page_users_up_setChoice.clicked.connect(self.UserPage_Up_SetChoiceUser)
-        self.label_page_users_up_setChoice_icon.clicked.connect(self.UserPage_Up_SetChoiceUser)
-        self.label_page_users_up_setChoice.clicked.connect(self.UserPage_Up_SetChoiceUser)
-
-        # 设置页面
-        self.radioButton_settings_background_none.clicked.connect(self.SettingsPage_Background_None_Clicked)
-        self.radioButton_settings_background_1.clicked.connect(self.SettingsPage_Background_1_Clicked)
-        self.radioButton_settings_background_2.clicked.connect(self.SettingsPage_Background_2_Clicked)
-        self.radioButton_settings_background_3.clicked.connect(self.SettingsPage_Background_3_Clicked)
-        self.radioButton_settings_background_4.clicked.connect(self.SettingsPage_Background_4_Clicked)
-        self.radioButton_settings_background_5.clicked.connect(self.SettingsPage_Background_5_Clicked)
-        self.radioButton_settings_background_6.clicked.connect(self.SettingsPage_Background_6_Clicked)
-        self.radioButton_settings_background_7.clicked.connect(self.SettingsPage_Background_7_Clicked)
-
-        self.horizontalSlider_page_settings_sidebar.sliderMoved.connect(self.SettingsPage_Sidebar_horizontalSlider)
-        self.horizontalSlider_page_settings_sidebar.sliderReleased.connect(self.SettingsPage_Sidebar_horizontalSlider_sliderReleased)
-        self.spinBox_page_settings_sidebar.valueChanged.connect(self.SettingsPage_Sidebar_spinBox)
-
+        self.__init__setAll()
         self.__init__setToolTipDuration()
 
     # 左边栏"按钮"被点击后（槽）
@@ -92,11 +45,38 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.Sidebar_Clicked(Want='Settings')
 
     def UserPage_Up_AddUser(self):
-        pass
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_Add.png"), QtGui.QIcon.Mode.Normal,
+                        QtGui.QIcon.State.Off)
+        self.pushButton_page_users_up_addUser.setIcon(icon2)
+    def UserPage_Up_AddUser_Pressed(self):
+        """再按下按钮时 切换图片"""
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_Add-pressed.png"), QtGui.QIcon.Mode.Normal,
+                        QtGui.QIcon.State.Off)
+        self.pushButton_page_users_up_addUser.setIcon(icon2)
     def UserPage_Up_RefreshUser(self):
-        pass
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_Refresh.png"), QtGui.QIcon.Mode.Normal,
+                        QtGui.QIcon.State.Off)
+        self.pushButton_page_users_up_refreshUser.setIcon(icon2)
+    def UserPage_Up_RefreshUser_Pressed(self):
+        """再按下按钮时 切换图片"""
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_Refresh-pressed.png"), QtGui.QIcon.Mode.Normal,
+                        QtGui.QIcon.State.Off)
+        self.pushButton_page_users_up_refreshUser.setIcon(icon2)
     def UserPage_Up_DeleteUser(self):
-        pass
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_Delete.png"), QtGui.QIcon.Mode.Normal,
+                        QtGui.QIcon.State.Off)
+        self.pushButton_page_users_up_deleteUser.setIcon(icon2)
+    def UserPage_Up_DeleteUser_Pressed(self):
+        """再按下按钮时 切换图片"""
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_Delete-pressed.png"), QtGui.QIcon.Mode.Normal,
+                        QtGui.QIcon.State.Off)
+        self.pushButton_page_users_up_deleteUser.setIcon(icon2)
     def UserPage_Up_SetChoiceUser(self):
         if self.UserPage_setChoice == 'Choice':
             self.UserPage_Up_SetChoiceUser_Set('Choices')
@@ -111,12 +91,18 @@ class RunUi(QMainWindow, Ui_MainWindow):
             # 如果是要设置为单选
             self.UserPage_setChoice = 'Choice'
             self.label_page_users_up_setChoice.setText('<html><head/><body><p><span style=" font-size:16pt;">单选</span>/<span style=" font-size:12pt;">多选</span></p></body></html>')
+            self.label_page_users_up_setChoice_icon.setPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_setChoice_Choice.png"))
+            self.pushButton_page_users_up_refreshUser.setText('刷新全部')
+            self.pushButton_page_users_up_deleteUser.setText('删除全部')
             self.Json_MOS['UserPage_setChoice'] = 'Choice'
             JsonWrite(self.Json_MOS,self.JsonFile)
         else:
             # 如果是要设置为多选
             self.UserPage_setChoice = 'Choices'
             self.label_page_users_up_setChoice.setText('<html><head/><body><p><span style=" font-size:16pt;">多选</span>/<span style=" font-size:12pt;">单选</span></p></body></html>')
+            self.label_page_users_up_setChoice_icon.setPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_setChoice_Choices.png"))
+            self.pushButton_page_users_up_refreshUser.setText('刷新所选')
+            self.pushButton_page_users_up_deleteUser.setText('删除所选')
             self.Json_MOS['UserPage_setChoice'] = 'Choices'
             JsonWrite(self.Json_MOS,self.JsonFile)
 
@@ -409,7 +395,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             else:
                 print_('Info', 'Json完整')
             print_('Info', 'Json验证完成')
-            self.label_loading_text_2.setText('正在设置启动器(3/4)')
+            self.label_loading_text_2.setText('正在设置启动器(4/5)')
             # 设置阶段
             if self.Systeam != 'Mac':
                 self.radioButton_settings_subject_automatic.setEnabled(False)
@@ -428,9 +414,11 @@ class RunUi(QMainWindow, Ui_MainWindow):
             if self.UserPage_setChoice == 'Choice':
                 # 如果是单选 就设置为单选
                 self.UserPage_Up_SetChoiceUser_Set('Choice')
+                self.pushButton_page_users_up_refreshUser.setText('刷新全部')
+                self.pushButton_page_users_up_deleteUser.setText('删除全部')
 
             print_('Info','设置背景……')
-            self.label_loading_text_2.setText('正在设置启动器(4/4)')
+            self.label_loading_text_2.setText('正在设置启动器(5/5)')
 
             if self.Json_MOS['BackGround'] == False:
                 self.MainWinowMainBackground(None)
@@ -452,11 +440,14 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 elif self.Json_MOS['BackGround'] == 7:
                     self.radioButton_settings_background_7.setChecked(True)
 
-
-
         if First == True:
             self.RunInitialize_.stop()
 
+        # 饮用阶段
+        print_('Info', '引入库')
+        self.label_loading_text_2.setText('正在设置启动器(2/5)')
+        import UI.Gif_rc
+        import pytz
 
         # 开始播放动图
         self.Page_Loading = QtGui.QMovie(":/widget_Sidebar/images/MOS_Logo_gif.gif")
@@ -473,8 +464,9 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.stackedWidget_main.setCurrentIndex(2)
         else:
             # 如果有 就进行下一步
-            self.label_loading_text_2.setText('正在设置启动器(2/4)')
+            self.label_loading_text_2.setText('正在设置启动器(3/5)')
             Settings_()
+            print_('Info', '设置完成')
             self.label_loading_text_2.setText('设置完成')
             self.Animation_ToMainWindow()
             self.Page_Loading.stop()  # 暂停动图
@@ -551,10 +543,58 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.Animation_ToMainWindow_Run.start(1)
         self.Animation_ToMainWindow_Run.timeout.connect(Animation)
 
+    def __init__setAll(self):
+        self.Log_QTime = QTimer()
+        self.Log_QTime.setInterval(2000)  # 2秒
+        self.Log_QTime.timeout.connect(self.Log_QTime_)
+        self.Log_QTime.start()
 
+        self.RunInitialize_ = QTimer()
+        self.RunInitialize_.setInterval(20)
+        self.RunInitialize_.timeout.connect(self.RunInitialize)
+        self.RunInitialize_.start()
+        self.pushButton_hello_start.clicked.connect(self.FirstStartInitialize)
+
+        # 左边栏
+        self.Sidebar_Click_ = ''  # 当前点击的控件
+        self.Sidebar_Click_Ok = True  # 记录动画是否完成
+        self.Sidebar_Click_C = 'Home'  # 彻底完成后……
+        self.label_Sidebar_Back.clicked.connect(self.Back_Clicked)
+        self.label_Sidebar_User.clicked.connect(self.User_Clicked)
+        self.label_Sidebar_Home.clicked.connect(self.Home_Clicked)
+        self.label_Sidebar_OnLine.clicked.connect(self.Online_Clicked)
+        self.label_Sidebar_Download.clicked.connect(self.Download_Clicked)
+        self.label_Sidebar_Settings.clicked.connect(self.Settings_Clicked)
+
+        # 账户页面
+        self.pushButton_page_users_up_addUser.clicked.connect(self.UserPage_Up_AddUser)
+        self.pushButton_page_users_up_addUser.pressed.connect(self.UserPage_Up_AddUser_Pressed)
+        self.pushButton_page_users_up_refreshUser.clicked.connect(self.UserPage_Up_RefreshUser)
+        self.pushButton_page_users_up_refreshUser.pressed.connect(self.UserPage_Up_RefreshUser_Pressed)
+        self.pushButton_page_users_up_deleteUser.clicked.connect(self.UserPage_Up_DeleteUser)
+        self.pushButton_page_users_up_deleteUser.pressed.connect(self.UserPage_Up_DeleteUser_Pressed)
+        self.widget_page_users_up_setChoice.clicked.connect(self.UserPage_Up_SetChoiceUser)
+        self.label_page_users_up_setChoice_icon.clicked.connect(self.UserPage_Up_SetChoiceUser)
+        self.label_page_users_up_setChoice.clicked.connect(self.UserPage_Up_SetChoiceUser)
+
+        # 设置页面
+        self.radioButton_settings_background_none.clicked.connect(self.SettingsPage_Background_None_Clicked)
+        self.radioButton_settings_background_1.clicked.connect(self.SettingsPage_Background_1_Clicked)
+        self.radioButton_settings_background_2.clicked.connect(self.SettingsPage_Background_2_Clicked)
+        self.radioButton_settings_background_3.clicked.connect(self.SettingsPage_Background_3_Clicked)
+        self.radioButton_settings_background_4.clicked.connect(self.SettingsPage_Background_4_Clicked)
+        self.radioButton_settings_background_5.clicked.connect(self.SettingsPage_Background_5_Clicked)
+        self.radioButton_settings_background_6.clicked.connect(self.SettingsPage_Background_6_Clicked)
+        self.radioButton_settings_background_7.clicked.connect(self.SettingsPage_Background_7_Clicked)
+
+        self.horizontalSlider_page_settings_sidebar.sliderMoved.connect(self.SettingsPage_Sidebar_horizontalSlider)
+        self.horizontalSlider_page_settings_sidebar.sliderReleased.connect(
+            self.SettingsPage_Sidebar_horizontalSlider_sliderReleased)
+        self.spinBox_page_settings_sidebar.valueChanged.connect(self.SettingsPage_Sidebar_spinBox)
     def __init__setToolTipDuration(self):
         """初始化设置: 设置提示框"""
         # 悬浮提示窗
+        from UI.Custom_UI.QToolTip import ToolTip
         self._toolTip = ToolTip(parent=self)
         self.label_Sidebar_Back.setToolTipDuration(1000)
         self.label_Sidebar_User.setToolTipDuration(1000)
@@ -581,7 +621,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
     def Log_QTime_(self):
         """定时将日志写入文件"""
         logs = Log_Return()
-        time_2 = datetime.datetime.now(pytz.timezone('Etc/GMT-8')).strftime('%Y%m%d')
+        time_2 = datetime.datetime.now(timezone('Etc/GMT-8')).strftime('%Y%m%d')
         time = time_2 + '.log'
         file = os.path.join(self.File, 'Logs', time)
 
@@ -616,8 +656,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
 def Run():
     print_('Info',"程序已开始运行！")
-    app = QtWidgets.QApplication(sys.argv)
+    app = QtWidgets.QApplication(argv)
     print_('Info',"创建窗口对象成功！")
     ui = RunUi()
     print_('Info',"创建PyQt窗口对象成功！")
-    sys.exit(app.exec())
+    exit(app.exec())
