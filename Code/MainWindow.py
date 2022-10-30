@@ -471,6 +471,12 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.Animation_ToMainWindow()
             self.Page_Loading.stop()  # 暂停动图
 
+            # 设置完成后就运行日志记录程序
+            self.Log_QTime = QTimer()
+            self.Log_QTime.setInterval(4000)  # 4秒
+            self.Log_QTime.timeout.connect(self.Log_QTime_)
+            self.Log_QTime.start()
+
     def FirstStartInitialize(self):
         """在第一次启动时 初始化(缓存)"""
         from Code.Code import InitializeFirst
@@ -544,11 +550,6 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.Animation_ToMainWindow_Run.timeout.connect(Animation)
 
     def __init__setAll(self):
-        self.Log_QTime = QTimer()
-        self.Log_QTime.setInterval(2000)  # 2秒
-        self.Log_QTime.timeout.connect(self.Log_QTime_)
-        self.Log_QTime.start()
-
         self.RunInitialize_ = QTimer()
         self.RunInitialize_.setInterval(20)
         self.RunInitialize_.timeout.connect(self.RunInitialize)
