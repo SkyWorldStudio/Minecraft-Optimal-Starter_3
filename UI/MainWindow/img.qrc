@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="widget_Sidebar">
+    <file>../../images/TriangleUp .png</file>
+    <file>../../images/TriangleUpsideDown .png</file>
     <file>../../images/User_Page_Add-pressed.png</file>
     <file>../../images/User_Page_Delete-pressed.png</file>
     <file>../../images/User_Page_Refresh-pressed.png</file>
@@ -31,6 +33,9 @@
     <file>../../images/Online.png</file>
     <file>../../images/Home.png</file>
     <file>../../images/Download.png</file>
+  </qresource>
+  <qresource prefix="Shadow">
+    <file>../../images/Shadow-2-4-6-2.png</file>
   </qresource>
   <qresource prefix="BackGround">
     <file>../../images/BackGround/7.png</file>

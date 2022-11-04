@@ -55,6 +55,12 @@ class RunUi(QMainWindow, Ui_MainWindow):
         icon2.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_Add-pressed.png"), QtGui.QIcon.Mode.Normal,
                         QtGui.QIcon.State.Off)
         self.pushButton_page_users_up_addUser.setIcon(icon2)
+
+        # 显示窗口
+        from Code.AddUserWindow import Dialog_AddUserWindows_
+        self.Dialog_AddUserWindows_ = Dialog_AddUserWindows_()
+        self.Dialog_AddUserWindows_.show()
+
     def UserPage_Up_RefreshUser(self):
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_Refresh.png"), QtGui.QIcon.Mode.Normal,
