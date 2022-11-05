@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="widget_Sidebar">
+    <file>../../images/Scrub_B15_FFFFFF-60_Main-User.svg</file>
     <file>../../images/TriangleUp.png</file>
     <file>../../images/TriangleUpsideDown.png</file>
     <file>../../images/User_Page_Add-pressed.png</file>

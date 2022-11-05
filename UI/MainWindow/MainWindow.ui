@@ -59,24 +59,30 @@
 #widget_page_users_down{
 	border-image: url(:/Scrub/images/Scrub_B15_FFFFFF-60_Main-User-2.png);
 }
-#treeWidget_users_down{border-radius: 8px;border: 1px solid rgb(33, 33, 33);}
+#treeWidget_users_down{
+	border-radius: 8px;
+	/*border: 1px solid rgb(33, 33, 33);*/
+}
+
+
+
 #treeWidget_users_down::item {
     height: 10px;
 	padding: 12px;
 	border-left: 0px solid rgba(214, 214, 214,0);
-	border-top: 1px solid rgb(169, 169, 169);
+	/*border-top: 1px solid rgb(169, 169, 169);*/
 	border-bottom: 1px solid rgb(169, 169, 169);
 }
 #treeWidget_users_down::item:hover {
 	background-color: rgba(235, 235, 235,0);
 	border-left: 0px solid rgba(214, 214, 214,0);
-	border-top: 1px solid rgb(214, 214, 214);
+	/*border-top: 1px solid rgb(214, 214, 214);*/
 	border-bottom: 1px solid rgb(214, 214, 214);
 }
 #treeWidget_users_down::item:selected {
 	background-color: rgba(235, 235, 235,0);
 	border-left: 0px solid rgba(214, 214, 214,0);
-	border-top: 1px solid rgba(214, 214, 214,0);
+	/*border-top: 1px solid rgba(214, 214, 214,0);*/
 	border-bottom: 1px solid rgba(214, 214, 214,0);
 }
 #widget_page_users_up &gt; QPushButton{
@@ -424,7 +430,7 @@ QTreeWidget::item:selected {
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="page_main">
        <property name="styleSheet">
@@ -688,15 +694,15 @@ QTreeWidget::item:selected {
               <string notr="true"/>
              </property>
              <property name="currentIndex">
-              <number>1</number>
+              <number>0</number>
              </property>
              <widget class="QWidget" name="page_users">
               <layout class="QVBoxLayout" name="verticalLayout_4">
                <property name="leftMargin">
-                <number>10</number>
+                <number>8</number>
                </property>
                <property name="rightMargin">
-                <number>10</number>
+                <number>8</number>
                </property>
                <property name="bottomMargin">
                 <number>10</number>
@@ -805,22 +811,22 @@ QTreeWidget::item:selected {
                    <widget class="MyQWidget" name="widget_page_users_up_setChoice" native="true">
                     <property name="minimumSize">
                      <size>
-                      <width>114</width>
+                      <width>130</width>
                       <height>40</height>
                      </size>
                     </property>
                     <layout class="QHBoxLayout" name="horizontalLayout_5">
                      <property name="spacing">
-                      <number>0</number>
+                      <number>2</number>
                      </property>
                      <property name="leftMargin">
-                      <number>7</number>
+                      <number>6</number>
                      </property>
                      <property name="topMargin">
                       <number>2</number>
                      </property>
                      <property name="rightMargin">
-                      <number>7</number>
+                      <number>6</number>
                      </property>
                      <property name="bottomMargin">
                       <number>2</number>
@@ -842,12 +848,15 @@ QTreeWidget::item:selected {
                        <property name="scaledContents">
                         <bool>true</bool>
                        </property>
+                       <property name="indent">
+                        <number>0</number>
+                       </property>
                       </widget>
                      </item>
                      <item>
                       <widget class="MyQLabel" name="label_page_users_up_setChoice">
                        <property name="sizePolicy">
-                        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
                          <horstretch>0</horstretch>
                          <verstretch>0</verstretch>
                         </sizepolicy>
@@ -856,7 +865,13 @@ QTreeWidget::item:selected {
                         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;多选&lt;/span&gt;/&lt;span style=&quot; font-size:12pt;&quot;&gt;单选&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                        </property>
                        <property name="alignment">
-                        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                        <set>Qt::AlignCenter</set>
+                       </property>
+                       <property name="margin">
+                        <number>0</number>
+                       </property>
+                       <property name="indent">
+                        <number>0</number>
                        </property>
                       </widget>
                      </item>

@@ -158,7 +158,7 @@ QLineEdit{
              <widget class="MyQLabel" name="label_2">
               <property name="font">
                <font>
-                <pointsize>16</pointsize>
+                <pointsize>14</pointsize>
                </font>
               </property>
               <property name="styleSheet">
@@ -179,7 +179,7 @@ QLineEdit{
              <widget class="MyQLabel" name="label_3">
               <property name="font">
                <font>
-                <pointsize>16</pointsize>
+                <pointsize>14</pointsize>
                </font>
               </property>
               <property name="text">
@@ -197,7 +197,7 @@ QLineEdit{
              <widget class="MyQLabel" name="label_4">
               <property name="font">
                <font>
-                <pointsize>16</pointsize>
+                <pointsize>14</pointsize>
                </font>
               </property>
               <property name="text">
@@ -224,7 +224,7 @@ QLineEdit{
            </property>
            <property name="font">
             <font>
-             <pointsize>20</pointsize>
+             <pointsize>19</pointsize>
             </font>
            </property>
            <property name="text">
@@ -258,6 +258,9 @@ QLineEdit{
         </property>
         <widget class="QWidget" name="page_OffLine">
          <layout class="QGridLayout" name="gridLayout_2">
+          <property name="rightMargin">
+           <number>12</number>
+          </property>
           <property name="verticalSpacing">
            <number>0</number>
           </property>
@@ -265,7 +268,7 @@ QLineEdit{
            <widget class="QWidget" name="widget_OffLine_1" native="true">
             <layout class="QHBoxLayout" name="horizontalLayout_3">
              <property name="spacing">
-              <number>0</number>
+              <number>5</number>
              </property>
              <property name="leftMargin">
               <number>0</number>
@@ -289,7 +292,7 @@ QLineEdit{
                </property>
                <property name="font">
                 <font>
-                 <pointsize>14</pointsize>
+                 <pointsize>13</pointsize>
                 </font>
                </property>
                <property name="text">
@@ -310,7 +313,7 @@ QLineEdit{
                </property>
                <property name="font">
                 <font>
-                 <pointsize>14</pointsize>
+                 <pointsize>13</pointsize>
                 </font>
                </property>
                <property name="placeholderText">
@@ -380,7 +383,7 @@ QLineEdit{
                 </property>
                 <layout class="QHBoxLayout" name="horizontalLayout">
                  <property name="spacing">
-                  <number>0</number>
+                  <number>5</number>
                  </property>
                  <property name="leftMargin">
                   <number>0</number>
@@ -404,7 +407,7 @@ QLineEdit{
                    </property>
                    <property name="font">
                     <font>
-                     <pointsize>14</pointsize>
+                     <pointsize>13</pointsize>
                     </font>
                    </property>
                    <property name="text">
@@ -428,7 +431,7 @@ QLineEdit{
                    </property>
                    <property name="font">
                     <font>
-                     <pointsize>14</pointsize>
+                     <pointsize>13</pointsize>
                     </font>
                    </property>
                    <property name="placeholderText">
@@ -449,6 +452,12 @@ QLineEdit{
             <property name="enabled">
              <bool>true</bool>
             </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
               <width>70</width>
@@ -457,13 +466,13 @@ QLineEdit{
             </property>
             <property name="maximumSize">
              <size>
-              <width>70</width>
+              <width>90</width>
               <height>20</height>
              </size>
             </property>
             <property name="font">
              <font>
-              <pointsize>12</pointsize>
+              <pointsize>11</pointsize>
              </font>
             </property>
             <property name="text">
@@ -560,7 +569,7 @@ QLineEdit{
            </property>
            <property name="font">
             <font>
-             <pointsize>14</pointsize>
+             <pointsize>13</pointsize>
             </font>
            </property>
            <property name="text">
@@ -575,7 +584,7 @@ QLineEdit{
           <widget class="QPushButton" name="pushButton_bottom_cancel_confirm">
            <property name="font">
             <font>
-             <pointsize>14</pointsize>
+             <pointsize>13</pointsize>
             </font>
            </property>
            <property name="text">

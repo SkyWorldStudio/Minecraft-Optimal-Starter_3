@@ -57,24 +57,30 @@ class Ui_MainWindow(object):
 "#widget_page_users_down{\n"
 "    border-image: url(:/Scrub/images/Scrub_B15_FFFFFF-60_Main-User-2.png);\n"
 "}\n"
-"#treeWidget_users_down{border-radius: 8px;border: 1px solid rgb(33, 33, 33);}\n"
+"#treeWidget_users_down{\n"
+"    border-radius: 8px;\n"
+"    /*border: 1px solid rgb(33, 33, 33);*/\n"
+"}\n"
+"\n"
+"\n"
+"\n"
 "#treeWidget_users_down::item {\n"
 "    height: 10px;\n"
 "    padding: 12px;\n"
 "    border-left: 0px solid rgba(214, 214, 214,0);\n"
-"    border-top: 1px solid rgb(169, 169, 169);\n"
+"    /*border-top: 1px solid rgb(169, 169, 169);*/\n"
 "    border-bottom: 1px solid rgb(169, 169, 169);\n"
 "}\n"
 "#treeWidget_users_down::item:hover {\n"
 "    background-color: rgba(235, 235, 235,0);\n"
 "    border-left: 0px solid rgba(214, 214, 214,0);\n"
-"    border-top: 1px solid rgb(214, 214, 214);\n"
+"    /*border-top: 1px solid rgb(214, 214, 214);*/\n"
 "    border-bottom: 1px solid rgb(214, 214, 214);\n"
 "}\n"
 "#treeWidget_users_down::item:selected {\n"
 "    background-color: rgba(235, 235, 235,0);\n"
 "    border-left: 0px solid rgba(214, 214, 214,0);\n"
-"    border-top: 1px solid rgba(214, 214, 214,0);\n"
+"    /*border-top: 1px solid rgba(214, 214, 214,0);*/\n"
 "    border-bottom: 1px solid rgba(214, 214, 214,0);\n"
 "}\n"
 "#widget_page_users_up > QPushButton{\n"
@@ -492,7 +498,7 @@ class Ui_MainWindow(object):
         self.page_users = QtWidgets.QWidget()
         self.page_users.setObjectName("page_users")
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.page_users)
-        self.verticalLayout_4.setContentsMargins(10, -1, 10, 10)
+        self.verticalLayout_4.setContentsMargins(8, -1, 8, 10)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.widget_page_users_up = QtWidgets.QWidget(self.page_users)
         self.widget_page_users_up.setObjectName("widget_page_users_up")
@@ -527,7 +533,7 @@ class Ui_MainWindow(object):
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem1)
         self.widget_page_users_up_setChoice = MyQWidget(self.widget_page_users_up)
-        self.widget_page_users_up_setChoice.setMinimumSize(QtCore.QSize(114, 40))
+        self.widget_page_users_up_setChoice.setMinimumSize(QtCore.QSize(120, 40))
         self.widget_page_users_up_setChoice.setObjectName("widget_page_users_up_setChoice")
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout(self.widget_page_users_up_setChoice)
         self.horizontalLayout_5.setContentsMargins(7, 2, 7, 2)

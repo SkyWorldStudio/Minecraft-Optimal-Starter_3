@@ -6,7 +6,7 @@ from sys import argv, exit
 from PyQt6 import QtWidgets, QtGui
 from PyQt6.QtCore import QTimer, QEvent, QPoint, Qt
 from PyQt6.QtGui import QColor
-from PyQt6.QtWidgets import QMainWindow, QGraphicsOpacityEffect, QDockWidget
+from PyQt6.QtWidgets import QMainWindow, QGraphicsOpacityEffect, QDockWidget, QGraphicsDropShadowEffect
 from pytz import timezone
 
 from Code.Log import print_,Log_Clear,Log_Return
@@ -27,6 +27,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         print_('Info',"已成功显示窗体")
         self.__init__setAll()
         self.__init__setToolTipDuration()
+        self.__init__setShadow()
 
     # 左边栏"按钮"被点击后（槽）
     def Back_Clicked(self):
@@ -616,7 +617,20 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.horizontalSlider_page_settings_sidebar.sliderMoved.connect(self.SettingsPage_Sidebar_horizontalSlider)
         self.horizontalSlider_page_settings_sidebar.sliderReleased.connect(
             self.SettingsPage_Sidebar_horizontalSlider_sliderReleased)
+        # self.horizontalSlider_page_settings_sidebar.slider
         self.spinBox_page_settings_sidebar.valueChanged.connect(self.SettingsPage_Sidebar_spinBox)
+
+    def __init__setShadow(self):
+        """设置控件阴影"""
+        # 添加阴影
+        """
+        self.effect_shadow = QGraphicsDropShadowEffect(self.widget_page_users_up)
+        self.effect_shadow.setOffset(0, 0)  # 偏移 (向右,向下)
+        self.effect_shadow.setColor(QColor(225, 225, 225, 200))  # 阴影颜色
+        self.effect_shadow.setBlurRadius(16) # 阴影圆角
+        self.widget_page_users_up.setGraphicsEffect(self.effect_shadow)  # 将设置套用
+        """
+
     def __init__setToolTipDuration(self):
         """初始化设置: 设置提示框"""
         # 悬浮提示窗
