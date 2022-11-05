@@ -14,7 +14,7 @@ class Ui_Dialog_AddUserWindows(object):
         Dialog_AddUserWindows.setObjectName("Dialog_AddUserWindows")
         Dialog_AddUserWindows.resize(585, 180)
         Dialog_AddUserWindows.setMinimumSize(QtCore.QSize(585, 180))
-        Dialog_AddUserWindows.setMaximumSize(QtCore.QSize(585, 180))
+        Dialog_AddUserWindows.setMaximumSize(QtCore.QSize(585, 220))
         Dialog_AddUserWindows.setStyleSheet("*{\n"
 "    padding: -1;  /*改变焦点框*/\n"
 "}\n"
@@ -55,7 +55,9 @@ class Ui_Dialog_AddUserWindows(object):
 "    border-radius: 8px;\n"
 "    background-color: rgb(255, 255, 255);\n"
 "}\n"
-"\n"
+"#widget_2{\n"
+"    background-color: rgba(255, 255, 255, 0);\n"
+"}\n"
 "QLineEdit{\n"
 "    background-color: rgba(204, 204, 255, 26);\n"
 "    border-style:none;\n"
@@ -254,6 +256,7 @@ class Ui_Dialog_AddUserWindows(object):
 
         self.retranslateUi(Dialog_AddUserWindows)
         self.stackedWidget_main.setCurrentIndex(0)
+        self.stackedWidget_widget_2.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(Dialog_AddUserWindows)
 
     def retranslateUi(self, Dialog_AddUserWindows):

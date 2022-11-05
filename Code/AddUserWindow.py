@@ -1,5 +1,5 @@
 # coding=utf-8
-from PyQt6 import QtGui
+from PyQt6 import QtGui, QtCore
 from PyQt6.QtCore import QPropertyAnimation
 from PyQt6.QtGui import QColor
 
@@ -31,6 +31,10 @@ class Dialog_AddUserWindows_(QDialog,Ui_Dialog_AddUserWindows):
             self.OffLine_Advanced_Open = True
             icon.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/TriangleUpsideDown.png"), QtGui.QIcon.Mode.Normal,
                            QtGui.QIcon.State.Off)
+            self.stackedWidget_widget_2.setMaximumSize(QtCore.QSize(16777215, 38))
+            self.stackedWidget_widget_2.setMinimumSize(QtCore.QSize(0, 38))
+            self.stackedWidget_widget_2.setCurrentIndex(0)
+            self.resize(585, 220)
         else:
             self.OffLine_Advanced_Open = False
             icon.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/TriangleUp.png"), QtGui.QIcon.Mode.Normal,
