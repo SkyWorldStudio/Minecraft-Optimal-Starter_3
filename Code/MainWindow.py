@@ -615,9 +615,9 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.radioButton_settings_background_7.clicked.connect(self.SettingsPage_Background_7_Clicked)
 
         self.horizontalSlider_page_settings_sidebar.sliderMoved.connect(self.SettingsPage_Sidebar_horizontalSlider)
-        self.horizontalSlider_page_settings_sidebar.sliderReleased.connect(
-            self.SettingsPage_Sidebar_horizontalSlider_sliderReleased)
-        # self.horizontalSlider_page_settings_sidebar.slider
+        self.horizontalSlider_page_settings_sidebar.sliderPressed.connect(self.SettingsPage_Sidebar_horizontalSlider)
+        self.horizontalSlider_page_settings_sidebar.sliderReleased.connect(self.SettingsPage_Sidebar_horizontalSlider_sliderReleased)
+        self.horizontalSlider_page_settings_sidebar.valueChanged.connect(self.SettingsPage_Sidebar_horizontalSlider)
         self.spinBox_page_settings_sidebar.valueChanged.connect(self.SettingsPage_Sidebar_spinBox)
 
     def __init__setShadow(self):

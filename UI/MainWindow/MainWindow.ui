@@ -430,7 +430,7 @@ QTreeWidget::item:selected {
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page_main">
        <property name="styleSheet">
@@ -694,7 +694,7 @@ QTreeWidget::item:selected {
               <string notr="true"/>
              </property>
              <property name="currentIndex">
-              <number>0</number>
+              <number>1</number>
              </property>
              <widget class="QWidget" name="page_users">
               <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -714,7 +714,7 @@ QTreeWidget::item:selected {
                    <number>5</number>
                   </property>
                   <property name="leftMargin">
-                   <number>17</number>
+                   <number>12</number>
                   </property>
                   <property name="topMargin">
                    <number>12</number>
@@ -799,6 +799,9 @@ QTreeWidget::item:selected {
                     <property name="orientation">
                      <enum>Qt::Horizontal</enum>
                     </property>
+                    <property name="sizeType">
+                     <enum>QSizePolicy::Expanding</enum>
+                    </property>
                     <property name="sizeHint" stdset="0">
                      <size>
                       <width>40</width>
@@ -809,10 +812,16 @@ QTreeWidget::item:selected {
                   </item>
                   <item>
                    <widget class="MyQWidget" name="widget_page_users_up_setChoice" native="true">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
                     <property name="minimumSize">
                      <size>
-                      <width>130</width>
-                      <height>40</height>
+                      <width>125</width>
+                      <height>0</height>
                      </size>
                     </property>
                     <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -820,13 +829,13 @@ QTreeWidget::item:selected {
                       <number>2</number>
                      </property>
                      <property name="leftMargin">
-                      <number>6</number>
+                      <number>4</number>
                      </property>
                      <property name="topMargin">
                       <number>2</number>
                      </property>
                      <property name="rightMargin">
-                      <number>6</number>
+                      <number>4</number>
                      </property>
                      <property name="bottomMargin">
                       <number>2</number>
@@ -856,7 +865,7 @@ QTreeWidget::item:selected {
                      <item>
                       <widget class="MyQLabel" name="label_page_users_up_setChoice">
                        <property name="sizePolicy">
-                        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                          <horstretch>0</horstretch>
                          <verstretch>0</verstretch>
                         </sizepolicy>
@@ -986,8 +995,8 @@ QTreeWidget::item:selected {
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>380</width>
-                    <height>336</height>
+                    <width>1119</width>
+                    <height>612</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -1190,11 +1199,20 @@ QTreeWidget::item:selected {
                         <property name="maximum">
                          <number>70</number>
                         </property>
+                        <property name="singleStep">
+                         <number>1</number>
+                        </property>
+                        <property name="pageStep">
+                         <number>1</number>
+                        </property>
                         <property name="value">
                          <number>15</number>
                         </property>
                         <property name="sliderPosition">
                          <number>15</number>
+                        </property>
+                        <property name="tracking">
+                         <bool>true</bool>
                         </property>
                         <property name="orientation">
                          <enum>Qt::Horizontal</enum>
