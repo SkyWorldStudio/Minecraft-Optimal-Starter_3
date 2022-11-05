@@ -4,8 +4,9 @@ import os.path
 from sys import argv, exit
 
 from PyQt6 import QtWidgets, QtGui
-from PyQt6.QtCore import QTimer, QEvent, QPoint
-from PyQt6.QtWidgets import QMainWindow, QGraphicsOpacityEffect
+from PyQt6.QtCore import QTimer, QEvent, QPoint, Qt
+from PyQt6.QtGui import QColor
+from PyQt6.QtWidgets import QMainWindow, QGraphicsOpacityEffect, QDockWidget
 from pytz import timezone
 
 from Code.Log import print_,Log_Clear,Log_Return
@@ -20,7 +21,9 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
         import UI.MainWindow.img_rc
         self.setupUi(self)
+        # self.setWindowFlags(Qt.WindowType.MacWindowToolBarButtonHint)
         self.show()
+
         print_('Info',"已成功显示窗体")
         self.__init__setAll()
         self.__init__setToolTipDuration()
@@ -59,6 +62,37 @@ class RunUi(QMainWindow, Ui_MainWindow):
         # 显示窗口
         from Code.AddUserWindow import Dialog_AddUserWindows_
         self.Dialog_AddUserWindows_ = Dialog_AddUserWindows_()
+        self.Dialog_AddUserWindows_.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
+        """
+        self.Dialog_AddUserWindows_.setWindowFlags(
+            Qt.WindowType.WindowCloseButtonHint |
+            Qt.WindowType.MSWindowsFixedSizeDialogHint |
+            Qt.WindowType.WindowStaysOnTopHint |
+            Qt.WindowType.FramelessWindowHint |
+            Qt.WindowType.Tool |
+            Qt.WindowType.ToolTip |
+            Qt.WindowType.CoverWindow |
+            Qt.WindowType.Popup |
+            Qt.WindowType.SplashScreen |
+            Qt.WindowType.NoDropShadowWindowHint |
+            Qt.WindowType.BypassGraphicsProxyWidget |
+            Qt.WindowType.MaximizeUsingFullscreenGeometryHint |
+            Qt.WindowType.X11BypassWindowManagerHint
+        )"""
+
+        self.Dialog_AddUserWindows_.setWindowFlags(
+            Qt.WindowType.Popup | # 表示该窗口小部件是一个弹出式顶层窗口，即它是模态的，但有一个适合弹出式菜单的窗口系统框架。
+            Qt.WindowType.Tool | # 表示小部件是一个工具窗口,如果有父级，则工具窗口将始终保留在其顶部,在 macOS 上，工具窗口对应于窗口的NSPanel类。这意味着窗口位于普通窗口之上，因此无法在其顶部放置普通窗口。默认情况下，当应用程序处于非活动状态时，工具窗口将消失。这可以通过WA_MacAlwaysShowToolWindow属性来控制。
+            Qt.WindowType.FramelessWindowHint | # 生成无边框窗口
+            Qt.WindowType.MSWindowsFixedSizeDialogHint | # 在 Windows 上为窗口提供一个细对话框边框。这种风格传统上用于固定大小的对话框。
+            Qt.WindowType.Dialog | # 指示该小部件是一个应装饰为对话框的窗口（即，通常在标题栏中没有最大化或最小化按钮）。这是 的默认类型QDialog。如果要将其用作模式对话框，则应从另一个窗口启动它，或者具有父级并与该windowModality属性一起使用。如果将其设为模态，对话框将阻止应用程序中的其他顶级窗口获得任何输入。我们将具有父级的顶级窗口称为辅助窗口。
+            Qt.WindowType.NoDropShadowWindowHint  # 禁用支持平台上的窗口投影。
+        )
+
+        self.Dialog_AddUserWindows_.setWindowModality(
+            Qt.WindowModality.ApplicationModal  # 该窗口对应用程序是模态的，并阻止对所有窗口的输入。
+        )
+
         self.Dialog_AddUserWindows_.show()
 
     def UserPage_Up_RefreshUser(self):

@@ -1,8 +1,6 @@
 # coding=utf-8
 from UI.AddUserWindow.AddUserWindow import Ui_Dialog_AddUserWindows
-from PyQt6 import QtWidgets, QtCore
-from PyQt6.QtWidgets import QDialog
-from PyQt6.QtCore import QPropertyAnimation
+from PyQt6.QtWidgets import QDialog, QGraphicsDropShadowEffect
 
 class Dialog_AddUserWindows_(QDialog,Ui_Dialog_AddUserWindows):
     def __init__(self):

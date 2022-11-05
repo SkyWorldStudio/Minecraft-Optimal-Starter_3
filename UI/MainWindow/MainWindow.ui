@@ -1677,6 +1677,11 @@ QTreeWidget::item:selected {
     </item>
    </layout>
   </widget>
+  <action name="action8">
+   <property name="text">
+    <string>8</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>

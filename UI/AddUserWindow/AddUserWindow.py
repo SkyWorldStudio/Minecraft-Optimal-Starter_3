@@ -18,19 +18,20 @@ class Ui_Dialog_AddUserWindows(object):
         Dialog_AddUserWindows.setStyleSheet("*{\n"
 "    padding: -1;  /*改变焦点框*/\n"
 "}\n"
-"#Dialog_AddUserWindows{\n"
-"    background-color: rgb(255, 255, 255);\n"
-"    border-image: url(:/Shadow/images/Shadow-2-4-6-2.png);\n"
-"    border-radius: 5px;\n"
-"}\n"
 "\n"
+"#Dialog_AddUserWindows{\n"
+"    border-image: url(:/Shadow/images/Shadow-2-4-6-2.png);\n"
+"    border-radius: 8px;\n"
+"}\n"
 "#stackedWidget_main > QWidget{\n"
-"    background-color: rgba(255, 255, 255,0);\n"
+"    background-color: rgb(255, 255, 255);\n"
 "}\n"
 "\n"
 "#widget_up{\n"
-"    /*border-bottom: 1px solid rgb(169, 169, 169);*/\n"
-"    background-color: rgba(229, 229, 229, 64);\n"
+"    background-color: rgb(248, 248, 248);\n"
+"    border: 1px solid rgba(0, 0, 0,0);\n"
+"    border-top-right-radius: 8px;\n"
+"    border-top-left-radius: 8px;\n"
 "}\n"
 "\n"
 "#widget_up_2 > QLabel{\n"
@@ -49,6 +50,11 @@ class Ui_Dialog_AddUserWindows(object):
 "    color: rgb(0, 119, 255);\n"
 "}\n"
 "\n"
+"#widget_main{\n"
+"    border: 1px solid rgb(33, 33, 33);\n"
+"    border-radius: 8px;\n"
+"    background-color: rgb(255, 255, 255);\n"
+"}\n"
 "\n"
 "QLineEdit{\n"
 "    background-color: rgba(204, 204, 255, 26);\n"
@@ -56,10 +62,16 @@ class Ui_Dialog_AddUserWindows(object):
 "}\n"
 "")
         self.verticalLayout = QtWidgets.QVBoxLayout(Dialog_AddUserWindows)
-        self.verticalLayout.setContentsMargins(6, 4, 10, 23)
+        self.verticalLayout.setContentsMargins(6, 4, 10, 11)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.widget_up = QtWidgets.QWidget(Dialog_AddUserWindows)
+        self.widget_main = QtWidgets.QWidget(Dialog_AddUserWindows)
+        self.widget_main.setObjectName("widget_main")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.widget_main)
+        self.verticalLayout_2.setContentsMargins(1, 1, 1, 12)
+        self.verticalLayout_2.setSpacing(0)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.widget_up = QtWidgets.QWidget(self.widget_main)
         self.widget_up.setMinimumSize(QtCore.QSize(0, 40))
         self.widget_up.setMaximumSize(QtCore.QSize(16777215, 40))
         self.widget_up.setObjectName("widget_up")
@@ -112,8 +124,8 @@ class Ui_Dialog_AddUserWindows(object):
         self.gridLayout.addWidget(self.label, 0, 0, 4, 1)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Minimum)
         self.gridLayout.addItem(spacerItem, 0, 1, 4, 2)
-        self.verticalLayout.addWidget(self.widget_up)
-        self.stackedWidget_main = QtWidgets.QStackedWidget(Dialog_AddUserWindows)
+        self.verticalLayout_2.addWidget(self.widget_up)
+        self.stackedWidget_main = QtWidgets.QStackedWidget(self.widget_main)
         self.stackedWidget_main.setObjectName("stackedWidget_main")
         self.page_OffLine = QtWidgets.QWidget()
         self.page_OffLine.setObjectName("page_OffLine")
@@ -156,11 +168,11 @@ class Ui_Dialog_AddUserWindows(object):
         self.label_6.setObjectName("label_6")
         self.horizontalLayout.addWidget(self.label_6)
         self.lineEdit_2 = QtWidgets.QLineEdit(self.widget)
+        self.lineEdit_2.setEnabled(False)
         self.lineEdit_2.setMinimumSize(QtCore.QSize(0, 35))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.lineEdit_2.setFont(font)
-        self.lineEdit_2.setClearButtonEnabled(False)
         self.lineEdit_2.setObjectName("lineEdit_2")
         self.horizontalLayout.addWidget(self.lineEdit_2)
         self.gridLayout_2.addWidget(self.widget, 3, 0, 1, 3)
@@ -183,6 +195,7 @@ class Ui_Dialog_AddUserWindows(object):
         font = QtGui.QFont()
         font.setPointSize(14)
         self.lineEdit.setFont(font)
+        self.lineEdit.setClearButtonEnabled(False)
         self.lineEdit.setObjectName("lineEdit")
         self.horizontalLayout_3.addWidget(self.lineEdit)
         self.gridLayout_2.addWidget(self.widget_2, 1, 0, 1, 3)
@@ -193,8 +206,8 @@ class Ui_Dialog_AddUserWindows(object):
         self.page_2 = QtWidgets.QWidget()
         self.page_2.setObjectName("page_2")
         self.stackedWidget_main.addWidget(self.page_2)
-        self.verticalLayout.addWidget(self.stackedWidget_main)
-        self.widget_bottom = QtWidgets.QWidget(Dialog_AddUserWindows)
+        self.verticalLayout_2.addWidget(self.stackedWidget_main)
+        self.widget_bottom = QtWidgets.QWidget(self.widget_main)
         self.widget_bottom.setObjectName("widget_bottom")
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.widget_bottom)
         self.horizontalLayout_4.setContentsMargins(0, 0, 15, 0)
@@ -217,7 +230,8 @@ class Ui_Dialog_AddUserWindows(object):
         self.pushButton_bottom_cancel_confirm.setAutoDefault(False)
         self.pushButton_bottom_cancel_confirm.setObjectName("pushButton_bottom_cancel_confirm")
         self.horizontalLayout_4.addWidget(self.pushButton_bottom_cancel_confirm)
-        self.verticalLayout.addWidget(self.widget_bottom)
+        self.verticalLayout_2.addWidget(self.widget_bottom)
+        self.verticalLayout.addWidget(self.widget_main)
 
         self.retranslateUi(Dialog_AddUserWindows)
         self.stackedWidget_main.setCurrentIndex(0)
@@ -234,6 +248,7 @@ class Ui_Dialog_AddUserWindows(object):
         self.label_6.setText(_translate("Dialog_AddUserWindows", "UUID"))
         self.lineEdit_2.setPlaceholderText(_translate("Dialog_AddUserWindows", " XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"))
         self.label_5.setText(_translate("Dialog_AddUserWindows", "用户名"))
+        self.lineEdit.setPlaceholderText(_translate("Dialog_AddUserWindows", " XXX"))
         self.pushButton_bottom_cancel.setText(_translate("Dialog_AddUserWindows", "取消"))
         self.pushButton_bottom_cancel_confirm.setText(_translate("Dialog_AddUserWindows", "登陆"))
 from UI.Custom_UI.QLabel import MyQLabel
