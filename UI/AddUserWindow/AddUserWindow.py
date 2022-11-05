@@ -20,7 +20,7 @@ class Ui_Dialog_AddUserWindows(object):
 "}\n"
 "\n"
 "#Dialog_AddUserWindows{\n"
-"    border-image: url(:/Shadow/images/Shadow-2-4-6-2.png);\n"
+"    /*border-image: url(:/Shadow/images/Shadow-2-4-6-2.png);*/\n"
 "    border-radius: 8px;\n"
 "}\n"
 "#stackedWidget_main > QWidget{\n"

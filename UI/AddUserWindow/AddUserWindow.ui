@@ -31,7 +31,7 @@
 }
 
 #Dialog_AddUserWindows{
-	border-image: url(:/Shadow/images/Shadow-2-4-6-2.png);
+	/*border-image: url(:/Shadow/images/Shadow-2-4-6-2.png);*/
 	border-radius: 8px;
 }
 #stackedWidget_main &gt; QWidget{

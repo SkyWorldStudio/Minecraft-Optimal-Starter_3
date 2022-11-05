@@ -63,23 +63,6 @@ class RunUi(QMainWindow, Ui_MainWindow):
         from Code.AddUserWindow import Dialog_AddUserWindows_
         self.Dialog_AddUserWindows_ = Dialog_AddUserWindows_()
         self.Dialog_AddUserWindows_.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
-        """
-        self.Dialog_AddUserWindows_.setWindowFlags(
-            Qt.WindowType.WindowCloseButtonHint |
-            Qt.WindowType.MSWindowsFixedSizeDialogHint |
-            Qt.WindowType.WindowStaysOnTopHint |
-            Qt.WindowType.FramelessWindowHint |
-            Qt.WindowType.Tool |
-            Qt.WindowType.ToolTip |
-            Qt.WindowType.CoverWindow |
-            Qt.WindowType.Popup |
-            Qt.WindowType.SplashScreen |
-            Qt.WindowType.NoDropShadowWindowHint |
-            Qt.WindowType.BypassGraphicsProxyWidget |
-            Qt.WindowType.MaximizeUsingFullscreenGeometryHint |
-            Qt.WindowType.X11BypassWindowManagerHint
-        )"""
-
         self.Dialog_AddUserWindows_.setWindowFlags(
             Qt.WindowType.Popup | # 表示该窗口小部件是一个弹出式顶层窗口，即它是模态的，但有一个适合弹出式菜单的窗口系统框架。
             Qt.WindowType.Tool | # 表示小部件是一个工具窗口,如果有父级，则工具窗口将始终保留在其顶部,在 macOS 上，工具窗口对应于窗口的NSPanel类。这意味着窗口位于普通窗口之上，因此无法在其顶部放置普通窗口。默认情况下，当应用程序处于非活动状态时，工具窗口将消失。这可以通过WA_MacAlwaysShowToolWindow属性来控制。
@@ -92,6 +75,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.Dialog_AddUserWindows_.setWindowModality(
             Qt.WindowModality.ApplicationModal  # 该窗口对应用程序是模态的，并阻止对所有窗口的输入。
         )
+
+        self.UserPage_Up_AddUser()  # 窗口弹出后，主页面不再刷新，所以在窗口弹出前改变
 
         self.Dialog_AddUserWindows_.show()
 
