@@ -28,9 +28,11 @@ class Dialog_AddUserWindows_(QDialog,Ui_Dialog_AddUserWindows):
     def pushButton_OffLine_Advanced_Clicked(self):
         icon = QtGui.QIcon()
         if self.OffLine_Advanced_Open == False:
+            self.OffLine_Advanced_Open = True
             icon.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/TriangleUpsideDown.png"), QtGui.QIcon.Mode.Normal,
                            QtGui.QIcon.State.Off)
         else:
+            self.OffLine_Advanced_Open = False
             icon.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/TriangleUp.png"), QtGui.QIcon.Mode.Normal,
                            QtGui.QIcon.State.Off)
         self.pushButton_OffLine_Advanced.setIcon(icon)
