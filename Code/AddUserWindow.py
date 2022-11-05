@@ -1,13 +1,15 @@
 # coding=utf-8
 from PyQt6 import QtGui, QtCore
-from PyQt6.QtCore import QPropertyAnimation
+from PyQt6.QtCore import QPropertyAnimation, Qt, pyqtSignal, QRect
 from PyQt6.QtGui import QColor
 
 from UI.AddUserWindow.AddUserWindow import Ui_Dialog_AddUserWindows
+from Code.MainWindow import Return_Window_XY
 from PyQt6.QtWidgets import QDialog, QGraphicsDropShadowEffect
 
 
 class Dialog_AddUserWindows_(QDialog,Ui_Dialog_AddUserWindows):
+    sinOut_Win_XY = pyqtSignal(int,int)
     def __init__(self):
         super(Dialog_AddUserWindows_, self).__init__()
         self.setupUi(self)
@@ -58,6 +60,32 @@ class Dialog_AddUserWindows_(QDialog,Ui_Dialog_AddUserWindows):
         self.anim.setEndValue(0)  # 设置结束属性，0为完全透明
         self.anim.finished.connect(self.close_)  # 动画结束时，关闭窗口
         self.anim.start()  # 开始动画
+
+    def mousePressEvent(self, a0: QtGui.QMouseEvent):
+        self.Is_Drag_ = True
+        self.Mouse_Start_Point_ = a0.globalPosition()  # 获得鼠标的初始位置
+        self.Window_Start_Point_ = self.frameGeometry().topLeft()  # 获得窗口的初始位置
+    def mouseMoveEvent(self, a0: QtGui.QMouseEvent):
+        # 判断是否在拖拽移动
+        if self.Is_Drag_:
+            # 获得鼠标移动的距离
+            self.Move_Distance = a0.globalPosition() - self.Mouse_Start_Point_
+            # 改变窗口的位置
+            Main_XY = Return_Window_XY()
+            self.sinOut_Win_XY.emit(
+                Main_XY.x() + self.Move_Distance.x(),
+                Main_XY.y() + self.Move_Distance.y()
+            )
+            x_c_m = self.Move_Distance.x()
+            y_c_m = self.Move_Distance.y()
+            x = self.Window_Start_Point_.x() + x_c_m
+            y = self.Window_Start_Point_.y() + y_c_m
+            self.move(x,y)
+
+    def mouseReleaseEvent(self, a0: QtGui.QMouseEvent):
+        # 放下左键即停止移动
+        if a0.button() == Qt.MouseButton.LeftButton:
+            self.Is_Drag_ = False
 
     def close_(self):
         self.close()

@@ -29,6 +29,9 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.__init__setToolTipDuration()
         self.__init__setShadow()
 
+        global Win_XY
+        Win_XY = self.geometry()
+
     # 左边栏"按钮"被点击后（槽）
     def Back_Clicked(self):
         self.Sidebar_Clicked(Want='Back')
@@ -63,6 +66,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         # 显示窗口
         from Code.AddUserWindow import Dialog_AddUserWindows_
         self.Dialog_AddUserWindows_ = Dialog_AddUserWindows_()
+        self.Dialog_AddUserWindows_.sinOut_Win_XY.connect(self.Window_XY)
         self.Dialog_AddUserWindows_.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
         self.Dialog_AddUserWindows_.setWindowFlags(
             Qt.WindowType.Popup | # 表示该窗口小部件是一个弹出式顶层窗口，即它是模态的，但有一个适合弹出式菜单的窗口系统框架。
@@ -77,6 +81,11 @@ class RunUi(QMainWindow, Ui_MainWindow):
             Qt.WindowModality.ApplicationModal  # 该窗口对应用程序是模态的，并阻止对所有窗口的输入。
         )
 
+        self.MainWindow_xy_size = self.geometry()  # 获取主界面 初始坐标
+        self.Dialog_AddUserWindows_.move(
+            self.MainWindow_xy_size.x() + (self.size().width()/2 - self.Dialog_AddUserWindows_.size().width()/2),
+            self.MainWindow_xy_size.y() + (self.size().height()/3)
+        )  # 子界面移动到 居中
         self.UserPage_Up_AddUser()  # 窗口弹出后，主页面不再刷新，所以在窗口弹出前改变
 
         self.Dialog_AddUserWindows_.show()
@@ -675,6 +684,31 @@ class RunUi(QMainWindow, Ui_MainWindow):
                     f.write(log_)
         Log_Clear()
 
+    def Window_XY(self,X,Y):
+        """改变窗口的XY坐标"""
+        self.move(X,Y)
+    def mousePressEvent(self, a0: QtGui.QMouseEvent):
+        global Win_XY
+        Win_XY = self.geometry()
+        self.Is_Drag_ = True
+        self.Mouse_Start_Point_ = a0.globalPosition()  # 获得鼠标的初始位置
+        self.Window_Start_Point_ = self.frameGeometry().topLeft()  # 获得窗口的初始位置
+    def mouseMoveEvent(self, a0: QtGui.QMouseEvent):
+        # 判断是否在拖拽移动
+        if self.Is_Drag_:
+            # 获得鼠标移动的距离
+            self.Move_Distance = a0.globalPosition() - self.Mouse_Start_Point_
+            # 改变窗口的位置
+            self.move(
+                self.Window_Start_Point_.x() + self.Move_Distance.x(),
+                self.Window_Start_Point_.y() + self.Move_Distance.y()
+            )
+
+    def mouseReleaseEvent(self, a0: QtGui.QMouseEvent):
+        # 放下左键即停止移动
+        if a0.button() == Qt.MouseButton.LeftButton:
+            self.Is_Drag_ = False
+
     def eventFilter(self, obj, e: QEvent):
         """重写 悬浮提示 方法"""
         if obj is self:
@@ -692,6 +726,13 @@ class RunUi(QMainWindow, Ui_MainWindow):
             return True
 
         return super().eventFilter(obj, e)
+
+
+def Return_Window_XY():
+    """返回窗口的坐标"""
+    global Win_XY
+    return Win_XY
+
 
 
 def Run():
