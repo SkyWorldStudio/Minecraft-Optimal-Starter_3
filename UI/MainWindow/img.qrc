@@ -1,7 +1,7 @@
 <RCC>
   <qresource prefix="widget_Sidebar">
-    <file>../../images/TriangleUp .png</file>
-    <file>../../images/TriangleUpsideDown .png</file>
+    <file>../../images/TriangleUp.png</file>
+    <file>../../images/TriangleUpsideDown.png</file>
     <file>../../images/User_Page_Add-pressed.png</file>
     <file>../../images/User_Page_Delete-pressed.png</file>
     <file>../../images/User_Page_Refresh-pressed.png</file>

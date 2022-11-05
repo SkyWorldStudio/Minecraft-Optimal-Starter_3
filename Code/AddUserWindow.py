@@ -1,9 +1,10 @@
 # coding=utf-8
-from PyQt6.QtCore import QPropertyAnimation, Qt
+from PyQt6 import QtGui
+from PyQt6.QtCore import QPropertyAnimation
 from PyQt6.QtGui import QColor
 
 from UI.AddUserWindow.AddUserWindow import Ui_Dialog_AddUserWindows
-from PyQt6.QtWidgets import QDialog, QGraphicsDropShadowEffect, QGraphicsBlurEffect
+from PyQt6.QtWidgets import QDialog, QGraphicsDropShadowEffect
 
 
 class Dialog_AddUserWindows_(QDialog,Ui_Dialog_AddUserWindows):
@@ -13,6 +14,9 @@ class Dialog_AddUserWindows_(QDialog,Ui_Dialog_AddUserWindows):
         self.show()
 
         self.pushButton_bottom_cancel.clicked.connect(self.pushButton_Cancel_Clicked)
+        self.pushButton_OffLine_Advanced.clicked.connect(self.pushButton_OffLine_Advanced_Clicked)
+
+        self.OffLine_Advanced_Open = False  # 存储现在 离线登陆中的"高级选项"是否打开
 
         # 添加阴影
         self.effect_shadow = QGraphicsDropShadowEffect(self)
@@ -20,6 +24,16 @@ class Dialog_AddUserWindows_(QDialog,Ui_Dialog_AddUserWindows):
         self.effect_shadow.setColor(QColor(121, 121, 121, 200))  # 阴影颜色
         self.effect_shadow.setBlurRadius(18) # 阴影圆角
         self.setGraphicsEffect(self.effect_shadow)  # 将设置套用到窗口中
+
+    def pushButton_OffLine_Advanced_Clicked(self):
+        icon = QtGui.QIcon()
+        if self.OffLine_Advanced_Open == False:
+            icon.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/TriangleUpsideDown.png"), QtGui.QIcon.Mode.Normal,
+                           QtGui.QIcon.State.Off)
+        else:
+            icon.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/TriangleUp.png"), QtGui.QIcon.Mode.Normal,
+                           QtGui.QIcon.State.Off)
+        self.pushButton_OffLine_Advanced.setIcon(icon)
 
     def pushButton_Cancel_Clicked(self):
         self.clicked_pushButton_close()
