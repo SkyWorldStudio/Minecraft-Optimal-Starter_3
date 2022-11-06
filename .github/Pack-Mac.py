@@ -19,7 +19,7 @@ DATA_FILES = ['UI','Code']
 # includes: A list of Python modules to include even if they are not detected by dependency checker. Packages in this list are ignored.
 # includes: 第三方库放在这里。
 # plist：其他的app应用配置，熟悉MACOS应用开发的都会非常熟悉这些参数，mac应用info.plist里的参数都可以添加进去
-OPTIONS = {'iconfile':'earth.icns',
+OPTIONS = {
            'plist': {
                     'CFBundleName'   : 'MOS',     # 应用名
                     'CFBundleDisplayName': 'verify', # 应用显示名
