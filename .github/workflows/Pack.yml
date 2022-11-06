@@ -22,3 +22,6 @@ jobs:
     - name: 检查版本
       run: |
         pip list
+    - name: Mac App打包
+      run: |
+        python .github/Pack-Mac.py
