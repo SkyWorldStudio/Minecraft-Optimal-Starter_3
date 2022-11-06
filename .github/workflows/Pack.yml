@@ -24,4 +24,4 @@ jobs:
         pip list
     - name: Mac App打包
       run: |
-        python .github/Pack-Mac.py
+        python .github/Pack-Mac.py py2app
