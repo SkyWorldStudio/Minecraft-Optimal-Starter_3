@@ -3,31 +3,32 @@ name: Pack
 on: [push]
 
 jobs:
-  build:
-    runs-on: macos-11
-    strategy:
-      matrix:
+  job1:
+     build:
+       runs-on: macos-11
+      strategy:
+        matrix:
         python-version: ["3.8"]
-    steps:
-    - uses: actions/checkout@v3
-    - name: 设置Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: 安装依赖库
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install py2app
-    - name: 检查版本
-      run: |
-        pip list
-    - name: Mac App打包
-      run: |
-        python .github/Pack-Mac.py py2app
+       steps:
+      - uses: actions/checkout@v3
+      - name: 设置Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: 安装依赖库
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install py2app
+      - name: 检查版本
+        run: |
+          pip list
+      - name: Mac App打包
+        run: |
+          python .github/Pack-Mac.py py2app
 
 
-  build:
+  job2:
     runs-on: macos-12
     strategy:
       matrix:
