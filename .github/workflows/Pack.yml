@@ -28,7 +28,7 @@ jobs:
            python .github/Pack-Mac.py py2app
 
 
-job2:
+  job2:
     name: My first job1
     runs-on: macos-12
     strategy:
