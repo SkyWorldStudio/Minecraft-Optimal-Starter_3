@@ -143,6 +143,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.pushButton_page_users_up_deleteUser.setText('删除所选')
             self.Json_MOS['UserPage_setChoice'] = 'Choices'
             JsonWrite(self.Json_MOS,self.JsonFile)
+
         self.Users_List_Refresh()
 
     def SettingsPage_Background_None_Clicked(self):
@@ -204,19 +205,32 @@ class RunUi(QMainWindow, Ui_MainWindow):
         U = self.Json_MOS['Users']
         I = -1
         self.listWidget_users_down.clear()
-        for U_1 in U:
-            I += 1
-            User_Name = self.Json_MOS['Users'][U_1]['User_Name']
-            F = self.Json_MOS['Users'][U_1]['Manner']
-            if F == 'OffLine':
-                # 如果账户是离线账户
-                T = '[离线]' + User_Name
-            item = QListWidgetItem(self.listWidget_users_down)
-            item.setText(T)
-            if self.Json_MOS['UserPage_setChoice'] == 'Choices':
-                # 如果多选开启
-                item.setCheckState(Qt.CheckState.Checked)
-            self.listWidget_users_down.addItem(item)
+        if U != {}:
+            self.stackedWidget_page_users_down.setCurrentIndex(1)
+
+            self.label_users_down_loading_ = QtGui.QMovie(":/Gif/images/Gif/Loaging.gif")
+            self.label_users_down_loading.setMovie(self.label_users_down_loading_)
+            self.label_users_down_loading_.start()
+
+            for U_1 in U:
+                I += 1
+                User_Name = self.Json_MOS['Users'][U_1]['User_Name']
+                F = self.Json_MOS['Users'][U_1]['Manner']
+                if F == 'OffLine':
+                    # 如果账户是离线账户
+                    T = '[离线]' + User_Name
+                item = QListWidgetItem(self.listWidget_users_down)
+                item.setText(T)
+                if self.Json_MOS['UserPage_setChoice'] == 'Choices':
+                    # 如果多选开启
+                    item.setCheckState(Qt.CheckState.Checked)
+                self.listWidget_users_down.addItem(item)
+
+            self.label_users_down_loading_.stop()
+            self.stackedWidget_page_users_down.setCurrentIndex(0)
+        else:
+            self.stackedWidget_page_users_down.setCurrentIndex(2)
+
 
     def MainWinowMainBackground(self,Want,_init_=False):
         """主窗口背景"""
@@ -457,7 +471,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             else:
                 print_('Info', 'Json完整')
             print_('Info', 'Json验证完成')
-            self.label_loading_text_2.setText('正在设置启动器(4/5)')
+            self.label_loading_text_2.setText('正在设置启动器(4/6)')
             # 设置阶段
             if self.Systeam != 'Mac':
                 self.radioButton_settings_subject_automatic.setEnabled(False)
@@ -480,7 +494,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 self.pushButton_page_users_up_deleteUser.setText('删除全部')
 
             print_('Info','设置背景……')
-            self.label_loading_text_2.setText('正在设置启动器(5/5)')
+            self.label_loading_text_2.setText('正在设置启动器(5/6)')
 
             if self.Json_MOS['BackGround'] == False:
                 self.MainWinowMainBackground(None)
@@ -507,7 +521,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
         # 引用阶段
         print_('Info', '引入库')
-        self.label_loading_text_2.setText('正在设置启动器(2/5)')
+        self.label_loading_text_2.setText('正在设置启动器(2/6)')
         import UI.Gif_rc
         import pytz
 
@@ -526,8 +540,13 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.stackedWidget_main.setCurrentIndex(2)
         else:
             # 如果有 就进行下一步
-            self.label_loading_text_2.setText('正在设置启动器(3/5)')
+            self.label_loading_text_2.setText('正在设置启动器(3/6)')
             Settings_()
+
+            print_('Info', '读取用户账户')
+            self.label_loading_text_2.setText('正在设置启动器(6/6)')
+            self.Users_List_Refresh()
+
             print_('Info', '设置完成')
             self.label_loading_text_2.setText('设置完成')
             self.Animation_ToMainWindow()
@@ -539,7 +558,6 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.Log_QTime.timeout.connect(self.Log_QTime_)
             self.Log_QTime.start()
 
-            self.Users_List_Refresh()
 
     def FirstStartInitialize(self):
         """在第一次启动时 初始化(缓存)"""

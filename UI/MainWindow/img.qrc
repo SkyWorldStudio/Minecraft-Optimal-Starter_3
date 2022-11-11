@@ -35,6 +35,9 @@
     <file>../../images/Home.png</file>
     <file>../../images/Download.png</file>
   </qresource>
+  <qresource prefix="Gif">
+    <file>../../images/Gif/Loaging.gif</file>
+  </qresource>
   <qresource prefix="Shadow">
     <file>../../images/Shadow-2-4-6-2.png</file>
   </qresource>

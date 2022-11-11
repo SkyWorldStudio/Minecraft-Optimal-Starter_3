@@ -54,7 +54,7 @@ class Ui_MainWindow(object):
 "#widget_page_users_up{\n"
 "    border-image: url(:/Scrub/images/Scrub_B15_FFFFFF-60_Main-User.png);\n"
 "}\n"
-"#widget_page_users_down{\n"
+"#stackedWidget_page_users_downPage1{\n"
 "    border-image: url(:/Scrub/images/Scrub_B15_FFFFFF-60_Main-User-2.png);\n"
 "}\n"
 "#listWidget_users_down{\n"
@@ -577,12 +577,14 @@ class Ui_MainWindow(object):
         self.horizontalLayout_5.addWidget(self.label_page_users_up_setChoice)
         self.horizontalLayout_4.addWidget(self.widget_page_users_up_setChoice)
         self.verticalLayout_4.addWidget(self.widget_page_users_up)
-        self.widget_page_users_down = QtWidgets.QWidget(self.page_users)
-        self.widget_page_users_down.setObjectName("widget_page_users_down")
-        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.widget_page_users_down)
+        self.stackedWidget_page_users_down = QtWidgets.QStackedWidget(self.page_users)
+        self.stackedWidget_page_users_down.setObjectName("stackedWidget_page_users_down")
+        self.stackedWidget_page_users_downPage1 = QtWidgets.QWidget()
+        self.stackedWidget_page_users_downPage1.setObjectName("stackedWidget_page_users_downPage1")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.stackedWidget_page_users_downPage1)
         self.verticalLayout_5.setContentsMargins(3, 0, 3, 6)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
-        self.listWidget_users_down = QtWidgets.QListWidget(self.widget_page_users_down)
+        self.listWidget_users_down = QtWidgets.QListWidget(self.stackedWidget_page_users_downPage1)
         font = QtGui.QFont()
         font.setPointSize(15)
         self.listWidget_users_down.setFont(font)
@@ -597,7 +599,32 @@ class Ui_MainWindow(object):
         item.setCheckState(QtCore.Qt.CheckState.Unchecked)
         self.listWidget_users_down.addItem(item)
         self.verticalLayout_5.addWidget(self.listWidget_users_down)
-        self.verticalLayout_4.addWidget(self.widget_page_users_down)
+        self.stackedWidget_page_users_down.addWidget(self.stackedWidget_page_users_downPage1)
+        self.stackedWidget_page_users_downPage_loaging = QtWidgets.QWidget()
+        self.stackedWidget_page_users_downPage_loaging.setObjectName("stackedWidget_page_users_downPage_loaging")
+        self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.stackedWidget_page_users_downPage_loaging)
+        self.verticalLayout_7.setObjectName("verticalLayout_7")
+        self.label_users_down_loading = QtWidgets.QLabel(self.stackedWidget_page_users_downPage_loaging)
+        self.label_users_down_loading.setText("")
+        self.label_users_down_loading.setPixmap(QtGui.QPixmap(":/Gif/images/Gif/Loaging.gif"))
+        self.label_users_down_loading.setScaledContents(False)
+        self.label_users_down_loading.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.label_users_down_loading.setObjectName("label_users_down_loading")
+        self.verticalLayout_7.addWidget(self.label_users_down_loading)
+        self.stackedWidget_page_users_down.addWidget(self.stackedWidget_page_users_downPage_loaging)
+        self.stackedWidget_page_users_downPage_none = QtWidgets.QWidget()
+        self.stackedWidget_page_users_downPage_none.setObjectName("stackedWidget_page_users_downPage_none")
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.stackedWidget_page_users_downPage_none)
+        self.verticalLayout_6.setObjectName("verticalLayout_6")
+        self.label_users_down_none = QtWidgets.QLabel(self.stackedWidget_page_users_downPage_none)
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        self.label_users_down_none.setFont(font)
+        self.label_users_down_none.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.label_users_down_none.setObjectName("label_users_down_none")
+        self.verticalLayout_6.addWidget(self.label_users_down_none)
+        self.stackedWidget_page_users_down.addWidget(self.stackedWidget_page_users_downPage_none)
+        self.verticalLayout_4.addWidget(self.stackedWidget_page_users_down)
         self.stackedWidget_main_2.addWidget(self.page_users)
         self.page_home = QtWidgets.QWidget()
         self.page_home.setObjectName("page_home")
@@ -871,6 +898,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.stackedWidget_main.setCurrentIndex(1)
         self.stackedWidget_main_2.setCurrentIndex(1)
+        self.stackedWidget_page_users_down.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -895,6 +923,7 @@ class Ui_MainWindow(object):
         item = self.listWidget_users_down.item(2)
         item.setText(_translate("MainWindow", "新建项目"))
         self.listWidget_users_down.setSortingEnabled(__sortingEnabled)
+        self.label_users_down_none.setText(_translate("MainWindow", "没有在您电脑中读取到任何账户数据。您可以点击“添加”按钮来进行添加"))
         self.label_page_settings_h1.setText(_translate("MainWindow", "个性化外观设置"))
         self.label_page_settings_subject_h2.setText(_translate("MainWindow", "主题"))
         self.radioButton_settings_subject_light.setToolTip(_translate("MainWindow", "浅色模式"))

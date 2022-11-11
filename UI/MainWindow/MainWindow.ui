@@ -56,7 +56,7 @@
 #widget_page_users_up{
 	border-image: url(:/Scrub/images/Scrub_B15_FFFFFF-60_Main-User.png);
 }
-#widget_page_users_down{
+#stackedWidget_page_users_downPage1{
 	border-image: url(:/Scrub/images/Scrub_B15_FFFFFF-60_Main-User-2.png);
 }
 #listWidget_users_down{
@@ -904,54 +904,98 @@ QListWidget::item:selected {
                 </widget>
                </item>
                <item>
-                <widget class="QWidget" name="widget_page_users_down" native="true">
-                 <layout class="QVBoxLayout" name="verticalLayout_5">
-                  <property name="leftMargin">
-                   <number>3</number>
-                  </property>
-                  <property name="topMargin">
-                   <number>0</number>
-                  </property>
-                  <property name="rightMargin">
-                   <number>3</number>
-                  </property>
-                  <property name="bottomMargin">
-                   <number>6</number>
-                  </property>
-                  <item>
-                   <widget class="QListWidget" name="listWidget_users_down">
-                    <property name="font">
-                     <font>
-                      <pointsize>15</pointsize>
-                     </font>
-                    </property>
-                    <item>
+                <widget class="QStackedWidget" name="stackedWidget_page_users_down">
+                 <property name="currentIndex">
+                  <number>0</number>
+                 </property>
+                 <widget class="QWidget" name="stackedWidget_page_users_downPage1" native="true">
+                  <layout class="QVBoxLayout" name="verticalLayout_5">
+                   <property name="leftMargin">
+                    <number>3</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>3</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>6</number>
+                   </property>
+                   <item>
+                    <widget class="QListWidget" name="listWidget_users_down">
+                     <property name="font">
+                      <font>
+                       <pointsize>15</pointsize>
+                      </font>
+                     </property>
+                     <item>
+                      <property name="text">
+                       <string>新建项目</string>
+                      </property>
+                      <property name="checkState">
+                       <enum>Unchecked</enum>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>新建项目</string>
+                      </property>
+                      <property name="checkState">
+                       <enum>Checked</enum>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>新建项目</string>
+                      </property>
+                      <property name="checkState">
+                       <enum>Unchecked</enum>
+                      </property>
+                     </item>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                 <widget class="QWidget" name="stackedWidget_page_users_downPage_loaging">
+                  <layout class="QVBoxLayout" name="verticalLayout_7">
+                   <item>
+                    <widget class="QLabel" name="label_users_down_loading">
                      <property name="text">
-                      <string>新建项目</string>
+                      <string/>
                      </property>
-                     <property name="checkState">
-                      <enum>Unchecked</enum>
+                     <property name="pixmap">
+                      <pixmap resource="img.qrc">:/Gif/images/Gif/Loaging.gif</pixmap>
                      </property>
-                    </item>
-                    <item>
+                     <property name="scaledContents">
+                      <bool>false</bool>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                 <widget class="QWidget" name="stackedWidget_page_users_downPage_none">
+                  <layout class="QVBoxLayout" name="verticalLayout_6">
+                   <item>
+                    <widget class="QLabel" name="label_users_down_none">
+                     <property name="font">
+                      <font>
+                       <pointsize>15</pointsize>
+                      </font>
+                     </property>
                      <property name="text">
-                      <string>新建项目</string>
+                      <string>没有在您电脑中读取到任何账户数据。您可以点击“添加”按钮来进行添加</string>
                      </property>
-                     <property name="checkState">
-                      <enum>Checked</enum>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
                      </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>新建项目</string>
-                     </property>
-                     <property name="checkState">
-                      <enum>Unchecked</enum>
-                     </property>
-                    </item>
-                   </widget>
-                  </item>
-                 </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
                 </widget>
                </item>
               </layout>

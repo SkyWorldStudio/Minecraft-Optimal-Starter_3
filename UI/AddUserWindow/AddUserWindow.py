@@ -280,4 +280,5 @@ class Ui_Dialog_AddUserWindows(object):
         self.pushButton_OffLine_Advanced.setText(_translate("Dialog_AddUserWindows", "高级设置"))
         self.pushButton_bottom_cancel.setText(_translate("Dialog_AddUserWindows", "取消"))
         self.pushButton_bottom_cancel_confirm.setText(_translate("Dialog_AddUserWindows", "登陆"))
+        self.pushButton_bottom_cancel_confirm.setShortcut(_translate("Dialog_AddUserWindows", "Return"))
 from UI.Custom_UI.QLabel import MyQLabel

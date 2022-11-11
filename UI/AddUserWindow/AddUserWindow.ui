@@ -590,6 +590,9 @@ QLineEdit{
            <property name="text">
             <string>登陆</string>
            </property>
+           <property name="shortcut">
+            <string>Return</string>
+           </property>
            <property name="autoDefault">
             <bool>false</bool>
            </property>
