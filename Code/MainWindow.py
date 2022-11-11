@@ -5,8 +5,7 @@ from sys import argv, exit
 
 from PyQt6 import QtWidgets, QtGui
 from PyQt6.QtCore import QTimer, QEvent, QPoint, Qt
-from PyQt6.QtGui import QColor
-from PyQt6.QtWidgets import QMainWindow, QGraphicsOpacityEffect, QDockWidget, QGraphicsDropShadowEffect
+from PyQt6.QtWidgets import QMainWindow, QGraphicsOpacityEffect, QListWidgetItem
 from pytz import timezone
 
 from Code.Log import print_,Log_Clear,Log_Return
@@ -28,6 +27,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.__init__setAll()
         self.__init__setToolTipDuration()
         self.__init__setShadow()
+        self.X_Y_ = self.frameGeometry().topLeft()
 
         global Win_XY
         Win_XY = self.geometry()
@@ -65,8 +65,9 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
         # 显示窗口
         from Code.AddUserWindow import Dialog_AddUserWindows_
-        self.Dialog_AddUserWindows_ = Dialog_AddUserWindows_()
+        self.Dialog_AddUserWindows_ = Dialog_AddUserWindows_(self.JsonFile)
         self.Dialog_AddUserWindows_.sinOut_Win_XY.connect(self.Window_XY)
+        self.Dialog_AddUserWindows_.sinOut_OK.connect(self.AddUserWindow_OK)
         self.Dialog_AddUserWindows_.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
         self.Dialog_AddUserWindows_.setWindowFlags(
             Qt.WindowType.Popup | # 表示该窗口小部件是一个弹出式顶层窗口，即它是模态的，但有一个适合弹出式菜单的窗口系统框架。
@@ -190,6 +191,29 @@ class RunUi(QMainWindow, Ui_MainWindow):
         i_2 = i * 30
         self.label_page_settings_background_h3_2.setText('预计 ' + str(i_2) + 'mm' + ' (' + str(i_2 / 1000) + 's)完成')
         self.SettingsPage_Sidebar_horizontalSlider_sliderReleased()
+
+    def AddUserWindow_OK(self):
+        self.Users_List_Refresh()
+
+    def Users_List_Refresh(self):
+        """读取账户列表并写入"""
+        self.Json_MOS = JsonRead(self.JsonFile)  # 重新读取
+        U = self.Json_MOS['Users']
+        I = -1
+        self.listWidget_users_down.clear()
+        for U_1 in U:
+            I += 1
+            User_Name = self.Json_MOS['Users'][U_1]['User_Name']
+            F = self.Json_MOS['Users'][U_1]['Manner']
+            if F == 'OffLine':
+                # 如果账户是离线账户
+                T = '[离线]' + User_Name
+            item = QListWidgetItem(self.listWidget_users_down)
+            item.setText(T)
+            if self.Json_MOS['UserPage_setChoice'] == 'Choices':
+                # 如果多选开启
+                item.setCheckState(Qt.CheckState.Checked)
+            self.listWidget_users_down.addItem(item)
 
     def MainWinowMainBackground(self,Want,_init_=False):
         """主窗口背景"""
@@ -478,7 +502,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         if First == True:
             self.RunInitialize_.stop()
 
-        # 饮用阶段
+        # 引用阶段
         print_('Info', '引入库')
         self.label_loading_text_2.setText('正在设置启动器(2/5)')
         import UI.Gif_rc
@@ -511,6 +535,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.Log_QTime.setInterval(4000)  # 4秒
             self.Log_QTime.timeout.connect(self.Log_QTime_)
             self.Log_QTime.start()
+
+            self.Users_List_Refresh()
 
     def FirstStartInitialize(self):
         """在第一次启动时 初始化(缓存)"""
@@ -585,6 +611,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.Animation_ToMainWindow_Run.timeout.connect(Animation)
 
     def __init__setAll(self):
+        """设置控件信号"""
         self.RunInitialize_ = QTimer()
         self.RunInitialize_.setInterval(20)
         self.RunInitialize_.timeout.connect(self.RunInitialize)

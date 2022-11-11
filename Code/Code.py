@@ -47,7 +47,8 @@ def Json_InitializeFirst():
         'Subject':'Light',
         'BackGround':False,
         'Sidebar_Sidebar_Time':15,  # 左边栏动画延迟
-        'UserPage_setChoice':'Choices'
+        'UserPage_setChoice':'Choices',
+        'Users':{}
          }
     return J
 

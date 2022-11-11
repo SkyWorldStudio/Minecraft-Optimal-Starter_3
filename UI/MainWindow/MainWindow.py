@@ -57,27 +57,27 @@ class Ui_MainWindow(object):
 "#widget_page_users_down{\n"
 "    border-image: url(:/Scrub/images/Scrub_B15_FFFFFF-60_Main-User-2.png);\n"
 "}\n"
-"#treeWidget_users_down{\n"
+"#listWidget_users_down{\n"
 "    border-radius: 8px;\n"
 "    /*border: 1px solid rgb(33, 33, 33);*/\n"
 "}\n"
 "\n"
 "\n"
 "\n"
-"#treeWidget_users_down::item {\n"
+"#listWidget_users_down::item {\n"
 "    height: 10px;\n"
 "    padding: 12px;\n"
 "    border-left: 0px solid rgba(214, 214, 214,0);\n"
 "    /*border-top: 1px solid rgb(169, 169, 169);*/\n"
 "    border-bottom: 1px solid rgb(169, 169, 169);\n"
 "}\n"
-"#treeWidget_users_down::item:hover {\n"
+"#listWidget_users_down::item:hover {\n"
 "    background-color: rgba(235, 235, 235,0);\n"
 "    border-left: 0px solid rgba(214, 214, 214,0);\n"
 "    /*border-top: 1px solid rgb(214, 214, 214);*/\n"
 "    border-bottom: 1px solid rgb(214, 214, 214);\n"
 "}\n"
-"#treeWidget_users_down::item:selected {\n"
+"#listWidget_users_down::item:selected {\n"
 "    background-color: rgba(235, 235, 235,0);\n"
 "    border-left: 0px solid rgba(214, 214, 214,0);\n"
 "    /*border-top: 1px solid rgba(214, 214, 214,0);*/\n"
@@ -403,6 +403,19 @@ class Ui_MainWindow(object):
 "    border-left: 3px solid rgb(0, 150, 255);\n"
 "}\n"
 "\n"
+"QListWidget::item {\n"
+"    height: 20px;\n"
+"    padding: 8px;\n"
+"}\n"
+"QListWidget::item:hover {\n"
+"    background-color: transparent;\n"
+"}\n"
+"QListWidget::item:selected {\n"
+"    background-color: transparent;\n"
+"    color: black;\n"
+"    background-color: rgb(235, 235, 235);\n"
+"}\n"
+"\n"
 "*{\n"
 "    background-color: rgba(255, 255, 255, 0);\n"
 "}\n"
@@ -569,24 +582,21 @@ class Ui_MainWindow(object):
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.widget_page_users_down)
         self.verticalLayout_5.setContentsMargins(3, 0, 3, 6)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
-        self.treeWidget_users_down = QtWidgets.QTreeWidget(self.widget_page_users_down)
+        self.listWidget_users_down = QtWidgets.QListWidget(self.widget_page_users_down)
         font = QtGui.QFont()
         font.setPointSize(15)
-        self.treeWidget_users_down.setFont(font)
-        self.treeWidget_users_down.setIndentation(0)
-        self.treeWidget_users_down.setRootIsDecorated(True)
-        self.treeWidget_users_down.setAllColumnsShowFocus(False)
-        self.treeWidget_users_down.setHeaderHidden(True)
-        self.treeWidget_users_down.setObjectName("treeWidget_users_down")
-        self.treeWidget_users_down.headerItem().setText(0, "1")
-        item_0 = QtWidgets.QTreeWidgetItem(self.treeWidget_users_down)
-        item_0 = QtWidgets.QTreeWidgetItem(self.treeWidget_users_down)
-        item_0 = QtWidgets.QTreeWidgetItem(self.treeWidget_users_down)
-        item_0 = QtWidgets.QTreeWidgetItem(self.treeWidget_users_down)
-        self.treeWidget_users_down.header().setCascadingSectionResizes(False)
-        self.treeWidget_users_down.header().setSortIndicatorShown(False)
-        self.treeWidget_users_down.header().setStretchLastSection(True)
-        self.verticalLayout_5.addWidget(self.treeWidget_users_down)
+        self.listWidget_users_down.setFont(font)
+        self.listWidget_users_down.setObjectName("listWidget_users_down")
+        item = QtWidgets.QListWidgetItem()
+        item.setCheckState(QtCore.Qt.CheckState.Unchecked)
+        self.listWidget_users_down.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        item.setCheckState(QtCore.Qt.CheckState.Checked)
+        self.listWidget_users_down.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        item.setCheckState(QtCore.Qt.CheckState.Unchecked)
+        self.listWidget_users_down.addItem(item)
+        self.verticalLayout_5.addWidget(self.listWidget_users_down)
         self.verticalLayout_4.addWidget(self.widget_page_users_down)
         self.stackedWidget_main_2.addWidget(self.page_users)
         self.page_home = QtWidgets.QWidget()
@@ -608,7 +618,7 @@ class Ui_MainWindow(object):
         self.scrollArea_page_settings.setWidgetResizable(True)
         self.scrollArea_page_settings.setObjectName("scrollArea_page_settings")
         self.scrollAreaWidgetContents_page_settings = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_page_settings.setGeometry(QtCore.QRect(0, 0, 1119, 612))
+        self.scrollAreaWidgetContents_page_settings.setGeometry(QtCore.QRect(0, 0, 380, 336))
         self.scrollAreaWidgetContents_page_settings.setObjectName("scrollAreaWidgetContents_page_settings")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_page_settings)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
@@ -876,13 +886,15 @@ class Ui_MainWindow(object):
         self.pushButton_page_users_up_refreshUser.setText(_translate("MainWindow", "刷新所选"))
         self.pushButton_page_users_up_deleteUser.setText(_translate("MainWindow", "删除所选"))
         self.label_page_users_up_setChoice.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:16pt;\">多选</span>/<span style=\" font-size:12pt;\">单选</span></p></body></html>"))
-        __sortingEnabled = self.treeWidget_users_down.isSortingEnabled()
-        self.treeWidget_users_down.setSortingEnabled(False)
-        self.treeWidget_users_down.topLevelItem(0).setText(0, _translate("MainWindow", "[微软]dddd"))
-        self.treeWidget_users_down.topLevelItem(1).setText(0, _translate("MainWindow", "[离线]mmm"))
-        self.treeWidget_users_down.topLevelItem(2).setText(0, _translate("MainWindow", "[离线]mmm"))
-        self.treeWidget_users_down.topLevelItem(3).setText(0, _translate("MainWindow", "[离线]mmm"))
-        self.treeWidget_users_down.setSortingEnabled(__sortingEnabled)
+        __sortingEnabled = self.listWidget_users_down.isSortingEnabled()
+        self.listWidget_users_down.setSortingEnabled(False)
+        item = self.listWidget_users_down.item(0)
+        item.setText(_translate("MainWindow", "新建项目"))
+        item = self.listWidget_users_down.item(1)
+        item.setText(_translate("MainWindow", "新建项目"))
+        item = self.listWidget_users_down.item(2)
+        item.setText(_translate("MainWindow", "新建项目"))
+        self.listWidget_users_down.setSortingEnabled(__sortingEnabled)
         self.label_page_settings_h1.setText(_translate("MainWindow", "个性化外观设置"))
         self.label_page_settings_subject_h2.setText(_translate("MainWindow", "主题"))
         self.radioButton_settings_subject_light.setToolTip(_translate("MainWindow", "浅色模式"))

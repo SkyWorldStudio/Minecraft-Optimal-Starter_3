@@ -59,27 +59,27 @@
 #widget_page_users_down{
 	border-image: url(:/Scrub/images/Scrub_B15_FFFFFF-60_Main-User-2.png);
 }
-#treeWidget_users_down{
+#listWidget_users_down{
 	border-radius: 8px;
 	/*border: 1px solid rgb(33, 33, 33);*/
 }
 
 
 
-#treeWidget_users_down::item {
+#listWidget_users_down::item {
     height: 10px;
 	padding: 12px;
 	border-left: 0px solid rgba(214, 214, 214,0);
 	/*border-top: 1px solid rgb(169, 169, 169);*/
 	border-bottom: 1px solid rgb(169, 169, 169);
 }
-#treeWidget_users_down::item:hover {
+#listWidget_users_down::item:hover {
 	background-color: rgba(235, 235, 235,0);
 	border-left: 0px solid rgba(214, 214, 214,0);
 	/*border-top: 1px solid rgb(214, 214, 214);*/
 	border-bottom: 1px solid rgb(214, 214, 214);
 }
-#treeWidget_users_down::item:selected {
+#listWidget_users_down::item:selected {
 	background-color: rgba(235, 235, 235,0);
 	border-left: 0px solid rgba(214, 214, 214,0);
 	/*border-top: 1px solid rgba(214, 214, 214,0);*/
@@ -403,6 +403,19 @@ QTreeWidget::item:selected {
 	color: black;
 	background-color: rgb(235, 235, 235);
 	border-left: 3px solid rgb(0, 150, 255);
+}
+
+QListWidget::item {
+    height: 20px;
+	padding: 8px;
+}
+QListWidget::item:hover {
+	background-color: transparent;
+}
+QListWidget::item:selected {
+	background-color: transparent;
+	color: black;
+	background-color: rgb(235, 235, 235);
 }
 
 *{
@@ -906,56 +919,34 @@ QTreeWidget::item:selected {
                    <number>6</number>
                   </property>
                   <item>
-                   <widget class="QTreeWidget" name="treeWidget_users_down">
+                   <widget class="QListWidget" name="listWidget_users_down">
                     <property name="font">
                      <font>
                       <pointsize>15</pointsize>
                      </font>
                     </property>
-                    <property name="indentation">
-                     <number>0</number>
-                    </property>
-                    <property name="rootIsDecorated">
-                     <bool>true</bool>
-                    </property>
-                    <property name="allColumnsShowFocus">
-                     <bool>false</bool>
-                    </property>
-                    <property name="headerHidden">
-                     <bool>true</bool>
-                    </property>
-                    <attribute name="headerCascadingSectionResizes">
-                     <bool>false</bool>
-                    </attribute>
-                    <attribute name="headerShowSortIndicator" stdset="0">
-                     <bool>false</bool>
-                    </attribute>
-                    <attribute name="headerStretchLastSection">
-                     <bool>true</bool>
-                    </attribute>
-                    <column>
-                     <property name="text">
-                      <string notr="true">1</string>
-                     </property>
-                    </column>
                     <item>
                      <property name="text">
-                      <string>[微软]dddd</string>
+                      <string>新建项目</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
                      </property>
                     </item>
                     <item>
                      <property name="text">
-                      <string>[离线]mmm</string>
+                      <string>新建项目</string>
+                     </property>
+                     <property name="checkState">
+                      <enum>Checked</enum>
                      </property>
                     </item>
                     <item>
                      <property name="text">
-                      <string>[离线]mmm</string>
+                      <string>新建项目</string>
                      </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>[离线]mmm</string>
+                     <property name="checkState">
+                      <enum>Unchecked</enum>
                      </property>
                     </item>
                    </widget>
@@ -995,8 +986,8 @@ QTreeWidget::item:selected {
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>1119</width>
-                    <height>612</height>
+                    <width>380</width>
+                    <height>336</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_2">

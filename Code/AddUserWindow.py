@@ -8,15 +8,20 @@ from Code.MainWindow import Return_Window_XY
 from PyQt6.QtWidgets import QDialog, QGraphicsDropShadowEffect
 
 
-class Dialog_AddUserWindows_(QDialog,Ui_Dialog_AddUserWindows):
-    sinOut_Win_XY = pyqtSignal(int,int)
-    def __init__(self):
+class Dialog_AddUserWindows_(QDialog, Ui_Dialog_AddUserWindows):
+    sinOut_Win_XY = pyqtSignal(int, int)
+    sinOut_OK = pyqtSignal()
+
+    def __init__(self, JsonFile):
         super(Dialog_AddUserWindows_, self).__init__()
         self.setupUi(self)
         self.show()
 
+        self.JsonFile = JsonFile
+
         self.pushButton_bottom_cancel.clicked.connect(self.pushButton_Cancel_Clicked)
         self.pushButton_OffLine_Advanced.clicked.connect(self.pushButton_OffLine_Advanced_Clicked)
+        self.pushButton_bottom_cancel_confirm.clicked.connect(self.pushButton_Confirm_Clicked)
 
         self.OffLine_Advanced_Open = False  # 存储现在 离线登陆中的"高级选项"是否打开
 
@@ -24,7 +29,7 @@ class Dialog_AddUserWindows_(QDialog,Ui_Dialog_AddUserWindows):
         self.effect_shadow = QGraphicsDropShadowEffect(self)
         self.effect_shadow.setOffset(2, 3)  # 偏移 (向右,向下)
         self.effect_shadow.setColor(QColor(121, 121, 121, 200))  # 阴影颜色
-        self.effect_shadow.setBlurRadius(18) # 阴影圆角
+        self.effect_shadow.setBlurRadius(18)  # 阴影圆角
         self.setGraphicsEffect(self.effect_shadow)  # 将设置套用到窗口中
 
     def pushButton_OffLine_Advanced_Clicked(self):
@@ -49,6 +54,28 @@ class Dialog_AddUserWindows_(QDialog,Ui_Dialog_AddUserWindows):
             self.lineEdit_OffLine_Advanced.setEnabled(False)
         self.pushButton_OffLine_Advanced.setIcon(icon)
 
+    def pushButton_Confirm_Clicked(self):
+        """点击登陆按钮"""
+        if self.stackedWidget_main.currentIndex() == 0:
+            # 如果是使用离线登陆
+            User_Name = self.lineEdit_OffLine.text()
+            if self.lineEdit_OffLine.text() != '':
+                from Code.Code import JsonRead, JsonWrite
+                if self.lineEdit_OffLine_Advanced.text() != '':
+                    # 如果填写了 UUID
+                    UUID = self.lineEdit_OffLine_Advanced.text()
+                else:
+                    UUID = None
+                J = JsonRead(self.JsonFile)
+                J['Users'][User_Name] = {
+                    'Manner': 'OffLine',
+                    'User_Name': User_Name,
+                    'UUID': UUID
+                }
+                JsonWrite(J, self.JsonFile)
+        self.sinOut_OK.emit()
+        self.pushButton_Cancel_Clicked()  # 关闭窗口
+
     def pushButton_Cancel_Clicked(self):
         self.clicked_pushButton_close()
 
@@ -65,6 +92,7 @@ class Dialog_AddUserWindows_(QDialog,Ui_Dialog_AddUserWindows):
         self.Is_Drag_ = True
         self.Mouse_Start_Point_ = a0.globalPosition()  # 获得鼠标的初始位置
         self.Window_Start_Point_ = self.frameGeometry().topLeft()  # 获得窗口的初始位置
+
     def mouseMoveEvent(self, a0: QtGui.QMouseEvent):
         # 判断是否在拖拽移动
         if self.Is_Drag_:
@@ -80,7 +108,7 @@ class Dialog_AddUserWindows_(QDialog,Ui_Dialog_AddUserWindows):
             y_c_m = self.Move_Distance.y()
             x = self.Window_Start_Point_.x() + x_c_m
             y = self.Window_Start_Point_.y() + y_c_m
-            self.move(x,y)
+            self.move(x, y)
 
     def mouseReleaseEvent(self, a0: QtGui.QMouseEvent):
         # 放下左键即停止移动
