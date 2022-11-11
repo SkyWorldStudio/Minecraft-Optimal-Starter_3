@@ -132,6 +132,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.pushButton_page_users_up_deleteUser.setText('删除全部')
             self.Json_MOS['UserPage_setChoice'] = 'Choice'
             JsonWrite(self.Json_MOS,self.JsonFile)
+
+
         else:
             # 如果是要设置为多选
             self.UserPage_setChoice = 'Choices'
@@ -141,6 +143,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.pushButton_page_users_up_deleteUser.setText('删除所选')
             self.Json_MOS['UserPage_setChoice'] = 'Choices'
             JsonWrite(self.Json_MOS,self.JsonFile)
+        self.Users_List_Refresh()
 
     def SettingsPage_Background_None_Clicked(self):
         """设置页面 -> 背景设置:选择：无"""
