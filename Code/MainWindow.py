@@ -29,12 +29,34 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.__init__setShadow()
         self.X_Y_ = self.frameGeometry().topLeft()
 
+
         global Win_XY
         Win_XY = self.geometry()
 
     # 左边栏"按钮"被点击后（槽）
     def Back_Clicked(self):
-        self.Sidebar_Clicked(Want='Back')
+        # self.Sidebar_Clicked(Want='Back')
+        try:
+            B = self.H_B[-2]
+            if B['Left'] != False:
+                B_1 = B['Left']
+                if B_1 == 0:
+                    self.Sidebar_Clicked(Want='User')
+                elif B_1 == 1:
+                    self.Sidebar_Clicked(Want='Home')
+                elif B_1 == 2:
+                    self.Sidebar_Clicked(Want='Online')
+                elif B_1 == 3:
+                    self.Sidebar_Clicked(Want='Download')
+                elif B_1 == 4:
+                    self.Sidebar_Clicked(Want='Settings')
+            else:
+                B['Name'].setCurrentIndex(B['Index'])
+            self.H_B.remove(self.H_B[-1])
+            print(self.H_B)
+        except IndexError:
+            pass
+
 
     def User_Clicked(self):
         self.Sidebar_Clicked(Want='User')
@@ -355,15 +377,15 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 if self.Sidebar_Click_I == 'Home':
                     self.label_Sidebar_Home.setPixmap(
                         QtGui.QPixmap(":/Gif_Home/images/Home/" + str(self.label_Sidebar_QTime_Back_N) + ".png"))
-                    print_('Info',":/Gif_Home/images/Home/" + str(self.label_Sidebar_QTime_Back_N) + ".png")
+                    # print_('Info',":/Gif_Home/images/Home/" + str(self.label_Sidebar_QTime_Back_N) + ".png")
                 elif self.Sidebar_Click_I == 'User':
                     self.label_Sidebar_User.setPixmap(
                         QtGui.QPixmap(":/Gif_User/images/User/" + str(self.label_Sidebar_QTime_Back_N) + ".png"))
-                    print_('Info',":/Gif_User/images/User/" + str(self.label_Sidebar_QTime_Back_N) + ".png")
+                    # print_('Info',":/Gif_User/images/User/" + str(self.label_Sidebar_QTime_Back_N) + ".png")
                 elif self.Sidebar_Click_I == 'Online':
                     self.label_Sidebar_OnLine.setPixmap(
                         QtGui.QPixmap(":/Gif_Online/images/Online/" + str(self.label_Sidebar_QTime_Back_N) + ".png"))
-                    print_('Info',":/Gif_Online/images/Online/" + str(self.label_Sidebar_QTime_Back_N) + ".png")
+                    # print_('Info',":/Gif_Online/images/Online/" + str(self.label_Sidebar_QTime_Back_N) + ".png")
                 elif self.Sidebar_Click_I == 'Download':
                     self.label_Sidebar_Download.setPixmap(QtGui.QPixmap(
                         ":/Gif_Download/images/Download/" + str(self.label_Sidebar_QTime_Back_N) + ".png"))
@@ -381,11 +403,11 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 if Want == 'Home':
                     self.label_Sidebar_Home.setStyleSheet(
                         "background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Go_N) + "%);")
-                    print_('Info',"background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Go_N) + "%);")
+                    # print_('Info',"background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Go_N) + "%);")
                 elif Want == 'User':
                     self.label_Sidebar_User.setStyleSheet(
                         "background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Go_N) + "%);")
-                    print_('Info',"background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Go_N) + "%);")
+                    # print_('Info',"background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Go_N) + "%);")
                 elif Want == 'Online':
                     self.label_Sidebar_OnLine.setStyleSheet(
                         "background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Go_N) + "%);")
@@ -410,11 +432,11 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 if self.Sidebar_Click_I == 'Home':
                     self.label_Sidebar_Home.setStyleSheet(
                         "background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Back_N) + "%);")
-                    print_('Info',"background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Back_N) + "%);")
+                    # print_('Info',"background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Back_N) + "%);")
                 elif self.Sidebar_Click_I == 'User':
                     self.label_Sidebar_User.setStyleSheet(
                         "background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Back_N) + "%);")
-                    print_('Info',"background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Back_N) + "%);")
+                    # print_('Info',"background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Back_N) + "%);")
                 elif self.Sidebar_Click_I == 'Online':
                     self.label_Sidebar_OnLine.setStyleSheet(
                         "background-color: rgba(128, 128, 128, " + str(self.label_Sidebar_B_QTime_Back_N) + "%);")
@@ -455,15 +477,15 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.label_Sidebar_B_QTime.timeout.connect(label_Sidebar_B_Go_QTime_)
 
             if Want == 'Home':
-                self.stackedWidget_main_2.setCurrentIndex(1)
+                self.SetCurrentIndex(self.stackedWidget_main_2, 1, 1, False)
             elif Want == 'User':
-                self.stackedWidget_main_2.setCurrentIndex(0)
+                self.SetCurrentIndex(self.stackedWidget_main_2, 0, 0, False)
             elif Want == 'Online':
-                self.stackedWidget_main_2.setCurrentIndex(2)
+                self.SetCurrentIndex(self.stackedWidget_main_2, 2, 2, False)
             elif Want == 'Download':
-                self.stackedWidget_main_2.setCurrentIndex(3)
+                self.SetCurrentIndex(self.stackedWidget_main_2, 3, 3, False)
             elif Want == 'Settings':
-                self.stackedWidget_main_2.setCurrentIndex(4)
+                self.SetCurrentIndex(self.stackedWidget_main_2, 4, 4, False)
 
     def RunInitialize(self, First=True):
         """在启动器启动后初始化启动器(读取设置+设置启动器)"""
@@ -547,6 +569,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.JsonFile = JsonFile()  # 读取Json路径
 
         self.File = File()  # 获取缓存目录
+
+        self.H_B = []
 
         if os.path.isfile(self.JsonFile) == False:
             """如果没有Json这个目录 就转到欢迎(初始化)页面"""
@@ -745,6 +769,24 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 for log_ in logs:
                     f.write(log_)
         Log_Clear()
+
+    def SetCurrentIndex(self,U,I,L=False,H=True):
+        """
+            更改控件的页数，并记录历史
+            参数:
+                U: 要更改的控件
+                I: 要将控件更改为第……页
+                L: 是否需要更改左边边栏显示(False, int)
+                H: 是否记录(True False)
+        """
+        U.setCurrentIndex(I)
+        if H == True:
+            self.H_B.append({
+                "Name": U,
+                "Index": I,
+                "Left": L
+            })
+        print(self.H_B)
 
     def Window_XY(self,X,Y):
         """改变窗口的XY坐标"""
