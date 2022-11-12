@@ -63,6 +63,17 @@
 	border-radius: 8px;
 	/*border: 1px solid rgb(33, 33, 33);*/
 }
+#listWidget_users_down QScrollBar{
+	border-right: 3px solid rgba(0, 150, 255,0);
+}
+#listWidget_users_down QScrollBar:vertical
+{
+    width:12px;
+    background:rgba(0,0,0,0%);
+    margin:0px,0px,0px,0px;
+    padding-top:9px;   /*留出9px给上面和下面的箭头*/
+    padding-bottom:9px;
+}
 
 
 
@@ -111,6 +122,7 @@
 {
 	border-image: url(:/widget_Sidebar/images/Scrub_Settings-Z_B15.png);
 }
+
 
 
 /*
@@ -908,19 +920,19 @@ QListWidget::item:selected {
                  <property name="currentIndex">
                   <number>0</number>
                  </property>
-                 <widget class="QWidget" name="stackedWidget_page_users_downPage1" native="true">
+                 <widget class="QWidget" name="stackedWidget_page_users_downPage1">
                   <layout class="QVBoxLayout" name="verticalLayout_5">
                    <property name="leftMargin">
                     <number>3</number>
                    </property>
                    <property name="topMargin">
-                    <number>0</number>
+                    <number>4</number>
                    </property>
                    <property name="rightMargin">
                     <number>3</number>
                    </property>
                    <property name="bottomMargin">
-                    <number>6</number>
+                    <number>8</number>
                    </property>
                    <item>
                     <widget class="QListWidget" name="listWidget_users_down">
@@ -928,6 +940,24 @@ QListWidget::item:selected {
                       <font>
                        <pointsize>15</pointsize>
                       </font>
+                     </property>
+                     <property name="verticalScrollBarPolicy">
+                      <enum>Qt::ScrollBarAlwaysOn</enum>
+                     </property>
+                     <property name="autoScroll">
+                      <bool>true</bool>
+                     </property>
+                     <property name="showDropIndicator" stdset="0">
+                      <bool>true</bool>
+                     </property>
+                     <property name="dragEnabled">
+                      <bool>false</bool>
+                     </property>
+                     <property name="dragDropOverwriteMode">
+                      <bool>false</bool>
+                     </property>
+                     <property name="selectionMode">
+                      <enum>QAbstractItemView::MultiSelection</enum>
                      </property>
                      <item>
                       <property name="text">
@@ -949,8 +979,75 @@ QListWidget::item:selected {
                       <property name="text">
                        <string>新建项目</string>
                       </property>
-                      <property name="checkState">
-                       <enum>Unchecked</enum>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>新建项目</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>新建项目</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>新建项目</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>新建项目</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>新建项目</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>新建项目</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>新建项目</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>新建项目</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>新建项目</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>新建项目</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>新建项目</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>新建项目</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>新建项目</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>新建项目</string>
                       </property>
                      </item>
                     </widget>

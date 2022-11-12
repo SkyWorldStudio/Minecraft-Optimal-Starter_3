@@ -130,6 +130,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.label_page_users_up_setChoice_icon.setPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_setChoice_Choice.png"))
             self.pushButton_page_users_up_refreshUser.setText('刷新全部')
             self.pushButton_page_users_up_deleteUser.setText('删除全部')
+            self.listWidget_users_down.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.SingleSelection)
             self.Json_MOS['UserPage_setChoice'] = 'Choice'
             JsonWrite(self.Json_MOS,self.JsonFile)
 
@@ -141,10 +142,22 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.label_page_users_up_setChoice_icon.setPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_setChoice_Choices.png"))
             self.pushButton_page_users_up_refreshUser.setText('刷新所选')
             self.pushButton_page_users_up_deleteUser.setText('删除所选')
+            self.listWidget_users_down.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.ExtendedSelection)
             self.Json_MOS['UserPage_setChoice'] = 'Choices'
             JsonWrite(self.Json_MOS,self.JsonFile)
 
         self.Users_List_Refresh()
+
+    def UserPage_Down_ListWidget_Clicked(self):
+        if self.UserPage_setChoice == 'Choices':
+            item = self.listWidget_users_down.currentItem()
+            print(item.text())
+            if str(item.checkState()) == 'CheckState.Checked':
+                # 如果已经选中
+                item.setCheckState(Qt.CheckState.Unchecked)
+            else:
+                item.setCheckState(Qt.CheckState.Checked)
+            self.listWidget_users_down.editItem(item)
 
     def SettingsPage_Background_None_Clicked(self):
         """设置页面 -> 背景设置:选择：无"""
@@ -223,7 +236,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 item.setText(T)
                 if self.Json_MOS['UserPage_setChoice'] == 'Choices':
                     # 如果多选开启
-                    item.setCheckState(Qt.CheckState.Checked)
+                    item.setCheckState(Qt.CheckState.Unchecked)
                 self.listWidget_users_down.addItem(item)
 
             self.label_users_down_loading_.stop()
@@ -660,6 +673,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.widget_page_users_up_setChoice.clicked.connect(self.UserPage_Up_SetChoiceUser)
         self.label_page_users_up_setChoice_icon.clicked.connect(self.UserPage_Up_SetChoiceUser)
         self.label_page_users_up_setChoice.clicked.connect(self.UserPage_Up_SetChoiceUser)
+        self.listWidget_users_down.itemPressed.connect(self.UserPage_Down_ListWidget_Clicked)
 
         # 设置页面
         self.radioButton_settings_background_none.clicked.connect(self.SettingsPage_Background_None_Clicked)
@@ -734,7 +748,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
     def Window_XY(self,X,Y):
         """改变窗口的XY坐标"""
-        self.move(X,Y)
+        self.move(round(X),round(Y))
     def mousePressEvent(self, a0: QtGui.QMouseEvent):
         global Win_XY
         Win_XY = self.geometry()
@@ -748,8 +762,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.Move_Distance = a0.globalPosition() - self.Mouse_Start_Point_
             # 改变窗口的位置
             self.move(
-                self.Window_Start_Point_.x() + self.Move_Distance.x(),
-                self.Window_Start_Point_.y() + self.Move_Distance.y()
+                round(self.Window_Start_Point_.x() + self.Move_Distance.x()),
+                round(self.Window_Start_Point_.y() + self.Move_Distance.y())
             )
 
     def mouseReleaseEvent(self, a0: QtGui.QMouseEvent):

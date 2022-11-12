@@ -101,14 +101,14 @@ class Dialog_AddUserWindows_(QDialog, Ui_Dialog_AddUserWindows):
             # 改变窗口的位置
             Main_XY = Return_Window_XY()
             self.sinOut_Win_XY.emit(
-                Main_XY.x() + self.Move_Distance.x(),
-                Main_XY.y() + self.Move_Distance.y()
+                round(Main_XY.x() + self.Move_Distance.x()),
+                round(Main_XY.y() + self.Move_Distance.y())
             )
             x_c_m = self.Move_Distance.x()
             y_c_m = self.Move_Distance.y()
             x = self.Window_Start_Point_.x() + x_c_m
             y = self.Window_Start_Point_.y() + y_c_m
-            self.move(x, y)
+            self.move(round(x), round(y))
 
     def mouseReleaseEvent(self, a0: QtGui.QMouseEvent):
         # 放下左键即停止移动

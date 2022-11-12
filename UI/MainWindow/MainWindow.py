@@ -61,6 +61,17 @@ class Ui_MainWindow(object):
 "    border-radius: 8px;\n"
 "    /*border: 1px solid rgb(33, 33, 33);*/\n"
 "}\n"
+"#listWidget_users_down QScrollBar{\n"
+"    border-right: 3px solid rgba(0, 150, 255,0);\n"
+"}\n"
+"#listWidget_users_down QScrollBar:vertical\n"
+"{\n"
+"    width:12px;\n"
+"    background:rgba(0,0,0,0%);\n"
+"    margin:0px,0px,0px,0px;\n"
+"    padding-top:9px;   /*留出9px给上面和下面的箭头*/\n"
+"    padding-bottom:9px;\n"
+"}\n"
 "\n"
 "\n"
 "\n"
@@ -109,6 +120,7 @@ class Ui_MainWindow(object):
 "{\n"
 "    border-image: url(:/widget_Sidebar/images/Scrub_Settings-Z_B15.png);\n"
 "}\n"
+"\n"
 "\n"
 "\n"
 "/*\n"
@@ -582,12 +594,18 @@ class Ui_MainWindow(object):
         self.stackedWidget_page_users_downPage1 = QtWidgets.QWidget()
         self.stackedWidget_page_users_downPage1.setObjectName("stackedWidget_page_users_downPage1")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.stackedWidget_page_users_downPage1)
-        self.verticalLayout_5.setContentsMargins(3, 0, 3, 6)
+        self.verticalLayout_5.setContentsMargins(3, 4, 3, 8)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.listWidget_users_down = QtWidgets.QListWidget(self.stackedWidget_page_users_downPage1)
         font = QtGui.QFont()
         font.setPointSize(15)
         self.listWidget_users_down.setFont(font)
+        self.listWidget_users_down.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
+        self.listWidget_users_down.setAutoScroll(True)
+        self.listWidget_users_down.setProperty("showDropIndicator", True)
+        self.listWidget_users_down.setDragEnabled(False)
+        self.listWidget_users_down.setDragDropOverwriteMode(False)
+        self.listWidget_users_down.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.MultiSelection)
         self.listWidget_users_down.setObjectName("listWidget_users_down")
         item = QtWidgets.QListWidgetItem()
         item.setCheckState(QtCore.Qt.CheckState.Unchecked)
@@ -596,7 +614,34 @@ class Ui_MainWindow(object):
         item.setCheckState(QtCore.Qt.CheckState.Checked)
         self.listWidget_users_down.addItem(item)
         item = QtWidgets.QListWidgetItem()
-        item.setCheckState(QtCore.Qt.CheckState.Unchecked)
+        self.listWidget_users_down.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_users_down.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_users_down.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_users_down.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_users_down.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_users_down.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_users_down.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_users_down.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_users_down.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_users_down.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_users_down.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_users_down.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_users_down.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_users_down.addItem(item)
+        item = QtWidgets.QListWidgetItem()
         self.listWidget_users_down.addItem(item)
         self.verticalLayout_5.addWidget(self.listWidget_users_down)
         self.stackedWidget_page_users_down.addWidget(self.stackedWidget_page_users_downPage1)
@@ -921,6 +966,34 @@ class Ui_MainWindow(object):
         item = self.listWidget_users_down.item(1)
         item.setText(_translate("MainWindow", "新建项目"))
         item = self.listWidget_users_down.item(2)
+        item.setText(_translate("MainWindow", "新建项目"))
+        item = self.listWidget_users_down.item(3)
+        item.setText(_translate("MainWindow", "新建项目"))
+        item = self.listWidget_users_down.item(4)
+        item.setText(_translate("MainWindow", "新建项目"))
+        item = self.listWidget_users_down.item(5)
+        item.setText(_translate("MainWindow", "新建项目"))
+        item = self.listWidget_users_down.item(6)
+        item.setText(_translate("MainWindow", "新建项目"))
+        item = self.listWidget_users_down.item(7)
+        item.setText(_translate("MainWindow", "新建项目"))
+        item = self.listWidget_users_down.item(8)
+        item.setText(_translate("MainWindow", "新建项目"))
+        item = self.listWidget_users_down.item(9)
+        item.setText(_translate("MainWindow", "新建项目"))
+        item = self.listWidget_users_down.item(10)
+        item.setText(_translate("MainWindow", "新建项目"))
+        item = self.listWidget_users_down.item(11)
+        item.setText(_translate("MainWindow", "新建项目"))
+        item = self.listWidget_users_down.item(12)
+        item.setText(_translate("MainWindow", "新建项目"))
+        item = self.listWidget_users_down.item(13)
+        item.setText(_translate("MainWindow", "新建项目"))
+        item = self.listWidget_users_down.item(14)
+        item.setText(_translate("MainWindow", "新建项目"))
+        item = self.listWidget_users_down.item(15)
+        item.setText(_translate("MainWindow", "新建项目"))
+        item = self.listWidget_users_down.item(16)
         item.setText(_translate("MainWindow", "新建项目"))
         self.listWidget_users_down.setSortingEnabled(__sortingEnabled)
         self.label_users_down_none.setText(_translate("MainWindow", "没有在您电脑中读取到任何账户数据。您可以点击“添加”按钮来进行添加"))
