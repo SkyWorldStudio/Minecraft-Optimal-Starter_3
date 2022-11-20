@@ -75,8 +75,6 @@
     padding-bottom:9px;
 }
 
-
-
 #listWidget_users_down::item {
     height: 10px;
 	padding: 12px;
@@ -117,10 +115,41 @@
 	background-color: rgb(115, 253, 255);
 }
 
+/*主页*/
+/*       游戏管理(列表)页面*/
+#page_home_game &gt; Line{
+	background-color: rgb(166, 166, 166);
+	border:none;
+}
+#widget_page_home_game_left{
+	border-image: url(:/widget_Sidebar/images/Scrub_Settings-Z_B15.png);
+	border-radius: 10px;
+}
+#widget_page_home_game_left &gt; QPushButton{
+	border-style:none;
+}
+#widget_page_home_game_left &gt; QPushButton:hover{
+	background-color: rgba(240, 240, 240, 191);
+}
+#widget_page_home_game_left &gt; QPushButton:pressed{
+	background-color: rgba(42, 130, 228, 24);
+}
+
+#listWidget_page_home_game_left::item{
+	border-left: 2px solid rgba(42, 130, 228,0);
+}
+#listWidget_page_home_game_left::item:hover{
+	background-color: rgba(240, 240, 240, 191);
+}
+#listWidget_page_home_game_left::item:selected{
+	border-left: 2px solid rgb(42, 130, 228);
+	background-color: rgba(42, 130, 255, 26);
+}
+
 /*设置页面*/
 #scrollAreaWidgetContents_page_settings &gt; QWidget
 {
-	border-image: url(:/widget_Sidebar/images/Scrub_Settings-Z_B15.png);
+	border-image: url(:/Scrub/images/Scrub_B15_FFFFFF-60_Main-User.png);
 }
 
 
@@ -918,7 +947,7 @@ QListWidget::item:selected {
                <item>
                 <widget class="QStackedWidget" name="stackedWidget_page_users_down">
                  <property name="currentIndex">
-                  <number>0</number>
+                  <number>1</number>
                  </property>
                  <widget class="QWidget" name="stackedWidget_page_users_downPage1">
                   <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1097,7 +1126,327 @@ QListWidget::item:selected {
                </item>
               </layout>
              </widget>
-             <widget class="QWidget" name="page_home"/>
+             <widget class="QWidget" name="page_home">
+              <layout class="QHBoxLayout" name="horizontalLayout_6">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QStackedWidget" name="stackedWidget_page_home">
+                 <widget class="QWidget" name="page_home_main">
+                  <layout class="QHBoxLayout" name="horizontalLayout_9">
+                   <item>
+                    <widget class="QPushButton" name="pushButton_page_home_main_game_list">
+                     <property name="text">
+                      <string>游戏列表</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                 <widget class="QWidget" name="page_home_game">
+                  <layout class="QHBoxLayout" name="horizontalLayout_7">
+                   <property name="spacing">
+                    <number>5</number>
+                   </property>
+                   <property name="leftMargin">
+                    <number>13</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>10</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>13</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>10</number>
+                   </property>
+                   <item>
+                    <widget class="QWidget" name="widget_page_home_game_left" native="true">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>155</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>165</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_8">
+                      <property name="spacing">
+                       <number>4</number>
+                      </property>
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>10</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>10</number>
+                      </property>
+                      <item>
+                       <widget class="QListWidget" name="listWidget_page_home_game_left">
+                        <item>
+                         <property name="text">
+                          <string>新建项目</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>新建项目</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>新建项目</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>新建项目</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>新建项目</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>新建项目</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>新建项目</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>新建项目</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>新建项目</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>新建项目</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>新建项目</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>新建项目</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>新建项目</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>新建项目</string>
+                         </property>
+                        </item>
+                       </widget>
+                      </item>
+                      <item>
+                       <spacer name="verticalSpacer_9">
+                        <property name="orientation">
+                         <enum>Qt::Vertical</enum>
+                        </property>
+                        <property name="sizeType">
+                         <enum>QSizePolicy::Minimum</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>20</width>
+                          <height>10</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="pushButton_page_home_file_leftrefresh">
+                        <property name="minimumSize">
+                         <size>
+                          <width>0</width>
+                          <height>32</height>
+                         </size>
+                        </property>
+                        <property name="text">
+                         <string>刷新                   </string>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="img.qrc">
+                          <normaloff>:/widget_Sidebar/images/User_Page_Refresh.png</normaloff>:/widget_Sidebar/images/User_Page_Refresh.png</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>22</width>
+                          <height>22</height>
+                         </size>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="pushButton_page_home_game_add">
+                        <property name="minimumSize">
+                         <size>
+                          <width>0</width>
+                          <height>32</height>
+                         </size>
+                        </property>
+                        <property name="text">
+                         <string>安装游戏           </string>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="img.qrc">
+                          <normaloff>:/widget_Sidebar/images/Game_Add.png</normaloff>:/widget_Sidebar/images/Game_Add.png</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>20</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="pushButton_page_home_file_add">
+                        <property name="minimumSize">
+                         <size>
+                          <width>0</width>
+                          <height>32</height>
+                         </size>
+                        </property>
+                        <property name="text">
+                         <string>添加游戏文件夹</string>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="img.qrc">
+                          <normaloff>:/widget_Sidebar/images/Game_File_Add.png</normaloff>:/widget_Sidebar/images/Game_File_Add.png</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>24</width>
+                          <height>24</height>
+                         </size>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="pushButton_page_home_game_settings">
+                        <property name="minimumSize">
+                         <size>
+                          <width>0</width>
+                          <height>32</height>
+                         </size>
+                        </property>
+                        <property name="text">
+                         <string>游戏文件夹设置</string>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="img.qrc">
+                          <normaloff>:/widget_Sidebar/images/Game_File_Settings.png</normaloff>:/widget_Sidebar/images/Game_File_Settings.png</iconset>
+                        </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>20</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="Line" name="line_2">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QWidget" name="widget_2" native="true">
+                     <layout class="QHBoxLayout" name="horizontalLayout_8">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <widget class="QListWidget" name="listWidget_2">
+                        <item>
+                         <property name="text">
+                          <string>新建项目</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>新建项目</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>新建项目</string>
+                         </property>
+                        </item>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </widget>
+               </item>
+              </layout>
+             </widget>
              <widget class="QWidget" name="page_online"/>
              <widget class="QWidget" name="page_download"/>
              <widget class="QWidget" name="page_settings">

@@ -60,21 +60,16 @@ class Dialog_AddUserWindows_(QDialog, Ui_Dialog_AddUserWindows):
             # 如果是使用离线登陆
             User_Name = self.lineEdit_OffLine.text()
             if self.lineEdit_OffLine.text() != '':
-                from Code.Code import JsonRead, JsonWrite
+                from Code.Users import UserAdd
                 if self.lineEdit_OffLine_Advanced.text() != '':
                     # 如果填写了 UUID
                     UUID = self.lineEdit_OffLine_Advanced.text()
                 else:
                     UUID = None
-                J = JsonRead(self.JsonFile)
-                J['Users'][User_Name] = {
-                    'Manner': 'OffLine',
-                    'User_Name': User_Name,
-                    'UUID': UUID
-                }
-                JsonWrite(J, self.JsonFile)
-        self.sinOut_OK.emit()
-        self.pushButton_Cancel_Clicked()  # 关闭窗口
+                R = UserAdd(self.JsonFile).UserAdd_OffLine(User_Name,UUID)
+                if R == 'OK':
+                    self.sinOut_OK.emit()
+                    self.pushButton_Cancel_Clicked()  # 关闭窗口
 
     def pushButton_Cancel_Clicked(self):
         self.clicked_pushButton_close()

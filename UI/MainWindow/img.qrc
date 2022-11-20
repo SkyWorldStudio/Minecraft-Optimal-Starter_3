@@ -1,6 +1,9 @@
 <RCC>
   <qresource prefix="widget_Sidebar">
+    <file>../../images/Game_File_Settings.png</file>
     <file>../../images/Scrub_B15_FFFFFF-60_Main-User.svg</file>
+    <file>../../images/Game_Add.png</file>
+    <file>../../images/Game_File_Add.png</file>
     <file>../../images/TriangleUp.png</file>
     <file>../../images/TriangleUpsideDown.png</file>
     <file>../../images/User_Page_Add-pressed.png</file>

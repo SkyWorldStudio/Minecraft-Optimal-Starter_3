@@ -37,23 +37,50 @@ class RunUi(QMainWindow, Ui_MainWindow):
     def Back_Clicked(self):
         # self.Sidebar_Clicked(Want='Back')
         try:
-            B = self.H_B[-2]
-            if B['Left'] != False:
-                B_1 = B['Left']
-                if B_1 == 0:
-                    self.Sidebar_Clicked(Want='User')
-                elif B_1 == 1:
-                    self.Sidebar_Clicked(Want='Home')
-                elif B_1 == 2:
-                    self.Sidebar_Clicked(Want='Online')
-                elif B_1 == 3:
-                    self.Sidebar_Clicked(Want='Download')
-                elif B_1 == 4:
-                    self.Sidebar_Clicked(Want='Settings')
-            else:
-                B['Name'].setCurrentIndex(B['Index'])
-            self.H_B.remove(self.H_B[-1])
-            print(self.H_B)
+            if self.label_Sidebar_QTime_Ok and self.label_Sidebar_B_QTime_Ok:
+                if len(self.H_B) > 2:
+                    B = self.H_B[-1]
+                    if B['Left'] != False:
+                        B_1 = B['Index_L']
+                        if B_1 == 0:
+                            self.Sidebar_Clicked(Want='User', H=False)
+                        elif B_1 == 1:
+                            self.Sidebar_Clicked(Want='Home', H=False)
+                        elif B_1 == 2:
+                            self.Sidebar_Clicked(Want='Online', H=False)
+                        elif B_1 == 3:
+                            self.Sidebar_Clicked(Want='Download', H=False)
+                        elif B_1 == 4:
+                            self.Sidebar_Clicked(Want='Settings', H=False)
+                    if B['Name'] != False:
+                        B_1 = B['Index_L']
+                        if B_1 == 0:
+                            self.Sidebar_Clicked(Want='User', H=False)
+                        elif B_1 == 1:
+                            self.Sidebar_Clicked(Want='Home', H=False)
+                        elif B_1 == 2:
+                            self.Sidebar_Clicked(Want='Online', H=False)
+                        elif B_1 == 3:
+                            self.Sidebar_Clicked(Want='Download', H=False)
+                        elif B_1 == 4:
+                            self.Sidebar_Clicked(Want='Settings', H=False)
+                        B['Name'].setCurrentIndex(B['Index_L'])
+                    # B['Name'].setCurrentIndex(B['Index_L'])
+                    self.H_B.remove(self.H_B[-1])
+
+                elif len(self.H_B) == 2:
+                    B = self.H_B[-1]
+                    B_1 = B['Index_L']
+                    if B['Name'] != False:
+                        B['Name'].setCurrentIndex(B['Index_L'])
+                    self.Sidebar_Clicked(Want='Home', H=False)
+                    self.H_B.remove(self.H_B[-1])
+
+                print(self.H_B)
+
+                if len(self.H_B) == 1:
+                    self.label_Sidebar_Back.setEnabled(False)
+
         except IndexError:
             pass
 
@@ -181,6 +208,10 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 item.setCheckState(Qt.CheckState.Checked)
             self.listWidget_users_down.editItem(item)
 
+    def MainPage_Mame_List(self):
+        """主页 -> 查看游戏列表"""
+        self.SetCurrentIndex(self.stackedWidget_page_home, 1, 1, True)
+
     def SettingsPage_Background_None_Clicked(self):
         """设置页面 -> 背景设置:选择：无"""
         self.MainWinowMainBackground(None)
@@ -286,10 +317,11 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
 
 
-    def Sidebar_Clicked(self, Want=None):
+    def Sidebar_Clicked(self, Want=None, H=True):
         """
             用户点击左边栏按钮后…\n
-            Want: 被点击的"按钮"
+            Want: 被点击的"按钮" \n
+            H: 是否记录历史(True, False)
         """
 
         def Go():
@@ -369,6 +401,10 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 self.label_Sidebar_QTime_Ok = True
                 IfOk()
                 self.label_Sidebar_QTime.stop()
+                if len(self.H_B) > 1:
+                    self.label_Sidebar_Back.setEnabled(True)
+                else:
+                    self.label_Sidebar_Back.setEnabled(False)
 
         def label_Sidebar_Back_QTime_():
             if self.label_Sidebar_QTime_Back_N <= self.label_Sidebar_QTime_Back_Stop:
@@ -458,6 +494,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         print_('Info',"用户点击左边栏按钮")
 
         if self.Sidebar_Click_Ok:
+            self.label_Sidebar_Back.setEnabled(False)
             Go()
             self.Sidebar_Click_Ok = False
             self.Sidebar_Click_ = str(Want)
@@ -477,15 +514,16 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.label_Sidebar_B_QTime.timeout.connect(label_Sidebar_B_Go_QTime_)
 
             if Want == 'Home':
-                self.SetCurrentIndex(self.stackedWidget_main_2, 1, 1, False)
+                self.SetCurrentIndex(False, 1, 1, H)
             elif Want == 'User':
-                self.SetCurrentIndex(self.stackedWidget_main_2, 0, 0, False)
+                self.SetCurrentIndex(False, 0, 0, H)
             elif Want == 'Online':
-                self.SetCurrentIndex(self.stackedWidget_main_2, 2, 2, False)
+                self.SetCurrentIndex(False, 2, 2, H)
             elif Want == 'Download':
-                self.SetCurrentIndex(self.stackedWidget_main_2, 3, 3, False)
+                self.SetCurrentIndex(False, 3, 3, H)
             elif Want == 'Settings':
-                self.SetCurrentIndex(self.stackedWidget_main_2, 4, 4, False)
+                self.SetCurrentIndex(False, 4, 4, H)
+
 
     def RunInitialize(self, First=True):
         """在启动器启动后初始化启动器(读取设置+设置启动器)"""
@@ -699,6 +737,11 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.label_page_users_up_setChoice.clicked.connect(self.UserPage_Up_SetChoiceUser)
         self.listWidget_users_down.itemPressed.connect(self.UserPage_Down_ListWidget_Clicked)
 
+        # 主页
+        self.pushButton_page_home_main_game_list.clicked.connect(self.MainPage_Mame_List)
+        # ---> 游戏列表
+
+
         # 设置页面
         self.radioButton_settings_background_none.clicked.connect(self.SettingsPage_Background_None_Clicked)
         self.radioButton_settings_background_1.clicked.connect(self.SettingsPage_Background_1_Clicked)
@@ -774,18 +817,32 @@ class RunUi(QMainWindow, Ui_MainWindow):
         """
             更改控件的页数，并记录历史
             参数:
-                U: 要更改的控件
-                I: 要将控件更改为第……页
-                L: 是否需要更改左边边栏显示(False, int)
+                U: 要更改的控件(如果为左边栏请传入False) \n
+                I: 要将控件更改为第……页 \n
+                L: 是否需要更改左边边栏显示(False, 如果更改->int) \n
                 H: 是否记录(True False)
         """
-        U.setCurrentIndex(I)
-        if H == True:
+        if H == True and U == False:
             self.H_B.append({
-                "Name": U,
-                "Index": I,
-                "Left": L
+                "Name": U,  # 控件名
+                "Index_L": int(self.stackedWidget_main_2.currentIndex()),  # 原来页码
+                "Left": L  # 是否更改左边 如果改 值为改为多少 如果不改 值为False
             })
+            self.stackedWidget_main_2.setCurrentIndex(I)
+        elif H == True and U != False:
+            self.H_B.append({
+                "Name": U,  # 控件名
+                "Index": I,  # 页码
+                "Index_L": int(U.currentIndex()),  # 原来页码
+                "Left": L,  # 是否更改左边 如果改 值为改为多少 如果不改 值为False
+                "Left_L": int(self.stackedWidget_main_2.currentIndex())  # 原来左边页码
+            })
+            self.stackedWidget_main_2.setCurrentIndex(L)
+            U.setCurrentIndex(I)
+        if len(self.H_B) > 1 and self.label_Sidebar_QTime_Ok and self.label_Sidebar_B_QTime_Ok:
+            self.label_Sidebar_Back.setEnabled(True)
+        else:
+            self.label_Sidebar_Back.setEnabled(False)
         print(self.H_B)
 
     def Window_XY(self,X,Y):
