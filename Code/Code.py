@@ -2,6 +2,7 @@
 import json
 import os
 from sys import platform
+from .Log import print_
 
 
 def JsonRead(JsonFile):
@@ -25,6 +26,7 @@ def JsonWrite(Json_, JsonFile):
     """写入Json"""
     with open(JsonFile, 'w+', encoding='utf_8') as f:
         json.dump(Json_, f, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
+    print_('Info',str('写入Json(启动器配置Json)  内容:\n') + str(Json_))
 
 
 def Json_Cheak(JsonFile):

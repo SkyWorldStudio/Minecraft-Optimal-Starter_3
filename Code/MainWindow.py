@@ -23,7 +23,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         # self.setWindowFlags(Qt.WindowType.MacWindowToolBarButtonHint)
         self.show()
 
-        print_('Info', "已成功显示窗体")
+        print_('Info', "程序启动(UI显示): 已成功显示窗体")
         self.__init__setAll()
         self.__init__setToolTipDuration()
         self.__init__setShadow()
@@ -36,6 +36,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
     def Back_Clicked(self):
         # self.Sidebar_Clicked(Want='Back')
         try:
+            print_('Info', '返回系统: 开始返回上一个')
             if self.label_Sidebar_QTime_Ok and self.label_Sidebar_B_QTime_Ok:
                 if len(self.H_B) > 2:
                     B = self.H_B[-1]
@@ -65,6 +66,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
                             self.Sidebar_Clicked(Want='Settings', H=False)
                         B['Name'].setCurrentIndex(B['Index_L'])
                     # B['Name'].setCurrentIndex(B['Index_L'])
+                    print_('Info', '返回系统: 返回完成 本次执行配置值: ' + str(self.H_B[-1]))
                     self.H_B.remove(self.H_B[-1])
 
                 elif len(self.H_B) == 2:
@@ -73,12 +75,14 @@ class RunUi(QMainWindow, Ui_MainWindow):
                     if B['Name'] != False:
                         B['Name'].setCurrentIndex(B['Index_L'])
                     self.Sidebar_Clicked(Want='Home', H=False)
+                    print_('Info', '返回系统: 返回完成 本次执行配置值: ' + str(self.H_B[-1]))
                     self.H_B.remove(self.H_B[-1])
 
                 print(self.H_B)
 
                 if len(self.H_B) == 1:
                     self.label_Sidebar_Back.setEnabled(False)
+                    print_('Info', '返回系统: 返回失败, 无需返回 已将按钮改为禁用')
 
         except IndexError:
             pass
@@ -166,9 +170,12 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.pushButton_page_users_up_deleteUser.setIcon(icon2)
 
     def UserPage_Up_SetChoiceUser(self):
+        """账户页 -> 账户列表设置 -> 单/多选"""
         if self.UserPage_setChoice == 'Choice':
+            print_('Info', '用户点击: 账户页 -> 账户列表设置 -> 单/多选:设置为多选状态')
             self.UserPage_Up_SetChoiceUser_Set('Choices')
         else:
+            print_('Info', '用户点击: 账户页 -> 账户列表设置 -> 单/多选:设置为单选状态')
             self.UserPage_Up_SetChoiceUser_Set('Choice')
 
     def UserPage_Up_SetChoiceUser_Set(self, a):
@@ -189,7 +196,6 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.Json_MOS['UserPage_setChoice'] = 'Choice'
             JsonWrite(self.Json_MOS, self.JsonFile)
 
-
         else:
             # 如果是要设置为多选
             self.UserPage_setChoice = 'Choices'
@@ -206,6 +212,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.Users_List_Refresh()
 
     def UserPage_Down_ListWidget_Clicked(self):
+        """账户页 -> 账户列表:选择项目"""
+        print_('Info', '用户点击: 账户页 -> 账户列表:选择项目')
         if self.UserPage_setChoice == 'Choices':
             item = self.listWidget_users_down.currentItem()
             print(item.text())
@@ -219,10 +227,12 @@ class RunUi(QMainWindow, Ui_MainWindow):
     def MainPage_Mame_List(self):
         """主页 -> 查看游戏列表"""
         self.SetCurrentIndex(self.stackedWidget_page_home, 1, 1, True)
+        print_('Info', '用户点击: 主页 -> 查看游戏列表')
 
     def MainPage_Mame_List_GameFileAdd(self):
         """主页 -> 查看游戏列表 -> 添加游戏文件夹"""
         self.SetCurrentIndex(self.stackedWidget_page_home, 2, 1, True)
+        print_('Info', '用户点击: 主页 -> 查看游戏列表 -> 添加游戏文件夹')
         self.MainPage_Mame_List_GameFileAdd_Add()
 
     def MainPage_Mame_List_GameFileAdd_Add(self):
@@ -235,55 +245,78 @@ class RunUi(QMainWindow, Ui_MainWindow):
         dir = QFileDialog()
         dir.setFileMode(QFileDialog.FileMode.Directory)
         dir.setDirectory(self.File_Parent)
-
+        print_('Info', '用户点击: 主页 -> 查看游戏列表 -> 添加游戏文件夹 -> 选择窗口:弹出')
         icon = QIcon()
-
         if dir.exec():
             F = dir.selectedFiles()  # 选择的路径
+            print_('Info', '用户点击: 主页 -> 查看游戏列表 -> 添加游戏文件夹 -> 选择目录: ' + str(F[0]))
             self.label_home_game_file_add_file_2.setText(str(F[0]))
             icon.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/Main_Page_GameFile_AddAgain.png"),
                            QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         else:
+            print_('Info', '用户点击: 主页 -> 查看游戏列表 -> 添加游戏文件夹 -> 选择窗口:弹出 -> 取消')
             self.pushButton_game_file_add_again.setText('选择文件夹')
             icon.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_Add.png"),
                             QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton_game_file_add_again.setIcon(icon)
 
+    def MainPage_Mame_List_GameFileAdd_TextChanged(self):
+        """主页 -> 查看游戏列表 -> 添加游戏文件夹 -> 名称:填写"""
+        if self.lineEdit_game_file_add.styleSheet() == "border:2px solid rgb(255, 47, 146);":
+            self.lineEdit_game_file_add.setStyleSheet("")
+
+    def MainPage_Mame_List_GameFileAdd_OK(self):
+        """主页 -> 查看游戏列表 -> 添加游戏文件夹 -> 确定(保存)"""
+        print_('Info', '用户点击: 主页 -> 查看游戏列表 -> 添加游戏文件夹 -> 确定(保存)')
+        if self.lineEdit_game_file_add.text()  == '':
+            self.lineEdit_game_file_add.setStyleSheet("border:2px solid rgb(255, 47, 146);")
+        else:
+            pass
+
     def MainPage_Mame_List_GameFileAdd_Cancel(self):
         """主页 -> 查看游戏列表 -> 添加游戏文件夹 -> 取消"""
         self.stackedWidget_page_home.setCurrentIndex(0)
+        print_('Info','用户点击: 主页 -> 查看游戏列表 -> 添加游戏文件夹 -> 取消')
 
     def SettingsPage_Background_None_Clicked(self):
         """设置页面 -> 背景设置:选择：无"""
         self.MainWinowMainBackground(None)
+        print_('Info', '用户点击: 设置页面 -> 背景设置:选择：无')
 
     def SettingsPage_Background_1_Clicked(self):
         """设置页面 -> 背景设置:选择：1(清爽橙黄)"""
         self.MainWinowMainBackground(1)
+        print_('Info', '用户点击: 设置页面 -> 背景设置:选择：1(清爽橙黄)')
 
     def SettingsPage_Background_2_Clicked(self):
         """设置页面 -> 背景设置:选择：2(梦幻浅蓝)"""
         self.MainWinowMainBackground(2)
+        print_('Info', '用户点击: 设置页面 -> 背景设置:选择：2(梦幻浅蓝)')
 
     def SettingsPage_Background_3_Clicked(self):
         """设置页面 -> 背景设置:选择：3(梦幻浅红)"""
         self.MainWinowMainBackground(3)
+        print_('Info', '用户点击: 设置页面 -> 背景设置:选择：3(梦幻浅红)')
 
     def SettingsPage_Background_4_Clicked(self):
         """设置页面 -> 背景设置:选择：4(三彩斑斓)"""
         self.MainWinowMainBackground(4)
+        print_('Info', '用户点击: 设置页面 -> 背景设置:选择：4(三彩斑斓)')
 
     def SettingsPage_Background_5_Clicked(self):
         """设置页面 -> 背景设置:选择：5(蓝白相照)"""
         self.MainWinowMainBackground(5)
+        print_('Info', '用户点击: 设置页面 -> 背景设置:选择：5(蓝白相照)')
 
     def SettingsPage_Background_6_Clicked(self):
         """设置页面 -> 背景设置:选择：6(深蓝天空)"""
         self.MainWinowMainBackground(6)
+        print_('Info', '用户点击: 设置页面 -> 背景设置:选择：6(深蓝天空)')
 
     def SettingsPage_Background_7_Clicked(self):
         """设置页面 -> 背景设置:选择：7(粉色迷雾)"""
         self.MainWinowMainBackground(7)
+        print_('Info', '用户点击: 设置页面 -> 背景设置:选择：7(粉色迷雾)')
 
     def SettingsPage_Sidebar_horizontalSlider(self):
         """设置页面 -> 左边栏动画设置 -> 滑动控件: 拖动"""
@@ -294,10 +327,13 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
     def SettingsPage_Sidebar_horizontalSlider_sliderReleased(self):
         """设置页面 -> 左边栏动画设置 -> 滑动控件: 拖动抬起后"""
-        self.Json_MOS['Sidebar_Sidebar_Time'] = self.horizontalSlider_page_settings_sidebar.value()
+        v = self.horizontalSlider_page_settings_sidebar.value()
+        self.Json_MOS['Sidebar_Sidebar_Time'] = v
+        print_('Info', '用户点击: 设置页面 -> 左边栏动画设置 -> 滑动控件: 拖动抬起/旋转数字输入框    左边栏动画设置值为: ' + str(v))
         JsonWrite(self.Json_MOS, self.JsonFile)
 
     def SettingsPage_Sidebar_spinBox(self):
+        """设置页面 -> 左边栏动画设置 -> 旋转数字输入框"""
         i = self.spinBox_page_settings_sidebar.value()
         self.horizontalSlider_page_settings_sidebar.setValue(i)
         i_2 = i * 30
@@ -308,7 +344,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.Users_List_Refresh()
 
     def Users_List_Refresh(self):
-        """读取账户列表并写入"""
+        """读取账户列表并反馈在控件上"""
+        print_('Info', '账户: 刷新账户列表')
         self.Json_MOS = JsonRead(self.JsonFile)  # 重新读取
         U = self.Json_MOS['Users']
         I = -1
@@ -338,6 +375,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.stackedWidget_page_users_down.setCurrentIndex(0)
         else:
             self.stackedWidget_page_users_down.setCurrentIndex(2)
+        print_('Info', '账户: 刷新账户列表完成')
 
     def MainWinowMainBackground(self, Want, _init_=False):
         """主窗口背景"""
@@ -533,7 +571,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 self.Sidebar_Click_I = False  # 正在变回去的
                 self.Sidebar_Click_C = str(Want)  # 彻底完成后……
 
-        print_('Info', "用户点击左边栏按钮")
+        print_('Info', '用户点击: 左边栏按钮 -> ' + str(Want))
 
         if self.Sidebar_Click_Ok:
             self.label_Sidebar_Back.setEnabled(False)
@@ -574,17 +612,17 @@ class RunUi(QMainWindow, Ui_MainWindow):
             # 导入
             # 读取阶段(读取配置等)
             self.Systeam = Systeam()
-            print_('Info', '系统：' + self.Systeam)
+            print_('Info', '系统检测: 系统：' + self.Systeam)
             self.Json_MOS = JsonRead(self.JsonFile)
-            print_('Info', 'Json读取完成')
+            print_('Info', '程序启动(初始化设置): Json读取完成')
             C = Json_Cheak(self.JsonFile)
             if C:
                 # 如果返回为True(已补全文件)
                 self.Json_MOS = JsonRead(self.JsonFile)
-                print_('Info', 'Json不完整, 以补全')
+                print_('Info', '程序启动(初始化设置:Json检查): Json不完整, 以补全')
             else:
-                print_('Info', 'Json完整')
-            print_('Info', 'Json验证完成')
+                print_('Info', '程序启动(初始化设置:Json检查): Json完整')
+            print_('Info', '程序启动(初始化设置:Json检查): Json验证完成')
             self.label_loading_text_2.setText('正在设置启动器(4/6)')
             # 设置阶段
             if self.Systeam != 'Mac':
@@ -607,7 +645,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 self.pushButton_page_users_up_refreshUser.setText('刷新全部')
                 self.pushButton_page_users_up_deleteUser.setText('删除全部')
 
-            print_('Info', '设置背景……')
+            print_('Info', '程序启动(初始化设置): 设置背景……')
             self.label_loading_text_2.setText('正在设置启动器(5/6)')
 
             if self.Json_MOS['BackGround'] == False:
@@ -634,7 +672,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.RunInitialize_.stop()
 
         # 引用阶段
-        print_('Info', '引入库')
+        print_('Info', '程序启动(初始化设置): 引入库')
         self.label_loading_text_2.setText('正在设置启动器(2/6)')
         import UI.Gif_rc
         import pytz
@@ -660,11 +698,11 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.label_loading_text_2.setText('正在设置启动器(3/6)')
             Settings_()
 
-            print_('Info', '读取用户账户')
+            print_('Info', '程序启动(初始化设置): 读取用户账户')
             self.label_loading_text_2.setText('正在设置启动器(6/6)')
             self.Users_List_Refresh()
 
-            print_('Info', '设置完成')
+            print_('Info', '程序启动(初始化设置): 设置完成')
             self.label_loading_text_2.setText('设置完成')
             self.Animation_ToMainWindow()
             self.Page_Loading.stop()  # 暂停动图
@@ -783,6 +821,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
         # ---> 游戏列表
         self.pushButton_page_home_file_add.clicked.connect(self.MainPage_Mame_List_GameFileAdd)
         self.pushButton_game_file_add_again.clicked.connect(self.MainPage_Mame_List_GameFileAdd_Add)
+        self.lineEdit_game_file_add.textChanged.connect(self.MainPage_Mame_List_GameFileAdd_TextChanged)
+        self.pushButton_game_file_add_ok.clicked.connect(self.MainPage_Mame_List_GameFileAdd_OK)
         self.pushButton_game_file_add_cancel.clicked.connect(self.MainPage_Mame_List_GameFileAdd_Cancel)
 
         # 设置页面
@@ -942,9 +982,9 @@ def Return_Window_XY():
 
 
 def Run():
-    print_('Info', "程序已开始运行！")
+    print_('Info', "程序启动(UI显示): 程序已开始运行！")
     app = QtWidgets.QApplication(argv)
-    print_('Info', "创建窗口对象成功！")
+    print_('Info', "程序启动(UI显示): 创建窗口对象成功！")
     ui = RunUi()
-    print_('Info', "创建PyQt窗口对象成功！")
+    print_('Info', "程序启动(UI显示): 创建PyQt窗口对象成功！")
     exit(app.exec())
