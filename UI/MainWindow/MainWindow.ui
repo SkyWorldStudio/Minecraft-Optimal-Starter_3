@@ -145,11 +145,40 @@
 	border-left: 2px solid rgb(42, 130, 228);
 	background-color: rgba(42, 130, 255, 26);
 }
+/*      游戏目录添加页面*/
+#widget_home_game_file_add{
+	border-image: url(:/Shadow/images/Whith_Shadow-0-2-4-0.png);
+	border-radius: 5px;
+}
+#widget_game_file_add_ok_cancel &gt; QPushButton{
+	border-radius: 5px;
+}
+#pushButton_game_file_add_ok{
+	background-color: rgb(42, 130, 228);
+	color: rgb(255, 255, 255);
+}
+#pushButton_game_file_add_ok:hover{
+	background-color: rgb(78, 148, 228);
+}
+#pushButton_game_file_add_ok:pressed{
+	background-color: rgb(32, 123, 228);
+}
+#pushButton_game_file_add_cancel{
+	background-color: rgb(255, 255, 255);
+	color: rgb(56, 56, 56);
+}
+#pushButton_game_file_add_cancel:hover{
+	background-color: rgb(252, 252, 252);
+	color: rgb(56, 56, 56);
+}
+#pushButton_game_file_add_cancel:pressed{
+	background-color: rgb(243, 243, 243);
+}
 
 /*设置页面*/
 #scrollAreaWidgetContents_page_settings &gt; QWidget
 {
-	border-image: url(:/Scrub/images/Scrub_B15_FFFFFF-60_Main-User.png);
+	border-image: url(:/widget_Sidebar/images/Scrub_Settings-Z_B15.png);
 }
 
 
@@ -458,6 +487,21 @@ QListWidget::item:selected {
 	color: black;
 	background-color: rgb(235, 235, 235);
 }
+QLineEdit{
+	background-color: rgb(240, 240, 240);
+	border-radius: 5px;
+}
+QLineEdit::focus{
+	border:2px solid rgb(0, 119, 255);
+}
+QPushButton{
+	border-style:none;
+	border-radius: 5px;
+}
+QPushButton:hover{
+	background-color: rgb(252, 252, 252);
+}
+
 
 *{
 	background-color: rgba(255, 255, 255, 0);
@@ -1145,6 +1189,9 @@ QListWidget::item:selected {
                </property>
                <item>
                 <widget class="QStackedWidget" name="stackedWidget_page_home">
+                 <property name="currentIndex">
+                  <number>0</number>
+                 </property>
                  <widget class="QWidget" name="page_home_main">
                   <layout class="QHBoxLayout" name="horizontalLayout_9">
                    <item>
@@ -1440,6 +1487,291 @@ QListWidget::item:selected {
                       </item>
                      </layout>
                     </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                 <widget class="QWidget" name="page_home_game_file_add">
+                  <layout class="QGridLayout" name="gridLayout_8">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="spacing">
+                    <number>0</number>
+                   </property>
+                   <item row="1" column="1">
+                    <widget class="QWidget" name="widget_home_game_file_add" native="true">
+                     <layout class="QVBoxLayout" name="verticalLayout_9">
+                      <property name="leftMargin">
+                       <number>12</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>8</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>12</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>8</number>
+                      </property>
+                      <item>
+                       <widget class="QLabel" name="label">
+                        <property name="font">
+                         <font>
+                          <pointsize>18</pointsize>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string>添加游戏目录</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QWidget" name="widget_4" native="true">
+                        <layout class="QGridLayout" name="gridLayout_9">
+                         <property name="leftMargin">
+                          <number>6</number>
+                         </property>
+                         <property name="topMargin">
+                          <number>2</number>
+                         </property>
+                         <property name="rightMargin">
+                          <number>6</number>
+                         </property>
+                         <property name="bottomMargin">
+                          <number>2</number>
+                         </property>
+                         <item row="2" column="2">
+                          <widget class="QPushButton" name="pushButton_game_file_add_again">
+                           <property name="minimumSize">
+                            <size>
+                             <width>96</width>
+                             <height>25</height>
+                            </size>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>94</width>
+                             <height>16777215</height>
+                            </size>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <pointsize>14</pointsize>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>重新选择</string>
+                           </property>
+                           <property name="icon">
+                            <iconset resource="img.qrc">
+                             <normaloff>:/widget_Sidebar/images/Main_Page_GameFile_AddAgain.png</normaloff>:/widget_Sidebar/images/Main_Page_GameFile_AddAgain.png</iconset>
+                           </property>
+                           <property name="iconSize">
+                            <size>
+                             <width>19</width>
+                             <height>19</height>
+                            </size>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="2" column="0">
+                          <widget class="QLabel" name="label_3">
+                           <property name="font">
+                            <font>
+                             <pointsize>15</pointsize>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>游戏目录路径</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="3" column="0" colspan="3">
+                          <widget class="QLabel" name="label_4">
+                           <property name="font">
+                            <font>
+                             <pointsize>12</pointsize>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>请先选择目录</string>
+                           </property>
+                           <property name="wordWrap">
+                            <bool>true</bool>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="0" column="0">
+                          <widget class="QLabel" name="label_2">
+                           <property name="font">
+                            <font>
+                             <pointsize>15</pointsize>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>名称</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="2" column="1">
+                          <spacer name="horizontalSpacer_14">
+                           <property name="orientation">
+                            <enum>Qt::Horizontal</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>40</width>
+                             <height>20</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item row="0" column="1" colspan="2">
+                          <widget class="QLineEdit" name="lineEdit_game_file_add">
+                           <property name="minimumSize">
+                            <size>
+                             <width>0</width>
+                             <height>30</height>
+                            </size>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QWidget" name="widget_game_file_add_ok_cancel" native="true">
+                        <layout class="QHBoxLayout" name="horizontalLayout_10">
+                         <property name="spacing">
+                          <number>12</number>
+                         </property>
+                         <property name="leftMargin">
+                          <number>0</number>
+                         </property>
+                         <property name="topMargin">
+                          <number>2</number>
+                         </property>
+                         <property name="rightMargin">
+                          <number>0</number>
+                         </property>
+                         <property name="bottomMargin">
+                          <number>2</number>
+                         </property>
+                         <item>
+                          <spacer name="horizontalSpacer_13">
+                           <property name="orientation">
+                            <enum>Qt::Horizontal</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>40</width>
+                             <height>20</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="pushButton_game_file_add_cancel">
+                           <property name="minimumSize">
+                            <size>
+                             <width>75</width>
+                             <height>30</height>
+                            </size>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <pointsize>16</pointsize>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>取消</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="pushButton_game_file_add_ok">
+                           <property name="minimumSize">
+                            <size>
+                             <width>75</width>
+                             <height>30</height>
+                            </size>
+                           </property>
+                           <property name="font">
+                            <font>
+                             <pointsize>16</pointsize>
+                            </font>
+                           </property>
+                           <property name="text">
+                            <string>保存</string>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item row="1" column="2">
+                    <spacer name="horizontalSpacer_12">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="0" column="1">
+                    <spacer name="verticalSpacer_10">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>40</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="1" column="0">
+                    <spacer name="horizontalSpacer_11">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item row="2" column="1">
+                    <spacer name="verticalSpacer_11">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>40</height>
+                      </size>
+                     </property>
+                    </spacer>
                    </item>
                   </layout>
                  </widget>

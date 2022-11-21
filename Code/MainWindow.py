@@ -212,6 +212,9 @@ class RunUi(QMainWindow, Ui_MainWindow):
         """主页 -> 查看游戏列表"""
         self.SetCurrentIndex(self.stackedWidget_page_home, 1, 1, True)
 
+    def MainPage_Mame_List_GameFileAdd(self):
+        self.SetCurrentIndex(self.stackedWidget_page_home, 2, 1, True)
+
     def SettingsPage_Background_None_Clicked(self):
         """设置页面 -> 背景设置:选择：无"""
         self.MainWinowMainBackground(None)
@@ -740,6 +743,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         # 主页
         self.pushButton_page_home_main_game_list.clicked.connect(self.MainPage_Mame_List)
         # ---> 游戏列表
+        self.pushButton_page_home_file_add.clicked.connect(self.MainPage_Mame_List_GameFileAdd)
 
 
         # 设置页面
