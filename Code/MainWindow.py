@@ -5,13 +5,13 @@ from sys import argv, exit
 
 from PyQt6 import QtWidgets, QtGui
 from PyQt6.QtCore import QTimer, QEvent, QPoint, Qt
-from PyQt6.QtWidgets import QMainWindow, QGraphicsOpacityEffect, QListWidgetItem
+from PyQt6.QtGui import QIcon
+from PyQt6.QtWidgets import QMainWindow, QGraphicsOpacityEffect, QListWidgetItem, QFileDialog
 from pytz import timezone
 
-from Code.Log import print_,Log_Clear,Log_Return
+from Code.Log import print_, Log_Clear, Log_Return
 from UI.MainWindow.MainWindow import Ui_MainWindow
 from Code.Code import JsonRead, JsonFile, Systeam, JsonWrite, File, Json_Cheak
-
 
 
 class RunUi(QMainWindow, Ui_MainWindow):
@@ -23,12 +23,11 @@ class RunUi(QMainWindow, Ui_MainWindow):
         # self.setWindowFlags(Qt.WindowType.MacWindowToolBarButtonHint)
         self.show()
 
-        print_('Info',"已成功显示窗体")
+        print_('Info', "已成功显示窗体")
         self.__init__setAll()
         self.__init__setToolTipDuration()
         self.__init__setShadow()
         self.X_Y_ = self.frameGeometry().topLeft()
-
 
         global Win_XY
         Win_XY = self.geometry()
@@ -84,7 +83,6 @@ class RunUi(QMainWindow, Ui_MainWindow):
         except IndexError:
             pass
 
-
     def User_Clicked(self):
         self.Sidebar_Clicked(Want='User')
 
@@ -105,6 +103,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         icon2.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_Add.png"), QtGui.QIcon.Mode.Normal,
                         QtGui.QIcon.State.Off)
         self.pushButton_page_users_up_addUser.setIcon(icon2)
+
     def UserPage_Up_AddUser_Pressed(self):
         """再按下按钮时 切换图片"""
         icon2 = QtGui.QIcon()
@@ -119,11 +118,11 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.Dialog_AddUserWindows_.sinOut_OK.connect(self.AddUserWindow_OK)
         self.Dialog_AddUserWindows_.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
         self.Dialog_AddUserWindows_.setWindowFlags(
-            Qt.WindowType.Popup | # 表示该窗口小部件是一个弹出式顶层窗口，即它是模态的，但有一个适合弹出式菜单的窗口系统框架。
-            Qt.WindowType.Tool | # 表示小部件是一个工具窗口,如果有父级，则工具窗口将始终保留在其顶部,在 macOS 上，工具窗口对应于窗口的NSPanel类。这意味着窗口位于普通窗口之上，因此无法在其顶部放置普通窗口。默认情况下，当应用程序处于非活动状态时，工具窗口将消失。这可以通过WA_MacAlwaysShowToolWindow属性来控制。
-            Qt.WindowType.FramelessWindowHint | # 生成无边框窗口
-            Qt.WindowType.MSWindowsFixedSizeDialogHint | # 在 Windows 上为窗口提供一个细对话框边框。这种风格传统上用于固定大小的对话框。
-            Qt.WindowType.Dialog | # 指示该小部件是一个应装饰为对话框的窗口（即，通常在标题栏中没有最大化或最小化按钮）。这是 的默认类型QDialog。如果要将其用作模式对话框，则应从另一个窗口启动它，或者具有父级并与该windowModality属性一起使用。如果将其设为模态，对话框将阻止应用程序中的其他顶级窗口获得任何输入。我们将具有父级的顶级窗口称为辅助窗口。
+            Qt.WindowType.Popup |  # 表示该窗口小部件是一个弹出式顶层窗口，即它是模态的，但有一个适合弹出式菜单的窗口系统框架。
+            Qt.WindowType.Tool |  # 表示小部件是一个工具窗口,如果有父级，则工具窗口将始终保留在其顶部,在 macOS 上，工具窗口对应于窗口的NSPanel类。这意味着窗口位于普通窗口之上，因此无法在其顶部放置普通窗口。默认情况下，当应用程序处于非活动状态时，工具窗口将消失。这可以通过WA_MacAlwaysShowToolWindow属性来控制。
+            Qt.WindowType.FramelessWindowHint |  # 生成无边框窗口
+            Qt.WindowType.MSWindowsFixedSizeDialogHint |  # 在 Windows 上为窗口提供一个细对话框边框。这种风格传统上用于固定大小的对话框。
+            Qt.WindowType.Dialog |  # 指示该小部件是一个应装饰为对话框的窗口（即，通常在标题栏中没有最大化或最小化按钮）。这是 的默认类型QDialog。如果要将其用作模式对话框，则应从另一个窗口启动它，或者具有父级并与该windowModality属性一起使用。如果将其设为模态，对话框将阻止应用程序中的其他顶级窗口获得任何输入。我们将具有父级的顶级窗口称为辅助窗口。
             Qt.WindowType.NoDropShadowWindowHint  # 禁用支持平台上的窗口投影。
         )
 
@@ -145,29 +144,34 @@ class RunUi(QMainWindow, Ui_MainWindow):
         icon2.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_Refresh.png"), QtGui.QIcon.Mode.Normal,
                         QtGui.QIcon.State.Off)
         self.pushButton_page_users_up_refreshUser.setIcon(icon2)
+
     def UserPage_Up_RefreshUser_Pressed(self):
         """再按下按钮时 切换图片"""
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_Refresh-pressed.png"), QtGui.QIcon.Mode.Normal,
                         QtGui.QIcon.State.Off)
         self.pushButton_page_users_up_refreshUser.setIcon(icon2)
+
     def UserPage_Up_DeleteUser(self):
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_Delete.png"), QtGui.QIcon.Mode.Normal,
                         QtGui.QIcon.State.Off)
         self.pushButton_page_users_up_deleteUser.setIcon(icon2)
+
     def UserPage_Up_DeleteUser_Pressed(self):
         """再按下按钮时 切换图片"""
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_Delete-pressed.png"), QtGui.QIcon.Mode.Normal,
                         QtGui.QIcon.State.Off)
         self.pushButton_page_users_up_deleteUser.setIcon(icon2)
+
     def UserPage_Up_SetChoiceUser(self):
         if self.UserPage_setChoice == 'Choice':
             self.UserPage_Up_SetChoiceUser_Set('Choices')
         else:
             self.UserPage_Up_SetChoiceUser_Set('Choice')
-    def UserPage_Up_SetChoiceUser_Set(self,a):
+
+    def UserPage_Up_SetChoiceUser_Set(self, a):
         """
             设置"账户"页面的 多选和单选
             a --> 设置为单选还是多选 传入值:'Choice' or' Choices'
@@ -175,25 +179,29 @@ class RunUi(QMainWindow, Ui_MainWindow):
         if a == 'Choice':
             # 如果是要设置为单选
             self.UserPage_setChoice = 'Choice'
-            self.label_page_users_up_setChoice.setText('<html><head/><body><p><span style=" font-size:16pt;">单选</span>/<span style=" font-size:12pt;">多选</span></p></body></html>')
-            self.label_page_users_up_setChoice_icon.setPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_setChoice_Choice.png"))
+            self.label_page_users_up_setChoice.setText(
+                '<html><head/><body><p><span style=" font-size:16pt;">单选</span>/<span style=" font-size:12pt;">多选</span></p></body></html>')
+            self.label_page_users_up_setChoice_icon.setPixmap(
+                QtGui.QPixmap(":/widget_Sidebar/images/User_Page_setChoice_Choice.png"))
             self.pushButton_page_users_up_refreshUser.setText('刷新全部')
             self.pushButton_page_users_up_deleteUser.setText('删除全部')
             self.listWidget_users_down.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.SingleSelection)
             self.Json_MOS['UserPage_setChoice'] = 'Choice'
-            JsonWrite(self.Json_MOS,self.JsonFile)
+            JsonWrite(self.Json_MOS, self.JsonFile)
 
 
         else:
             # 如果是要设置为多选
             self.UserPage_setChoice = 'Choices'
-            self.label_page_users_up_setChoice.setText('<html><head/><body><p><span style=" font-size:16pt;">多选</span>/<span style=" font-size:12pt;">单选</span></p></body></html>')
-            self.label_page_users_up_setChoice_icon.setPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_setChoice_Choices.png"))
+            self.label_page_users_up_setChoice.setText(
+                '<html><head/><body><p><span style=" font-size:16pt;">多选</span>/<span style=" font-size:12pt;">单选</span></p></body></html>')
+            self.label_page_users_up_setChoice_icon.setPixmap(
+                QtGui.QPixmap(":/widget_Sidebar/images/User_Page_setChoice_Choices.png"))
             self.pushButton_page_users_up_refreshUser.setText('刷新所选')
             self.pushButton_page_users_up_deleteUser.setText('删除所选')
             self.listWidget_users_down.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.ExtendedSelection)
             self.Json_MOS['UserPage_setChoice'] = 'Choices'
-            JsonWrite(self.Json_MOS,self.JsonFile)
+            JsonWrite(self.Json_MOS, self.JsonFile)
 
         self.Users_List_Refresh()
 
@@ -213,7 +221,37 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.SetCurrentIndex(self.stackedWidget_page_home, 1, 1, True)
 
     def MainPage_Mame_List_GameFileAdd(self):
+        """主页 -> 查看游戏列表 -> 添加游戏文件夹"""
         self.SetCurrentIndex(self.stackedWidget_page_home, 2, 1, True)
+        self.MainPage_Mame_List_GameFileAdd_Add()
+
+    def MainPage_Mame_List_GameFileAdd_Add(self):
+        """
+            主页 -> 查看游戏列表 -> 添加游戏文件夹\n
+            主页 -> 查看游戏列表 -> 添加游戏文件夹 -> 重新选择\n
+
+            弹出选择窗口
+        """
+        dir = QFileDialog()
+        dir.setFileMode(QFileDialog.FileMode.Directory)
+        dir.setDirectory(self.File_Parent)
+
+        icon = QIcon()
+
+        if dir.exec():
+            F = dir.selectedFiles()  # 选择的路径
+            self.label_home_game_file_add_file_2.setText(str(F[0]))
+            icon.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/Main_Page_GameFile_AddAgain.png"),
+                           QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        else:
+            self.pushButton_game_file_add_again.setText('选择文件夹')
+            icon.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_Add.png"),
+                            QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.pushButton_game_file_add_again.setIcon(icon)
+
+    def MainPage_Mame_List_GameFileAdd_Cancel(self):
+        """主页 -> 查看游戏列表 -> 添加游戏文件夹 -> 取消"""
+        self.stackedWidget_page_home.setCurrentIndex(0)
 
     def SettingsPage_Background_None_Clicked(self):
         """设置页面 -> 背景设置:选择：无"""
@@ -242,6 +280,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
     def SettingsPage_Background_6_Clicked(self):
         """设置页面 -> 背景设置:选择：6(深蓝天空)"""
         self.MainWinowMainBackground(6)
+
     def SettingsPage_Background_7_Clicked(self):
         """设置页面 -> 背景设置:选择：7(粉色迷雾)"""
         self.MainWinowMainBackground(7)
@@ -249,9 +288,9 @@ class RunUi(QMainWindow, Ui_MainWindow):
     def SettingsPage_Sidebar_horizontalSlider(self):
         """设置页面 -> 左边栏动画设置 -> 滑动控件: 拖动"""
         i = self.horizontalSlider_page_settings_sidebar.value()
-        i_2 = i*30
+        i_2 = i * 30
         self.spinBox_page_settings_sidebar.setValue(i)
-        self.label_page_settings_background_h3_2.setText('预计 ' + str(i_2) + 'mm' + ' (' + str(i_2/1000) + 's)完成')
+        self.label_page_settings_background_h3_2.setText('预计 ' + str(i_2) + 'mm' + ' (' + str(i_2 / 1000) + 's)完成')
 
     def SettingsPage_Sidebar_horizontalSlider_sliderReleased(self):
         """设置页面 -> 左边栏动画设置 -> 滑动控件: 拖动抬起后"""
@@ -300,25 +339,25 @@ class RunUi(QMainWindow, Ui_MainWindow):
         else:
             self.stackedWidget_page_users_down.setCurrentIndex(2)
 
-
-    def MainWinowMainBackground(self,Want,_init_=False):
+    def MainWinowMainBackground(self, Want, _init_=False):
         """主窗口背景"""
         if Want == None:
             self.centralwidget.setStyleSheet('')
-            self.page_main.setStyleSheet('/*模拟阴影*/\n#widget_Middle > #stackedWidget_main_2{border-image: url(:/Scrub/images/Scrub_B2_FFFFFF-50_Main-M-B.png);}')
+            self.page_main.setStyleSheet(
+                '/*模拟阴影*/\n#widget_Middle > #stackedWidget_main_2{border-image: url(:/Scrub/images/Scrub_B2_FFFFFF-50_Main-M-B.png);}')
             if _init_ == False:
                 # 如果不是初始化 就改变json配置
                 self.Json_MOS['BackGround'] = False
-                JsonWrite(self.Json_MOS,self.JsonFile)
+                JsonWrite(self.Json_MOS, self.JsonFile)
         else:
-            self.centralwidget.setStyleSheet('#stackedWidget_main > #page_main{border-image: url(:/BackGround/images/BackGround/' + str(Want) + '.png);}')
+            self.centralwidget.setStyleSheet(
+                '#stackedWidget_main > #page_main{border-image: url(:/BackGround/images/BackGround/' + str(
+                    Want) + '.png);}')
             self.page_main.setStyleSheet('')
             if _init_ == False:
                 # 如果不是初始化 就改变json配置
                 self.Json_MOS['BackGround'] = Want
                 JsonWrite(self.Json_MOS, self.JsonFile)
-
-
 
     def Sidebar_Clicked(self, Want=None, H=True):
         """
@@ -494,7 +533,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 self.Sidebar_Click_I = False  # 正在变回去的
                 self.Sidebar_Click_C = str(Want)  # 彻底完成后……
 
-        print_('Info',"用户点击左边栏按钮")
+        print_('Info', "用户点击左边栏按钮")
 
         if self.Sidebar_Click_Ok:
             self.label_Sidebar_Back.setEnabled(False)
@@ -527,7 +566,6 @@ class RunUi(QMainWindow, Ui_MainWindow):
             elif Want == 'Settings':
                 self.SetCurrentIndex(False, 4, 4, H)
 
-
     def RunInitialize(self, First=True):
         """在启动器启动后初始化启动器(读取设置+设置启动器)"""
 
@@ -536,9 +574,9 @@ class RunUi(QMainWindow, Ui_MainWindow):
             # 导入
             # 读取阶段(读取配置等)
             self.Systeam = Systeam()
-            print_('Info','系统：' + self.Systeam)
+            print_('Info', '系统：' + self.Systeam)
             self.Json_MOS = JsonRead(self.JsonFile)
-            print_('Info','Json读取完成')
+            print_('Info', 'Json读取完成')
             C = Json_Cheak(self.JsonFile)
             if C:
                 # 如果返回为True(已补全文件)
@@ -569,7 +607,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 self.pushButton_page_users_up_refreshUser.setText('刷新全部')
                 self.pushButton_page_users_up_deleteUser.setText('删除全部')
 
-            print_('Info','设置背景……')
+            print_('Info', '设置背景……')
             self.label_loading_text_2.setText('正在设置启动器(5/6)')
 
             if self.Json_MOS['BackGround'] == False:
@@ -610,6 +648,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.JsonFile = JsonFile()  # 读取Json路径
 
         self.File = File()  # 获取缓存目录
+        self.File_Parent = os.path.dirname(self.File)  # 缓存目录上一级
 
         self.H_B = []
 
@@ -635,7 +674,6 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.Log_QTime.setInterval(4000)  # 4秒
             self.Log_QTime.timeout.connect(self.Log_QTime_)
             self.Log_QTime.start()
-
 
     def FirstStartInitialize(self):
         """在第一次启动时 初始化(缓存)"""
@@ -744,7 +782,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.pushButton_page_home_main_game_list.clicked.connect(self.MainPage_Mame_List)
         # ---> 游戏列表
         self.pushButton_page_home_file_add.clicked.connect(self.MainPage_Mame_List_GameFileAdd)
-
+        self.pushButton_game_file_add_again.clicked.connect(self.MainPage_Mame_List_GameFileAdd_Add)
+        self.pushButton_game_file_add_cancel.clicked.connect(self.MainPage_Mame_List_GameFileAdd_Cancel)
 
         # 设置页面
         self.radioButton_settings_background_none.clicked.connect(self.SettingsPage_Background_None_Clicked)
@@ -758,7 +797,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
         self.horizontalSlider_page_settings_sidebar.sliderMoved.connect(self.SettingsPage_Sidebar_horizontalSlider)
         self.horizontalSlider_page_settings_sidebar.sliderPressed.connect(self.SettingsPage_Sidebar_horizontalSlider)
-        self.horizontalSlider_page_settings_sidebar.sliderReleased.connect(self.SettingsPage_Sidebar_horizontalSlider_sliderReleased)
+        self.horizontalSlider_page_settings_sidebar.sliderReleased.connect(
+            self.SettingsPage_Sidebar_horizontalSlider_sliderReleased)
         self.horizontalSlider_page_settings_sidebar.valueChanged.connect(self.SettingsPage_Sidebar_horizontalSlider)
         self.spinBox_page_settings_sidebar.valueChanged.connect(self.SettingsPage_Sidebar_spinBox)
 
@@ -799,7 +839,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.radioButton_settings_subject_automatic.installEventFilter(self)
 
         self._toolTip.hide()
-    
+
     def Log_QTime_(self):
         """定时将日志写入文件"""
         logs = Log_Return()
@@ -817,7 +857,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
                     f.write(log_)
         Log_Clear()
 
-    def SetCurrentIndex(self,U,I,L=False,H=True):
+    def SetCurrentIndex(self, U, I, L=False, H=True):
         """
             更改控件的页数，并记录历史
             参数:
@@ -849,15 +889,17 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.label_Sidebar_Back.setEnabled(False)
         print(self.H_B)
 
-    def Window_XY(self,X,Y):
+    def Window_XY(self, X, Y):
         """改变窗口的XY坐标"""
-        self.move(round(X),round(Y))
+        self.move(round(X), round(Y))
+
     def mousePressEvent(self, a0: QtGui.QMouseEvent):
         global Win_XY
         Win_XY = self.geometry()
         self.Is_Drag_ = True
         self.Mouse_Start_Point_ = a0.globalPosition()  # 获得鼠标的初始位置
         self.Window_Start_Point_ = self.frameGeometry().topLeft()  # 获得窗口的初始位置
+
     def mouseMoveEvent(self, a0: QtGui.QMouseEvent):
         # 判断是否在拖拽移动
         if self.Is_Drag_:
@@ -899,11 +941,10 @@ def Return_Window_XY():
     return Win_XY
 
 
-
 def Run():
-    print_('Info',"程序已开始运行！")
+    print_('Info', "程序已开始运行！")
     app = QtWidgets.QApplication(argv)
-    print_('Info',"创建窗口对象成功！")
+    print_('Info', "创建窗口对象成功！")
     ui = RunUi()
-    print_('Info',"创建PyQt窗口对象成功！")
+    print_('Info', "创建PyQt窗口对象成功！")
     exit(app.exec())

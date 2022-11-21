@@ -9,17 +9,19 @@ def JsonRead(JsonFile):
         读取Json
         JsonFile = Json的目录
     """
-    with open(JsonFile,'r',encoding='utf_8') as f:
+    with open(JsonFile, 'r', encoding='utf_8') as f:
         r = json.load(f, strict=False)
     return r
+
 
 def JsonFile():
     """获取Json路径"""
     a = File()
-    b = os.path.join(a,'MOS.json')
+    b = os.path.join(a, 'MOS.json')
     return b
 
-def JsonWrite(Json_,JsonFile):
+
+def JsonWrite(Json_, JsonFile):
     """写入Json"""
     with open(JsonFile, 'w+', encoding='utf_8') as f:
         json.dump(Json_, f, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
@@ -36,36 +38,44 @@ def Json_Cheak(JsonFile):
             C = 1
     if C == 1:
         # 如果少参数
-        JsonWrite(J,JsonFile)
+        JsonWrite(J, JsonFile)
         return True  # 需要进行补全,补全文件
     else:
         return False  # 不需要进行补全
 
+
 def Json_InitializeFirst():
     """返回Json默认(字典)"""
     J = {
-        'Subject':'Light',
-        'BackGround':False,
-        'Sidebar_Sidebar_Time':15,  # 左边栏动画延迟
-        'UserPage_setChoice':'Choices',
-        'Users':{}
-         }
+        'Subject': 'Light',
+        'BackGround': False,
+        'Sidebar_Sidebar_Time': 15,  # 左边栏动画延迟
+        'UserPage_setChoice': 'Choices',
+        'Users': {},
+        'GameFile': {
+            '当前目录': {
+                'Name': '当前目录',
+                'File': os.path.join(os.path.dirname(File()), '.minecraft')
+            }
+        }
+    }
     return J
+
 
 def InitializeFirst():
     """在第一次运行时，初始化"""
-    f = ['Download','Music','Java','Html','Mod','Logs']
+    f = ['Download', 'Music', 'Java', 'Html', 'Mod', 'Logs']
     q = File()
     for f_1 in f:
-        file = os.path.join(q,f_1)
-        os.makedirs(file,exist_ok=True)
+        file = os.path.join(q, f_1)
+        os.makedirs(file, exist_ok=True)
 
     JsonFile_ = JsonFile()
 
     J = Json_InitializeFirst()
 
-    with open(JsonFile_,'w',encoding='utf-8') as f:
-        json.dump(J,f, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
+    with open(JsonFile_, 'w', encoding='utf-8') as f:
+        json.dump(J, f, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
 
 def File():
@@ -74,10 +84,11 @@ def File():
     if s == 'Mac':
         # 获取当前系统用户目录
         UserFile = os.path.expanduser('~')
-        file = os.path.join(UserFile,'Documents','.MOS')
+        file = os.path.join(UserFile, 'Documents', '.MOS')
     else:
         file = '.MOS'
     return file
+
 
 def Systeam():
     """
