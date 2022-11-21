@@ -133,9 +133,9 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
         self.MainWindow_xy_size = self.geometry()  # 获取主界面 初始坐标
         self.Dialog_AddUserWindows_.move(
-            self.MainWindow_xy_size.x() + (self.size().width()/2 - self.Dialog_AddUserWindows_.size().width()/2),
-            self.MainWindow_xy_size.y() + (self.size().height()/3)
-        )  # 子界面移动到 居中
+            round(self.MainWindow_xy_size.x() + (self.size().width()/2 - self.Dialog_AddUserWindows_.size().width()/2)),
+            round(self.MainWindow_xy_size.y() + (self.size().height()/3)
+        ))  # 子界面移动到 居中
         self.UserPage_Up_AddUser()  # 窗口弹出后，主页面不再刷新，所以在窗口弹出前改变
 
         self.Dialog_AddUserWindows_.show()
