@@ -18,13 +18,19 @@ class GameFile:
             添加游戏文件夹
             :param Name: 名称
             :param File: 路径
-            :return: 'OK'
+            :return: 'OK','Repeat'
         """
         print_('Info', '游戏文件夹(添加): 添加文件夹 名称: ' + Name + '路径: ' + File)
-        self.Json_MOS['GameFile'][Name] = {
-            "Name": Name,
-            "File": File
-        }
+        if Name not in self.Json_MOS['GameFile']:
+            self.Json_MOS['GameFile'][Name] = {
+                "Name": Name,
+                "File": File
+            }
+            self.Json_MOS['GameFile_List'].append(Name)
+            JsonWrite(self.Json_MOS, self.JsonFile)
 
-        JsonWrite(self.Json_MOS,self.JsonFile)
+            return 'OK'
+        else:
+            return 'Repeat'
+
 

@@ -65,7 +65,8 @@ def Json_InitializeFirst():
                 'Name': '当前目录',
                 'File': os.path.join(os.path.dirname(File()), '.minecraft')
             }
-        }
+        },
+        'GameFile_List':['当前目录']
     }
     return J
 

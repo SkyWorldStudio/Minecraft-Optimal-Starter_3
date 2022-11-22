@@ -284,6 +284,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             a.GameFile_Add(n,f)
             print_('Info', '游戏文件夹(添加): 添加文件夹 完成')
             self.stackedWidget_page_home.setCurrentIndex(1)
+            self.MainPage_Mame_List_Refresh()  # 刷新
             self.label_home_game_file_add_file_2.setText('请先选择目录')
             self.lineEdit_game_file_add.setText('')
 
@@ -999,14 +1000,17 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
     def mouseMoveEvent(self, a0: QtGui.QMouseEvent):
         # 判断是否在拖拽移动
-        if self.Is_Drag_:
-            # 获得鼠标移动的距离
-            self.Move_Distance = a0.globalPosition() - self.Mouse_Start_Point_
-            # 改变窗口的位置
-            self.move(
-                round(self.Window_Start_Point_.x() + self.Move_Distance.x()),
-                round(self.Window_Start_Point_.y() + self.Move_Distance.y())
-            )
+        try:
+            if self.Is_Drag_:
+                # 获得鼠标移动的距离
+                self.Move_Distance = a0.globalPosition() - self.Mouse_Start_Point_
+                # 改变窗口的位置
+                self.move(
+                    round(self.Window_Start_Point_.x() + self.Move_Distance.x()),
+                    round(self.Window_Start_Point_.y() + self.Move_Distance.y())
+                )
+        except AttributeError:
+            pass
 
     def mouseReleaseEvent(self, a0: QtGui.QMouseEvent):
         # 放下左键即停止移动
@@ -1038,12 +1042,15 @@ class GameFiles_Read_Thread(QThread):
     def __init__(self,Json_MOS):
         """
             多线程进行游戏目录读取
-            :param JsonFile:
+            :param Json_MOS: Json内容
         """
         super(GameFiles_Read_Thread, self).__init__()
         self.Json_MOS = Json_MOS
     def run(self):
-        for J in self.Json_MOS['GameFile']:
+        # self.Json_MOS = JsonRead(self.JsonFile)
+        key_ = self.Json_MOS['GameFile_List']
+        print(key_)
+        for J in key_:
             N = self.Json_MOS['GameFile'][J]['Name']
             F = self.Json_MOS['GameFile'][J]['File']
             self.SinOut.emit(N)
