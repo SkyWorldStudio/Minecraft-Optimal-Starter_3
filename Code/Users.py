@@ -27,6 +27,7 @@ class UserAdd():
             'User_Name': User_Name,
             'UUID': UUID
         }
-        JsonWrite(J, self.JsonFile)
+        r = JsonWrite(J, self.JsonFile)
 
-        return "OK"
+        if r == 'OK':
+            return "OK"

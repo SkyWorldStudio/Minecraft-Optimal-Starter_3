@@ -268,14 +268,24 @@ class RunUi(QMainWindow, Ui_MainWindow):
     def MainPage_Mame_List_GameFileAdd_OK(self):
         """主页 -> 查看游戏列表 -> 添加游戏文件夹 -> 确定(保存)"""
         print_('Info', '用户点击: 主页 -> 查看游戏列表 -> 添加游戏文件夹 -> 确定(保存)')
-        if self.lineEdit_game_file_add.text()  == '':
+        n = self.lineEdit_game_file_add.text()
+        if n  == '':
             self.lineEdit_game_file_add.setStyleSheet("border:2px solid rgb(255, 47, 146);")
         else:
-            pass
+            from .GameFile import GameFile
+            f = self.label_home_game_file_add_file_2.text()
+            a = GameFile(self.JsonFile,self.Json_MOS)
+            a.GameFile_Add(n,f)
+            print_('Info', '游戏文件夹(添加): 添加文件夹 完成')
+            self.stackedWidget_page_home.setCurrentIndex(1)
+            self.label_home_game_file_add_file_2.setText('请先选择目录')
+            self.lineEdit_game_file_add.setText('')
+
+
 
     def MainPage_Mame_List_GameFileAdd_Cancel(self):
         """主页 -> 查看游戏列表 -> 添加游戏文件夹 -> 取消"""
-        self.stackedWidget_page_home.setCurrentIndex(0)
+        self.stackedWidget_page_home.setCurrentIndex(1)
         print_('Info','用户点击: 主页 -> 查看游戏列表 -> 添加游戏文件夹 -> 取消')
 
     def SettingsPage_Background_None_Clicked(self):
