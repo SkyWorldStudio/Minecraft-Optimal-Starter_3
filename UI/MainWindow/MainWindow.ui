@@ -1257,77 +1257,73 @@ QPushButton:hover{
                        <number>10</number>
                       </property>
                       <item>
-                       <widget class="QListWidget" name="listWidget_page_home_game_left">
-                        <item>
-                         <property name="text">
-                          <string>新建项目</string>
-                         </property>
-                        </item>
-                        <item>
-                         <property name="text">
-                          <string>新建项目</string>
-                         </property>
-                        </item>
-                        <item>
-                         <property name="text">
-                          <string>新建项目</string>
-                         </property>
-                        </item>
-                        <item>
-                         <property name="text">
-                          <string>新建项目</string>
-                         </property>
-                        </item>
-                        <item>
-                         <property name="text">
-                          <string>新建项目</string>
-                         </property>
-                        </item>
-                        <item>
-                         <property name="text">
-                          <string>新建项目</string>
-                         </property>
-                        </item>
-                        <item>
-                         <property name="text">
-                          <string>新建项目</string>
-                         </property>
-                        </item>
-                        <item>
-                         <property name="text">
-                          <string>新建项目</string>
-                         </property>
-                        </item>
-                        <item>
-                         <property name="text">
-                          <string>新建项目</string>
-                         </property>
-                        </item>
-                        <item>
-                         <property name="text">
-                          <string>新建项目</string>
-                         </property>
-                        </item>
-                        <item>
-                         <property name="text">
-                          <string>新建项目</string>
-                         </property>
-                        </item>
-                        <item>
-                         <property name="text">
-                          <string>新建项目</string>
-                         </property>
-                        </item>
-                        <item>
-                         <property name="text">
-                          <string>新建项目</string>
-                         </property>
-                        </item>
-                        <item>
-                         <property name="text">
-                          <string>新建项目</string>
-                         </property>
-                        </item>
+                       <widget class="QStackedWidget" name="stackedWidget_page_home_game_left">
+                        <property name="currentIndex">
+                         <number>0</number>
+                        </property>
+                        <widget class="QWidget" name="page_page_home_game_left_1">
+                         <layout class="QHBoxLayout" name="horizontalLayout_11">
+                          <property name="spacing">
+                           <number>0</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>0</number>
+                          </property>
+                          <item>
+                           <widget class="QListWidget" name="listWidget_page_home_game_left">
+                            <property name="iconSize">
+                             <size>
+                              <width>24</width>
+                              <height>24</height>
+                             </size>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                        <widget class="QWidget" name="page_page_home_game_left_2">
+                         <layout class="QHBoxLayout" name="horizontalLayout_12">
+                          <item>
+                           <widget class="QLabel" name="label_page_home_game_left_none">
+                            <property name="text">
+                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;您没有添加任何游戏文件夹。&lt;/p&gt;&lt;p style='line-height:22px'&gt;您可以点击“添加游戏文件夹”按钮来进行添加&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                            <property name="wordWrap">
+                             <bool>true</bool>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                        <widget class="QWidget" name="page_page_home_game_left_3">
+                         <layout class="QHBoxLayout" name="horizontalLayout_13">
+                          <item>
+                           <widget class="QLabel" name="label_page_home_game_left_none_loading">
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="pixmap">
+                             <pixmap resource="img.qrc">:/Gif/images/Gif/Loaging.gif</pixmap>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
                        </widget>
                       </item>
                       <item>
@@ -1808,8 +1804,8 @@ QPushButton:hover{
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>1119</width>
-                    <height>612</height>
+                    <width>380</width>
+                    <height>336</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_2">

@@ -4,7 +4,7 @@ import os.path
 from sys import argv, exit
 
 from PyQt6 import QtWidgets, QtGui
-from PyQt6.QtCore import QTimer, QEvent, QPoint, Qt
+from PyQt6.QtCore import QTimer, QEvent, QPoint, Qt, QThread, pyqtSignal
 from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QMainWindow, QGraphicsOpacityEffect, QListWidgetItem, QFileDialog
 from pytz import timezone
@@ -234,6 +234,12 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.SetCurrentIndex(self.stackedWidget_page_home, 2, 1, True)
         print_('Info', '用户点击: 主页 -> 查看游戏列表 -> 添加游戏文件夹')
         self.MainPage_Mame_List_GameFileAdd_Add()
+
+    def MainPage_Mame_List_Refresh(self):
+        """
+            主页 -> 查看游戏列表 -> 刷新
+        """
+        self.GameFiles_Read_Thread_Start()
 
     def MainPage_Mame_List_GameFileAdd_Add(self):
         """
@@ -633,7 +639,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             else:
                 print_('Info', '程序启动(初始化设置:Json检查): Json完整')
             print_('Info', '程序启动(初始化设置:Json检查): Json验证完成')
-            self.label_loading_text_2.setText('正在设置启动器(4/6)')
+            self.label_loading_text_2.setText('正在设置启动器(4/7)')
             # 设置阶段
             if self.Systeam != 'Mac':
                 self.radioButton_settings_subject_automatic.setEnabled(False)
@@ -656,7 +662,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 self.pushButton_page_users_up_deleteUser.setText('删除全部')
 
             print_('Info', '程序启动(初始化设置): 设置背景……')
-            self.label_loading_text_2.setText('正在设置启动器(5/6)')
+            self.label_loading_text_2.setText('正在设置启动器(5/7)')
 
             if self.Json_MOS['BackGround'] == False:
                 self.MainWinowMainBackground(None)
@@ -683,7 +689,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
         # 引用阶段
         print_('Info', '程序启动(初始化设置): 引入库')
-        self.label_loading_text_2.setText('正在设置启动器(2/6)')
+        self.label_loading_text_2.setText('正在设置启动器(2/7)')
         import UI.Gif_rc
         import pytz
 
@@ -705,12 +711,16 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.stackedWidget_main.setCurrentIndex(2)
         else:
             # 如果有 就进行下一步
-            self.label_loading_text_2.setText('正在设置启动器(3/6)')
+            self.label_loading_text_2.setText('正在设置启动器(3/7)')
             Settings_()
 
             print_('Info', '程序启动(初始化设置): 读取用户账户')
-            self.label_loading_text_2.setText('正在设置启动器(6/6)')
+            self.label_loading_text_2.setText('正在设置启动器(6/7)')
             self.Users_List_Refresh()
+
+            print_('Info', '程序启动(初始化设置): 读取游戏列表')
+            self.label_loading_text_2.setText('正在设置启动器(7/7)')
+            self.GameFiles_Read_Thread_Start()
 
             print_('Info', '程序启动(初始化设置): 设置完成')
             self.label_loading_text_2.setText('设置完成')
@@ -830,6 +840,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.pushButton_page_home_main_game_list.clicked.connect(self.MainPage_Mame_List)
         # ---> 游戏列表
         self.pushButton_page_home_file_add.clicked.connect(self.MainPage_Mame_List_GameFileAdd)
+        self.pushButton_page_home_file_leftrefresh.clicked.connect(self.MainPage_Mame_List_Refresh)
         self.pushButton_game_file_add_again.clicked.connect(self.MainPage_Mame_List_GameFileAdd_Add)
         self.lineEdit_game_file_add.textChanged.connect(self.MainPage_Mame_List_GameFileAdd_TextChanged)
         self.pushButton_game_file_add_ok.clicked.connect(self.MainPage_Mame_List_GameFileAdd_OK)
@@ -939,6 +950,42 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.label_Sidebar_Back.setEnabled(False)
         print(self.H_B)
 
+    def GameFiles_Read_Thread_Start(self):
+        """启动游戏目录返回线程 同时启动动画"""
+        # 在启动前就检测是不是一个都没有
+        if self.Json_MOS['GameFile'] == {}:
+            self.stackedWidget_page_home_game_left.setCurrentIndex(1)
+        else:
+            self.label_page_home_game_left_none_loading_ = QtGui.QMovie(":/Gif/images/Gif/Loaging.gif")
+            self.label_page_home_game_left_none_loading.setMovie(self.label_page_home_game_left_none_loading_)
+            self.label_page_home_game_left_none_loading_.start()
+            
+            self.listWidget_page_home_game_left.clear()
+            
+            self.GameFiles_Read_Thread_Start_ = GameFiles_Read_Thread(self.Json_MOS)
+            self.GameFiles_Read_Thread_Start_.SinOut.connect(self.GameFiles_Read_Thread_SinOut)
+            self.GameFiles_Read_Thread_Start_.SinOutOK.connect(self.GameFiles_Read_Thread_SinOutOK)
+            self.GameFiles_Read_Thread_Start_.start()
+
+    def GameFiles_Read_Thread_SinOut(self,N):
+        """
+            游戏目录返回线程 信号槽
+            :param N: 游戏目录名称
+        """
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/Game_File.png"), QtGui.QIcon.Mode.Normal,
+                       QtGui.QIcon.State.Off)
+        item = QListWidgetItem(icon, N)
+        self.listWidget_page_home_game_left.addItem(item)
+
+    def GameFiles_Read_Thread_SinOutOK(self):
+        """
+            游戏目录返回线程 完成信号
+        """
+        self.stackedWidget_page_home_game_left.setCurrentIndex(0)
+        self.label_page_home_game_left_none_loading_.stop()
+
+
     def Window_XY(self, X, Y):
         """改变窗口的XY坐标"""
         self.move(round(X), round(Y))
@@ -983,6 +1030,25 @@ class RunUi(QMainWindow, Ui_MainWindow):
             return True
 
         return super().eventFilter(obj, e)
+
+
+class GameFiles_Read_Thread(QThread):
+    SinOut = pyqtSignal(str)
+    SinOutOK = pyqtSignal()
+    def __init__(self,Json_MOS):
+        """
+            多线程进行游戏目录读取
+            :param JsonFile:
+        """
+        super(GameFiles_Read_Thread, self).__init__()
+        self.Json_MOS = Json_MOS
+    def run(self):
+        for J in self.Json_MOS['GameFile']:
+            N = self.Json_MOS['GameFile'][J]['Name']
+            F = self.Json_MOS['GameFile'][J]['File']
+            self.SinOut.emit(N)
+
+        self.SinOutOK.emit()
 
 
 def Return_Window_XY():
