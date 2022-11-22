@@ -8,6 +8,7 @@
 # 我的世界MOS 3 启动器
 
 [![OSCS Status](https://www.oscs1024.com/platform/badge/xianyongjian080402/Minecraft-Optimal-Starter_2.svg?size=small)](https://www.oscs1024.com/project/xianyongjian080402/Minecraft-Optimal-Starter_2?ref=badge_small)
+[![OSCS Status](https://api.codiga.io/project/35071/score/svg)](https://app.codiga.io/hub/project/35071/Minecraft-Optimal-Starter_3)
 [![star](https://gitee.com/xian66/minecraft-optimal-starter_2/badge/star.svg?theme=dark)](https://gitee.com/xian66/minecraft-optimal-starter_2/stargazers)
 [![fork](https://gitee.com/xian66/minecraft-optimal-starter_2/badge/fork.svg?theme=dark)](https://gitee.com/xian66/minecraft-optimal-starter_2/members)
 [![GitHub issues](https://img.shields.io/github/issues/xianyongjian080402/Minecraft-Optimal-Starter_2)](https://github.com/xianyongjian080402/Minecraft-Optimal-Starter_2/issues)
