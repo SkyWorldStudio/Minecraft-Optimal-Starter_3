@@ -224,56 +224,56 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 item.setCheckState(Qt.CheckState.Checked)
             self.listWidget_users_down.editItem(item)
 
-    def MainPage_Mame_List(self):
-        """主页 -> 查看游戏列表"""
+    def MainPage_GameList(self):
+        """主页 -> 游戏列表"""
         self.SetCurrentIndex(self.stackedWidget_page_home, 1, 1, True)
-        print_('Info', '用户点击: 主页 -> 查看游戏列表')
+        print_('Info', '用户点击: 主页 -> 游戏列表')
 
-    def MainPage_Mame_List_GameFileAdd(self):
-        """主页 -> 查看游戏列表 -> 添加游戏文件夹"""
+    def MainPage_GameList_List_GameFileAdd(self):
+        """主页 -> 游戏列表 -> 添加游戏文件夹"""
         self.SetCurrentIndex(self.stackedWidget_page_home, 2, 1, True)
-        print_('Info', '用户点击: 主页 -> 查看游戏列表 -> 添加游戏文件夹')
-        self.MainPage_Mame_List_GameFileAdd_Add()
+        print_('Info', '用户点击: 主页 -> 游戏列表 -> 添加游戏文件夹')
+        self.MainPage_GameList_List_GameFileAdd_Add()
 
-    def MainPage_Mame_List_Refresh(self):
+    def MainPage_GameList_List_Refresh(self):
         """
-            主页 -> 查看游戏列表 -> 刷新
+            主页 -> 游戏列表 -> 刷新
         """
         self.GameFiles_Read_Thread_Start()
 
-    def MainPage_Mame_List_GameFileAdd_Add(self):
+    def MainPage_GameList_List_GameFileAdd_Add(self):
         """
-            主页 -> 查看游戏列表 -> 添加游戏文件夹\n
-            主页 -> 查看游戏列表 -> 添加游戏文件夹 -> 重新选择\n
+            主页 -> 游戏列表 -> 添加游戏文件夹\n
+            主页 -> 游戏列表 -> 添加游戏文件夹 -> 重新选择\n
 
             弹出选择窗口
         """
         dir = QFileDialog()
         dir.setFileMode(QFileDialog.FileMode.Directory)
         dir.setDirectory(self.File_Parent)
-        print_('Info', '用户点击: 主页 -> 查看游戏列表 -> 添加游戏文件夹 -> 选择窗口:弹出')
+        print_('Info', '用户点击: 主页 -> 游戏列表 -> 添加游戏文件夹 -> 选择窗口:弹出')
         icon = QIcon()
         if dir.exec():
             F = dir.selectedFiles()  # 选择的路径
-            print_('Info', '用户点击: 主页 -> 查看游戏列表 -> 添加游戏文件夹 -> 选择目录: ' + str(F[0]))
+            print_('Info', '用户点击: 主页 -> 游戏列表 -> 添加游戏文件夹 -> 选择目录: ' + str(F[0]))
             self.label_home_game_file_add_file_2.setText(str(F[0]))
             icon.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/Main_Page_GameFile_AddAgain.png"),
                            QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         else:
-            print_('Info', '用户点击: 主页 -> 查看游戏列表 -> 添加游戏文件夹 -> 选择窗口:弹出 -> 取消')
+            print_('Info', '用户点击: 主页 -> 游戏列表 -> 添加游戏文件夹 -> 选择窗口:弹出 -> 取消')
             self.pushButton_game_file_add_again.setText('选择文件夹')
             icon.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_Add.png"),
                             QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton_game_file_add_again.setIcon(icon)
 
-    def MainPage_Mame_List_GameFileAdd_TextChanged(self):
-        """主页 -> 查看游戏列表 -> 添加游戏文件夹 -> 名称:填写"""
+    def MainPage_GameList_List_GameFileAdd_TextChanged(self):
+        """主页 -> 游戏列表 -> 添加游戏文件夹 -> 名称:填写"""
         if self.lineEdit_game_file_add.styleSheet() == "border:2px solid rgb(255, 47, 146);":
             self.lineEdit_game_file_add.setStyleSheet("")
 
-    def MainPage_Mame_List_GameFileAdd_OK(self):
-        """主页 -> 查看游戏列表 -> 添加游戏文件夹 -> 确定(保存)"""
-        print_('Info', '用户点击: 主页 -> 查看游戏列表 -> 添加游戏文件夹 -> 确定(保存)')
+    def MainPage_GameList_List_GameFileAdd_OK(self):
+        """主页 -> 游戏列表 -> 添加游戏文件夹 -> 确定(保存)"""
+        print_('Info', '用户点击: 主页 -> 游戏列表 -> 添加游戏文件夹 -> 确定(保存)')
         n = self.lineEdit_game_file_add.text()
         if n  == '':
             self.lineEdit_game_file_add.setStyleSheet("border:2px solid rgb(255, 47, 146);")
@@ -284,16 +284,23 @@ class RunUi(QMainWindow, Ui_MainWindow):
             a.GameFile_Add(n,f)
             print_('Info', '游戏文件夹(添加): 添加文件夹 完成')
             self.stackedWidget_page_home.setCurrentIndex(1)
-            self.MainPage_Mame_List_Refresh()  # 刷新
+            self.MainPage_GameList_List_Refresh()  # 刷新
             self.label_home_game_file_add_file_2.setText('请先选择目录')
             self.lineEdit_game_file_add.setText('')
 
 
 
-    def MainPage_Mame_List_GameFileAdd_Cancel(self):
-        """主页 -> 查看游戏列表 -> 添加游戏文件夹 -> 取消"""
+    def MainPage_GameList_List_GameFileAdd_Cancel(self):
+        """主页 -> 游戏列表 -> 添加游戏文件夹 -> 取消"""
         self.stackedWidget_page_home.setCurrentIndex(1)
-        print_('Info','用户点击: 主页 -> 查看游戏列表 -> 添加游戏文件夹 -> 取消')
+        print_('Info','用户点击: 主页 -> 游戏列表 -> 添加游戏文件夹 -> 取消')
+
+    def MainPage_GameList_List(self):
+        """主页 -> 游戏列表 -> 选中一项"""
+        item = self.listWidget_page_home_game_left.currentItem()
+        N = item.text()
+        F = self.Json_MOS['GameFile'][N]['File']
+        self.GameFiles_ReturnGameList_Thread_Start(F)
 
     def SettingsPage_Background_None_Clicked(self):
         """设置页面 -> 背景设置:选择：无"""
@@ -838,14 +845,15 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.listWidget_users_down.itemPressed.connect(self.UserPage_Down_ListWidget_Clicked)
 
         # 主页
-        self.pushButton_page_home_main_game_list.clicked.connect(self.MainPage_Mame_List)
+        self.pushButton_page_home_main_game_list.clicked.connect(self.MainPage_GameList)
         # ---> 游戏列表
-        self.pushButton_page_home_file_add.clicked.connect(self.MainPage_Mame_List_GameFileAdd)
-        self.pushButton_page_home_file_leftrefresh.clicked.connect(self.MainPage_Mame_List_Refresh)
-        self.pushButton_game_file_add_again.clicked.connect(self.MainPage_Mame_List_GameFileAdd_Add)
-        self.lineEdit_game_file_add.textChanged.connect(self.MainPage_Mame_List_GameFileAdd_TextChanged)
-        self.pushButton_game_file_add_ok.clicked.connect(self.MainPage_Mame_List_GameFileAdd_OK)
-        self.pushButton_game_file_add_cancel.clicked.connect(self.MainPage_Mame_List_GameFileAdd_Cancel)
+        self.pushButton_page_home_file_add.clicked.connect(self.MainPage_GameList_List_GameFileAdd)
+        self.pushButton_page_home_file_leftrefresh.clicked.connect(self.MainPage_GameList_List_Refresh)
+        self.pushButton_game_file_add_again.clicked.connect(self.MainPage_GameList_List_GameFileAdd_Add)
+        self.lineEdit_game_file_add.textChanged.connect(self.MainPage_GameList_List_GameFileAdd_TextChanged)
+        self.pushButton_game_file_add_ok.clicked.connect(self.MainPage_GameList_List_GameFileAdd_OK)
+        self.pushButton_game_file_add_cancel.clicked.connect(self.MainPage_GameList_List_GameFileAdd_Cancel)
+        self.listWidget_page_home_game_left.clicked.connect(self.MainPage_GameList_List)
 
         # 设置页面
         self.radioButton_settings_background_none.clicked.connect(self.SettingsPage_Background_None_Clicked)
@@ -986,6 +994,17 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.stackedWidget_page_home_game_left.setCurrentIndex(0)
         self.label_page_home_game_left_none_loading_.stop()
 
+    def GameFiles_ReturnGameList_Thread_Start(self,GameFile):
+        """启动"检测游戏目录下的游戏线程" 同时启动动画"""
+        self.GameFiles_ReturnGameList_Thread_Start_ = GameFiles_ReturnGameList_Thread(GameFile)
+        self.GameFiles_ReturnGameList_Thread_Start_.SinOut.connect(self.GameFiles_ReturnGameList_Thread__SinOut)
+        #self.GameFiles_ReturnGameList_Thread_Start_.SinOutOK.connect(self.GameFiles_Read_Thread_SinOutOK)
+        self.GameFiles_ReturnGameList_Thread_Start_.start()
+
+    def GameFiles_ReturnGameList_Thread__SinOut(self,Name):
+        item = QListWidgetItem(self.listWidget_page_home_game_right_gamefile_game)
+        item.setText(Name)
+        self.listWidget_page_home_game_right_gamefile_game.addItem(item)
 
     def Window_XY(self, X, Y):
         """改变窗口的XY坐标"""
@@ -1049,13 +1068,44 @@ class GameFiles_Read_Thread(QThread):
     def run(self):
         # self.Json_MOS = JsonRead(self.JsonFile)
         key_ = self.Json_MOS['GameFile_List']
-        print(key_)
         for J in key_:
             N = self.Json_MOS['GameFile'][J]['Name']
             F = self.Json_MOS['GameFile'][J]['File']
             self.SinOut.emit(N)
 
         self.SinOutOK.emit()
+
+class GameFiles_ReturnGameList_Thread(QThread):
+    SinOut = pyqtSignal(str)
+    def __init__(self,GameFile):
+        """
+            多线程读取游戏目录下的游戏
+            :param GameFile: 游戏目录
+        """
+        super(GameFiles_ReturnGameList_Thread, self).__init__()
+        self.GameFile = GameFile
+    def run(self):
+        from Code.GameFile_Game import GameFile_Game
+        a = GameFile_Game()
+        out = a.GameFile_Game_ReturnGames(self.GameFile)
+        print(out)
+        for game in out:
+            if out[game]['Jar_Exist'] == False and out[game]['Json_Check'] == False:
+                Z = '缺少Jar文件, 并且Json文件可能已损坏'
+            elif out[game]['Jar_Exist'] == False:
+                Z = '缺少Jar文件'
+            elif out[game]['Json_Exist'] == False:
+                Z = '缺少Json文件'
+            elif out[game]['Json_Check'] == False:
+                Z = 'Json文件可能已损坏'
+            else:
+                Z = ''
+            if Z == '':
+                N = out[game]['Name']
+            else:
+                N = out[game]['Name'] + ' ' + Z
+            self.SinOut.emit(N)
+
 
 
 def Return_Window_XY():

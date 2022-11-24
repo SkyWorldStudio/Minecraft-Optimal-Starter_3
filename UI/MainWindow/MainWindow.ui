@@ -991,7 +991,7 @@ QPushButton:hover{
                <item>
                 <widget class="QStackedWidget" name="stackedWidget_page_users_down">
                  <property name="currentIndex">
-                  <number>1</number>
+                  <number>2</number>
                  </property>
                  <widget class="QWidget" name="stackedWidget_page_users_downPage1">
                   <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1259,7 +1259,7 @@ QPushButton:hover{
                       <item>
                        <widget class="QStackedWidget" name="stackedWidget_page_home_game_left">
                         <property name="currentIndex">
-                         <number>0</number>
+                         <number>2</number>
                         </property>
                         <widget class="QWidget" name="page_page_home_game_left_1">
                          <layout class="QHBoxLayout" name="horizontalLayout_11">
@@ -1445,7 +1445,7 @@ QPushButton:hover{
                     </widget>
                    </item>
                    <item>
-                    <widget class="QWidget" name="widget_2" native="true">
+                    <widget class="QWidget" name="widget_page_home_game_right" native="true">
                      <layout class="QHBoxLayout" name="horizontalLayout_8">
                       <property name="spacing">
                        <number>0</number>
@@ -1463,23 +1463,7 @@ QPushButton:hover{
                        <number>0</number>
                       </property>
                       <item>
-                       <widget class="QListWidget" name="listWidget_2">
-                        <item>
-                         <property name="text">
-                          <string>新建项目</string>
-                         </property>
-                        </item>
-                        <item>
-                         <property name="text">
-                          <string>新建项目</string>
-                         </property>
-                        </item>
-                        <item>
-                         <property name="text">
-                          <string>新建项目</string>
-                         </property>
-                        </item>
-                       </widget>
+                       <widget class="QListWidget" name="listWidget_page_home_game_right_gamefile_game"/>
                       </item>
                      </layout>
                     </widget>
