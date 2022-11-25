@@ -145,6 +145,9 @@
 	border-left: 2px solid rgb(42, 130, 228);
 	background-color: rgba(42, 130, 255, 26);
 }
+#listWidget_page_home_game_right_gamefile_game::item{
+	height: 35px;
+}
 /*      游戏目录添加页面*/
 #widget_home_game_file_add{
 	border-image: url(:/Shadow/images/Whith_Shadow-0-2-4-0.png);
@@ -991,7 +994,7 @@ QPushButton:hover{
                <item>
                 <widget class="QStackedWidget" name="stackedWidget_page_users_down">
                  <property name="currentIndex">
-                  <number>2</number>
+                  <number>0</number>
                  </property>
                  <widget class="QWidget" name="stackedWidget_page_users_downPage1">
                   <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1259,7 +1262,7 @@ QPushButton:hover{
                       <item>
                        <widget class="QStackedWidget" name="stackedWidget_page_home_game_left">
                         <property name="currentIndex">
-                         <number>2</number>
+                         <number>0</number>
                         </property>
                         <widget class="QWidget" name="page_page_home_game_left_1">
                          <layout class="QHBoxLayout" name="horizontalLayout_11">

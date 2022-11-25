@@ -4,9 +4,10 @@ import os.path
 from sys import argv, exit
 
 from PyQt6 import QtWidgets, QtGui
-from PyQt6.QtCore import QTimer, QEvent, QPoint, Qt, QThread, pyqtSignal
+from PyQt6.QtCore import QTimer, QEvent, QPoint, Qt, QThread, pyqtSignal, QSize
 from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import QMainWindow, QGraphicsOpacityEffect, QListWidgetItem, QFileDialog
+from PyQt6.QtWidgets import QMainWindow, QGraphicsOpacityEffect, QListWidgetItem, QFileDialog, QPushButton, QLabel, \
+    QHBoxLayout, QWidget, QSpacerItem, QSizePolicy
 from pytz import timezone
 
 from Code.Log import print_, Log_Clear, Log_Return
@@ -997,14 +998,70 @@ class RunUi(QMainWindow, Ui_MainWindow):
     def GameFiles_ReturnGameList_Thread_Start(self,GameFile):
         """启动"检测游戏目录下的游戏线程" 同时启动动画"""
         self.GameFiles_ReturnGameList_Thread_Start_ = GameFiles_ReturnGameList_Thread(GameFile)
-        self.GameFiles_ReturnGameList_Thread_Start_.SinOut.connect(self.GameFiles_ReturnGameList_Thread__SinOut)
+        self.GameFiles_ReturnGameList_Thread_Start_.SinOut.connect(self.GameFiles_ReturnGameList_Thread_SinOut)
         #self.GameFiles_ReturnGameList_Thread_Start_.SinOutOK.connect(self.GameFiles_Read_Thread_SinOutOK)
         self.GameFiles_ReturnGameList_Thread_Start_.start()
 
-    def GameFiles_ReturnGameList_Thread__SinOut(self,Name):
-        item = QListWidgetItem(self.listWidget_page_home_game_right_gamefile_game)
+    def GameFiles_ReturnGameList_Thread_SinOut(self,Name):
+        item = QListWidgetItem()
         item.setText(Name)
+        widget = QWidget()
+        hLayout = QHBoxLayout()
+
+
+        btn_s = QPushButton()  # 设置
+        icon_s = QtGui.QIcon()
+        icon_s.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/Settings_Game.png"), QtGui.QIcon.Mode.Normal,
+                         QtGui.QIcon.State.Off)
+        btn_s.setIcon(icon_s)
+        btn_s.setIconSize(QSize(20, 20))
+        btn_s.setMinimumWidth(20)
+        btn_s.setMinimumSize(QSize(35, 35))
+        btn_s.setMaximumSize(QSize(35, 35))
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(btn_s.sizePolicy().hasHeightForWidth())
+        btn_s.setSizePolicy(sizePolicy)
+
+        btn_d = QPushButton()  # 删除
+        icon_d = QtGui.QIcon()
+        icon_d.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_Delete-pressed.png"), QtGui.QIcon.Mode.Normal,
+                         QtGui.QIcon.State.Off)
+        btn_d.setIcon(icon_d)
+        btn_d.setIconSize(QSize(23, 23))
+        btn_d.setMinimumWidth(20)
+        btn_d.setMinimumSize(QSize(35,35))
+        btn_d.setMaximumSize(QSize(35,35))
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(btn_d.sizePolicy().hasHeightForWidth())
+        btn_d.setSizePolicy(sizePolicy)
+
+        hl = QSpacerItem(0, 0, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)  # 水平
+
+        hLayout.addItem(hl)
+        hLayout.addWidget(btn_s)
+        hLayout.addWidget(btn_d)
+
+        hLayout.setContentsMargins(0, 0, 0, 0)
+        hLayout.setSpacing(5)
+        widget.setLayout(hLayout)
+        widget.setContentsMargins(0, 0, 0, 0)
+
+        btn_s.clicked.connect(lambda:self.GameFiles_ReturnGameList_Thread_SinOut_PushButton())
+        btn_d.clicked.connect(lambda: self.GameFiles_ReturnGameList_Thread_SinOut_PushButton())
+
         self.listWidget_page_home_game_right_gamefile_game.addItem(item)
+        self.listWidget_page_home_game_right_gamefile_game.setItemWidget(item, widget) # 为item设置widget
+        #item = QListWidgetItem(self.listWidget_page_home_game_right_gamefile_game)
+        #item.setText(Name)
+        #self.listWidget_page_home_game_right_gamefile_game.addItem(item)
+
+    def GameFiles_ReturnGameList_Thread_SinOut_PushButton(self):
+        a = self.listWidget_page_home_game_right_gamefile_game.currentItem()
+        print(a.text())
 
     def Window_XY(self, X, Y):
         """改变窗口的XY坐标"""

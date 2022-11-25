@@ -143,6 +143,9 @@ class Ui_MainWindow(object):
 "    border-left: 2px solid rgb(42, 130, 228);\n"
 "    background-color: rgba(42, 130, 255, 26);\n"
 "}\n"
+"#listWidget_page_home_game_right_gamefile_game::item{\n"
+"    height: 35px;\n"
+"}\n"
 "/*      游戏目录添加页面*/\n"
 "#widget_home_game_file_add{\n"
 "    border-image: url(:/Shadow/images/Whith_Shadow-0-2-4-0.png);\n"
@@ -1231,9 +1234,9 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.stackedWidget_main.setCurrentIndex(1)
         self.stackedWidget_main_2.setCurrentIndex(1)
-        self.stackedWidget_page_users_down.setCurrentIndex(2)
+        self.stackedWidget_page_users_down.setCurrentIndex(0)
         self.stackedWidget_page_home.setCurrentIndex(0)
-        self.stackedWidget_page_home_game_left.setCurrentIndex(2)
+        self.stackedWidget_page_home_game_left.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
