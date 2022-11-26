@@ -13,7 +13,7 @@
 ---
 
 <div align="center">
-    <a><img src="https://repobeats.axiom.co/api/embed/b690a0a750143858f38209f1a9fb619146492357.svg " alt=" Repo analytics"></a>
+    <a><img src="https://repobeats.axiom.co/api/embed/0b0f70de5827421d8d95d2975d76eaa66e0b887e.svg" alt="Repo analytics(https://repobeats.axiom.co/)"></a>
 </div>
 
 ---
