@@ -1,6 +1,6 @@
 # coding=utf-8
-from .Code import JsonWrite
-from .Log import print_
+from Code.Code import JsonWrite
+from Code.Log import print_
 
 class GameFile:
     def __init__(self, JsonFile, Json_MOS):

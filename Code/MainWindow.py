@@ -6,12 +6,11 @@ from sys import argv, exit
 from PyQt6 import QtWidgets, QtGui
 from PyQt6.QtCore import QTimer, QEvent, QPoint, Qt, QThread, pyqtSignal, QSize
 from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import QMainWindow, QGraphicsOpacityEffect, QListWidgetItem, QFileDialog, QPushButton, QLabel, \
-    QHBoxLayout, QWidget, QSpacerItem, QSizePolicy
+from PyQt6.QtWidgets import QMainWindow, QGraphicsOpacityEffect, QListWidgetItem, QFileDialog, QPushButton, QHBoxLayout, QWidget, QSpacerItem, QSizePolicy
 from pytz import timezone
 
 from Code.Log import print_, Log_Clear, Log_Return
-from UI.MainWindow.MainWindow import Ui_MainWindow
+from Code.MC_Code.MainWindow import Ui_MainWindow
 from Code.Code import JsonRead, JsonFile, Systeam, JsonWrite, File, Json_Cheak
 
 
@@ -240,6 +239,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
         """
             主页 -> 游戏列表 -> 刷新
         """
+        self.listWidget_page_home_game_left.clear()
+        self.listWidget_page_home_game_right_gamefile_game.clear()
         self.GameFiles_Read_Thread_Start()
 
     def MainPage_GameList_List_GameFileAdd_Add(self):
@@ -279,7 +280,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         if n  == '':
             self.lineEdit_game_file_add.setStyleSheet("border:2px solid rgb(255, 47, 146);")
         else:
-            from .GameFile import GameFile
+            from Code.MC_Code.GameFile import GameFile
             f = self.label_home_game_file_add_file_2.text()
             a = GameFile(self.JsonFile,self.Json_MOS)
             a.GameFile_Add(n,f)
@@ -1019,6 +1020,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.GameFiles_ReturnGameList_Thread_Start_.start()
 
     def GameFiles_ReturnGameList_Thread_SinOut(self,Name):
+        """检测游戏目录下的游戏线程 输出处理"""
         item = QListWidgetItem()
         item.setText(Name)
         widget = QWidget()
@@ -1066,13 +1068,14 @@ class RunUi(QMainWindow, Ui_MainWindow):
         widget.setLayout(hLayout)
         widget.setContentsMargins(0, 0, 0, 0)
 
-        btn_s.clicked.connect(lambda:self.GameFiles_ReturnGameList_Thread_SinOut_PushButton())
-        btn_d.clicked.connect(lambda: self.GameFiles_ReturnGameList_Thread_SinOut_PushButton())
+        btn_s.clicked.connect(lambda: self.GameFiles_ReturnGameList_Thread_SinOut_PushButton_settings())
+        btn_d.clicked.connect(lambda: self.GameFiles_ReturnGameList_Thread_SinOut_PushButton_delate())
 
         self.listWidget_page_home_game_right_gamefile_game.addItem(item)
         self.listWidget_page_home_game_right_gamefile_game.setItemWidget(item, widget) # 为item设置widget
 
-    def GameFiles_ReturnGameList_Thread_SinOut_PushButton(self):
+    def GameFiles_ReturnGameList_Thread_SinOut_PushButton_settings(self):
+        """游戏列表设置按钮信号处理"""
         # 获取button
         btn = self.sender()
         # 获取按钮相对于listwwdget的坐标
@@ -1084,6 +1087,51 @@ class RunUi(QMainWindow, Ui_MainWindow):
         index = item.row()
         item_ = self.listWidget_page_home_game_right_gamefile_game.item(index)
         print(item_.text())
+
+    def GameFiles_ReturnGameList_Thread_SinOut_PushButton_delate(self):
+        """游戏列表设置按钮信号处理"""
+        # 获取button
+        btn = self.sender()
+        # 获取按钮相对于listwwdget的坐标
+        # listwidget 相对于窗体的坐标 减去 button 相对于窗体的坐标
+        buttonpos = btn.mapToGlobal(QPoint(0, 0)) - self.widget_page_home_game_right.mapToGlobal(QPoint(0, 0))
+        # 获取到对象
+        item = self.listWidget_page_home_game_right_gamefile_game.indexAt(buttonpos)
+        # 获取位置
+        index = item.row()
+        item_ = self.listWidget_page_home_game_right_gamefile_game.item(index)
+        N = item_.text()
+        from Code.DelateGameWindow import Dialog_DelateGameWindows_
+        gamefile_name = self.listWidget_page_home_game_left.item(self.Json_MOS['GameFile_List_Clicked']).text()
+        self.Dialog_DelateGameWindows_ = Dialog_DelateGameWindows_(
+            os.path.join(self.Json_MOS['GameFile'][gamefile_name]['File'],'versions'),
+            N,
+            gamefile_name
+        )
+        self.Dialog_DelateGameWindows_.sinOut_Win_XY.connect(self.Window_XY)
+        self.Dialog_DelateGameWindows_.sinOut_OK.connect(self.AddUserWindow_OK)
+        self.Dialog_DelateGameWindows_.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
+        self.Dialog_DelateGameWindows_.setWindowFlags(
+            Qt.WindowType.Popup |  # 表示该窗口小部件是一个弹出式顶层窗口，即它是模态的，但有一个适合弹出式菜单的窗口系统框架。
+            Qt.WindowType.Tool |  # 表示小部件是一个工具窗口,如果有父级，则工具窗口将始终保留在其顶部,在 macOS 上，工具窗口对应于窗口的NSPanel类。这意味着窗口位于普通窗口之上，因此无法在其顶部放置普通窗口。默认情况下，当应用程序处于非活动状态时，工具窗口将消失。这可以通过WA_MacAlwaysShowToolWindow属性来控制。
+            Qt.WindowType.FramelessWindowHint |  # 生成无边框窗口
+            Qt.WindowType.MSWindowsFixedSizeDialogHint |  # 在 Windows 上为窗口提供一个细对话框边框。这种风格传统上用于固定大小的对话框。
+            Qt.WindowType.Dialog |  # 指示该小部件是一个应装饰为对话框的窗口（即，通常在标题栏中没有最大化或最小化按钮）。这是 的默认类型QDialog。如果要将其用作模式对话框，则应从另一个窗口启动它，或者具有父级并与该windowModality属性一起使用。如果将其设为模态，对话框将阻止应用程序中的其他顶级窗口获得任何输入。我们将具有父级的顶级窗口称为辅助窗口。
+            Qt.WindowType.NoDropShadowWindowHint  # 禁用支持平台上的窗口投影。
+        )
+
+        self.Dialog_DelateGameWindows_.setWindowModality(
+            Qt.WindowModality.ApplicationModal  # 该窗口对应用程序是模态的，并阻止对所有窗口的输入。
+        )
+
+        self.MainWindow_xy_size = self.geometry()  # 获取主界面 初始坐标
+        self.Dialog_DelateGameWindows_.move(
+            round(self.MainWindow_xy_size.x() + (self.size().width()/2 - self.Dialog_DelateGameWindows_.size().width()/2)),
+            round(self.MainWindow_xy_size.y() + (self.size().height()/3)
+        ))  # 子界面移动到 居中
+
+        self.Dialog_DelateGameWindows_.show()
+
 
     def Window_XY(self, X, Y):
         """改变窗口的XY坐标"""
@@ -1164,7 +1212,7 @@ class GameFiles_ReturnGameList_Thread(QThread):
         super(GameFiles_ReturnGameList_Thread, self).__init__()
         self.GameFile = GameFile
     def run(self):
-        from Code.GameFile_Game import GameFile_Game
+        from Code.MC_Code.GameFile_Game import GameFile_Game
         a = GameFile_Game()
         out = a.GameFile_Game_ReturnGames(self.GameFile)
         print(out)

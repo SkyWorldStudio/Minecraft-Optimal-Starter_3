@@ -1118,7 +1118,7 @@ QPushButton:hover{
                <item>
                 <widget class="QStackedWidget" name="stackedWidget_page_home">
                  <property name="currentIndex">
-                  <number>1</number>
+                  <number>0</number>
                  </property>
                  <widget class="QWidget" name="page_home_main">
                   <layout class="QHBoxLayout" name="horizontalLayout_9">
@@ -1268,9 +1268,6 @@ QPushButton:hover{
                        <spacer name="verticalSpacer_9">
                         <property name="orientation">
                          <enum>Qt::Vertical</enum>
-                        </property>
-                        <property name="sizeType">
-                         <enum>QSizePolicy::Minimum</enum>
                         </property>
                         <property name="sizeHint" stdset="0">
                          <size>
