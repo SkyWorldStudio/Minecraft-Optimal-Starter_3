@@ -51,4 +51,4 @@
 ---
 
 ## 贡献人员 ❤
-<a href="https://github.com/xianyongjian080402/Minecraft-Optimal-Starter_3/graphs/contributors"><img src="https://contributors-img.web.app/image?repo=xianyongjian080402/Minecraft-Optimal-Starter_3"></a>
+<a href="https://github.com/xianyongjian080402/Minecraft-Optimal-Starter_3/graphs/contributors"><img src="https://contrib.rocks/image?repo=xianyongjian080402/Minecraft-Optimal-Starter_3&anon=1&max=100000000"></a>
