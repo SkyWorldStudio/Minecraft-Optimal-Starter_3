@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="https://gitee.com/xian66/minecraft-optimal-starter_2/raw/master/picture/ico.png" alt="MOS3 Logo" width="500">
+    <img src="https://gitee.com/xian66/minecraft-optimal-starter_2/raw/master/picture/ico.png" alt="MOS3 Logo">
     <h1>Minecraft Optimal
      Starter 3</h1>
     <p>MOS 3启动器可以让玩家更便捷快速的启动游戏, 并且具有简单启动、下载速度快、不需安装Java、跨平台等特点</p>
