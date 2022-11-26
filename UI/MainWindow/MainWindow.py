@@ -144,6 +144,13 @@ class Ui_MainWindow(object):
 "    border-left: 2px solid rgb(42, 130, 228);\n"
 "    background-color: rgba(42, 130, 255, 26);\n"
 "}\n"
+"#widget_page_home_game_right{\n"
+"    border-image: url(:/widget_Sidebar/images/Scrub_Settings-Z_B15.png);\n"
+"}\n"
+"#listWidget_page_home_game_right_gamefile_game{\n"
+"    border: 2px solid rgb(33, 33, 33);\n"
+"    border-radius: 8px;\n"
+"}\n"
 "#listWidget_page_home_game_right_gamefile_game::item{\n"
 "    height: 35px;\n"
 "}\n"
@@ -436,13 +443,13 @@ class Ui_MainWindow(object):
 "    background:rgba(0,0,0,0%);\n"
 "    border-style:none;\n"
 "    height:9px;width:8px;\n"
-"    border-image:none;\n"
+"    border-image:url(:/widget_Sidebar/images/Whith-0.png);\n"
 "    subcontrol-position:bottom;\n"
 "}\n"
 "QScrollBar::sub-line:vertical   /*设置上箭头*/\n"
 "{\n"
 "    background:rgba(0,0,0,0%);\n"
-"    border-style:none;\n"
+"    border-style:url(:/widget_Sidebar/images/Whith-0.png);\n"
 "    height:9px;width:8px;\n"
 "    border-image:url(:/img/caret-up_1.png);\n"
 "    subcontrol-position:top;\n"
@@ -450,13 +457,13 @@ class Ui_MainWindow(object):
 "QScrollBar::add-line:vertical:hover   /*当鼠标放到下箭头上的时候*/\n"
 "{\n"
 "    height:9px;width:8px;\n"
-"    border-image:none;\n"
+"    border-image:url(:/widget_Sidebar/images/Whith-0.png);\n"
 "    subcontrol-position:bottom;\n"
 "}\n"
 "QScrollBar::sub-line:vertical:hover  /*当鼠标放到下箭头上的时候*/\n"
 "{\n"
 "    height:9px;width:8px;\n"
-"    border-image:none;\n"
+"    border-image:url(:/widget_Sidebar/images/Whith-0.png);\n"
 "    subcontrol-position:top;\n"
 "}\n"
 " /*当滚动条滚动的时候，上面的部分和下面的部分*/\n"
@@ -958,7 +965,7 @@ class Ui_MainWindow(object):
         self.scrollArea_page_settings.setWidgetResizable(True)
         self.scrollArea_page_settings.setObjectName("scrollArea_page_settings")
         self.scrollAreaWidgetContents_page_settings = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_page_settings.setGeometry(QtCore.QRect(0, 0, 1119, 612))
+        self.scrollAreaWidgetContents_page_settings.setGeometry(QtCore.QRect(0, 0, 380, 336))
         self.scrollAreaWidgetContents_page_settings.setObjectName("scrollAreaWidgetContents_page_settings")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_page_settings)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
@@ -1212,7 +1219,7 @@ class Ui_MainWindow(object):
         self.stackedWidget_main.setCurrentIndex(1)
         self.stackedWidget_main_2.setCurrentIndex(1)
         self.stackedWidget_page_users_down.setCurrentIndex(0)
-        self.stackedWidget_page_home.setCurrentIndex(0)
+        self.stackedWidget_page_home.setCurrentIndex(1)
         self.stackedWidget_page_home_game_left.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 

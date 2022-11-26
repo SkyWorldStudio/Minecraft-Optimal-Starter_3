@@ -146,6 +146,13 @@
 	border-left: 2px solid rgb(42, 130, 228);
 	background-color: rgba(42, 130, 255, 26);
 }
+#widget_page_home_game_right{
+	border-image: url(:/widget_Sidebar/images/Scrub_Settings-Z_B15.png);
+}
+#listWidget_page_home_game_right_gamefile_game{
+	border: 2px solid rgb(33, 33, 33);
+	border-radius: 8px;
+}
 #listWidget_page_home_game_right_gamefile_game::item{
 	height: 35px;
 }
@@ -438,13 +445,13 @@ QScrollBar::add-line:vertical   /*这个应该是设置下箭头的，3.png就�
 	background:rgba(0,0,0,0%);
 	border-style:none;
     height:9px;width:8px;
-    border-image:none;
+    border-image:url(:/widget_Sidebar/images/Whith-0.png);
     subcontrol-position:bottom;
 }
 QScrollBar::sub-line:vertical   /*设置上箭头*/
 {
 	background:rgba(0,0,0,0%);
-	border-style:none;
+	border-style:url(:/widget_Sidebar/images/Whith-0.png);
     height:9px;width:8px;
     border-image:url(:/img/caret-up_1.png);
     subcontrol-position:top;
@@ -452,13 +459,13 @@ QScrollBar::sub-line:vertical   /*设置上箭头*/
 QScrollBar::add-line:vertical:hover   /*当鼠标放到下箭头上的时候*/
 {
     height:9px;width:8px;
-    border-image:none;
+    border-image:url(:/widget_Sidebar/images/Whith-0.png);
     subcontrol-position:bottom;
 }
 QScrollBar::sub-line:vertical:hover  /*当鼠标放到下箭头上的时候*/
 {
     height:9px;width:8px;
-    border-image:none;
+    border-image:url(:/widget_Sidebar/images/Whith-0.png);
     subcontrol-position:top;
 }
  /*当滚动条滚动的时候，上面的部分和下面的部分*/
@@ -1111,7 +1118,7 @@ QPushButton:hover{
                <item>
                 <widget class="QStackedWidget" name="stackedWidget_page_home">
                  <property name="currentIndex">
-                  <number>0</number>
+                  <number>1</number>
                  </property>
                  <widget class="QWidget" name="page_home_main">
                   <layout class="QHBoxLayout" name="horizontalLayout_9">
@@ -1719,8 +1726,8 @@ QPushButton:hover{
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>1119</width>
-                    <height>612</height>
+                    <width>380</width>
+                    <height>336</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_2">
