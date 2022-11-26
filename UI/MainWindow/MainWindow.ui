@@ -137,6 +137,7 @@
 
 #listWidget_page_home_game_left::item{
 	border-left: 2px solid rgba(42, 130, 228,0);
+	padding: 8px;
 }
 #listWidget_page_home_game_left::item:hover{
 	background-color: rgba(240, 240, 240, 191);
@@ -434,12 +435,16 @@ QScrollBar::handle:vertical:hover
 }
 QScrollBar::add-line:vertical   /*这个应该是设置下箭头的，3.png就是箭头*/
 {
+	background:rgba(0,0,0,0%);
+	border-style:none;
     height:9px;width:8px;
-    border-image:url(:/img/caret-down_1.png);
+    border-image:none;
     subcontrol-position:bottom;
 }
 QScrollBar::sub-line:vertical   /*设置上箭头*/
 {
+	background:rgba(0,0,0,0%);
+	border-style:none;
     height:9px;width:8px;
     border-image:url(:/img/caret-up_1.png);
     subcontrol-position:top;
@@ -447,19 +452,21 @@ QScrollBar::sub-line:vertical   /*设置上箭头*/
 QScrollBar::add-line:vertical:hover   /*当鼠标放到下箭头上的时候*/
 {
     height:9px;width:8px;
-    border-image:url(:/img/caret-down.png);
+    border-image:none;
     subcontrol-position:bottom;
 }
 QScrollBar::sub-line:vertical:hover  /*当鼠标放到下箭头上的时候*/
 {
     height:9px;width:8px;
-    border-image:url(:/img/caret-up.png);
+    border-image:none;
     subcontrol-position:top;
 }
-QScrollBar::add-page:vertical,QScrollBar::sub-page:vertical   /*当滚动条滚动的时候，上面的部分和下面的部分*/
-{
-    background:rgba(0,0,0,10%);
-    border-radius:4px;
+ /*当滚动条滚动的时候，上面的部分和下面的部分*/
+QScrollBar::add-page:vertical{
+    border-radius:0px;	background:rgba(0,0,0,10%);
+}
+QScrollBar::sub-page:vertical  {
+    border-radius:0px;	background:rgba(0,0,0,10%);
 }
 
 QTreeWidget::item {
@@ -483,9 +490,11 @@ QListWidget::item {
 	padding: 8px;
 }
 QListWidget::item:hover {
+	padding: 0px;
 	background-color: transparent;
 }
 QListWidget::item:selected {
+	padding: 0px;
 	background-color: transparent;
 	color: black;
 	background-color: rgb(235, 235, 235);
@@ -1035,97 +1044,6 @@ QPushButton:hover{
                      <property name="selectionMode">
                       <enum>QAbstractItemView::MultiSelection</enum>
                      </property>
-                     <item>
-                      <property name="text">
-                       <string>新建项目</string>
-                      </property>
-                      <property name="checkState">
-                       <enum>Unchecked</enum>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>新建项目</string>
-                      </property>
-                      <property name="checkState">
-                       <enum>Checked</enum>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>新建项目</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>新建项目</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>新建项目</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>新建项目</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>新建项目</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>新建项目</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>新建项目</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>新建项目</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>新建项目</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>新建项目</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>新建项目</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>新建项目</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>新建项目</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>新建项目</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>新建项目</string>
-                      </property>
-                     </item>
                     </widget>
                    </item>
                   </layout>
@@ -1289,6 +1207,16 @@ QPushButton:hover{
                               <height>24</height>
                              </size>
                             </property>
+                            <item>
+                             <property name="text">
+                              <string>新建项目</string>
+                             </property>
+                            </item>
+                            <item>
+                             <property name="text">
+                              <string>新建项目</string>
+                             </property>
+                            </item>
                            </widget>
                           </item>
                          </layout>
@@ -1791,8 +1719,8 @@ QPushButton:hover{
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>380</width>
-                    <height>336</height>
+                    <width>1119</width>
+                    <height>612</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_2">

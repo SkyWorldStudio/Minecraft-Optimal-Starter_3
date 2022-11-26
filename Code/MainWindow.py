@@ -300,7 +300,13 @@ class RunUi(QMainWindow, Ui_MainWindow):
         """主页 -> 游戏列表 -> 选中一项"""
         item = self.listWidget_page_home_game_left.currentItem()
         N = item.text()
+        # 改变配置文件中的当前选中
+        print(self.listWidget_page_home_game_left.currentRow())
+        self.Json_MOS['GameFile_List_Clicked'] = int(self.listWidget_page_home_game_left.currentRow())
+        JsonWrite(self.Json_MOS,self.JsonFile)
+
         F = self.Json_MOS['GameFile'][N]['File']
+        self.listWidget_page_home_game_right_gamefile_game.clear()
         self.GameFiles_ReturnGameList_Thread_Start(F)
 
     def SettingsPage_Background_None_Clicked(self):
@@ -727,7 +733,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.label_loading_text_2.setText('正在设置启动器(6/7)')
             self.Users_List_Refresh()
 
-            print_('Info', '程序启动(初始化设置): 读取游戏列表')
+            print_('Info', '程序启动(初始化设置): 读取游戏目录列表')
             self.label_loading_text_2.setText('正在设置启动器(7/7)')
             self.GameFiles_Read_Thread_Start()
 
@@ -994,6 +1000,16 @@ class RunUi(QMainWindow, Ui_MainWindow):
         """
         self.stackedWidget_page_home_game_left.setCurrentIndex(0)
         self.label_page_home_game_left_none_loading_.stop()
+        # 设置当前选中
+        if self.listWidget_page_home_game_left.count() == 0:
+            pass
+        else:
+            index = self.Json_MOS['GameFile_List_Clicked']
+            self.listWidget_page_home_game_left.setCurrentRow(index)
+            text_ = self.listWidget_page_home_game_left.item(index)
+            text = text_.text()
+            GameFile = self.Json_MOS['GameFile'][text]['File']
+            self.GameFiles_ReturnGameList_Thread_Start(GameFile)
 
     def GameFiles_ReturnGameList_Thread_Start(self,GameFile):
         """启动"检测游戏目录下的游戏线程" 同时启动动画"""
@@ -1055,13 +1071,19 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
         self.listWidget_page_home_game_right_gamefile_game.addItem(item)
         self.listWidget_page_home_game_right_gamefile_game.setItemWidget(item, widget) # 为item设置widget
-        #item = QListWidgetItem(self.listWidget_page_home_game_right_gamefile_game)
-        #item.setText(Name)
-        #self.listWidget_page_home_game_right_gamefile_game.addItem(item)
 
     def GameFiles_ReturnGameList_Thread_SinOut_PushButton(self):
-        a = self.listWidget_page_home_game_right_gamefile_game.currentItem()
-        print(a.text())
+        # 获取button
+        btn = self.sender()
+        # 获取按钮相对于listwwdget的坐标
+        # listwidget 相对于窗体的坐标 减去 button 相对于窗体的坐标
+        buttonpos = btn.mapToGlobal(QPoint(0, 0)) - self.widget_page_home_game_right.mapToGlobal(QPoint(0, 0))
+        # 获取到对象
+        item = self.listWidget_page_home_game_right_gamefile_game.indexAt(buttonpos)
+        # 获取位置
+        index = item.row()
+        item_ = self.listWidget_page_home_game_right_gamefile_game.item(index)
+        print(item_.text())
 
     def Window_XY(self, X, Y):
         """改变窗口的XY坐标"""

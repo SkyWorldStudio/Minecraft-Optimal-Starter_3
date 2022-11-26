@@ -135,6 +135,7 @@ class Ui_MainWindow(object):
 "\n"
 "#listWidget_page_home_game_left::item{\n"
 "    border-left: 2px solid rgba(42, 130, 228,0);\n"
+"    padding: 8px;\n"
 "}\n"
 "#listWidget_page_home_game_left::item:hover{\n"
 "    background-color: rgba(240, 240, 240, 191);\n"
@@ -432,12 +433,16 @@ class Ui_MainWindow(object):
 "}\n"
 "QScrollBar::add-line:vertical   /*这个应该是设置下箭头的，3.png就是箭头*/\n"
 "{\n"
+"    background:rgba(0,0,0,0%);\n"
+"    border-style:none;\n"
 "    height:9px;width:8px;\n"
-"    border-image:url(:/img/caret-down_1.png);\n"
+"    border-image:none;\n"
 "    subcontrol-position:bottom;\n"
 "}\n"
 "QScrollBar::sub-line:vertical   /*设置上箭头*/\n"
 "{\n"
+"    background:rgba(0,0,0,0%);\n"
+"    border-style:none;\n"
 "    height:9px;width:8px;\n"
 "    border-image:url(:/img/caret-up_1.png);\n"
 "    subcontrol-position:top;\n"
@@ -445,19 +450,21 @@ class Ui_MainWindow(object):
 "QScrollBar::add-line:vertical:hover   /*当鼠标放到下箭头上的时候*/\n"
 "{\n"
 "    height:9px;width:8px;\n"
-"    border-image:url(:/img/caret-down.png);\n"
+"    border-image:none;\n"
 "    subcontrol-position:bottom;\n"
 "}\n"
 "QScrollBar::sub-line:vertical:hover  /*当鼠标放到下箭头上的时候*/\n"
 "{\n"
 "    height:9px;width:8px;\n"
-"    border-image:url(:/img/caret-up.png);\n"
+"    border-image:none;\n"
 "    subcontrol-position:top;\n"
 "}\n"
-"QScrollBar::add-page:vertical,QScrollBar::sub-page:vertical   /*当滚动条滚动的时候，上面的部分和下面的部分*/\n"
-"{\n"
-"    background:rgba(0,0,0,10%);\n"
-"    border-radius:4px;\n"
+" /*当滚动条滚动的时候，上面的部分和下面的部分*/\n"
+"QScrollBar::add-page:vertical{\n"
+"    border-radius:0px;    background:rgba(0,0,0,10%);\n"
+"}\n"
+"QScrollBar::sub-page:vertical  {\n"
+"    border-radius:0px;    background:rgba(0,0,0,10%);\n"
 "}\n"
 "\n"
 "QTreeWidget::item {\n"
@@ -481,9 +488,11 @@ class Ui_MainWindow(object):
 "    padding: 8px;\n"
 "}\n"
 "QListWidget::item:hover {\n"
+"    padding: 0px;\n"
 "    background-color: transparent;\n"
 "}\n"
 "QListWidget::item:selected {\n"
+"    padding: 0px;\n"
 "    background-color: transparent;\n"
 "    color: black;\n"
 "    background-color: rgb(235, 235, 235);\n"
@@ -683,42 +692,6 @@ class Ui_MainWindow(object):
         self.listWidget_users_down.setDragDropOverwriteMode(False)
         self.listWidget_users_down.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.MultiSelection)
         self.listWidget_users_down.setObjectName("listWidget_users_down")
-        item = QtWidgets.QListWidgetItem()
-        item.setCheckState(QtCore.Qt.CheckState.Unchecked)
-        self.listWidget_users_down.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        item.setCheckState(QtCore.Qt.CheckState.Checked)
-        self.listWidget_users_down.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_users_down.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_users_down.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_users_down.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_users_down.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_users_down.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_users_down.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_users_down.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_users_down.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_users_down.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_users_down.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_users_down.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_users_down.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_users_down.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_users_down.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_users_down.addItem(item)
         self.verticalLayout_5.addWidget(self.listWidget_users_down)
         self.stackedWidget_page_users_down.addWidget(self.stackedWidget_page_users_downPage1)
         self.stackedWidget_page_users_downPage_loaging = QtWidgets.QWidget()
@@ -793,6 +766,10 @@ class Ui_MainWindow(object):
         self.listWidget_page_home_game_left = QtWidgets.QListWidget(self.page_page_home_game_left_1)
         self.listWidget_page_home_game_left.setIconSize(QtCore.QSize(24, 24))
         self.listWidget_page_home_game_left.setObjectName("listWidget_page_home_game_left")
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_page_home_game_left.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_page_home_game_left.addItem(item)
         self.horizontalLayout_11.addWidget(self.listWidget_page_home_game_left)
         self.stackedWidget_page_home_game_left.addWidget(self.page_page_home_game_left_1)
         self.page_page_home_game_left_2 = QtWidgets.QWidget()
@@ -981,7 +958,7 @@ class Ui_MainWindow(object):
         self.scrollArea_page_settings.setWidgetResizable(True)
         self.scrollArea_page_settings.setObjectName("scrollArea_page_settings")
         self.scrollAreaWidgetContents_page_settings = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_page_settings.setGeometry(QtCore.QRect(0, 0, 380, 336))
+        self.scrollAreaWidgetContents_page_settings.setGeometry(QtCore.QRect(0, 0, 1119, 612))
         self.scrollAreaWidgetContents_page_settings.setObjectName("scrollAreaWidgetContents_page_settings")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_page_settings)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
@@ -1252,45 +1229,15 @@ class Ui_MainWindow(object):
         self.pushButton_page_users_up_refreshUser.setText(_translate("MainWindow", "刷新所选"))
         self.pushButton_page_users_up_deleteUser.setText(_translate("MainWindow", "删除所选"))
         self.label_page_users_up_setChoice.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:16pt;\">多选</span>/<span style=\" font-size:12pt;\">单选</span></p></body></html>"))
-        __sortingEnabled = self.listWidget_users_down.isSortingEnabled()
-        self.listWidget_users_down.setSortingEnabled(False)
-        item = self.listWidget_users_down.item(0)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_users_down.item(1)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_users_down.item(2)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_users_down.item(3)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_users_down.item(4)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_users_down.item(5)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_users_down.item(6)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_users_down.item(7)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_users_down.item(8)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_users_down.item(9)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_users_down.item(10)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_users_down.item(11)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_users_down.item(12)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_users_down.item(13)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_users_down.item(14)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_users_down.item(15)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_users_down.item(16)
-        item.setText(_translate("MainWindow", "新建项目"))
-        self.listWidget_users_down.setSortingEnabled(__sortingEnabled)
         self.label_users_down_none.setText(_translate("MainWindow", "没有在您电脑中读取到任何账户数据。您可以点击“添加”按钮来进行添加"))
         self.pushButton_page_home_main_game_list.setText(_translate("MainWindow", "游戏列表"))
+        __sortingEnabled = self.listWidget_page_home_game_left.isSortingEnabled()
+        self.listWidget_page_home_game_left.setSortingEnabled(False)
+        item = self.listWidget_page_home_game_left.item(0)
+        item.setText(_translate("MainWindow", "新建项目"))
+        item = self.listWidget_page_home_game_left.item(1)
+        item.setText(_translate("MainWindow", "新建项目"))
+        self.listWidget_page_home_game_left.setSortingEnabled(__sortingEnabled)
         self.label_page_home_game_left_none.setText(_translate("MainWindow", "<html><head/><body><p>您没有添加任何游戏文件夹。</p><p style=\'line-height:22px\'>您可以点击“添加游戏文件夹”按钮来进行添加</p></body></html>"))
         self.pushButton_page_home_file_leftrefresh.setText(_translate("MainWindow", "刷新                   "))
         self.pushButton_page_home_game_add.setText(_translate("MainWindow", "安装游戏           "))
