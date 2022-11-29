@@ -2,6 +2,7 @@
 
 import asyncio
 import aiohttp
+from collections import OrderedDict
 import datetime
 import os
 from sys import platform
@@ -64,38 +65,67 @@ class Download:
                     file_size_str_l = 0
                 else:
                     file_size_str_l = int(file_size_str_l_to)
-                file_size_str_l_to = file_size_str_l+ 5242880
-                if file_size_str_l_to < self.file_size_str:
-                    pass
-                else:
-                    # 如果超过了文件大小 就改成最大
-                    file_size_str_l_to = self.file_size_str
-                file = os.path.join(self.parh_cache_,str(Download_Number) + '.MOS_Download')
-                if file_size_str_l == file_size_str_l_to:
-                    pass
-                else:
-                    a = {
-                        'Download_Number': Download_Number,  # 下载次数
-                        'size_star': file_size_str_l,  # 从……开始
-                        'size_to': file_size_str_l_to, # 下载到……
-                        'file': file  # 缓存到……
-                    }
+                    file_size_str_l += 1
+                file_size_str_l_to = file_size_str_l+ 4194304
+                if file_size_str_l < self.file_size_str:
+                    if file_size_str_l_to < self.file_size_str:
+                        pass
+                    else:
+                        # 如果超过了文件大小 就改成最大
+                        file_size_str_l_to = self.file_size_str
+                    file = os.path.join(self.parh_cache_,str(Download_Number) + '.MOS_Download')
+                    if file_size_str_l == file_size_str_l_to:
+                        pass
+                    else:
+                        a = {
+                            'Download_Number': Download_Number,  # 下载次数
+                            'size_star': file_size_str_l,  # 从……开始
+                            'size_to': file_size_str_l_to, # 下载到……
+                            'file': file  # 缓存到……
+                        }
                     
-                    self.Download_Subsection_.append(
-                        asyncio.ensure_future(self.Download_Subsection(a))
-                        )
+                        self.Download_Subsection_.append(
+                            asyncio.ensure_future(self.Download_Subsection(a))
+                            )
             else:
                 print(self.Download_Subsection)
                 break
-        await asyncio.wait([self.Download_Subsection_Start(self.Download_Subsection_)])
+        await asyncio.wait([self.Download_Subsection_Start()])
     
-    async def Download_Subsection_Start(self, Download_Subsection):
-        await asyncio.wait(Download_Subsection)
-        # 检查是否完全完成
-        if len(Download_Subsection) != 0:
-            print('没有全部完成')
-        else:
-            print('ooooookkk')
+    async def Download_Subsection_Start(self):
+        async def Cheak():
+            await asyncio.wait(self.Download_Subsection_)
+            # 检查是否完全完成
+            Download_Subsection = list(OrderedDict.fromkeys(self.Download_Subsection_))
+            print(Download_Subsection)
+            Download_Subsection.remove(None)
+            print(Download_Subsection)
+            if len(Download_Subsection) != 0:
+                print('没有全部完成')
+                # await asyncio.wait([Cheak()])
+            else:
+                print('ooooookkk')
+                await asyncio.wait([CombinationFile()])
+        async def CombinationFile():
+            B = []
+            for file_ in os.listdir(self.parh_cache_):
+                if os.path.isdir(os.path.join(self.parh_cache_,file_)) == False:
+                    file__ = file_.split('.MOS_Download')[0]  # 存储编号
+                    B.append(file__)
+            print(B)
+            B.sort(key=int)  # 排序
+            print(B)
+            for file_ in B:
+                file = os.path.join(self.parh_cache_,file_)  # 缓存文件目录
+                file_1 = file + '.MOS_Download'
+                with open(file_1, 'rb') as f:
+                    r = f.read()
+                    with open(self.path, 'ab') as f_1:
+                        f_1.write(r)
+           
+        await asyncio.wait([Cheak()])
+        
+        
     
     async def Download_Subsection(self,Download_Subsection):
         print(Download_Subsection)
@@ -105,25 +135,25 @@ class Download:
         headers['Range'] = 'bytes=' + str(Download_Subsection['size_star']) + '-' + str(Download_Subsection['size_to'])
         print(headers)
         # 重试5次
-        try:
-            async with aiohttp.ClientSession(timeout = aiohttp.ClientTimeout(connect=30)) as session:
-                f = await session.get(self.url, headers=headers, ssl=False)
-                f_code = await f.read()
-                os.makedirs(self.parh_cache_,exist_ok=True)
-                with open(Download_Subsection['file'], 'wb') as f:
-                    f.write(f_code)
-                #self.Download_Subsection__ = []
+        while True:
+            try:
+                async with aiohttp.ClientSession(timeout = aiohttp.ClientTimeout(connect=30)) as session:
+                    f = await session.get(self.url, headers=headers, ssl=False)
+                    f_code = await f.read()
+                    os.makedirs(self.parh_cache_,exist_ok=True)
+                    with open(Download_Subsection['file'], 'wb') as f:
+                        f.write(f_code)
 
-                self.Download_Subsection_[Download_Subsection['Download_Number']] = None
-                print(self.Download_Subsection_)
+                    self.Download_Subsection_[Download_Subsection['Download_Number']] = None
+                    print(self.Download_Subsection_)
+                    break
 
-        except aiohttp.client_exceptions.ClientConnectorError:
-            print('客户端链接错误')
-            if 'C' in Download_Subsection:
-                Download_Subsection['C'] += 1
-            else:
-                Download_Subsection['C'] = 1
-
+            except aiohttp.client_exceptions.ClientConnectorError:
+                print('客户端链接错误')
+                asyncio.sleep(10)
+            except aiohttp.client_exceptions.ClientPayloadError:
+                print('客户端网络错误')
+                asyncio.sleep(10)
         print('OK')
 
     def DownloadAll(self, url_list, path_list):
@@ -141,8 +171,12 @@ class Download:
         gevent.joinall(li)
 
 if __name__ == '__main__':
-    U = 'https://download-ssl.firefox.com.cn/releases/firefox/107.0/zh-CN/Firefox-latest.dmg'
-    F = '/Users/xyj/Documents/临时/Firefox-latest.dmg'
-    P_F = '/Users/xyj/Documents/临时/Firefox-latest__'
+    # U = 'https://download-ssl.firefox.com.cn/releases/firefox/107.0/zh-CN/Firefox-latest.dmg'
+    U = 'https://download.moslauncher.tk/Download/java/version_grean/Java_16/Java-16-x64-Mac-jdk-16.0.2_osx-x64_bin.tar.gz'
+    # U = 'http://154.12.37.148:8888/down/z0vtLwTtoUpq.gz'
+    #U = 'https://download.moslauncher.tk/Download/java/123.txt'
+    F = '/Users/xyj/Documents/临时/Java-16-x64-Mac-jdk-16.0.2_osx-x64_bin.tar.gz'
+    #F = '/Users/xyj/Documents/临时/1.txt'
+    P_F = '/Users/xyj/Documents/临时/Java__'
     a = Download()
     a.download(U,F,P_F)
