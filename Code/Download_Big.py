@@ -173,7 +173,6 @@ class Download:
 if __name__ == '__main__':
     # U = 'https://download-ssl.firefox.com.cn/releases/firefox/107.0/zh-CN/Firefox-latest.dmg'
     U = 'https://download.moslauncher.tk/Download/java/version_grean/Java_16/Java-16-x64-Mac-jdk-16.0.2_osx-x64_bin.tar.gz'
-    # U = 'http://154.12.37.148:8888/down/z0vtLwTtoUpq.gz'
     #U = 'https://download.moslauncher.tk/Download/java/123.txt'
     F = '/Users/xyj/Documents/临时/Java-16-x64-Mac-jdk-16.0.2_osx-x64_bin.tar.gz'
     #F = '/Users/xyj/Documents/临时/1.txt'
