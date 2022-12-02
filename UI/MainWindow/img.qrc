@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="widget_Sidebar">
+    <file>../../images/Refresh_2.png</file>
     <file>../../images/Settings_Game.png</file>
     <file>../../images/Game_File.png</file>
     <file>../../images/Main_Page_GameFile_AddAgain.png</file>

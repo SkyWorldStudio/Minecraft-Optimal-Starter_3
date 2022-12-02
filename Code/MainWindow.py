@@ -10,7 +10,7 @@ from PyQt6.QtWidgets import QMainWindow, QGraphicsOpacityEffect, QListWidgetItem
 from pytz import timezone
 
 from Code.Log import print_, Log_Clear, Log_Return
-from Code.MC_Code.MainWindow import Ui_MainWindow
+from UI.MainWindow.MainWindow import Ui_MainWindow
 from Code.Code import JsonRead, JsonFile, Systeam, JsonWrite, File, Json_Cheak
 
 
