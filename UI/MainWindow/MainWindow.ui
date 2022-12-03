@@ -186,6 +186,46 @@
 	background-color: rgb(243, 243, 243);
 }
 
+/*下载页面*/
+#page_download_1{
+	border-image: url(:/Scrub/images/Scrub_B15_FFFFFF-60_Main-User-2.png);
+	border-radius: 8px;
+}
+#listWidget_page_1_download{
+	border-radius: 8px;
+	/*border: 1px solid rgb(33, 33, 33);*/
+}
+#listWidget_page_1_download QScrollBar{
+	border-right: 3px solid rgba(0, 150, 255,0);
+}
+#listWidget_page_1_download QScrollBar:vertical
+{
+    width:12px;
+    background:rgba(0,0,0,0%);
+    margin:0px,0px,0px,0px;
+    padding-top:9px;   /*留出9px给上面和下面的箭头*/
+    padding-bottom:9px;
+}
+
+#listWidget_page_1_download::item {
+    height: 10px;
+	padding: 12px;
+	border-left: 0px solid rgba(214, 214, 214,0);
+	/*border-top: 1px solid rgb(169, 169, 169);*/
+	border-bottom: 1px solid rgb(169, 169, 169);
+}
+#listWidget_page_1_download::item:hover {
+	background-color: rgba(235, 235, 235,0);
+	border-left: 0px solid rgba(214, 214, 214,0);
+	/*border-top: 1px solid rgb(214, 214, 214);*/
+	border-bottom: 1px solid rgb(214, 214, 214);
+}
+#listWidget_page_1_download::item:selected {
+	background-color: rgba(235, 235, 235,0);
+	border-left: 0px solid rgba(214, 214, 214,0);
+	/*border-top: 1px solid rgba(214, 214, 214,0);*/
+	border-bottom: 1px solid rgba(214, 214, 214,0);
+}
 /*设置页面*/
 #scrollAreaWidgetContents_page_settings &gt; QWidget
 {
@@ -476,6 +516,52 @@ QScrollBar::sub-page:vertical  {
     border-radius:0px;	background:rgba(0,0,0,10%);
 }
 
+QCheckBox{
+	border: none;/*最外层边框*/
+}
+QCheckBox::indicator{/*选择框尺寸*/
+    background-color: rgba(255, 255, 255, 0);
+    border: 0px solid #b1b1b1;
+}
+QCheckBox:enabled:checked{
+	color: rgb(0, 0, 0);
+}
+QCheckBox:enabled:!checked{
+	color:  rgb(0, 0, 0);
+}
+QCheckBox:enabled:hover{
+ 	color: rgb(0, 0, 0);
+}
+QCheckBox:!enabled{
+	color: rgb(0, 0, 0);
+}
+QCheckBox::indicator{
+	padding: 5px;
+	width:15px;
+	height:15px;
+}
+/*未选中样式*/
+QCheckBox::indicator:unchecked {
+	border-image: url(:/widget_Sidebar/images/QCheckBox_Unchecked.png);
+}
+QCheckBox::indicator:unchecked:hover {
+	
+}
+QCheckBox::indicator:unchecked:pressed {
+	border-image: url(:/widget_Sidebar/images/QCheckBox_Unchecked-Pressed.png);
+}
+
+/*选中样式*/
+QCheckBox::indicator:checked {
+	border-image: url(:/widget_Sidebar/images/QCheckBox_Checked.png);
+}
+QCheckBox::indicator:checked:hover {
+	
+}
+QCheckBox::indicator:checked:pressed {
+	border-image: url(:/widget_Sidebar/images/QCheckBox_Checked-Pressed.png)；
+}
+
 QTreeWidget::item {
     height: 20px;
 	padding: 8px;
@@ -513,6 +599,7 @@ QLineEdit{
 QLineEdit::focus{
 	border:2px solid rgb(0, 119, 255);
 }
+
 QPushButton{
 	border-style:none;
 	border-radius: 5px;
@@ -520,7 +607,7 @@ QPushButton{
 QPushButton:hover{
 	background-color: rgb(252, 252, 252);
 }
-Line{
+#widget_page_download_2_line{
 	background-color: rgb(166, 166, 166);
 	border:none;
 }
@@ -1013,7 +1100,7 @@ Line{
                <item>
                 <widget class="QStackedWidget" name="stackedWidget_page_users_down">
                  <property name="currentIndex">
-                  <number>1</number>
+                  <number>0</number>
                  </property>
                  <widget class="QWidget" name="stackedWidget_page_users_downPage1">
                   <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1217,16 +1304,6 @@ Line{
                               <height>24</height>
                              </size>
                             </property>
-                            <item>
-                             <property name="text">
-                              <string>新建项目</string>
-                             </property>
-                            </item>
-                            <item>
-                             <property name="text">
-                              <string>新建项目</string>
-                             </property>
-                            </item>
                            </widget>
                           </item>
                          </layout>
@@ -1700,6 +1777,9 @@ Line{
              <widget class="QWidget" name="page_online"/>
              <widget class="QWidget" name="page_download">
               <layout class="QVBoxLayout" name="verticalLayout_10">
+               <property name="spacing">
+                <number>4</number>
+               </property>
                <property name="leftMargin">
                 <number>8</number>
                </property>
@@ -1734,7 +1814,7 @@ Line{
                    <number>0</number>
                   </property>
                   <property name="rightMargin">
-                   <number>0</number>
+                   <number>5</number>
                   </property>
                   <property name="bottomMargin">
                    <number>0</number>
@@ -1743,105 +1823,143 @@ Line{
                    <widget class="QWidget" name="widget_page_download_2" native="true">
                     <layout class="QHBoxLayout" name="horizontalLayout_14">
                      <property name="spacing">
-                      <number>-1</number>
+                      <number>7</number>
                      </property>
                      <property name="leftMargin">
                       <number>5</number>
                      </property>
                      <property name="topMargin">
-                      <number>0</number>
+                      <number>4</number>
                      </property>
                      <property name="rightMargin">
                       <number>0</number>
                      </property>
                      <property name="bottomMargin">
-                      <number>0</number>
+                      <number>4</number>
                      </property>
                      <item>
                       <widget class="MyQLabel" name="label_page_download_2_game">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>70</width>
+                         <height>0</height>
+                        </size>
+                       </property>
                        <property name="font">
                         <font>
-                         <pointsize>15</pointsize>
+                         <pointsize>17</pointsize>
                         </font>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">border-bottom: 2px solid rgb(0, 119, 225);</string>
                        </property>
                        <property name="text">
                         <string>游戏本体</string>
                        </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QWidget" name="widget_page_download_2_line" native="true">
-                       <layout class="QHBoxLayout" name="horizontalLayout_18">
-                        <property name="spacing">
-                         <number>0</number>
-                        </property>
-                        <property name="leftMargin">
-                         <number>0</number>
-                        </property>
-                        <property name="topMargin">
-                         <number>8</number>
-                        </property>
-                        <property name="rightMargin">
-                         <number>0</number>
-                        </property>
-                        <property name="bottomMargin">
-                         <number>8</number>
-                        </property>
-                        <item>
-                         <widget class="Line" name="line_page_download_2">
-                          <property name="orientation">
-                           <enum>Qt::Vertical</enum>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
                       </widget>
                      </item>
                      <item>
                       <widget class="MyQLabel" name="label_page_download_2_word">
+                       <property name="minimumSize">
+                        <size>
+                         <width>70</width>
+                         <height>0</height>
+                        </size>
+                       </property>
                        <property name="font">
                         <font>
-                         <pointsize>15</pointsize>
+                         <pointsize>17</pointsize>
                         </font>
                        </property>
                        <property name="text">
                         <string>世界存档</string>
                        </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
                       </widget>
                      </item>
                      <item>
                       <widget class="MyQLabel" name="label_page_download_2_mode">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>55</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>55</width>
+                         <height>16777215</height>
+                        </size>
+                       </property>
                        <property name="font">
                         <font>
-                         <pointsize>15</pointsize>
+                         <pointsize>17</pointsize>
                         </font>
                        </property>
                        <property name="text">
                         <string>模组</string>
                        </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
                       </widget>
                      </item>
                      <item>
                       <widget class="MyQLabel" name="label_page_download_2_conformity">
+                       <property name="minimumSize">
+                        <size>
+                         <width>60</width>
+                         <height>0</height>
+                        </size>
+                       </property>
                        <property name="font">
                         <font>
-                         <pointsize>15</pointsize>
+                         <pointsize>17</pointsize>
                         </font>
                        </property>
                        <property name="text">
                         <string>整合包</string>
                        </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
                       </widget>
                      </item>
                      <item>
                       <widget class="MyQLabel" name="label_page_download_2_resource">
+                       <property name="minimumSize">
+                        <size>
+                         <width>65</width>
+                         <height>0</height>
+                        </size>
+                       </property>
                        <property name="font">
                         <font>
-                         <pointsize>15</pointsize>
+                         <pointsize>17</pointsize>
                         </font>
                        </property>
                        <property name="text">
                         <string>资源包</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
                        </property>
                       </widget>
                      </item>
@@ -1869,7 +1987,7 @@ Line{
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
-                    <widget class="QWidget" name="page_3">
+                    <widget class="QWidget" name="page_page_download_mc">
                      <layout class="QHBoxLayout" name="horizontalLayout_15">
                       <property name="spacing">
                        <number>18</number>
@@ -1887,7 +2005,7 @@ Line{
                        <number>0</number>
                       </property>
                       <item>
-                       <widget class="QCheckBox" name="checkBox_2">
+                       <widget class="QCheckBox" name="checkBox_page_download_mc_official">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                           <horstretch>0</horstretch>
@@ -1908,13 +2026,19 @@ Line{
                         <property name="text">
                          <string>正式版</string>
                         </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>22</width>
+                          <height>22</height>
+                         </size>
+                        </property>
                         <property name="checked">
                          <bool>true</bool>
                         </property>
                        </widget>
                       </item>
                       <item>
-                       <widget class="QCheckBox" name="checkBox_3">
+                       <widget class="QCheckBox" name="checkBox_page_download_mc_test">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                           <horstretch>0</horstretch>
@@ -1935,10 +2059,16 @@ Line{
                         <property name="text">
                          <string>测试版</string>
                         </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>22</width>
+                          <height>22</height>
+                         </size>
+                        </property>
                        </widget>
                       </item>
                       <item>
-                       <widget class="QCheckBox" name="checkBox">
+                       <widget class="QCheckBox" name="checkBox_page_download_mc_previously">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                           <horstretch>0</horstretch>
@@ -1959,10 +2089,16 @@ Line{
                         <property name="text">
                          <string>远古版</string>
                         </property>
+                        <property name="iconSize">
+                         <size>
+                          <width>22</width>
+                          <height>22</height>
+                         </size>
+                        </property>
                        </widget>
                       </item>
                       <item>
-                       <widget class="QPushButton" name="pushButton">
+                       <widget class="QPushButton" name="pushButton_page_download_mc_refresh">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                           <horstretch>0</horstretch>
@@ -1989,8 +2125,8 @@ Line{
                         </property>
                         <property name="iconSize">
                          <size>
-                          <width>13</width>
-                          <height>17</height>
+                          <width>22</width>
+                          <height>22</height>
                          </size>
                         </property>
                        </widget>
@@ -2004,31 +2140,27 @@ Line{
                 </widget>
                </item>
                <item>
-                <widget class="QStackedWidget" name="stackedWidget">
+                <widget class="QStackedWidget" name="stackedWidget_page_download">
                  <widget class="QWidget" name="page_download_1">
                   <layout class="QHBoxLayout" name="horizontalLayout_17">
+                   <property name="leftMargin">
+                    <number>12</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>6</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>6</number>
+                   </property>
                    <item>
-                    <widget class="QListWidget" name="listWidget_page_1_download">
-                     <item>
-                      <property name="text">
-                       <string>新建项目</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>新建项目</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>新建项目</string>
-                      </property>
-                     </item>
-                    </widget>
+                    <widget class="QListWidget" name="listWidget_page_1_download"/>
                    </item>
                   </layout>
                  </widget>
+                 <widget class="QWidget" name="page_5"/>
                  <widget class="QWidget" name="page_2"/>
+                 <widget class="QWidget" name="page"/>
+                 <widget class="QWidget" name="page_3"/>
                 </widget>
                </item>
               </layout>
@@ -2060,8 +2192,8 @@ Line{
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>380</width>
-                    <height>336</height>
+                    <width>1119</width>
+                    <height>612</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_2">

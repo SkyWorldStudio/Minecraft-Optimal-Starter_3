@@ -10,7 +10,7 @@ from PyQt6.QtWidgets import QMainWindow, QGraphicsOpacityEffect, QListWidgetItem
 from pytz import timezone
 
 from Code.Log import print_, Log_Clear, Log_Return
-from Code.MC_Code.MainWindow import Ui_MainWindow
+from UI.MainWindow.MainWindow import Ui_MainWindow
 from Code.Code import JsonRead, JsonFile, Systeam, JsonWrite, File, Json_Cheak
 
 
@@ -309,6 +309,84 @@ class RunUi(QMainWindow, Ui_MainWindow):
         F = self.Json_MOS['GameFile'][N]['File']
         self.listWidget_page_home_game_right_gamefile_game.clear()
         self.GameFiles_ReturnGameList_Thread_Start(F)
+
+    def DownloadPage_Game_Clicked(self):
+        """下载页 -> 游戏本体"""
+        if self.stackedWidget_page_download.currentIndex() == 0:
+            pass
+        else:
+            self.SetCurrentIndex(self.stackedWidget_page_download, 0, 3, True)
+
+    def DownloadPage_Word_Clicked(self):
+        """下载页 -> 游戏本体"""
+        if self.stackedWidget_page_download.currentIndex() == 1:
+            pass
+        else:
+            self.SetCurrentIndex(self.stackedWidget_page_download, 1, 3, True)
+
+    def DownloadPage_Mode_Clicked(self):
+        """下载页 -> 游戏本体"""
+        if self.stackedWidget_page_download.currentIndex() == 2:
+            pass
+        else:
+            self.SetCurrentIndex(self.stackedWidget_page_download, 2, 3, True)
+
+    def DownloadPage_Conformity_Clicked(self):
+        """下载页 -> 游戏本体"""
+        if self.stackedWidget_page_download.currentIndex() == 3:
+            pass
+        else:
+            self.SetCurrentIndex(self.stackedWidget_page_download, 3, 3, True)
+
+    def DownloadPage_Resource_Clicked(self):
+        """下载页 -> 游戏本体"""
+        if self.stackedWidget_page_download.currentIndex() == 4:
+            pass
+        else:
+            self.SetCurrentIndex(self.stackedWidget_page_download, 4, 3, True)
+
+    def DownloadPage_stackedWidget_setButtonStyleSheet(self,I):
+        """
+            在下载页面的stackedWidget改变时, 设置 下载页 -> 左上方的按钮控件样式
+            :param I : 将下载页面的stackedWidget设置为了第……页
+        """
+        S = 'border-bottom: 2px solid rgb(0, 119, 225);'
+        if I == 0:
+            self.label_page_download_2_game.setStyleSheet(S)
+            self.label_page_download_2_word.setStyleSheet('')
+            self.label_page_download_2_mode.setStyleSheet('')
+            self.label_page_download_2_conformity.setStyleSheet('')
+            self.label_page_download_2_resource.setStyleSheet('')
+        elif I == 1:
+            self.label_page_download_2_game.setStyleSheet('')
+            self.label_page_download_2_word.setStyleSheet(S)
+            self.label_page_download_2_mode.setStyleSheet('')
+            self.label_page_download_2_conformity.setStyleSheet('')
+            self.label_page_download_2_resource.setStyleSheet('')
+        elif I == 2:
+            self.label_page_download_2_game.setStyleSheet('')
+            self.label_page_download_2_word.setStyleSheet('')
+            self.label_page_download_2_mode.setStyleSheet(S)
+            self.label_page_download_2_conformity.setStyleSheet('')
+            self.label_page_download_2_resource.setStyleSheet('')
+        elif I == 3:
+            self.label_page_download_2_game.setStyleSheet('')
+            self.label_page_download_2_word.setStyleSheet('')
+            self.label_page_download_2_mode.setStyleSheet('')
+            self.label_page_download_2_conformity.setStyleSheet(S)
+            self.label_page_download_2_resource.setStyleSheet('')
+        elif I == 4:
+            self.label_page_download_2_game.setStyleSheet('')
+            self.label_page_download_2_word.setStyleSheet('')
+            self.label_page_download_2_mode.setStyleSheet('')
+            self.label_page_download_2_conformity.setStyleSheet('')
+            self.label_page_download_2_resource.setStyleSheet(S)
+
+
+    def DownloadPage_stackedWidget_CurrentIndex(self):
+        """当下载页面的stackedWidget传来页数改变的信号时 调用DownloadPage_stackedWidget_setButtonStyleSheet"""
+        I = self.stackedWidget_page_download.currentIndex()
+        self.DownloadPage_stackedWidget_setButtonStyleSheet(I)
 
     def SettingsPage_Background_None_Clicked(self):
         """设置页面 -> 背景设置:选择：无"""
@@ -863,6 +941,14 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.pushButton_game_file_add_cancel.clicked.connect(self.MainPage_GameList_List_GameFileAdd_Cancel)
         self.listWidget_page_home_game_left.clicked.connect(self.MainPage_GameList_List)
 
+        # 下载页面
+        self.label_page_download_2_game.clicked.connect(self.DownloadPage_Game_Clicked)
+        self.label_page_download_2_word.clicked.connect(self.DownloadPage_Word_Clicked)
+        self.label_page_download_2_mode.clicked.connect(self.DownloadPage_Mode_Clicked)
+        self.label_page_download_2_conformity.clicked.connect(self.DownloadPage_Conformity_Clicked)
+        self.label_page_download_2_resource.clicked.connect(self.DownloadPage_Resource_Clicked)
+        self.stackedWidget_page_download.currentChanged.connect(self.DownloadPage_stackedWidget_CurrentIndex)
+
         # 设置页面
         self.radioButton_settings_background_none.clicked.connect(self.SettingsPage_Background_None_Clicked)
         self.radioButton_settings_background_1.clicked.connect(self.SettingsPage_Background_1_Clicked)
@@ -1092,7 +1178,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         """游戏列表设置按钮信号处理"""
         # 获取button
         btn = self.sender()
-        # 获取按钮相对于listwwdget的坐标
+        # 获取按钮相对于listwidget的坐标
         # listwidget 相对于窗体的坐标 减去 button 相对于窗体的坐标
         buttonpos = btn.mapToGlobal(QPoint(0, 0)) - self.widget_page_home_game_right.mapToGlobal(QPoint(0, 0))
         # 获取到对象

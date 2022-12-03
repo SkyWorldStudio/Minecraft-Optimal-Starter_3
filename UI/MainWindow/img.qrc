@@ -1,5 +1,9 @@
 <RCC>
   <qresource prefix="widget_Sidebar">
+    <file>../../images/QCheckBox_Checked-Pressed.png</file>
+    <file>../../images/QCheckBox_Checked.png</file>
+    <file>../../images/QCheckBox_Unchecked-Pressed.png</file>
+    <file>../../images/QCheckBox_Unchecked.png</file>
     <file>../../images/Refresh_2.png</file>
     <file>../../images/Settings_Game.png</file>
     <file>../../images/Game_File.png</file>

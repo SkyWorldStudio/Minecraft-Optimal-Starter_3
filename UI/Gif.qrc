@@ -1,6 +1,6 @@
 <RCC>
   <qresource prefix="Gif_BG">
-    <file>../images/Whith-0%.png</file>
+    <file>../images/Whith-0.png</file>
   </qresource>
   <qresource prefix="Gif_Home">
     <file>../images/Home/18.png</file>
