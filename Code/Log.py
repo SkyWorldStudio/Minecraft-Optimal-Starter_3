@@ -14,6 +14,7 @@ class Print_Colour:
         OKGREEN:绿色
         OKGREEN_2:有下划线的绿色
         WARNING:黄色
+        WARNING_2:有下划线的黄色
         FAIL:红色
         FAIL_2:加粗的红色
         FAIL_3:有下划线的红色
@@ -27,6 +28,7 @@ class Print_Colour:
     OKGREEN = '\033[92m'
     OKGREEN_2 = '\033[4;92m'
     WARNING = '\033[93m'
+    WARNING_2 = '\033[4;93m'
     FAIL = '\033[91m'
     FAIL_2 = '\033[1;91m'
     FAIL_3 = '\033[4;91m'
@@ -35,8 +37,7 @@ class Print_Colour:
     UNDERLINE = '\033[4m'
 
 
-def print_(Type, Text):
-    global r
+def print_(Type, Text, Log=True):
     MOS_print = str(Text)
     Time = datetime.datetime.now().strftime('%H:%M:%S.%f')
     if Type == 'Error':
@@ -61,7 +62,20 @@ def print_(Type, Text):
         p = left + Time_2 + right + left + Tybe_2 + right + Print_Colour.ENDC + MOS_print + Print_Colour.ENDC
         print(p)
         p_1 = '[' + Time + '][' + Tybe_1 + ']' + MOS_print + '\n'
-    r.append(p_1)
+
+    elif Type == 'BeBug':
+        Tybe_1 = 'BEBUG'
+        left = Print_Colour.ENDC + '[' + Print_Colour.ENDC
+        right = Print_Colour.ENDC + ']' + Print_Colour.ENDC
+        Tybe_2 = Print_Colour.WARNING_2 + 'INFO' + Print_Colour.ENDC
+        # Time_2 = Print_Colour.UNDERLINE + Time + Print_Colour.ENDC
+        Time_2 = Time
+        p = left + Time_2 + right + left + Tybe_2 + right + Print_Colour.ENDC + MOS_print + Print_Colour.ENDC
+        print(p)
+        p_1 = '[' + Time + '][' + Tybe_1 + ']' + MOS_print + '\n'
+    if Log == True:
+        global r
+        r.append(p_1)
 
 
 def Log_Return():
@@ -77,5 +91,7 @@ def Log_Clear():
 
 
 if __name__ == '__main__':
+    r = []
     print_('Error', '1111')
     print_('Info', 'asdasdas')
+    print_('BeBug','askdnasnnaksldnklas')

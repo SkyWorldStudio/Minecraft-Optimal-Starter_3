@@ -143,6 +143,7 @@ class Download:
                     os.makedirs(self.parh_cache_,exist_ok=True)
                     with open(Download_Subsection['file'], 'wb') as f:
                         f.write(f_code)
+                    f_code = ''  # 释放缓存
 
                     self.Download_Subsection_[Download_Subsection['Download_Number']] = None
                     print(self.Download_Subsection_)

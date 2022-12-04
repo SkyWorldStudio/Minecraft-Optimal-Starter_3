@@ -22,7 +22,7 @@ def JsonFile():
     return b
 
 
-def JsonWrite(Json_, JsonFile_):
+def JsonWrite(Json_, JsonFile_,BuBug = False):
     """
         写入Json
         :param Json_: Json内容
@@ -31,9 +31,15 @@ def JsonWrite(Json_, JsonFile_):
     with open(JsonFile_, 'w+', encoding='utf_8') as f:
         json.dump(Json_, f, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
     if JsonFile_ == JsonFile():
-        print_('Info',str('写入Json(启动器配置Json) 目录: ' + JsonFile_ + ' 内容:\n') + str(Json_))
+        if BuBug == True:
+            print_('BeBug', str('写入Json(启动器配置Json) 目录: ' + JsonFile_ + ' 内容:\n') + str(Json_))
+        else:
+            print_('Info',str('写入Json(启动器配置Json) 目录: ' + JsonFile_ + ' 内容:\n') + str(Json_))
     else:
-        print_('Info', str('写入Json 目录: ' + JsonFile_ + ' 内容:\n') + str(Json_))
+        if BuBug == True:
+            print_('BeBug', str('写入Json 目录: ' + JsonFile_ + ' 内容:\n') + str(Json_))
+        else:
+            print_('Info', str('写入Json 目录: ' + JsonFile_ + ' 内容:\n') + str(Json_))
 
     return 'OK'
 

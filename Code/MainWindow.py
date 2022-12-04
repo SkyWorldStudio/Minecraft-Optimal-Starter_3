@@ -382,6 +382,18 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.label_page_download_2_conformity.setStyleSheet('')
             self.label_page_download_2_resource.setStyleSheet(S)
 
+    def DownloadPage_MC_Official(self):
+        Qt
+        self.checkBox_page_download_mc_test.x(Qt.heckState.Unchecked())
+        self.checkBox_page_download_mc_previously.setChecked(Qt.CheckState.Unchecked())
+    def DownloadPage_MC_Text(self):
+        self.checkBox_page_download_mc_previously.setChecked(Qt.CheckState.Unchecked)
+        self.checkBox_page_download_mc_previously.setChecked(Qt.CheckState.Unchecked())
+
+    def DownloadPage_MC_Previously(self):
+        self.checkBox_page_download_mc_previously.setChecked(Qt.CheckState.Unchecked())
+        self.checkBox_page_download_mc_test.setChecked(Qt.CheckState.Unchecked())
+
 
     def DownloadPage_stackedWidget_CurrentIndex(self):
         """当下载页面的stackedWidget传来页数改变的信号时 调用DownloadPage_stackedWidget_setButtonStyleSheet"""
@@ -948,6 +960,9 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.label_page_download_2_conformity.clicked.connect(self.DownloadPage_Conformity_Clicked)
         self.label_page_download_2_resource.clicked.connect(self.DownloadPage_Resource_Clicked)
         self.stackedWidget_page_download.currentChanged.connect(self.DownloadPage_stackedWidget_CurrentIndex)
+        self.checkBox_page_download_mc_official.clicked.connect(self.DownloadPage_MC_Official)
+        self.checkBox_page_download_mc_test.clicked.connect(self.DownloadPage_MC_Text)
+        self.checkBox_page_download_mc_previously.clicked.connect(self.DownloadPage_MC_Previously)
 
         # 设置页面
         self.radioButton_settings_background_none.clicked.connect(self.SettingsPage_Background_None_Clicked)

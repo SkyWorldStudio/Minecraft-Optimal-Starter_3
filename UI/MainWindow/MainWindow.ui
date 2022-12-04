@@ -637,7 +637,7 @@ QPushButton:hover{
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="page_main">
        <property name="styleSheet">
@@ -901,7 +901,7 @@ QPushButton:hover{
               <string notr="true"/>
              </property>
              <property name="currentIndex">
-              <number>1</number>
+              <number>3</number>
              </property>
              <widget class="QWidget" name="page_users">
               <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -2005,7 +2005,7 @@ QPushButton:hover{
                        <number>0</number>
                       </property>
                       <item>
-                       <widget class="QCheckBox" name="checkBox_page_download_mc_official">
+                       <widget class="QRadioButton" name="radioButton_page_download_mc_official">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                           <horstretch>0</horstretch>
@@ -2038,7 +2038,7 @@ QPushButton:hover{
                        </widget>
                       </item>
                       <item>
-                       <widget class="QCheckBox" name="checkBox_page_download_mc_test">
+                       <widget class="QRadioButton" name="radioButton_page_download_mc_test">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                           <horstretch>0</horstretch>
@@ -2068,7 +2068,7 @@ QPushButton:hover{
                        </widget>
                       </item>
                       <item>
-                       <widget class="QCheckBox" name="checkBox_page_download_mc_previously">
+                       <widget class="QRadioButton" name="radioButton_page_download_mc_previously">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                           <horstretch>0</horstretch>
@@ -2141,6 +2141,9 @@ QPushButton:hover{
                </item>
                <item>
                 <widget class="QStackedWidget" name="stackedWidget_page_download">
+                 <property name="currentIndex">
+                  <number>0</number>
+                 </property>
                  <widget class="QWidget" name="page_download_1">
                   <layout class="QHBoxLayout" name="horizontalLayout_17">
                    <property name="leftMargin">
