@@ -200,7 +200,7 @@
 }
 #listWidget_page_1_download QScrollBar:vertical
 {
-    width:12px;
+    width:10px;
     background:rgba(0,0,0,0%);
     margin:0px,0px,0px,0px;
     padding-top:9px;   /*留出9px给上面和下面的箭头*/
@@ -208,7 +208,7 @@
 }
 
 #listWidget_page_1_download::item {
-    height: 10px;
+    height: 22px;
 	padding: 12px;
 	border-left: 0px solid rgba(214, 214, 214,0);
 	/*border-top: 1px solid rgb(169, 169, 169);*/
@@ -637,7 +637,7 @@ QPushButton:hover{
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page_main">
        <property name="styleSheet">
@@ -901,7 +901,7 @@ QPushButton:hover{
               <string notr="true"/>
              </property>
              <property name="currentIndex">
-              <number>3</number>
+              <number>1</number>
              </property>
              <widget class="QWidget" name="page_users">
               <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -2005,7 +2005,7 @@ QPushButton:hover{
                        <number>0</number>
                       </property>
                       <item>
-                       <widget class="QRadioButton" name="radioButton_page_download_mc_official">
+                       <widget class="QCheckBox" name="checkBox_page_download_mc_official">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                           <horstretch>0</horstretch>
@@ -2038,7 +2038,7 @@ QPushButton:hover{
                        </widget>
                       </item>
                       <item>
-                       <widget class="QRadioButton" name="radioButton_page_download_mc_test">
+                       <widget class="QCheckBox" name="checkBox_page_download_mc_test">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                           <horstretch>0</horstretch>
@@ -2068,7 +2068,7 @@ QPushButton:hover{
                        </widget>
                       </item>
                       <item>
-                       <widget class="QRadioButton" name="radioButton_page_download_mc_previously">
+                       <widget class="QCheckBox" name="checkBox_page_download_mc_previously">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                           <horstretch>0</horstretch>
@@ -2147,16 +2147,31 @@ QPushButton:hover{
                  <widget class="QWidget" name="page_download_1">
                   <layout class="QHBoxLayout" name="horizontalLayout_17">
                    <property name="leftMargin">
-                    <number>12</number>
+                    <number>10</number>
                    </property>
                    <property name="topMargin">
                     <number>6</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>10</number>
                    </property>
                    <property name="bottomMargin">
                     <number>6</number>
                    </property>
                    <item>
-                    <widget class="QListWidget" name="listWidget_page_1_download"/>
+                    <widget class="QListWidget" name="listWidget_page_1_download">
+                     <property name="font">
+                      <font>
+                       <pointsize>13</pointsize>
+                      </font>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>40</width>
+                       <height>40</height>
+                      </size>
+                     </property>
+                    </widget>
                    </item>
                   </layout>
                  </widget>
@@ -2195,8 +2210,8 @@ QPushButton:hover{
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>1119</width>
-                    <height>612</height>
+                    <width>380</width>
+                    <height>336</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_2">

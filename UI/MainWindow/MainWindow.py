@@ -198,7 +198,7 @@ class Ui_MainWindow(object):
 "}\n"
 "#listWidget_page_1_download QScrollBar:vertical\n"
 "{\n"
-"    width:12px;\n"
+"    width:10px;\n"
 "    background:rgba(0,0,0,0%);\n"
 "    margin:0px,0px,0px,0px;\n"
 "    padding-top:9px;   /*留出9px给上面和下面的箭头*/\n"
@@ -206,7 +206,7 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "#listWidget_page_1_download::item {\n"
-"    height: 10px;\n"
+"    height: 22px;\n"
 "    padding: 12px;\n"
 "    border-left: 0px solid rgba(214, 214, 214,0);\n"
 "    /*border-top: 1px solid rgb(169, 169, 169);*/\n"
@@ -1197,9 +1197,13 @@ class Ui_MainWindow(object):
         self.page_download_1 = QtWidgets.QWidget()
         self.page_download_1.setObjectName("page_download_1")
         self.horizontalLayout_17 = QtWidgets.QHBoxLayout(self.page_download_1)
-        self.horizontalLayout_17.setContentsMargins(12, 6, -1, 6)
+        self.horizontalLayout_17.setContentsMargins(10, 6, 10, 6)
         self.horizontalLayout_17.setObjectName("horizontalLayout_17")
         self.listWidget_page_1_download = QtWidgets.QListWidget(self.page_download_1)
+        font = QtGui.QFont()
+        font.setPointSize(13)
+        self.listWidget_page_1_download.setFont(font)
+        self.listWidget_page_1_download.setIconSize(QtCore.QSize(40, 40))
         self.listWidget_page_1_download.setObjectName("listWidget_page_1_download")
         self.horizontalLayout_17.addWidget(self.listWidget_page_1_download)
         self.stackedWidget_page_download.addWidget(self.page_download_1)
@@ -1227,7 +1231,7 @@ class Ui_MainWindow(object):
         self.scrollArea_page_settings.setWidgetResizable(True)
         self.scrollArea_page_settings.setObjectName("scrollArea_page_settings")
         self.scrollAreaWidgetContents_page_settings = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_page_settings.setGeometry(QtCore.QRect(0, 0, 1119, 612))
+        self.scrollAreaWidgetContents_page_settings.setGeometry(QtCore.QRect(0, 0, 380, 336))
         self.scrollAreaWidgetContents_page_settings.setObjectName("scrollAreaWidgetContents_page_settings")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_page_settings)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
@@ -1483,6 +1487,7 @@ class Ui_MainWindow(object):
         self.stackedWidget_page_users_down.setCurrentIndex(0)
         self.stackedWidget_page_home.setCurrentIndex(0)
         self.stackedWidget_page_home_game_left.setCurrentIndex(0)
+        self.stackedWidget_page_download.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="widget_Sidebar">
+    <file>../../images/MC_Grass.png</file>
     <file>../../images/QCheckBox_Checked-Pressed.png</file>
     <file>../../images/QCheckBox_Checked.png</file>
     <file>../../images/QCheckBox_Unchecked-Pressed.png</file>

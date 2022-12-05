@@ -5,7 +5,7 @@ import requests
 import os
 from Code.Code import JsonWrite,print_
 
-class GamePublishListReturn():
+class GamePublishListReturn:
     def __init__(self,Source,File) -> None:
         """
             请求游戏版本列表
@@ -19,7 +19,7 @@ class GamePublishListReturn():
     def ListReturn(self,Kind):
         """
             请求原版列表
-            :param Kind: 种类(release: 原版 / Snapshot: 快照版/ old_alpha: 远古版本)
+            :param Kind: 种类(release: 原版 / snapshot: 快照版/ old_alpha: 远古版本)
             :return: 游戏列表(List)
         """
         if self.Source == 'MC':
@@ -40,10 +40,10 @@ class GamePublishListReturn():
         JsonWrite(r.json(),File,BuBug=True)
         L = []
         for J_1 in J:
-            print_('BeBug',J_1)
+            # print_('BeBug',J_1)
             if J_1['type'] == Kind:
                 L.append(J_1)
-        print_('BeBug',L)
+        # print_('BeBug',L)
         return L
 
         # 释放缓存

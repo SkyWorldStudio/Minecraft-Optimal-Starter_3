@@ -357,6 +357,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.label_page_download_2_mode.setStyleSheet('')
             self.label_page_download_2_conformity.setStyleSheet('')
             self.label_page_download_2_resource.setStyleSheet('')
+            self.DownloadPage_stackedWidget_GetGameList_()
         elif I == 1:
             self.label_page_download_2_game.setStyleSheet('')
             self.label_page_download_2_word.setStyleSheet(S)
@@ -382,17 +383,47 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.label_page_download_2_conformity.setStyleSheet('')
             self.label_page_download_2_resource.setStyleSheet(S)
 
+    def DownloadPage_stackedWidget_GetGameList_(self):
+        """启动多线程请求版本列表"""
+        # release: 原版 / Snapshot: 快照版/ old_alpha: 远古版本
+        if self.checkBox_page_download_mc_official.isChecked() == True:
+            self.Download_MC_Kind = 'release'
+            self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_Grass.png'
+        elif self.checkBox_page_download_mc_test.isChecked() == True:
+            self.Download_MC_Kind = 'snapshot'
+            self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_Grass.png'
+        elif self.checkBox_page_download_mc_previously.isChecked() == True:
+            self.Download_MC_Kind = 'old_alpha'
+            self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_Grass.png'
+        print(self.File)
+        self.DownloadPage_stackedWidget_GetGameList_Thread_Start_ = DownloadPage_stackedWidget_GetGameList_Thread( 'MCBBS',self.File,self.Download_MC_Kind)
+        self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.SinOut.connect(self.DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut)
+        self.listWidget_page_1_download.clear()
+        self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.start()
+
+    def DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut(self,name):
+        """
+            得到"多线程请求版本列表"线程输出 并在列表中添加控件
+            :param name: 版本名字
+            :return:
+        """
+        item = QListWidgetItem()
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(self.Download_MC_Kind_IconFile), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        item.setIcon(icon)
+        item.setText(name)
+        self.listWidget_page_1_download.addItem(item)
+
     def DownloadPage_MC_Official(self):
-        Qt
-        self.checkBox_page_download_mc_test.x(Qt.heckState.Unchecked())
-        self.checkBox_page_download_mc_previously.setChecked(Qt.CheckState.Unchecked())
+        self.checkBox_page_download_mc_test.setChecked(False)
+        self.checkBox_page_download_mc_previously.setChecked(False)
     def DownloadPage_MC_Text(self):
-        self.checkBox_page_download_mc_previously.setChecked(Qt.CheckState.Unchecked)
-        self.checkBox_page_download_mc_previously.setChecked(Qt.CheckState.Unchecked())
+        self.checkBox_page_download_mc_official.setChecked(False)
+        self.checkBox_page_download_mc_previously.setChecked(False)
 
     def DownloadPage_MC_Previously(self):
-        self.checkBox_page_download_mc_previously.setChecked(Qt.CheckState.Unchecked())
-        self.checkBox_page_download_mc_test.setChecked(Qt.CheckState.Unchecked())
+        self.checkBox_page_download_mc_official.setChecked(False)
+        self.checkBox_page_download_mc_test.setChecked(False)
 
 
     def DownloadPage_stackedWidget_CurrentIndex(self):
@@ -1334,7 +1365,23 @@ class GameFiles_ReturnGameList_Thread(QThread):
                 N = out[game]['Name'] + ' ' + Z
             self.SinOut.emit(N)
 
-
+class DownloadPage_stackedWidget_GetGameList_Thread(QThread):
+    SinOut = pyqtSignal(str)
+    def __init__(self,Source,File,Kind):
+        """多线程获取版本列表"""
+        super(DownloadPage_stackedWidget_GetGameList_Thread, self).__init__()
+        self.Source = Source
+        self.File = File
+        self.Kind = Kind
+    def run(self):
+        from Code.MC_Code.GamePublishListReturn import GamePublishListReturn
+        a = GamePublishListReturn(self.Source,self.File)
+        b = a.ListReturn(self.Kind)
+        print(b)
+        l = []
+        for b_1 in b:
+            N = b_1['id']
+            self.SinOut.emit(N)
 
 def Return_Window_XY():
     """返回窗口的坐标"""
