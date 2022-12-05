@@ -102,6 +102,14 @@ class RunUi(QMainWindow, Ui_MainWindow):
     def Settings_Clicked(self):
         self.Sidebar_Clicked(Want='Settings')
 
+    def StackedWidget_Main(self):
+        """在切换stackedWidget_main_2后"""
+        i = self.stackedWidget_main_2.currentIndex()
+        if i == 3:
+            # 如果切换到了下载页后
+            print('knskldnaklsdnaksndlkasdnalskd')
+            self.DownloadPage_stackedWidget_GetGameList_()
+
     def UserPage_Up_AddUser(self):
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_Add.png"), QtGui.QIcon.Mode.Normal,
@@ -352,40 +360,54 @@ class RunUi(QMainWindow, Ui_MainWindow):
         """
         S = 'border-bottom: 2px solid rgb(0, 119, 225);'
         if I == 0:
-            self.label_page_download_2_game.setStyleSheet(S)
-            self.label_page_download_2_word.setStyleSheet('')
-            self.label_page_download_2_mode.setStyleSheet('')
-            self.label_page_download_2_conformity.setStyleSheet('')
-            self.label_page_download_2_resource.setStyleSheet('')
-            self.DownloadPage_stackedWidget_GetGameList_()
+            if self.label_page_download_2_game.styleSheet() != S:
+                self.label_page_download_2_game.setStyleSheet(S)
+                self.label_page_download_2_word.setStyleSheet('')
+                self.label_page_download_2_mode.setStyleSheet('')
+                self.label_page_download_2_conformity.setStyleSheet('')
+                self.label_page_download_2_resource.setStyleSheet('')
+                self.DownloadPage_stackedWidget_GetGameList_()
         elif I == 1:
-            self.label_page_download_2_game.setStyleSheet('')
-            self.label_page_download_2_word.setStyleSheet(S)
-            self.label_page_download_2_mode.setStyleSheet('')
-            self.label_page_download_2_conformity.setStyleSheet('')
-            self.label_page_download_2_resource.setStyleSheet('')
+            if self.label_page_download_2_word.styleSheet() != S:
+                self.label_page_download_2_game.setStyleSheet('')
+                self.label_page_download_2_word.setStyleSheet(S)
+                self.label_page_download_2_mode.setStyleSheet('')
+                self.label_page_download_2_conformity.setStyleSheet('')
+                self.label_page_download_2_resource.setStyleSheet('')
+
         elif I == 2:
-            self.label_page_download_2_game.setStyleSheet('')
-            self.label_page_download_2_word.setStyleSheet('')
-            self.label_page_download_2_mode.setStyleSheet(S)
-            self.label_page_download_2_conformity.setStyleSheet('')
-            self.label_page_download_2_resource.setStyleSheet('')
+            if self.label_page_download_2_mode.styleSheet() != S:
+                self.label_page_download_2_game.setStyleSheet('')
+                self.label_page_download_2_word.setStyleSheet('')
+                self.label_page_download_2_mode.setStyleSheet(S)
+                self.label_page_download_2_conformity.setStyleSheet('')
+                self.label_page_download_2_resource.setStyleSheet('')
+
         elif I == 3:
-            self.label_page_download_2_game.setStyleSheet('')
-            self.label_page_download_2_word.setStyleSheet('')
-            self.label_page_download_2_mode.setStyleSheet('')
-            self.label_page_download_2_conformity.setStyleSheet(S)
-            self.label_page_download_2_resource.setStyleSheet('')
+            if self.label_page_download_2_conformity.styleSheet() != S:
+                self.label_page_download_2_game.setStyleSheet('')
+                self.label_page_download_2_word.setStyleSheet('')
+                self.label_page_download_2_mode.setStyleSheet('')
+                self.label_page_download_2_conformity.setStyleSheet(S)
+                self.label_page_download_2_resource.setStyleSheet('')
+
         elif I == 4:
-            self.label_page_download_2_game.setStyleSheet('')
-            self.label_page_download_2_word.setStyleSheet('')
-            self.label_page_download_2_mode.setStyleSheet('')
-            self.label_page_download_2_conformity.setStyleSheet('')
-            self.label_page_download_2_resource.setStyleSheet(S)
+            if self.label_page_download_2_resource.styleSheet() != S:
+                self.label_page_download_2_game.setStyleSheet('')
+                self.label_page_download_2_word.setStyleSheet('')
+                self.label_page_download_2_mode.setStyleSheet('')
+                self.label_page_download_2_conformity.setStyleSheet('')
+                self.label_page_download_2_resource.setStyleSheet(S)
+
 
     def DownloadPage_stackedWidget_GetGameList_(self):
         """启动多线程请求版本列表"""
         # release: 原版 / Snapshot: 快照版/ old_alpha: 远古版本
+        self.label_page_download_loading_ = QtGui.QMovie(":/Gif/images/Gif/Loaging.gif")
+        self.label_page_download_loading.setMovie(self.label_page_download_loading_)
+        self.label_page_download_loading_.start()
+        self.stackedWidget_page_download.setCurrentIndex(5)
+
         if self.checkBox_page_download_mc_official.isChecked() == True:
             self.Download_MC_Kind = 'release'
             self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_Grass.png'
@@ -395,9 +417,11 @@ class RunUi(QMainWindow, Ui_MainWindow):
         elif self.checkBox_page_download_mc_previously.isChecked() == True:
             self.Download_MC_Kind = 'old_alpha'
             self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_Grass.png'
-        print(self.File)
+        # print(self.File)
+        print('lllll')
         self.DownloadPage_stackedWidget_GetGameList_Thread_Start_ = DownloadPage_stackedWidget_GetGameList_Thread( 'MCBBS',self.File,self.Download_MC_Kind)
         self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.SinOut.connect(self.DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut)
+        self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.SinOut_OK.connect(self.DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut_OK)
         self.listWidget_page_1_download.clear()
         self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.start()
 
@@ -405,7 +429,6 @@ class RunUi(QMainWindow, Ui_MainWindow):
         """
             得到"多线程请求版本列表"线程输出 并在列表中添加控件
             :param name: 版本名字
-            :return:
         """
         item = QListWidgetItem()
         icon = QtGui.QIcon()
@@ -413,23 +436,37 @@ class RunUi(QMainWindow, Ui_MainWindow):
         item.setIcon(icon)
         item.setText(name)
         self.listWidget_page_1_download.addItem(item)
+    
+    def DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut_OK(self):
+        """
+            得到"多线程请求版本列表"线程完成信号
+        """
+        self.stackedWidget_page_download.setCurrentIndex(0)
+        self.label_page_download_loading_.stop()
 
     def DownloadPage_MC_Official(self):
         self.checkBox_page_download_mc_test.setChecked(False)
         self.checkBox_page_download_mc_previously.setChecked(False)
+        self.DownloadPage_stackedWidget_GetGameList_()
     def DownloadPage_MC_Text(self):
         self.checkBox_page_download_mc_official.setChecked(False)
         self.checkBox_page_download_mc_previously.setChecked(False)
+        self.DownloadPage_stackedWidget_GetGameList_()
 
     def DownloadPage_MC_Previously(self):
         self.checkBox_page_download_mc_official.setChecked(False)
         self.checkBox_page_download_mc_test.setChecked(False)
+        self.DownloadPage_stackedWidget_GetGameList_()
 
 
     def DownloadPage_stackedWidget_CurrentIndex(self):
         """当下载页面的stackedWidget传来页数改变的信号时 调用DownloadPage_stackedWidget_setButtonStyleSheet"""
         I = self.stackedWidget_page_download.currentIndex()
-        self.DownloadPage_stackedWidget_setButtonStyleSheet(I)
+        print(I)
+        if I == 5:
+            pass
+        else:
+            self.DownloadPage_stackedWidget_setButtonStyleSheet(I)
 
     def SettingsPage_Background_None_Clicked(self):
         """设置页面 -> 背景设置:选择：无"""
@@ -961,6 +998,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.label_Sidebar_Download.clicked.connect(self.Download_Clicked)
         self.label_Sidebar_Settings.clicked.connect(self.Settings_Clicked)
 
+        self.stackedWidget_main_2.currentChanged.connect(self.StackedWidget_Main)
+
         # 账户页面
         self.pushButton_page_users_up_addUser.clicked.connect(self.UserPage_Up_AddUser)
         self.pushButton_page_users_up_addUser.pressed.connect(self.UserPage_Up_AddUser_Pressed)
@@ -1367,6 +1406,7 @@ class GameFiles_ReturnGameList_Thread(QThread):
 
 class DownloadPage_stackedWidget_GetGameList_Thread(QThread):
     SinOut = pyqtSignal(str)
+    SinOut_OK = pyqtSignal()
     def __init__(self,Source,File,Kind):
         """多线程获取版本列表"""
         super(DownloadPage_stackedWidget_GetGameList_Thread, self).__init__()
@@ -1377,11 +1417,12 @@ class DownloadPage_stackedWidget_GetGameList_Thread(QThread):
         from Code.MC_Code.GamePublishListReturn import GamePublishListReturn
         a = GamePublishListReturn(self.Source,self.File)
         b = a.ListReturn(self.Kind)
-        print(b)
+        # print(b)
         l = []
         for b_1 in b:
             N = b_1['id']
             self.SinOut.emit(N)
+        self.SinOut_OK.emit()
 
 def Return_Window_XY():
     """返回窗口的坐标"""

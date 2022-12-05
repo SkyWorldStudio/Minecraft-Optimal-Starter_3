@@ -2142,7 +2142,7 @@ QPushButton:hover{
                <item>
                 <widget class="QStackedWidget" name="stackedWidget_page_download">
                  <property name="currentIndex">
-                  <number>0</number>
+                  <number>5</number>
                  </property>
                  <widget class="QWidget" name="page_download_1">
                   <layout class="QHBoxLayout" name="horizontalLayout_17">
@@ -2179,6 +2179,23 @@ QPushButton:hover{
                  <widget class="QWidget" name="page_2"/>
                  <widget class="QWidget" name="page"/>
                  <widget class="QWidget" name="page_3"/>
+                 <widget class="QWidget" name="page_6">
+                  <layout class="QGridLayout" name="gridLayout_10">
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="label_page_download_loading">
+                     <property name="text">
+                      <string/>
+                     </property>
+                     <property name="pixmap">
+                      <pixmap resource="img.qrc">:/Gif/images/Gif/Loaging.gif</pixmap>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
                 </widget>
                </item>
               </layout>
@@ -2210,8 +2227,8 @@ QPushButton:hover{
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>380</width>
-                    <height>336</height>
+                    <width>1119</width>
+                    <height>612</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_2">
