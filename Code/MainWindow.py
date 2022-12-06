@@ -413,10 +413,10 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_Grass.png'
         elif self.checkBox_page_download_mc_test.isChecked() == True:
             self.Download_MC_Kind = 'snapshot'
-            self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_Grass.png'
+            self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_CommandBlock.png'
         elif self.checkBox_page_download_mc_previously.isChecked() == True:
             self.Download_MC_Kind = 'old_alpha'
-            self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_Grass.png'
+            self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_CraftingTable.png'
         # print(self.File)
         print('lllll')
         self.DownloadPage_stackedWidget_GetGameList_Thread_Start_ = DownloadPage_stackedWidget_GetGameList_Thread( 'MCBBS',self.File,self.Download_MC_Kind)
@@ -443,6 +443,12 @@ class RunUi(QMainWindow, Ui_MainWindow):
         """
         self.stackedWidget_page_download.setCurrentIndex(0)
         self.label_page_download_loading_.stop()
+
+    def DownloadPage_stackedWidget_GameList_Clicked(self):
+        """下载页面 -> 原版下载列表: 点击项目"""
+        item = self.listWidget_page_home_game_left.currentItem()
+        # a = self.listWidget_page_home_game_left.itemWidget(item)
+        # a.findChild()
 
     def DownloadPage_MC_Official(self):
         self.checkBox_page_download_mc_test.setChecked(False)
@@ -1033,6 +1039,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.checkBox_page_download_mc_official.clicked.connect(self.DownloadPage_MC_Official)
         self.checkBox_page_download_mc_test.clicked.connect(self.DownloadPage_MC_Text)
         self.checkBox_page_download_mc_previously.clicked.connect(self.DownloadPage_MC_Previously)
+        self.listWidget_page_1_download.itemPressed.connect(self.DownloadPage_stackedWidget_GameList_Clicked)
 
         # 设置页面
         self.radioButton_settings_background_none.clicked.connect(self.SettingsPage_Background_None_Clicked)

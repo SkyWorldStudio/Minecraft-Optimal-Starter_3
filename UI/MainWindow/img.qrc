@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="widget_Sidebar">
+    <file>../../images/MC_CommandBlock.png</file>
+    <file>../../images/MC_CraftingTable.png</file>
     <file>../../images/MC_Grass.png</file>
     <file>../../images/QCheckBox_Checked-Pressed.png</file>
     <file>../../images/QCheckBox_Checked.png</file>
