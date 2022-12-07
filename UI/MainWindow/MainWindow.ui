@@ -208,7 +208,8 @@
 }
 
 #listWidget_page_1_download::item {
-    height: 22px;
+	color: rgba(255, 255, 255, 0);
+    height: 28px;
 	padding: 12px;
 	border-left: 0px solid rgba(214, 214, 214,0);
 	/*border-top: 1px solid rgb(169, 169, 169);*/
@@ -1100,7 +1101,7 @@ QPushButton:hover{
                <item>
                 <widget class="QStackedWidget" name="stackedWidget_page_users_down">
                  <property name="currentIndex">
-                  <number>0</number>
+                  <number>1</number>
                  </property>
                  <widget class="QWidget" name="stackedWidget_page_users_downPage1">
                   <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -2142,7 +2143,7 @@ QPushButton:hover{
                <item>
                 <widget class="QStackedWidget" name="stackedWidget_page_download">
                  <property name="currentIndex">
-                  <number>5</number>
+                  <number>0</number>
                  </property>
                  <widget class="QWidget" name="page_download_1">
                   <layout class="QHBoxLayout" name="horizontalLayout_17">
@@ -2171,6 +2172,31 @@ QPushButton:hover{
                        <height>40</height>
                       </size>
                      </property>
+                     <item>
+                      <property name="text">
+                       <string>新建项目</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>新建项目</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>新建项目</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>新建项目</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>新建项目</string>
+                      </property>
+                     </item>
                     </widget>
                    </item>
                   </layout>
@@ -2227,8 +2253,8 @@ QPushButton:hover{
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>1119</width>
-                    <height>612</height>
+                    <width>380</width>
+                    <height>336</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_2">

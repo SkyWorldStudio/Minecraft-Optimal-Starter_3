@@ -5,8 +5,9 @@ from sys import argv, exit
 
 from PyQt6 import QtWidgets, QtGui
 from PyQt6.QtCore import QTimer, QEvent, QPoint, Qt, QThread, pyqtSignal, QSize
-from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import QMainWindow, QGraphicsOpacityEffect, QListWidgetItem, QFileDialog, QPushButton, QHBoxLayout, QWidget, QSpacerItem, QSizePolicy
+from PyQt6.QtGui import QIcon, QFont
+from PyQt6.QtWidgets import QMainWindow, QGraphicsOpacityEffect, QListWidgetItem, QFileDialog, QPushButton, QHBoxLayout, \
+    QWidget, QSpacerItem, QSizePolicy, QLabel, QVBoxLayout
 from pytz import timezone
 
 from Code.Log import print_, Log_Clear, Log_Return
@@ -425,17 +426,53 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.listWidget_page_1_download.clear()
         self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.start()
 
-    def DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut(self,name):
+    def DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut(self,name,time):
         """
             得到"多线程请求版本列表"线程输出 并在列表中添加控件
             :param name: 版本名字
+            :param time: 发布时间
         """
         item = QListWidgetItem()
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(self.Download_MC_Kind_IconFile), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         item.setIcon(icon)
         item.setText(name)
+        widget = QWidget()
+        QVBoxLayout_ = QVBoxLayout()
+
+        l_l = QLabel()
+        l_l.setText(name)
+        font = QFont()
+        font.setPointSize(17)
+        l_l.setFont(font)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(l_l.sizePolicy().hasHeightForWidth())
+        l_l.setSizePolicy(sizePolicy)
+
+
+        l_l2 = QLabel()
+        l_l2.setText(time)
+        font = QFont()
+        font.setPointSize(11)
+        l_l2.setFont(font)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(l_l2.sizePolicy().hasHeightForWidth())
+        l_l2.setSizePolicy(sizePolicy)
+
+        QVBoxLayout_.addWidget(l_l)
+        QVBoxLayout_.addWidget(l_l2)
+        QVBoxLayout_.setContentsMargins(0, 0, 0, 0)
+        QVBoxLayout_.setSpacing(3)
+
+        widget.setLayout(QVBoxLayout_)
+        widget.setContentsMargins(0, 0, 0, 0)
+
         self.listWidget_page_1_download.addItem(item)
+        self.listWidget_page_1_download.setItemWidget(item, widget)
     
     def DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut_OK(self):
         """
@@ -446,7 +483,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
     def DownloadPage_stackedWidget_GameList_Clicked(self):
         """下载页面 -> 原版下载列表: 点击项目"""
-        item = self.listWidget_page_home_game_left.currentItem()
+        item = self.listWidget_page_1_download.currentItem()
+        print(item.text())
         # a = self.listWidget_page_home_game_left.itemWidget(item)
         # a.findChild()
 
@@ -1412,7 +1450,7 @@ class GameFiles_ReturnGameList_Thread(QThread):
             self.SinOut.emit(N)
 
 class DownloadPage_stackedWidget_GetGameList_Thread(QThread):
-    SinOut = pyqtSignal(str)
+    SinOut = pyqtSignal(str,str)
     SinOut_OK = pyqtSignal()
     def __init__(self,Source,File,Kind):
         """多线程获取版本列表"""
@@ -1428,7 +1466,8 @@ class DownloadPage_stackedWidget_GetGameList_Thread(QThread):
         l = []
         for b_1 in b:
             N = b_1['id']
-            self.SinOut.emit(N)
+            T = b_1['time']
+            self.SinOut.emit(N,T)
         self.SinOut_OK.emit()
 
 def Return_Window_XY():

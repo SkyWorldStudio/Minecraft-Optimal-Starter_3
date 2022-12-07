@@ -206,7 +206,8 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "#listWidget_page_1_download::item {\n"
-"    height: 22px;\n"
+"    color: rgba(255, 255, 255, 0);\n"
+"    height: 28px;\n"
 "    padding: 12px;\n"
 "    border-left: 0px solid rgba(214, 214, 214,0);\n"
 "    /*border-top: 1px solid rgb(169, 169, 169);*/\n"
@@ -1205,6 +1206,16 @@ class Ui_MainWindow(object):
         self.listWidget_page_1_download.setFont(font)
         self.listWidget_page_1_download.setIconSize(QtCore.QSize(40, 40))
         self.listWidget_page_1_download.setObjectName("listWidget_page_1_download")
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_page_1_download.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_page_1_download.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_page_1_download.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_page_1_download.addItem(item)
+        item = QtWidgets.QListWidgetItem()
+        self.listWidget_page_1_download.addItem(item)
         self.horizontalLayout_17.addWidget(self.listWidget_page_1_download)
         self.stackedWidget_page_download.addWidget(self.page_download_1)
         self.page_5 = QtWidgets.QWidget()
@@ -1242,7 +1253,7 @@ class Ui_MainWindow(object):
         self.scrollArea_page_settings.setWidgetResizable(True)
         self.scrollArea_page_settings.setObjectName("scrollArea_page_settings")
         self.scrollAreaWidgetContents_page_settings = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_page_settings.setGeometry(QtCore.QRect(0, 0, 1119, 612))
+        self.scrollAreaWidgetContents_page_settings.setGeometry(QtCore.QRect(0, 0, 380, 336))
         self.scrollAreaWidgetContents_page_settings.setObjectName("scrollAreaWidgetContents_page_settings")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_page_settings)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
@@ -1495,10 +1506,10 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.stackedWidget_main.setCurrentIndex(1)
         self.stackedWidget_main_2.setCurrentIndex(1)
-        self.stackedWidget_page_users_down.setCurrentIndex(0)
+        self.stackedWidget_page_users_down.setCurrentIndex(1)
         self.stackedWidget_page_home.setCurrentIndex(0)
         self.stackedWidget_page_home_game_left.setCurrentIndex(0)
-        self.stackedWidget_page_download.setCurrentIndex(5)
+        self.stackedWidget_page_download.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -1537,6 +1548,19 @@ class Ui_MainWindow(object):
         self.checkBox_page_download_mc_test.setText(_translate("MainWindow", "测试版"))
         self.checkBox_page_download_mc_previously.setText(_translate("MainWindow", "远古版"))
         self.pushButton_page_download_mc_refresh.setText(_translate("MainWindow", "刷新"))
+        __sortingEnabled = self.listWidget_page_1_download.isSortingEnabled()
+        self.listWidget_page_1_download.setSortingEnabled(False)
+        item = self.listWidget_page_1_download.item(0)
+        item.setText(_translate("MainWindow", "新建项目"))
+        item = self.listWidget_page_1_download.item(1)
+        item.setText(_translate("MainWindow", "新建项目"))
+        item = self.listWidget_page_1_download.item(2)
+        item.setText(_translate("MainWindow", "新建项目"))
+        item = self.listWidget_page_1_download.item(3)
+        item.setText(_translate("MainWindow", "新建项目"))
+        item = self.listWidget_page_1_download.item(4)
+        item.setText(_translate("MainWindow", "新建项目"))
+        self.listWidget_page_1_download.setSortingEnabled(__sortingEnabled)
         self.label_page_settings_h1.setText(_translate("MainWindow", "个性化外观设置"))
         self.label_page_settings_subject_h2.setText(_translate("MainWindow", "主题"))
         self.radioButton_settings_subject_light.setToolTip(_translate("MainWindow", "浅色模式"))
