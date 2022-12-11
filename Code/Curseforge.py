@@ -44,43 +44,45 @@ ClassIdsDict = {"worlds":17,
 #Mod加载器类型
 ModLoadTypesDict = {"forge":1, "fabric":4, "quilt":5}
 
-#查询信息类
-"""
-params:
-    searchFilter:搜索过滤器,也就是关键字
-    classId:要搜索的资源类型
-    categoryid:要搜索的资源类型的类型
-    gameVersion:指定搜索支持某个MC版本的mod
-    modLoaderType:加载器类型 
-"""
-class CurseforgeQueryInfo:
+class QueryCurseforge:
     def __init__(self, 
                  searchFilter:str = None,
                  classId:int = -1,
                  categoryid:int = -1,
                  gameVersion:str = None,
                  modLoaderType:int = -1) -> None:
+        """
+            Curseforge资源搜索
+            :param searchFilter:搜索过滤器,也就是关键字
+            :param classId:要搜索的资源类型
+            :param categoryid:要搜索的资源类型的类型
+            :param gameVersion:指定搜索支持某个MC版本的mod
+            :param modLoaderType:加载器类型 
+        """
         self.SearchFilter = searchFilter
         self.ClassId = classId
         self.CategoryId = categoryid
         self.GameVersion = gameVersion
         self.ModLoaderType = modLoaderType
         
-#真正的查询类
-"""
-params:
-    apikey:查询需要的APIKey,这个是必须的
-    queryinfo:查询信息类
-ReturnType:返回一个请求api的response
-"""
-def QueryCurseforgeResources(apikey:str, queryinfo:CurseforgeQueryInfo) -> RequestResponse:
-    requesturl:str = "https://api.curseforge.com/v1/mods/search?gameId=432?" #432为Minecraft的gameId
-    args = []
-    if(queryinfo.SearchFilter is not None):args.append(f"searchFilter={queryinfo.SearchFilter}")
-    if(queryinfo.ClassId != -1):args.append(f"classId={queryinfo.ClassId}")
-    if(queryinfo.CategoryId != -1):args.append(f"categoryId={queryinfo.CategoryId}")
-    if(queryinfo.GameVersion is not None):args.append(f"gameVersion={queryinfo.GameVersion}")
-    if(queryinfo.ModLoaderType != -1):args.append(f"modLoaderType={queryinfo.ModLoaderType}")
-    requesturl += "&".join(args)
-    return requests_get(requesturl, headers={"x-api-key":apikey})
-    
+    def Resources(self,apikey:str) -> RequestResponse:
+        """
+            Curseforge资源查询
+            :param apikey:查询需要的APIKey
+            :return: 返回一个请求api的response
+        """
+        requesturl:str = "https://api.curseforge.com/v1/mods/search?gameId=432?"  # 432为Minecraft的gameId
+        args = []
+        if self.SearchFilter is not None:
+            args.append(f"searchFilter={self.SearchFilter}")
+        if self.ClassId != -1:
+            args.append(f"classId={self.ClassId}")
+        if self.CategoryId != -1:
+            args.append(f"categoryId={self.CategoryId}")
+        if self.GameVersion is not None:
+            args.append(f"gameVersion={self.GameVersion}")
+        if self.ModLoaderType != -1:
+            args.append(f"modLoaderType={self.ModLoaderType}")
+        requesturl += "&".join(args)
+        return requests_get(requesturl, headers={"x-api-key":apikey})
+        
