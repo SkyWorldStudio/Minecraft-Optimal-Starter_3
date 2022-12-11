@@ -22,15 +22,24 @@ def JsonFile():
     return b
 
 
-def JsonWrite(Json_, JsonFile):
+def JsonWrite(Json_, JsonFile_,BuBug = False):
     """
         写入Json
         :param Json_: Json内容
         :param JsonFile: Json路径
     """
-    with open(JsonFile, 'w+', encoding='utf_8') as f:
+    with open(JsonFile_, 'w+', encoding='utf_8') as f:
         json.dump(Json_, f, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
-    print_('Info',str('写入Json(启动器配置Json)  内容:\n') + str(Json_))
+    if JsonFile_ == JsonFile():
+        if BuBug == True:
+            print_('BeBug', str('写入Json(启动器配置Json) 目录: ' + JsonFile_ + ' 内容:\n') + str(Json_))
+        else:
+            print_('Info',str('写入Json(启动器配置Json) 目录: ' + JsonFile_ + ' 内容:\n') + str(Json_))
+    else:
+        if BuBug == True:
+            print_('BeBug', str('写入Json 目录: ' + JsonFile_ + ' 内容:\n') + str(Json_))
+        else:
+            print_('Info', str('写入Json 目录: ' + JsonFile_ + ' 内容:\n') + str(Json_))
 
     return 'OK'
 

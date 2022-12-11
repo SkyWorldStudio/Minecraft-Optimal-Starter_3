@@ -5,9 +5,9 @@ from sys import argv, exit
 
 from PyQt6 import QtWidgets, QtGui
 from PyQt6.QtCore import QTimer, QEvent, QPoint, Qt, QThread, pyqtSignal, QSize
-from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import QMainWindow, QGraphicsOpacityEffect, QListWidgetItem, QFileDialog, QPushButton, QLabel, \
-    QHBoxLayout, QWidget, QSpacerItem, QSizePolicy
+from PyQt6.QtGui import QIcon, QFont
+from PyQt6.QtWidgets import QMainWindow, QGraphicsOpacityEffect, QListWidgetItem, QFileDialog, QPushButton, QHBoxLayout, \
+    QWidget, QSpacerItem, QSizePolicy, QLabel, QVBoxLayout
 from pytz import timezone
 
 from Code.Log import print_, Log_Clear, Log_Return
@@ -102,6 +102,14 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
     def Settings_Clicked(self):
         self.Sidebar_Clicked(Want='Settings')
+
+    def StackedWidget_Main(self):
+        """在切换stackedWidget_main_2后"""
+        i = self.stackedWidget_main_2.currentIndex()
+        if i == 3:
+            # 如果切换到了下载页后
+            print('knskldnaklsdnaksndlkasdnalskd')
+            self.DownloadPage_stackedWidget_GetGameList_()
 
     def UserPage_Up_AddUser(self):
         icon2 = QtGui.QIcon()
@@ -240,6 +248,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
         """
             主页 -> 游戏列表 -> 刷新
         """
+        self.listWidget_page_home_game_left.clear()
+        self.listWidget_page_home_game_right_gamefile_game.clear()
         self.GameFiles_Read_Thread_Start()
 
     def MainPage_GameList_List_GameFileAdd_Add(self):
@@ -279,7 +289,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         if n  == '':
             self.lineEdit_game_file_add.setStyleSheet("border:2px solid rgb(255, 47, 146);")
         else:
-            from .GameFile import GameFile
+            from Code.MC_Code.GameFile import GameFile
             f = self.label_home_game_file_add_file_2.text()
             a = GameFile(self.JsonFile,self.Json_MOS)
             a.GameFile_Add(n,f)
@@ -308,6 +318,222 @@ class RunUi(QMainWindow, Ui_MainWindow):
         F = self.Json_MOS['GameFile'][N]['File']
         self.listWidget_page_home_game_right_gamefile_game.clear()
         self.GameFiles_ReturnGameList_Thread_Start(F)
+
+    def DownloadPage_Game_Clicked(self):
+        """下载页 -> 游戏本体"""
+        if self.stackedWidget_page_download.currentIndex() == 0:
+            pass
+        else:
+            self.SetCurrentIndex(self.stackedWidget_page_download, 0, 3, True)
+
+    def DownloadPage_Word_Clicked(self):
+        """下载页 -> 游戏本体"""
+        if self.stackedWidget_page_download.currentIndex() == 1:
+            pass
+        else:
+            self.SetCurrentIndex(self.stackedWidget_page_download, 1, 3, True)
+
+    def DownloadPage_Mode_Clicked(self):
+        """下载页 -> 游戏本体"""
+        if self.stackedWidget_page_download.currentIndex() == 2:
+            pass
+        else:
+            self.SetCurrentIndex(self.stackedWidget_page_download, 2, 3, True)
+
+    def DownloadPage_Conformity_Clicked(self):
+        """下载页 -> 游戏本体"""
+        if self.stackedWidget_page_download.currentIndex() == 3:
+            pass
+        else:
+            self.SetCurrentIndex(self.stackedWidget_page_download, 3, 3, True)
+
+    def DownloadPage_Resource_Clicked(self):
+        """下载页 -> 游戏本体"""
+        if self.stackedWidget_page_download.currentIndex() == 4:
+            pass
+        else:
+            self.SetCurrentIndex(self.stackedWidget_page_download, 4, 3, True)
+
+    def DownloadPage_stackedWidget_setButtonStyleSheet(self,I):
+        """
+            在下载页面的stackedWidget改变时, 设置 下载页 -> 左上方的按钮控件样式
+            :param I : 将下载页面的stackedWidget设置为了第……页
+        """
+        S = 'border-bottom: 2px solid rgb(0, 119, 225);'
+        if I == 0:
+            if self.label_page_download_2_game.styleSheet() != S:
+                self.label_page_download_2_game.setStyleSheet(S)
+                self.label_page_download_2_word.setStyleSheet('')
+                self.label_page_download_2_mode.setStyleSheet('')
+                self.label_page_download_2_conformity.setStyleSheet('')
+                self.label_page_download_2_resource.setStyleSheet('')
+                self.DownloadPage_stackedWidget_GetGameList_()
+        elif I == 1:
+            if self.label_page_download_2_word.styleSheet() != S:
+                self.label_page_download_2_game.setStyleSheet('')
+                self.label_page_download_2_word.setStyleSheet(S)
+                self.label_page_download_2_mode.setStyleSheet('')
+                self.label_page_download_2_conformity.setStyleSheet('')
+                self.label_page_download_2_resource.setStyleSheet('')
+
+        elif I == 2:
+            if self.label_page_download_2_mode.styleSheet() != S:
+                self.label_page_download_2_game.setStyleSheet('')
+                self.label_page_download_2_word.setStyleSheet('')
+                self.label_page_download_2_mode.setStyleSheet(S)
+                self.label_page_download_2_conformity.setStyleSheet('')
+                self.label_page_download_2_resource.setStyleSheet('')
+
+        elif I == 3:
+            if self.label_page_download_2_conformity.styleSheet() != S:
+                self.label_page_download_2_game.setStyleSheet('')
+                self.label_page_download_2_word.setStyleSheet('')
+                self.label_page_download_2_mode.setStyleSheet('')
+                self.label_page_download_2_conformity.setStyleSheet(S)
+                self.label_page_download_2_resource.setStyleSheet('')
+
+        elif I == 4:
+            if self.label_page_download_2_resource.styleSheet() != S:
+                self.label_page_download_2_game.setStyleSheet('')
+                self.label_page_download_2_word.setStyleSheet('')
+                self.label_page_download_2_mode.setStyleSheet('')
+                self.label_page_download_2_conformity.setStyleSheet('')
+                self.label_page_download_2_resource.setStyleSheet(S)
+
+
+    def DownloadPage_stackedWidget_GetGameList_(self):
+        """启动多线程请求版本列表"""
+        # release: 原版 / Snapshot: 快照版/ old_alpha: 远古版本
+        self.label_page_download_loading_ = QtGui.QMovie(":/Gif/images/Gif/Loaging.gif")
+        self.label_page_download_loading.setMovie(self.label_page_download_loading_)
+        self.label_page_download_loading_.start()
+        self.stackedWidget_page_download.setCurrentIndex(5)
+
+        if self.checkBox_page_download_mc_official.isChecked() == True:
+            self.Download_MC_Kind = 'release'
+            self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_Grass.png'
+        elif self.checkBox_page_download_mc_test.isChecked() == True:
+            self.Download_MC_Kind = 'snapshot'
+            self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_CommandBlock.png'
+        elif self.checkBox_page_download_mc_previously.isChecked() == True:
+            self.Download_MC_Kind = 'old_alpha'
+            self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_CraftingTable.png'
+        # print(self.File)
+        print('lllll')
+        self.DownloadPage_stackedWidget_GetGameList_Thread_Start_ = DownloadPage_stackedWidget_GetGameList_Thread( 'MCBBS',self.File,self.Download_MC_Kind)
+        self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.SinOut.connect(self.DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut)
+        self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.SinOut_OK.connect(self.DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut_OK)
+        self.listWidget_page_1_download.clear()
+        self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.start()
+
+    def DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut(self,name,time):
+        """
+            得到"多线程请求版本列表"线程输出 并在列表中添加控件
+            :param name: 版本名字
+            :param time: 发布时间
+        """
+        item = QListWidgetItem()
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(self.Download_MC_Kind_IconFile), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        item.setIcon(icon)
+        item.setText(name)
+        widget = QWidget()
+        QVBoxLayout_ = QVBoxLayout()
+
+        l_l = QLabel()
+        l_l.setText(name)
+        font = QFont()
+        font.setPointSize(17)
+        l_l.setFont(font)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(l_l.sizePolicy().hasHeightForWidth())
+        l_l.setSizePolicy(sizePolicy)
+
+
+        l_l2 = QLabel()
+        l_l2.setText(time)
+        font = QFont()
+        font.setPointSize(11)
+        l_l2.setFont(font)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(l_l2.sizePolicy().hasHeightForWidth())
+        l_l2.setSizePolicy(sizePolicy)
+
+        QVBoxLayout_.addWidget(l_l)
+        QVBoxLayout_.addWidget(l_l2)
+        QVBoxLayout_.setContentsMargins(0, 0, 0, 0)
+        QVBoxLayout_.setSpacing(3)
+
+        widget.setLayout(QVBoxLayout_)
+        widget.setContentsMargins(0, 0, 0, 0)
+
+        self.listWidget_page_1_download.addItem(item)
+        self.listWidget_page_1_download.setItemWidget(item, widget)
+    
+    def DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut_OK(self):
+        """
+            得到"多线程请求版本列表"线程完成信号
+        """
+        self.stackedWidget_page_download.setCurrentIndex(0)
+        self.label_page_download_loading_.stop()
+
+    def DownloadPage_stackedWidget_GameList_Clicked(self):
+        """下载页面 -> 原版下载列表: 点击项目"""
+        item = self.listWidget_page_1_download.currentItem()
+        t = item.text()
+        self.label_page_download_1_install_bottom.setText(str(t) + '安装')
+        self.lineEdit_page_download_1_install_bottom_GameName.setPlaceholderText(str(t))
+        self.SetCurrentIndex(self.stackedWidget_page_download_1, 1, 3, True)
+
+    def DownloadPage_stackedWidget_install_fabric_list_bata(self):
+        """下载页面 -> 选择安装 -> Fabric -> 测试版"""
+        pass
+    def DownloadPage_stackedWidget_install_fabric_list_version(self):
+        """下载页面 -> 选择安装 -> Fabric -> 稳定版"""
+        pass
+    def DownloadPage_stackedWidget_install_fabric_up(self):
+        """下载页面 -> 选择安装 -> Fabric"""
+        pass
+    def DownloadPage_stackedWidget_install_forge_up(self):
+        """下载页面 -> 选择安装 -> Forge"""
+        pass
+    def DownloadPage_stackedWidget_install_optifine_list_bata(self):
+        """下载页面 -> 选择安装 -> Optifine -> 测试版"""
+        pass
+    def DownloadPage_stackedWidget_install_optifine_list_version(self):
+        """下载页面 -> 选择安装 -> Optifine -> 稳定版"""
+        pass
+    def DownloadPage_stackedWidget_install_optifine_up(self):
+        """下载页面 -> 选择安装 -> Optifine"""
+        pass
+
+    def DownloadPage_MC_Official(self):
+        self.checkBox_page_download_mc_test.setChecked(False)
+        self.checkBox_page_download_mc_previously.setChecked(False)
+        self.DownloadPage_stackedWidget_GetGameList_()
+    def DownloadPage_MC_Text(self):
+        self.checkBox_page_download_mc_official.setChecked(False)
+        self.checkBox_page_download_mc_previously.setChecked(False)
+        self.DownloadPage_stackedWidget_GetGameList_()
+
+    def DownloadPage_MC_Previously(self):
+        self.checkBox_page_download_mc_official.setChecked(False)
+        self.checkBox_page_download_mc_test.setChecked(False)
+        self.DownloadPage_stackedWidget_GetGameList_()
+
+
+    def DownloadPage_stackedWidget_CurrentIndex(self):
+        """当下载页面的stackedWidget传来页数改变的信号时 调用DownloadPage_stackedWidget_setButtonStyleSheet"""
+        I = self.stackedWidget_page_download.currentIndex()
+        print(I)
+        if I == 5:
+            pass
+        else:
+            self.DownloadPage_stackedWidget_setButtonStyleSheet(I)
 
     def SettingsPage_Background_None_Clicked(self):
         """设置页面 -> 背景设置:选择：无"""
@@ -839,6 +1065,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.label_Sidebar_Download.clicked.connect(self.Download_Clicked)
         self.label_Sidebar_Settings.clicked.connect(self.Settings_Clicked)
 
+        self.stackedWidget_main_2.currentChanged.connect(self.StackedWidget_Main)
+
         # 账户页面
         self.pushButton_page_users_up_addUser.clicked.connect(self.UserPage_Up_AddUser)
         self.pushButton_page_users_up_addUser.pressed.connect(self.UserPage_Up_AddUser_Pressed)
@@ -861,6 +1089,25 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.pushButton_game_file_add_ok.clicked.connect(self.MainPage_GameList_List_GameFileAdd_OK)
         self.pushButton_game_file_add_cancel.clicked.connect(self.MainPage_GameList_List_GameFileAdd_Cancel)
         self.listWidget_page_home_game_left.clicked.connect(self.MainPage_GameList_List)
+
+        # 下载页面
+        self.label_page_download_2_game.clicked.connect(self.DownloadPage_Game_Clicked)
+        self.label_page_download_2_word.clicked.connect(self.DownloadPage_Word_Clicked)
+        self.label_page_download_2_mode.clicked.connect(self.DownloadPage_Mode_Clicked)
+        self.label_page_download_2_conformity.clicked.connect(self.DownloadPage_Conformity_Clicked)
+        self.label_page_download_2_resource.clicked.connect(self.DownloadPage_Resource_Clicked)
+        self.stackedWidget_page_download.currentChanged.connect(self.DownloadPage_stackedWidget_CurrentIndex)
+        self.checkBox_page_download_mc_official.clicked.connect(self.DownloadPage_MC_Official)
+        self.checkBox_page_download_mc_test.clicked.connect(self.DownloadPage_MC_Text)
+        self.checkBox_page_download_mc_previously.clicked.connect(self.DownloadPage_MC_Previously)
+        self.listWidget_page_1_download.itemPressed.connect(self.DownloadPage_stackedWidget_GameList_Clicked)
+        self.widget_page_download_1_install_fabric_list_bata.clicked.connect(self.DownloadPage_stackedWidget_install_fabric_list_bata)
+        self.widget_page_download_1_install_fabric_list_version.clicked.connect(self.DownloadPage_stackedWidget_install_fabric_list_version)
+        self.widget_page_download_1_install_fabric_up.clicked.connect(self.DownloadPage_stackedWidget_install_fabric_up)
+        self.widget_page_download_1_install_forge_up.clicked.connect(self.DownloadPage_stackedWidget_install_forge_up)
+        self.widget_page_download_1_install_optifine_list_bata.clicked.connect(self.DownloadPage_stackedWidget_install_optifine_list_bata)
+        self.widget_page_download_1_install_optifine_list_version.clicked.connect(self.DownloadPage_stackedWidget_install_optifine_list_version)
+        self.widget_page_download_1_install_optifine_up.clicked.connect(self.DownloadPage_stackedWidget_install_optifine_up)
 
         # 设置页面
         self.radioButton_settings_background_none.clicked.connect(self.SettingsPage_Background_None_Clicked)
@@ -1019,6 +1266,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.GameFiles_ReturnGameList_Thread_Start_.start()
 
     def GameFiles_ReturnGameList_Thread_SinOut(self,Name):
+        """检测游戏目录下的游戏线程 输出处理"""
         item = QListWidgetItem()
         item.setText(Name)
         widget = QWidget()
@@ -1066,13 +1314,14 @@ class RunUi(QMainWindow, Ui_MainWindow):
         widget.setLayout(hLayout)
         widget.setContentsMargins(0, 0, 0, 0)
 
-        btn_s.clicked.connect(lambda:self.GameFiles_ReturnGameList_Thread_SinOut_PushButton())
-        btn_d.clicked.connect(lambda: self.GameFiles_ReturnGameList_Thread_SinOut_PushButton())
+        btn_s.clicked.connect(lambda: self.GameFiles_ReturnGameList_Thread_SinOut_PushButton_settings())
+        btn_d.clicked.connect(lambda: self.GameFiles_ReturnGameList_Thread_SinOut_PushButton_delate())
 
         self.listWidget_page_home_game_right_gamefile_game.addItem(item)
         self.listWidget_page_home_game_right_gamefile_game.setItemWidget(item, widget) # 为item设置widget
 
-    def GameFiles_ReturnGameList_Thread_SinOut_PushButton(self):
+    def GameFiles_ReturnGameList_Thread_SinOut_PushButton_settings(self):
+        """游戏列表设置按钮信号处理"""
         # 获取button
         btn = self.sender()
         # 获取按钮相对于listwwdget的坐标
@@ -1084,6 +1333,51 @@ class RunUi(QMainWindow, Ui_MainWindow):
         index = item.row()
         item_ = self.listWidget_page_home_game_right_gamefile_game.item(index)
         print(item_.text())
+
+    def GameFiles_ReturnGameList_Thread_SinOut_PushButton_delate(self):
+        """游戏列表设置按钮信号处理"""
+        # 获取button
+        btn = self.sender()
+        # 获取按钮相对于listwidget的坐标
+        # listwidget 相对于窗体的坐标 减去 button 相对于窗体的坐标
+        buttonpos = btn.mapToGlobal(QPoint(0, 0)) - self.widget_page_home_game_right.mapToGlobal(QPoint(0, 0))
+        # 获取到对象
+        item = self.listWidget_page_home_game_right_gamefile_game.indexAt(buttonpos)
+        # 获取位置
+        index = item.row()
+        item_ = self.listWidget_page_home_game_right_gamefile_game.item(index)
+        N = item_.text()
+        from Code.DelateGameWindow import Dialog_DelateGameWindows_
+        gamefile_name = self.listWidget_page_home_game_left.item(self.Json_MOS['GameFile_List_Clicked']).text()
+        self.Dialog_DelateGameWindows_ = Dialog_DelateGameWindows_(
+            os.path.join(self.Json_MOS['GameFile'][gamefile_name]['File'],'versions'),
+            N,
+            gamefile_name
+        )
+        self.Dialog_DelateGameWindows_.sinOut_Win_XY.connect(self.Window_XY)
+        self.Dialog_DelateGameWindows_.sinOut_OK.connect(self.AddUserWindow_OK)
+        self.Dialog_DelateGameWindows_.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
+        self.Dialog_DelateGameWindows_.setWindowFlags(
+            Qt.WindowType.Popup |  # 表示该窗口小部件是一个弹出式顶层窗口，即它是模态的，但有一个适合弹出式菜单的窗口系统框架。
+            Qt.WindowType.Tool |  # 表示小部件是一个工具窗口,如果有父级，则工具窗口将始终保留在其顶部,在 macOS 上，工具窗口对应于窗口的NSPanel类。这意味着窗口位于普通窗口之上，因此无法在其顶部放置普通窗口。默认情况下，当应用程序处于非活动状态时，工具窗口将消失。这可以通过WA_MacAlwaysShowToolWindow属性来控制。
+            Qt.WindowType.FramelessWindowHint |  # 生成无边框窗口
+            Qt.WindowType.MSWindowsFixedSizeDialogHint |  # 在 Windows 上为窗口提供一个细对话框边框。这种风格传统上用于固定大小的对话框。
+            Qt.WindowType.Dialog |  # 指示该小部件是一个应装饰为对话框的窗口（即，通常在标题栏中没有最大化或最小化按钮）。这是 的默认类型QDialog。如果要将其用作模式对话框，则应从另一个窗口启动它，或者具有父级并与该windowModality属性一起使用。如果将其设为模态，对话框将阻止应用程序中的其他顶级窗口获得任何输入。我们将具有父级的顶级窗口称为辅助窗口。
+            Qt.WindowType.NoDropShadowWindowHint  # 禁用支持平台上的窗口投影。
+        )
+
+        self.Dialog_DelateGameWindows_.setWindowModality(
+            Qt.WindowModality.ApplicationModal  # 该窗口对应用程序是模态的，并阻止对所有窗口的输入。
+        )
+
+        self.MainWindow_xy_size = self.geometry()  # 获取主界面 初始坐标
+        self.Dialog_DelateGameWindows_.move(
+            round(self.MainWindow_xy_size.x() + (self.size().width()/2 - self.Dialog_DelateGameWindows_.size().width()/2)),
+            round(self.MainWindow_xy_size.y() + (self.size().height()/3)
+        ))  # 子界面移动到 居中
+
+        self.Dialog_DelateGameWindows_.show()
+
 
     def Window_XY(self, X, Y):
         """改变窗口的XY坐标"""
@@ -1153,6 +1447,9 @@ class GameFiles_Read_Thread(QThread):
             self.SinOut.emit(N)
 
         self.SinOutOK.emit()
+        import gc
+        del key_,J,N,F
+        gc.collect()
 
 class GameFiles_ReturnGameList_Thread(QThread):
     SinOut = pyqtSignal(str)
@@ -1164,7 +1461,7 @@ class GameFiles_ReturnGameList_Thread(QThread):
         super(GameFiles_ReturnGameList_Thread, self).__init__()
         self.GameFile = GameFile
     def run(self):
-        from Code.GameFile_Game import GameFile_Game
+        from Code.MC_Code.GameFile_Game import GameFile_Game
         a = GameFile_Game()
         out = a.GameFile_Game_ReturnGames(self.GameFile)
         print(out)
@@ -1184,8 +1481,33 @@ class GameFiles_ReturnGameList_Thread(QThread):
             else:
                 N = out[game]['Name'] + ' ' + Z
             self.SinOut.emit(N)
+        import gc
+        del out,a
+        gc.collect()
 
-
+class DownloadPage_stackedWidget_GetGameList_Thread(QThread):
+    SinOut = pyqtSignal(str,str)
+    SinOut_OK = pyqtSignal()
+    def __init__(self,Source,File,Kind):
+        """多线程获取版本列表"""
+        super(DownloadPage_stackedWidget_GetGameList_Thread, self).__init__()
+        self.Source = Source
+        self.File = File
+        self.Kind = Kind
+    def run(self):
+        from Code.MC_Code.GamePublishListReturn import GamePublishListReturn
+        a = GamePublishListReturn(self.Source,self.File)
+        b = a.ListReturn(self.Kind)
+        # print(b)
+        l = []
+        for b_1 in b:
+            N = b_1['id']
+            T = b_1['time']
+            self.SinOut.emit(N,T)
+        self.SinOut_OK.emit()
+        import gc
+        del a,b,l,N,T
+        gc.collect()
 
 def Return_Window_XY():
     """返回窗口的坐标"""

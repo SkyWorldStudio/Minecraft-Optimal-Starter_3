@@ -1,6 +1,6 @@
 # coding=utf-8
 from PyQt6 import QtGui, QtCore
-from PyQt6.QtCore import QPropertyAnimation, Qt, pyqtSignal, QRect
+from PyQt6.QtCore import QPropertyAnimation, Qt, pyqtSignal
 from PyQt6.QtGui import QColor
 
 from UI.AddUserWindow.AddUserWindow import Ui_Dialog_AddUserWindows
@@ -60,7 +60,7 @@ class Dialog_AddUserWindows_(QDialog, Ui_Dialog_AddUserWindows):
             # 如果是使用离线登陆
             User_Name = self.lineEdit_OffLine.text()
             if self.lineEdit_OffLine.text() != '':
-                from Code.Users import UserAdd
+                from Code.MC_Code.Users import UserAdd
                 if self.lineEdit_OffLine_Advanced.text() != '':
                     # 如果填写了 UUID
                     UUID = self.lineEdit_OffLine_Advanced.text()
