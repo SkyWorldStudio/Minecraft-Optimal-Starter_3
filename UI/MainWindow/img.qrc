@@ -1,5 +1,12 @@
 <RCC>
   <qresource prefix="widget_Sidebar">
+    <file>../../images/MCDownloadPage_Up.png</file>
+    <file>../../images/MCDownloadPage_Close.png</file>
+    <file>../../images/MCDownloadPage_Dowe.png</file>
+    <file>../../images/MC_Forge.png</file>
+    <file>../../images/MC_Fabric.png</file>
+    <file>../../images/MC_Optifine.png</file>
+    <file>../../images/MC_Quilt.png</file>
     <file>../../images/MC_CommandBlock.png</file>
     <file>../../images/MC_CraftingTable.png</file>
     <file>../../images/MC_Grass.png</file>

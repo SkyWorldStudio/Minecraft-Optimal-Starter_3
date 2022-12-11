@@ -227,6 +227,27 @@
 	/*border-top: 1px solid rgba(214, 214, 214,0);*/
 	border-bottom: 1px solid rgba(214, 214, 214,0);
 }
+#scrollAreaWidgetContents_page_download_1_install &gt; QWidget{
+	background-color: rgba(191, 191, 191, 54);
+	border-radius: 8px;
+}
+#widget_page_download_1_install_fabric_list_all &gt; QWidget{
+	background-color: rgba(255, 255, 255, 40%);
+	border-radius: 8px;
+}
+#page_download_1_install QListWidget::item{
+	border-left: 0px solid rgba(255, 255, 255,0);
+}
+#page_download_1_install QListWidget::item:hover {
+	border-left: 0px solid rgba(255, 255, 255,0);
+	background-color: rgba(255, 255, 255,50%);
+	padding: 8px;
+}
+#page_download_1_install QListWidget::item:selected {
+	border-left: 0px solid rgba(255, 255, 255,0);
+	background-color: rgba(255, 255, 255,70%);
+	padding: 8px;
+}
 /*设置页面*/
 #scrollAreaWidgetContents_page_settings &gt; QWidget
 {
@@ -608,6 +629,10 @@ QPushButton{
 QPushButton:hover{
 	background-color: rgb(252, 252, 252);
 }
+Line{
+	background-color: rgb(128, 128, 128);
+	border:none;
+}
 #widget_page_download_2_line{
 	background-color: rgb(166, 166, 166);
 	border:none;
@@ -638,7 +663,7 @@ QPushButton:hover{
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="page_main">
        <property name="styleSheet">
@@ -902,7 +927,7 @@ QPushButton:hover{
               <string notr="true"/>
              </property>
              <property name="currentIndex">
-              <number>1</number>
+              <number>3</number>
              </property>
              <widget class="QWidget" name="page_users">
               <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -1209,7 +1234,7 @@ QPushButton:hover{
                <item>
                 <widget class="QStackedWidget" name="stackedWidget_page_home">
                  <property name="currentIndex">
-                  <number>0</number>
+                  <number>1</number>
                  </property>
                  <widget class="QWidget" name="page_home_main">
                   <layout class="QHBoxLayout" name="horizontalLayout_9">
@@ -1791,7 +1816,7 @@ QPushButton:hover{
                 <number>8</number>
                </property>
                <item>
-                <widget class="QWidget" name="widget_page_download" native="true">
+                <widget class="QWidget" name="widget_page_up" native="true">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
                    <horstretch>0</horstretch>
@@ -2147,56 +2172,1622 @@ QPushButton:hover{
                  </property>
                  <widget class="QWidget" name="page_download_1">
                   <layout class="QHBoxLayout" name="horizontalLayout_17">
+                   <property name="spacing">
+                    <number>0</number>
+                   </property>
                    <property name="leftMargin">
-                    <number>10</number>
+                    <number>0</number>
                    </property>
                    <property name="topMargin">
-                    <number>6</number>
+                    <number>0</number>
                    </property>
                    <property name="rightMargin">
-                    <number>10</number>
+                    <number>0</number>
                    </property>
                    <property name="bottomMargin">
-                    <number>6</number>
+                    <number>0</number>
                    </property>
                    <item>
-                    <widget class="QListWidget" name="listWidget_page_1_download">
-                     <property name="font">
-                      <font>
-                       <pointsize>13</pointsize>
-                      </font>
+                    <widget class="QStackedWidget" name="stackedWidget">
+                     <property name="currentIndex">
+                      <number>1</number>
                      </property>
-                     <property name="iconSize">
-                      <size>
-                       <width>40</width>
-                       <height>40</height>
-                      </size>
-                     </property>
-                     <item>
-                      <property name="text">
-                       <string>新建项目</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>新建项目</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>新建项目</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>新建项目</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>新建项目</string>
-                      </property>
-                     </item>
+                     <widget class="QWidget" name="page_download_1_main">
+                      <layout class="QVBoxLayout" name="verticalLayout_11">
+                       <property name="leftMargin">
+                        <number>10</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>6</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>10</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>6</number>
+                       </property>
+                       <item>
+                        <widget class="QListWidget" name="listWidget_page_1_download">
+                         <property name="font">
+                          <font>
+                           <pointsize>13</pointsize>
+                          </font>
+                         </property>
+                         <property name="iconSize">
+                          <size>
+                           <width>40</width>
+                           <height>40</height>
+                          </size>
+                         </property>
+                         <item>
+                          <property name="text">
+                           <string>新建项目</string>
+                          </property>
+                         </item>
+                         <item>
+                          <property name="text">
+                           <string>新建项目</string>
+                          </property>
+                         </item>
+                         <item>
+                          <property name="text">
+                           <string>新建项目</string>
+                          </property>
+                         </item>
+                         <item>
+                          <property name="text">
+                           <string>新建项目</string>
+                          </property>
+                         </item>
+                         <item>
+                          <property name="text">
+                           <string>新建项目</string>
+                          </property>
+                         </item>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                     <widget class="QWidget" name="page_download_1_install">
+                      <layout class="QVBoxLayout" name="verticalLayout_13">
+                       <property name="leftMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>4</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>5</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <widget class="QScrollArea" name="scrollArea_page_download_1_install">
+                         <property name="widgetResizable">
+                          <bool>true</bool>
+                         </property>
+                         <widget class="QWidget" name="scrollAreaWidgetContents_page_download_1_install">
+                          <property name="geometry">
+                           <rect>
+                            <x>0</x>
+                            <y>0</y>
+                            <width>1094</width>
+                            <height>588</height>
+                           </rect>
+                          </property>
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                          <layout class="QVBoxLayout" name="verticalLayout_12">
+                           <property name="spacing">
+                            <number>10</number>
+                           </property>
+                           <property name="leftMargin">
+                            <number>12</number>
+                           </property>
+                           <property name="topMargin">
+                            <number>8</number>
+                           </property>
+                           <property name="rightMargin">
+                            <number>14</number>
+                           </property>
+                           <property name="bottomMargin">
+                            <number>10</number>
+                           </property>
+                           <item>
+                            <widget class="QWidget" name="widget_page_download_1_install_forge" native="true">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <layout class="QGridLayout" name="gridLayout_11">
+                              <property name="leftMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="topMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="rightMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="bottomMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="horizontalSpacing">
+                               <number>-1</number>
+                              </property>
+                              <property name="verticalSpacing">
+                               <number>0</number>
+                              </property>
+                              <item row="0" column="0">
+                               <widget class="QWidget" name="widget_page_download_1_install_forge_up" native="true">
+                                <property name="sizePolicy">
+                                 <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                                  <horstretch>0</horstretch>
+                                  <verstretch>0</verstretch>
+                                 </sizepolicy>
+                                </property>
+                                <property name="maximumSize">
+                                 <size>
+                                  <width>16777215</width>
+                                  <height>52</height>
+                                 </size>
+                                </property>
+                                <layout class="QHBoxLayout" name="horizontalLayout_19">
+                                 <property name="spacing">
+                                  <number>-1</number>
+                                 </property>
+                                 <property name="leftMargin">
+                                  <number>13</number>
+                                 </property>
+                                 <property name="topMargin">
+                                  <number>4</number>
+                                 </property>
+                                 <property name="rightMargin">
+                                  <number>14</number>
+                                 </property>
+                                 <property name="bottomMargin">
+                                  <number>4</number>
+                                 </property>
+                                 <item>
+                                  <widget class="QLabel" name="label_3">
+                                   <property name="minimumSize">
+                                    <size>
+                                     <width>42</width>
+                                     <height>42</height>
+                                    </size>
+                                   </property>
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>42</width>
+                                     <height>42</height>
+                                    </size>
+                                   </property>
+                                   <property name="text">
+                                    <string/>
+                                   </property>
+                                   <property name="pixmap">
+                                    <pixmap resource="img.qrc">:/widget_Sidebar/images/MC_Forge.png</pixmap>
+                                   </property>
+                                   <property name="scaledContents">
+                                    <bool>true</bool>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QLabel" name="label_4">
+                                   <property name="sizePolicy">
+                                    <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                                     <horstretch>0</horstretch>
+                                     <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                   </property>
+                                   <property name="text">
+                                    <string>Forge
+模组加载器</string>
+                                   </property>
+                                   <property name="alignment">
+                                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <spacer name="horizontalSpacer_17">
+                                   <property name="orientation">
+                                    <enum>Qt::Horizontal</enum>
+                                   </property>
+                                   <property name="sizeHint" stdset="0">
+                                    <size>
+                                     <width>20</width>
+                                     <height>30</height>
+                                    </size>
+                                   </property>
+                                  </spacer>
+                                 </item>
+                                 <item>
+                                  <widget class="QPushButton" name="pushButton_2">
+                                   <property name="text">
+                                    <string/>
+                                   </property>
+                                   <property name="icon">
+                                    <iconset resource="img.qrc">
+                                     <normaloff>:/widget_Sidebar/images/MCDownloadPage_Close.png</normaloff>:/widget_Sidebar/images/MCDownloadPage_Close.png</iconset>
+                                   </property>
+                                   <property name="iconSize">
+                                    <size>
+                                     <width>25</width>
+                                     <height>25</height>
+                                    </size>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QPushButton" name="pushButton_3">
+                                   <property name="text">
+                                    <string/>
+                                   </property>
+                                   <property name="icon">
+                                    <iconset resource="img.qrc">
+                                     <normaloff>:/widget_Sidebar/images/Dowe.png</normaloff>:/widget_Sidebar/images/Dowe.png</iconset>
+                                   </property>
+                                   <property name="iconSize">
+                                    <size>
+                                     <width>25</width>
+                                     <height>25</height>
+                                    </size>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </widget>
+                              </item>
+                              <item row="1" column="0" colspan="2">
+                               <widget class="QWidget" name="widget_page_download_1_install_forge_list" native="true">
+                                <property name="sizePolicy">
+                                 <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                                  <horstretch>0</horstretch>
+                                  <verstretch>0</verstretch>
+                                 </sizepolicy>
+                                </property>
+                                <property name="maximumSize">
+                                 <size>
+                                  <width>16777215</width>
+                                  <height>0</height>
+                                 </size>
+                                </property>
+                                <layout class="QGridLayout" name="gridLayout_12">
+                                 <property name="leftMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="topMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="rightMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="bottomMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="spacing">
+                                  <number>0</number>
+                                 </property>
+                                 <item row="1" column="1">
+                                  <widget class="QListWidget" name="listWidget_download_1_install_forge_list">
+                                   <property name="sizePolicy">
+                                    <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+                                     <horstretch>0</horstretch>
+                                     <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                   </property>
+                                   <item>
+                                    <property name="text">
+                                     <string>新建项目</string>
+                                    </property>
+                                   </item>
+                                   <item>
+                                    <property name="text">
+                                     <string>新建项目</string>
+                                    </property>
+                                   </item>
+                                   <item>
+                                    <property name="text">
+                                     <string>新建项目</string>
+                                    </property>
+                                   </item>
+                                   <item>
+                                    <property name="text">
+                                     <string>新建项目</string>
+                                    </property>
+                                   </item>
+                                   <item>
+                                    <property name="text">
+                                     <string>新建项目</string>
+                                    </property>
+                                   </item>
+                                   <item>
+                                    <property name="text">
+                                     <string>新建项目</string>
+                                    </property>
+                                   </item>
+                                   <item>
+                                    <property name="text">
+                                     <string>新建项目</string>
+                                    </property>
+                                   </item>
+                                   <item>
+                                    <property name="text">
+                                     <string>新建项目</string>
+                                    </property>
+                                   </item>
+                                   <item>
+                                    <property name="text">
+                                     <string>新建项目</string>
+                                    </property>
+                                   </item>
+                                   <item>
+                                    <property name="text">
+                                     <string>新建项目</string>
+                                    </property>
+                                   </item>
+                                  </widget>
+                                 </item>
+                                 <item row="1" column="0">
+                                  <spacer name="horizontalSpacer_21">
+                                   <property name="orientation">
+                                    <enum>Qt::Horizontal</enum>
+                                   </property>
+                                   <property name="sizeType">
+                                    <enum>QSizePolicy::Fixed</enum>
+                                   </property>
+                                   <property name="sizeHint" stdset="0">
+                                    <size>
+                                     <width>13</width>
+                                     <height>0</height>
+                                    </size>
+                                   </property>
+                                  </spacer>
+                                 </item>
+                                 <item row="0" column="0" colspan="2">
+                                  <widget class="Line" name="line_download_1_install_forge_list">
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>16777215</width>
+                                     <height>2</height>
+                                    </size>
+                                   </property>
+                                   <property name="orientation">
+                                    <enum>Qt::Horizontal</enum>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </widget>
+                              </item>
+                             </layout>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QWidget" name="widget_page_download_1_install_fabric" native="true">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <layout class="QGridLayout" name="gridLayout_14">
+                              <property name="leftMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="topMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="rightMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="bottomMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="verticalSpacing">
+                               <number>0</number>
+                              </property>
+                              <item row="0" column="0">
+                               <widget class="QWidget" name="widget_page_download_1_install_fabric_up" native="true">
+                                <property name="maximumSize">
+                                 <size>
+                                  <width>16777215</width>
+                                  <height>52</height>
+                                 </size>
+                                </property>
+                                <layout class="QHBoxLayout" name="horizontalLayout_23">
+                                 <property name="leftMargin">
+                                  <number>13</number>
+                                 </property>
+                                 <property name="topMargin">
+                                  <number>4</number>
+                                 </property>
+                                 <property name="rightMargin">
+                                  <number>14</number>
+                                 </property>
+                                 <property name="bottomMargin">
+                                  <number>4</number>
+                                 </property>
+                                 <item>
+                                  <widget class="QLabel" name="label_5">
+                                   <property name="minimumSize">
+                                    <size>
+                                     <width>42</width>
+                                     <height>42</height>
+                                    </size>
+                                   </property>
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>42</width>
+                                     <height>42</height>
+                                    </size>
+                                   </property>
+                                   <property name="text">
+                                    <string/>
+                                   </property>
+                                   <property name="pixmap">
+                                    <pixmap resource="img.qrc">:/widget_Sidebar/images/MC_Fabric.png</pixmap>
+                                   </property>
+                                   <property name="scaledContents">
+                                    <bool>true</bool>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QLabel" name="label_6">
+                                   <property name="sizePolicy">
+                                    <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                                     <horstretch>0</horstretch>
+                                     <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                   </property>
+                                   <property name="text">
+                                    <string>Fabric
+模组加载器</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <spacer name="horizontalSpacer_18">
+                                   <property name="orientation">
+                                    <enum>Qt::Horizontal</enum>
+                                   </property>
+                                   <property name="sizeHint" stdset="0">
+                                    <size>
+                                     <width>828</width>
+                                     <height>20</height>
+                                    </size>
+                                   </property>
+                                  </spacer>
+                                 </item>
+                                 <item>
+                                  <widget class="QPushButton" name="pushButton_4">
+                                   <property name="text">
+                                    <string/>
+                                   </property>
+                                   <property name="icon">
+                                    <iconset resource="img.qrc">
+                                     <normaloff>:/widget_Sidebar/images/MCDownloadPage_Close.png</normaloff>:/widget_Sidebar/images/MCDownloadPage_Close.png</iconset>
+                                   </property>
+                                   <property name="iconSize">
+                                    <size>
+                                     <width>25</width>
+                                     <height>25</height>
+                                    </size>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QPushButton" name="pushButton_5">
+                                   <property name="text">
+                                    <string/>
+                                   </property>
+                                   <property name="icon">
+                                    <iconset resource="img.qrc">
+                                     <normaloff>:/widget_Sidebar/images/Dowe.png</normaloff>:/widget_Sidebar/images/Dowe.png</iconset>
+                                   </property>
+                                   <property name="iconSize">
+                                    <size>
+                                     <width>25</width>
+                                     <height>25</height>
+                                    </size>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </widget>
+                              </item>
+                              <item row="1" column="0">
+                               <widget class="QWidget" name="widget_page_download_1_install_fabric_list" native="true">
+                                <property name="sizePolicy">
+                                 <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                                  <horstretch>0</horstretch>
+                                  <verstretch>0</verstretch>
+                                 </sizepolicy>
+                                </property>
+                                <layout class="QGridLayout" name="gridLayout_13">
+                                 <property name="leftMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="topMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="rightMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="bottomMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="spacing">
+                                  <number>0</number>
+                                 </property>
+                                 <item row="1" column="1">
+                                  <widget class="QWidget" name="widget_page_download_1_install_fabric_list_all" native="true">
+                                   <layout class="QVBoxLayout" name="verticalLayout_14">
+                                    <property name="spacing">
+                                     <number>10</number>
+                                    </property>
+                                    <property name="leftMargin">
+                                     <number>0</number>
+                                    </property>
+                                    <property name="topMargin">
+                                     <number>7</number>
+                                    </property>
+                                    <property name="rightMargin">
+                                     <number>16</number>
+                                    </property>
+                                    <property name="bottomMargin">
+                                     <number>9</number>
+                                    </property>
+                                    <item>
+                                     <widget class="MyQWidget" name="widget_page_download_1_install_fabric_list_bata" native="true">
+                                      <layout class="QVBoxLayout" name="verticalLayout_15">
+                                       <property name="spacing">
+                                        <number>0</number>
+                                       </property>
+                                       <property name="leftMargin">
+                                        <number>0</number>
+                                       </property>
+                                       <property name="topMargin">
+                                        <number>0</number>
+                                       </property>
+                                       <property name="rightMargin">
+                                        <number>0</number>
+                                       </property>
+                                       <property name="bottomMargin">
+                                        <number>0</number>
+                                       </property>
+                                       <item>
+                                        <widget class="QWidget" name="widget_page_download_1_install_fabric_list_bata_list_up" native="true">
+                                         <layout class="QHBoxLayout" name="horizontalLayout_20">
+                                          <property name="spacing">
+                                           <number>-1</number>
+                                          </property>
+                                          <item>
+                                           <widget class="QLabel" name="label_13">
+                                            <property name="text">
+                                             <string>测试版</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item>
+                                           <spacer name="horizontalSpacer_24">
+                                            <property name="orientation">
+                                             <enum>Qt::Horizontal</enum>
+                                            </property>
+                                            <property name="sizeHint" stdset="0">
+                                             <size>
+                                              <width>956</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                           </spacer>
+                                          </item>
+                                          <item>
+                                           <widget class="QPushButton" name="pushButton_12">
+                                            <property name="text">
+                                             <string/>
+                                            </property>
+                                            <property name="icon">
+                                             <iconset resource="img.qrc">
+                                              <normaloff>:/widget_Sidebar/images/Dowe.png</normaloff>:/widget_Sidebar/images/Dowe.png</iconset>
+                                            </property>
+                                            <property name="iconSize">
+                                             <size>
+                                              <width>25</width>
+                                              <height>25</height>
+                                             </size>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                         </layout>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QWidget" name="widget_page_download_1_install_fabric_list_bata_list" native="true">
+                                         <layout class="QGridLayout" name="gridLayout_16">
+                                          <property name="leftMargin">
+                                           <number>0</number>
+                                          </property>
+                                          <property name="topMargin">
+                                           <number>0</number>
+                                          </property>
+                                          <property name="rightMargin">
+                                           <number>0</number>
+                                          </property>
+                                          <property name="bottomMargin">
+                                           <number>0</number>
+                                          </property>
+                                          <property name="spacing">
+                                           <number>0</number>
+                                          </property>
+                                          <item row="1" column="1">
+                                           <widget class="QListWidget" name="listWidget">
+                                            <property name="sizePolicy">
+                                             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                                              <horstretch>0</horstretch>
+                                              <verstretch>0</verstretch>
+                                             </sizepolicy>
+                                            </property>
+                                            <item>
+                                             <property name="text">
+                                              <string>新建项目</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>新建项目</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>新建项目</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>新建项目</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>新建项目</string>
+                                             </property>
+                                            </item>
+                                           </widget>
+                                          </item>
+                                          <item row="0" column="0" colspan="2">
+                                           <widget class="Line" name="line_3">
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>16777215</width>
+                                              <height>2</height>
+                                             </size>
+                                            </property>
+                                            <property name="orientation">
+                                             <enum>Qt::Horizontal</enum>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                         </layout>
+                                        </widget>
+                                       </item>
+                                      </layout>
+                                     </widget>
+                                    </item>
+                                    <item>
+                                     <widget class="MyQWidget" name="widget_page_download_1_install_fabric_list_version" native="true">
+                                      <layout class="QVBoxLayout" name="verticalLayout_16">
+                                       <property name="spacing">
+                                        <number>0</number>
+                                       </property>
+                                       <property name="leftMargin">
+                                        <number>0</number>
+                                       </property>
+                                       <property name="topMargin">
+                                        <number>0</number>
+                                       </property>
+                                       <property name="rightMargin">
+                                        <number>0</number>
+                                       </property>
+                                       <property name="bottomMargin">
+                                        <number>0</number>
+                                       </property>
+                                       <item>
+                                        <widget class="QWidget" name="widget_page_download_1_install_fabric_list_version_list_up" native="true">
+                                         <layout class="QHBoxLayout" name="horizontalLayout_24">
+                                          <property name="spacing">
+                                           <number>-1</number>
+                                          </property>
+                                          <item>
+                                           <widget class="QLabel" name="label_15">
+                                            <property name="text">
+                                             <string>正式版</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item>
+                                           <spacer name="horizontalSpacer_27">
+                                            <property name="orientation">
+                                             <enum>Qt::Horizontal</enum>
+                                            </property>
+                                            <property name="sizeHint" stdset="0">
+                                             <size>
+                                              <width>956</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                           </spacer>
+                                          </item>
+                                          <item>
+                                           <widget class="QPushButton" name="pushButton_14">
+                                            <property name="text">
+                                             <string/>
+                                            </property>
+                                            <property name="icon">
+                                             <iconset resource="img.qrc">
+                                              <normaloff>:/widget_Sidebar/images/Dowe.png</normaloff>:/widget_Sidebar/images/Dowe.png</iconset>
+                                            </property>
+                                            <property name="iconSize">
+                                             <size>
+                                              <width>25</width>
+                                              <height>25</height>
+                                             </size>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                         </layout>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QWidget" name="widget_page_download_1_install_fabric_list_version_list" native="true">
+                                         <property name="maximumSize">
+                                          <size>
+                                           <width>16777215</width>
+                                           <height>0</height>
+                                          </size>
+                                         </property>
+                                         <layout class="QGridLayout" name="gridLayout_17">
+                                          <property name="leftMargin">
+                                           <number>0</number>
+                                          </property>
+                                          <property name="topMargin">
+                                           <number>0</number>
+                                          </property>
+                                          <property name="rightMargin">
+                                           <number>0</number>
+                                          </property>
+                                          <property name="bottomMargin">
+                                           <number>0</number>
+                                          </property>
+                                          <property name="spacing">
+                                           <number>0</number>
+                                          </property>
+                                          <item row="1" column="1">
+                                           <widget class="QListWidget" name="listWidget_2">
+                                            <property name="sizePolicy">
+                                             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                                              <horstretch>0</horstretch>
+                                              <verstretch>0</verstretch>
+                                             </sizepolicy>
+                                            </property>
+                                            <item>
+                                             <property name="text">
+                                              <string>新建项目</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>新建项目</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>新建项目</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>新建项目</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>新建项目</string>
+                                             </property>
+                                            </item>
+                                           </widget>
+                                          </item>
+                                          <item row="1" column="0">
+                                           <spacer name="horizontalSpacer_26">
+                                            <property name="orientation">
+                                             <enum>Qt::Horizontal</enum>
+                                            </property>
+                                            <property name="sizeType">
+                                             <enum>QSizePolicy::Fixed</enum>
+                                            </property>
+                                            <property name="sizeHint" stdset="0">
+                                             <size>
+                                              <width>5</width>
+                                              <height>0</height>
+                                             </size>
+                                            </property>
+                                           </spacer>
+                                          </item>
+                                          <item row="0" column="0" colspan="2">
+                                           <widget class="Line" name="line_4">
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>16777215</width>
+                                              <height>2</height>
+                                             </size>
+                                            </property>
+                                            <property name="orientation">
+                                             <enum>Qt::Horizontal</enum>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                         </layout>
+                                        </widget>
+                                       </item>
+                                      </layout>
+                                     </widget>
+                                    </item>
+                                   </layout>
+                                  </widget>
+                                 </item>
+                                 <item row="1" column="0" rowspan="2">
+                                  <spacer name="horizontalSpacer_23">
+                                   <property name="orientation">
+                                    <enum>Qt::Horizontal</enum>
+                                   </property>
+                                   <property name="sizeType">
+                                    <enum>QSizePolicy::Fixed</enum>
+                                   </property>
+                                   <property name="sizeHint" stdset="0">
+                                    <size>
+                                     <width>13</width>
+                                     <height>0</height>
+                                    </size>
+                                   </property>
+                                  </spacer>
+                                 </item>
+                                 <item row="0" column="0" colspan="3">
+                                  <widget class="Line" name="line_download_1_install_forge_list_2">
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>16777215</width>
+                                     <height>2</height>
+                                    </size>
+                                   </property>
+                                   <property name="orientation">
+                                    <enum>Qt::Horizontal</enum>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </widget>
+                              </item>
+                             </layout>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QWidget" name="widget_page_download_1_install_optifine" native="true">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <layout class="QGridLayout" name="gridLayout_23">
+                              <property name="leftMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="topMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="rightMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="bottomMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="verticalSpacing">
+                               <number>0</number>
+                              </property>
+                              <item row="2" column="1">
+                               <widget class="QWidget" name="widget_page_download_1_install_optifine_list" native="true">
+                                <property name="sizePolicy">
+                                 <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                                  <horstretch>0</horstretch>
+                                  <verstretch>0</verstretch>
+                                 </sizepolicy>
+                                </property>
+                                <property name="maximumSize">
+                                 <size>
+                                  <width>16777215</width>
+                                  <height>0</height>
+                                 </size>
+                                </property>
+                                <layout class="QGridLayout" name="gridLayout_20">
+                                 <property name="leftMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="topMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="rightMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="bottomMargin">
+                                  <number>0</number>
+                                 </property>
+                                 <property name="spacing">
+                                  <number>0</number>
+                                 </property>
+                                 <item row="1" column="1">
+                                  <widget class="QWidget" name="widget_page_download_1_install_optifine_list_all" native="true">
+                                   <layout class="QVBoxLayout" name="verticalLayout_20">
+                                    <property name="spacing">
+                                     <number>10</number>
+                                    </property>
+                                    <property name="leftMargin">
+                                     <number>0</number>
+                                    </property>
+                                    <property name="topMargin">
+                                     <number>7</number>
+                                    </property>
+                                    <property name="rightMargin">
+                                     <number>16</number>
+                                    </property>
+                                    <property name="bottomMargin">
+                                     <number>9</number>
+                                    </property>
+                                    <item>
+                                     <widget class="MyQWidget" name="widget_page_download_1_install_optifine_list_bata" native="true">
+                                      <layout class="QVBoxLayout" name="verticalLayout_21">
+                                       <property name="spacing">
+                                        <number>0</number>
+                                       </property>
+                                       <property name="leftMargin">
+                                        <number>0</number>
+                                       </property>
+                                       <property name="topMargin">
+                                        <number>0</number>
+                                       </property>
+                                       <property name="rightMargin">
+                                        <number>0</number>
+                                       </property>
+                                       <property name="bottomMargin">
+                                        <number>0</number>
+                                       </property>
+                                       <item>
+                                        <widget class="QWidget" name="widget_page_download_1_install_optifine_list_bata_list_up" native="true">
+                                         <layout class="QHBoxLayout" name="horizontalLayout_27">
+                                          <property name="spacing">
+                                           <number>-1</number>
+                                          </property>
+                                          <item>
+                                           <widget class="QLabel" name="label_17">
+                                            <property name="text">
+                                             <string>测试版</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item>
+                                           <spacer name="horizontalSpacer_32">
+                                            <property name="orientation">
+                                             <enum>Qt::Horizontal</enum>
+                                            </property>
+                                            <property name="sizeHint" stdset="0">
+                                             <size>
+                                              <width>956</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                           </spacer>
+                                          </item>
+                                          <item>
+                                           <widget class="QPushButton" name="pushButton_16">
+                                            <property name="text">
+                                             <string/>
+                                            </property>
+                                            <property name="icon">
+                                             <iconset resource="img.qrc">
+                                              <normaloff>:/widget_Sidebar/images/Dowe.png</normaloff>:/widget_Sidebar/images/Dowe.png</iconset>
+                                            </property>
+                                            <property name="iconSize">
+                                             <size>
+                                              <width>25</width>
+                                              <height>25</height>
+                                             </size>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                         </layout>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QWidget" name="widget_page_download_1_install_optifine_list_bata_list" native="true">
+                                         <property name="maximumSize">
+                                          <size>
+                                           <width>16777215</width>
+                                           <height>0</height>
+                                          </size>
+                                         </property>
+                                         <layout class="QGridLayout" name="gridLayout_21">
+                                          <property name="leftMargin">
+                                           <number>0</number>
+                                          </property>
+                                          <property name="topMargin">
+                                           <number>0</number>
+                                          </property>
+                                          <property name="rightMargin">
+                                           <number>0</number>
+                                          </property>
+                                          <property name="bottomMargin">
+                                           <number>0</number>
+                                          </property>
+                                          <property name="spacing">
+                                           <number>0</number>
+                                          </property>
+                                          <item row="1" column="1">
+                                           <widget class="QListWidget" name="listWidget_5">
+                                            <property name="sizePolicy">
+                                             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                                              <horstretch>0</horstretch>
+                                              <verstretch>0</verstretch>
+                                             </sizepolicy>
+                                            </property>
+                                            <item>
+                                             <property name="text">
+                                              <string>新建项目</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>新建项目</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>新建项目</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>新建项目</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>新建项目</string>
+                                             </property>
+                                            </item>
+                                           </widget>
+                                          </item>
+                                          <item row="1" column="0">
+                                           <spacer name="horizontalSpacer_33">
+                                            <property name="orientation">
+                                             <enum>Qt::Horizontal</enum>
+                                            </property>
+                                            <property name="sizeType">
+                                             <enum>QSizePolicy::Fixed</enum>
+                                            </property>
+                                            <property name="sizeHint" stdset="0">
+                                             <size>
+                                              <width>5</width>
+                                              <height>0</height>
+                                             </size>
+                                            </property>
+                                           </spacer>
+                                          </item>
+                                          <item row="0" column="0" colspan="2">
+                                           <widget class="Line" name="line_7">
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>16777215</width>
+                                              <height>2</height>
+                                             </size>
+                                            </property>
+                                            <property name="orientation">
+                                             <enum>Qt::Horizontal</enum>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                         </layout>
+                                        </widget>
+                                       </item>
+                                      </layout>
+                                     </widget>
+                                    </item>
+                                    <item>
+                                     <widget class="MyQWidget" name="widget_page_download_1_install_optifine_list_version" native="true">
+                                      <layout class="QVBoxLayout" name="verticalLayout_22">
+                                       <property name="spacing">
+                                        <number>0</number>
+                                       </property>
+                                       <property name="leftMargin">
+                                        <number>0</number>
+                                       </property>
+                                       <property name="topMargin">
+                                        <number>0</number>
+                                       </property>
+                                       <property name="rightMargin">
+                                        <number>0</number>
+                                       </property>
+                                       <property name="bottomMargin">
+                                        <number>0</number>
+                                       </property>
+                                       <item>
+                                        <widget class="QWidget" name="widget_page_download_1_install_optifine_list_version_list_up" native="true">
+                                         <layout class="QHBoxLayout" name="horizontalLayout_28">
+                                          <property name="spacing">
+                                           <number>-1</number>
+                                          </property>
+                                          <item>
+                                           <widget class="QLabel" name="label_18">
+                                            <property name="text">
+                                             <string>正式版</string>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                          <item>
+                                           <spacer name="horizontalSpacer_34">
+                                            <property name="orientation">
+                                             <enum>Qt::Horizontal</enum>
+                                            </property>
+                                            <property name="sizeHint" stdset="0">
+                                             <size>
+                                              <width>956</width>
+                                              <height>30</height>
+                                             </size>
+                                            </property>
+                                           </spacer>
+                                          </item>
+                                          <item>
+                                           <widget class="QPushButton" name="pushButton_17">
+                                            <property name="text">
+                                             <string/>
+                                            </property>
+                                            <property name="icon">
+                                             <iconset resource="img.qrc">
+                                              <normaloff>:/widget_Sidebar/images/Dowe.png</normaloff>:/widget_Sidebar/images/Dowe.png</iconset>
+                                            </property>
+                                            <property name="iconSize">
+                                             <size>
+                                              <width>25</width>
+                                              <height>25</height>
+                                             </size>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                         </layout>
+                                        </widget>
+                                       </item>
+                                       <item>
+                                        <widget class="QWidget" name="widget_page_download_1_install_optifine_list_version_list" native="true">
+                                         <property name="maximumSize">
+                                          <size>
+                                           <width>16777215</width>
+                                           <height>0</height>
+                                          </size>
+                                         </property>
+                                         <layout class="QGridLayout" name="gridLayout_22">
+                                          <property name="leftMargin">
+                                           <number>0</number>
+                                          </property>
+                                          <property name="topMargin">
+                                           <number>0</number>
+                                          </property>
+                                          <property name="rightMargin">
+                                           <number>0</number>
+                                          </property>
+                                          <property name="bottomMargin">
+                                           <number>0</number>
+                                          </property>
+                                          <property name="spacing">
+                                           <number>0</number>
+                                          </property>
+                                          <item row="1" column="1">
+                                           <widget class="QListWidget" name="listWidget_6">
+                                            <property name="sizePolicy">
+                                             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                                              <horstretch>0</horstretch>
+                                              <verstretch>0</verstretch>
+                                             </sizepolicy>
+                                            </property>
+                                            <item>
+                                             <property name="text">
+                                              <string>新建项目</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>新建项目</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>新建项目</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>新建项目</string>
+                                             </property>
+                                            </item>
+                                            <item>
+                                             <property name="text">
+                                              <string>新建项目</string>
+                                             </property>
+                                            </item>
+                                           </widget>
+                                          </item>
+                                          <item row="1" column="0">
+                                           <spacer name="horizontalSpacer_35">
+                                            <property name="orientation">
+                                             <enum>Qt::Horizontal</enum>
+                                            </property>
+                                            <property name="sizeType">
+                                             <enum>QSizePolicy::Fixed</enum>
+                                            </property>
+                                            <property name="sizeHint" stdset="0">
+                                             <size>
+                                              <width>5</width>
+                                              <height>0</height>
+                                             </size>
+                                            </property>
+                                           </spacer>
+                                          </item>
+                                          <item row="0" column="0" colspan="2">
+                                           <widget class="Line" name="line_8">
+                                            <property name="maximumSize">
+                                             <size>
+                                              <width>16777215</width>
+                                              <height>2</height>
+                                             </size>
+                                            </property>
+                                            <property name="orientation">
+                                             <enum>Qt::Horizontal</enum>
+                                            </property>
+                                           </widget>
+                                          </item>
+                                         </layout>
+                                        </widget>
+                                       </item>
+                                      </layout>
+                                     </widget>
+                                    </item>
+                                   </layout>
+                                  </widget>
+                                 </item>
+                                 <item row="1" column="0" rowspan="2">
+                                  <spacer name="horizontalSpacer_36">
+                                   <property name="orientation">
+                                    <enum>Qt::Horizontal</enum>
+                                   </property>
+                                   <property name="sizeType">
+                                    <enum>QSizePolicy::Fixed</enum>
+                                   </property>
+                                   <property name="sizeHint" stdset="0">
+                                    <size>
+                                     <width>13</width>
+                                     <height>0</height>
+                                    </size>
+                                   </property>
+                                  </spacer>
+                                 </item>
+                                 <item row="0" column="0" colspan="3">
+                                  <widget class="Line" name="line_download_1_install_forge_list_4">
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>16777215</width>
+                                     <height>2</height>
+                                    </size>
+                                   </property>
+                                   <property name="orientation">
+                                    <enum>Qt::Horizontal</enum>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </widget>
+                              </item>
+                              <item row="1" column="1">
+                               <widget class="QWidget" name="widget_page_download_1_install_optifine_up" native="true">
+                                <layout class="QHBoxLayout" name="horizontalLayout_25">
+                                 <property name="leftMargin">
+                                  <number>13</number>
+                                 </property>
+                                 <property name="topMargin">
+                                  <number>4</number>
+                                 </property>
+                                 <property name="rightMargin">
+                                  <number>14</number>
+                                 </property>
+                                 <property name="bottomMargin">
+                                  <number>4</number>
+                                 </property>
+                                 <item>
+                                  <widget class="QLabel" name="label_7">
+                                   <property name="minimumSize">
+                                    <size>
+                                     <width>42</width>
+                                     <height>42</height>
+                                    </size>
+                                   </property>
+                                   <property name="maximumSize">
+                                    <size>
+                                     <width>42</width>
+                                     <height>42</height>
+                                    </size>
+                                   </property>
+                                   <property name="text">
+                                    <string/>
+                                   </property>
+                                   <property name="pixmap">
+                                    <pixmap resource="img.qrc">:/widget_Sidebar/images/MC_Optifine.png</pixmap>
+                                   </property>
+                                   <property name="scaledContents">
+                                    <bool>true</bool>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QLabel" name="label_8">
+                                   <property name="sizePolicy">
+                                    <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                                     <horstretch>0</horstretch>
+                                     <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                   </property>
+                                   <property name="text">
+                                    <string>Optifine
+高清修复</string>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <spacer name="horizontalSpacer_19">
+                                   <property name="orientation">
+                                    <enum>Qt::Horizontal</enum>
+                                   </property>
+                                   <property name="sizeHint" stdset="0">
+                                    <size>
+                                     <width>841</width>
+                                     <height>20</height>
+                                    </size>
+                                   </property>
+                                  </spacer>
+                                 </item>
+                                 <item>
+                                  <widget class="QPushButton" name="pushButton_6">
+                                   <property name="text">
+                                    <string/>
+                                   </property>
+                                   <property name="icon">
+                                    <iconset resource="img.qrc">
+                                     <normaloff>:/widget_Sidebar/images/MCDownloadPage_Close.png</normaloff>:/widget_Sidebar/images/MCDownloadPage_Close.png</iconset>
+                                   </property>
+                                   <property name="iconSize">
+                                    <size>
+                                     <width>25</width>
+                                     <height>25</height>
+                                    </size>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                 <item>
+                                  <widget class="QPushButton" name="pushButton_7">
+                                   <property name="text">
+                                    <string/>
+                                   </property>
+                                   <property name="icon">
+                                    <iconset resource="img.qrc">
+                                     <normaloff>:/widget_Sidebar/images/Dowe.png</normaloff>:/widget_Sidebar/images/Dowe.png</iconset>
+                                   </property>
+                                   <property name="iconSize">
+                                    <size>
+                                     <width>25</width>
+                                     <height>25</height>
+                                    </size>
+                                   </property>
+                                  </widget>
+                                 </item>
+                                </layout>
+                               </widget>
+                              </item>
+                             </layout>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QWidget" name="widget_page_download_1_install_quilt" native="true">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>16777215</width>
+                               <height>52</height>
+                              </size>
+                             </property>
+                             <layout class="QHBoxLayout" name="horizontalLayout_22">
+                              <property name="leftMargin">
+                               <number>13</number>
+                              </property>
+                              <property name="topMargin">
+                               <number>4</number>
+                              </property>
+                              <property name="rightMargin">
+                               <number>14</number>
+                              </property>
+                              <property name="bottomMargin">
+                               <number>4</number>
+                              </property>
+                              <item>
+                               <widget class="QLabel" name="label_9">
+                                <property name="minimumSize">
+                                 <size>
+                                  <width>42</width>
+                                  <height>42</height>
+                                 </size>
+                                </property>
+                                <property name="maximumSize">
+                                 <size>
+                                  <width>42</width>
+                                  <height>42</height>
+                                 </size>
+                                </property>
+                                <property name="text">
+                                 <string/>
+                                </property>
+                                <property name="pixmap">
+                                 <pixmap resource="img.qrc">:/widget_Sidebar/images/MC_Quilt.png</pixmap>
+                                </property>
+                                <property name="scaledContents">
+                                 <bool>true</bool>
+                                </property>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QLabel" name="label_10">
+                                <property name="sizePolicy">
+                                 <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                                  <horstretch>0</horstretch>
+                                  <verstretch>0</verstretch>
+                                 </sizepolicy>
+                                </property>
+                                <property name="text">
+                                 <string>Quilt
+模组加载器</string>
+                                </property>
+                               </widget>
+                              </item>
+                              <item>
+                               <spacer name="horizontalSpacer_20">
+                                <property name="orientation">
+                                 <enum>Qt::Horizontal</enum>
+                                </property>
+                                <property name="sizeHint" stdset="0">
+                                 <size>
+                                  <width>828</width>
+                                  <height>20</height>
+                                 </size>
+                                </property>
+                               </spacer>
+                              </item>
+                              <item>
+                               <widget class="QPushButton" name="pushButton_8">
+                                <property name="text">
+                                 <string/>
+                                </property>
+                                <property name="icon">
+                                 <iconset resource="img.qrc">
+                                  <normaloff>:/widget_Sidebar/images/MCDownloadPage_Close.png</normaloff>:/widget_Sidebar/images/MCDownloadPage_Close.png</iconset>
+                                </property>
+                                <property name="iconSize">
+                                 <size>
+                                  <width>25</width>
+                                  <height>25</height>
+                                 </size>
+                                </property>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QPushButton" name="pushButton_9">
+                                <property name="text">
+                                 <string/>
+                                </property>
+                                <property name="icon">
+                                 <iconset resource="img.qrc">
+                                  <normaloff>:/widget_Sidebar/images/Dowe.png</normaloff>:/widget_Sidebar/images/Dowe.png</iconset>
+                                </property>
+                                <property name="iconSize">
+                                 <size>
+                                  <width>25</width>
+                                  <height>25</height>
+                                 </size>
+                                </property>
+                               </widget>
+                              </item>
+                             </layout>
+                            </widget>
+                           </item>
+                           <item>
+                            <spacer name="verticalSpacer_12">
+                             <property name="orientation">
+                              <enum>Qt::Vertical</enum>
+                             </property>
+                             <property name="sizeHint" stdset="0">
+                              <size>
+                               <width>20</width>
+                               <height>40</height>
+                              </size>
+                             </property>
+                            </spacer>
+                           </item>
+                          </layout>
+                         </widget>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QWidget" name="widget_2" native="true">
+                         <layout class="QHBoxLayout" name="horizontalLayout_18">
+                          <item>
+                           <widget class="QLabel" name="label">
+                            <property name="text">
+                             <string>TextLabel</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <spacer name="horizontalSpacer_16">
+                            <property name="orientation">
+                             <enum>Qt::Horizontal</enum>
+                            </property>
+                            <property name="sizeHint" stdset="0">
+                             <size>
+                              <width>40</width>
+                              <height>20</height>
+                             </size>
+                            </property>
+                           </spacer>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="label_2">
+                            <property name="text">
+                             <string>TextLabel</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLineEdit" name="lineEdit"/>
+                          </item>
+                          <item>
+                           <widget class="QPushButton" name="pushButton">
+                            <property name="text">
+                             <string>PushButton</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
                     </widget>
                    </item>
                   </layout>
@@ -2989,6 +4580,7 @@ QPushButton:hover{
  </customwidgets>
  <resources>
   <include location="img.qrc"/>
+  <include location="../Gif.qrc"/>
   <include location="../Gif.qrc"/>
  </resources>
  <connections/>
