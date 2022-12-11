@@ -484,9 +484,32 @@ class RunUi(QMainWindow, Ui_MainWindow):
     def DownloadPage_stackedWidget_GameList_Clicked(self):
         """下载页面 -> 原版下载列表: 点击项目"""
         item = self.listWidget_page_1_download.currentItem()
-        print(item.text())
-        # a = self.listWidget_page_home_game_left.itemWidget(item)
-        # a.findChild()
+        t = item.text()
+        self.label_page_download_1_install_bottom.setText(str(t) + '安装')
+        self.lineEdit_page_download_1_install_bottom_GameName.setPlaceholderText(str(t))
+        self.SetCurrentIndex(self.stackedWidget_page_download_1, 1, 3, True)
+
+    def DownloadPage_stackedWidget_install_fabric_list_bata(self):
+        """下载页面 -> 选择安装 -> Fabric -> 测试版"""
+        pass
+    def DownloadPage_stackedWidget_install_fabric_list_version(self):
+        """下载页面 -> 选择安装 -> Fabric -> 稳定版"""
+        pass
+    def DownloadPage_stackedWidget_install_fabric_up(self):
+        """下载页面 -> 选择安装 -> Fabric"""
+        pass
+    def DownloadPage_stackedWidget_install_forge_up(self):
+        """下载页面 -> 选择安装 -> Forge"""
+        pass
+    def DownloadPage_stackedWidget_install_optifine_list_bata(self):
+        """下载页面 -> 选择安装 -> Optifine -> 测试版"""
+        pass
+    def DownloadPage_stackedWidget_install_optifine_list_version(self):
+        """下载页面 -> 选择安装 -> Optifine -> 稳定版"""
+        pass
+    def DownloadPage_stackedWidget_install_optifine_up(self):
+        """下载页面 -> 选择安装 -> Optifine"""
+        pass
 
     def DownloadPage_MC_Official(self):
         self.checkBox_page_download_mc_test.setChecked(False)
@@ -1078,6 +1101,13 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.checkBox_page_download_mc_test.clicked.connect(self.DownloadPage_MC_Text)
         self.checkBox_page_download_mc_previously.clicked.connect(self.DownloadPage_MC_Previously)
         self.listWidget_page_1_download.itemPressed.connect(self.DownloadPage_stackedWidget_GameList_Clicked)
+        self.widget_page_download_1_install_fabric_list_bata.clicked.connect(self.DownloadPage_stackedWidget_install_fabric_list_bata)
+        self.widget_page_download_1_install_fabric_list_version.clicked.connect(self.DownloadPage_stackedWidget_install_fabric_list_version)
+        self.widget_page_download_1_install_fabric_up.clicked.connect(self.DownloadPage_stackedWidget_install_fabric_up)
+        self.widget_page_download_1_install_forge_up.clicked.connect(self.DownloadPage_stackedWidget_install_forge_up)
+        self.widget_page_download_1_install_optifine_list_bata.clicked.connect(self.DownloadPage_stackedWidget_install_optifine_list_bata)
+        self.widget_page_download_1_install_optifine_list_version.clicked.connect(self.DownloadPage_stackedWidget_install_optifine_list_version)
+        self.widget_page_download_1_install_optifine_up.clicked.connect(self.DownloadPage_stackedWidget_install_optifine_up)
 
         # 设置页面
         self.radioButton_settings_background_none.clicked.connect(self.SettingsPage_Background_None_Clicked)
@@ -1417,6 +1447,9 @@ class GameFiles_Read_Thread(QThread):
             self.SinOut.emit(N)
 
         self.SinOutOK.emit()
+        import gc
+        del key_,J,N,F
+        gc.collect()
 
 class GameFiles_ReturnGameList_Thread(QThread):
     SinOut = pyqtSignal(str)
@@ -1448,6 +1481,9 @@ class GameFiles_ReturnGameList_Thread(QThread):
             else:
                 N = out[game]['Name'] + ' ' + Z
             self.SinOut.emit(N)
+        import gc
+        del out,a
+        gc.collect()
 
 class DownloadPage_stackedWidget_GetGameList_Thread(QThread):
     SinOut = pyqtSignal(str,str)
@@ -1469,6 +1505,9 @@ class DownloadPage_stackedWidget_GetGameList_Thread(QThread):
             T = b_1['time']
             self.SinOut.emit(N,T)
         self.SinOut_OK.emit()
+        import gc
+        del a,b,l,N,T
+        gc.collect()
 
 def Return_Window_XY():
     """返回窗口的坐标"""

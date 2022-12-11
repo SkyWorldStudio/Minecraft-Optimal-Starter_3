@@ -169,7 +169,7 @@
 	color: rgb(255, 255, 255);
 }
 #pushButton_game_file_add_ok:hover{
-	background-color: rgb(78, 148, 228);
+	background-color: rgb(48, 132, 228);
 }
 #pushButton_game_file_add_ok:pressed{
 	background-color: rgb(32, 123, 228);
@@ -247,6 +247,31 @@
 	border-left: 0px solid rgba(255, 255, 255,0);
 	background-color: rgba(255, 255, 255,70%);
 	padding: 8px;
+}
+#pushButton_page_download_1_install_bottom_ok{
+	background-color: rgb(42, 130, 228);
+	color: rgb(255, 255, 255);
+}
+#pushButton_page_download_1_install_bottom_ok:hover{
+	background-color: rgb(74, 146, 228);
+}
+#pushButton_page_download_1_install_bottom_ok:pressed{
+	background-color: rgb(29, 122, 228);
+}
+#lineEdit_page_download_1_install_bottom_GameName{
+	border: 2px solid rgb(56, 56, 56);
+}
+#lineEdit_page_download_1_install_bottom_GameName::focus{
+	border: 2px solid rgb(0, 119, 255);
+}
+#scrollAreaWidgetContents_page_download_1_install QPushButton{
+	background-color: rgba(255, 255, 255, 0);
+}
+#scrollAreaWidgetContents_page_download_1_install QPushButton:hover{
+	background-color: rgba(255, 255, 255, 0);
+}
+#scrollAreaWidgetContents_page_download_1_install QPushButton:pressed{
+	background-color: rgba(255, 255, 255, 0);
 }
 /*设置页面*/
 #scrollAreaWidgetContents_page_settings &gt; QWidget
@@ -663,7 +688,7 @@ Line{
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page_main">
        <property name="styleSheet">
@@ -927,7 +952,7 @@ Line{
               <string notr="true"/>
              </property>
              <property name="currentIndex">
-              <number>3</number>
+              <number>1</number>
              </property>
              <widget class="QWidget" name="page_users">
               <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -1234,7 +1259,7 @@ Line{
                <item>
                 <widget class="QStackedWidget" name="stackedWidget_page_home">
                  <property name="currentIndex">
-                  <number>1</number>
+                  <number>0</number>
                  </property>
                  <widget class="QWidget" name="page_home_main">
                   <layout class="QHBoxLayout" name="horizontalLayout_9">
@@ -2188,9 +2213,9 @@ Line{
                     <number>0</number>
                    </property>
                    <item>
-                    <widget class="QStackedWidget" name="stackedWidget">
+                    <widget class="QStackedWidget" name="stackedWidget_page_download_1">
                      <property name="currentIndex">
-                      <number>1</number>
+                      <number>0</number>
                      </property>
                      <widget class="QWidget" name="page_download_1_main">
                       <layout class="QVBoxLayout" name="verticalLayout_11">
@@ -2273,7 +2298,7 @@ Line{
                             <x>0</x>
                             <y>0</y>
                             <width>1094</width>
-                            <height>588</height>
+                            <height>467</height>
                            </rect>
                           </property>
                           <property name="sizePolicy">
@@ -2319,14 +2344,11 @@ Line{
                               <property name="bottomMargin">
                                <number>0</number>
                               </property>
-                              <property name="horizontalSpacing">
-                               <number>-1</number>
-                              </property>
-                              <property name="verticalSpacing">
+                              <property name="spacing">
                                <number>0</number>
                               </property>
                               <item row="0" column="0">
-                               <widget class="QWidget" name="widget_page_download_1_install_forge_up" native="true">
+                               <widget class="MyQWidget" name="widget_page_download_1_install_forge_up" native="true">
                                 <property name="sizePolicy">
                                  <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
                                   <horstretch>0</horstretch>
@@ -2356,7 +2378,7 @@ Line{
                                   <number>4</number>
                                  </property>
                                  <item>
-                                  <widget class="QLabel" name="label_3">
+                                  <widget class="QLabel" name="label_page_download_1_install_forge_up_icon">
                                    <property name="minimumSize">
                                     <size>
                                      <width>42</width>
@@ -2381,7 +2403,7 @@ Line{
                                   </widget>
                                  </item>
                                  <item>
-                                  <widget class="QLabel" name="label_4">
+                                  <widget class="QLabel" name="label_page_download_1_install_forge_up_txt">
                                    <property name="sizePolicy">
                                     <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
                                      <horstretch>0</horstretch>
@@ -2411,7 +2433,7 @@ Line{
                                   </spacer>
                                  </item>
                                  <item>
-                                  <widget class="QPushButton" name="pushButton_2">
+                                  <widget class="QPushButton" name="pushButton_page_download_1_install_forge_up_close">
                                    <property name="text">
                                     <string/>
                                    </property>
@@ -2428,7 +2450,7 @@ Line{
                                   </widget>
                                  </item>
                                  <item>
-                                  <widget class="QPushButton" name="pushButton_3">
+                                  <widget class="QPushButton" name="pushButton_page_download_1_install_forge_up_ok">
                                    <property name="text">
                                     <string/>
                                    </property>
@@ -2597,7 +2619,7 @@ Line{
                                <number>0</number>
                               </property>
                               <item row="0" column="0">
-                               <widget class="QWidget" name="widget_page_download_1_install_fabric_up" native="true">
+                               <widget class="MyQWidget" name="widget_page_download_1_install_fabric_up" native="true">
                                 <property name="maximumSize">
                                  <size>
                                   <width>16777215</width>
@@ -2618,7 +2640,7 @@ Line{
                                   <number>4</number>
                                  </property>
                                  <item>
-                                  <widget class="QLabel" name="label_5">
+                                  <widget class="QLabel" name="label_page_download_1_install_fabric_up_icon">
                                    <property name="minimumSize">
                                     <size>
                                      <width>42</width>
@@ -2643,7 +2665,7 @@ Line{
                                   </widget>
                                  </item>
                                  <item>
-                                  <widget class="QLabel" name="label_6">
+                                  <widget class="QLabel" name="label_page_download_1_install_fabric_up_txt">
                                    <property name="sizePolicy">
                                     <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
                                      <horstretch>0</horstretch>
@@ -2670,7 +2692,7 @@ Line{
                                   </spacer>
                                  </item>
                                  <item>
-                                  <widget class="QPushButton" name="pushButton_4">
+                                  <widget class="QPushButton" name="pushButton_page_download_1_install_fabric_up_close">
                                    <property name="text">
                                     <string/>
                                    </property>
@@ -2687,7 +2709,7 @@ Line{
                                   </widget>
                                  </item>
                                  <item>
-                                  <widget class="QPushButton" name="pushButton_5">
+                                  <widget class="QPushButton" name="pushButton_page_download_1_install_fabric_up_ok">
                                    <property name="text">
                                     <string/>
                                    </property>
@@ -2713,6 +2735,12 @@ Line{
                                   <horstretch>0</horstretch>
                                   <verstretch>0</verstretch>
                                  </sizepolicy>
+                                </property>
+                                <property name="maximumSize">
+                                 <size>
+                                  <width>16777215</width>
+                                  <height>0</height>
+                                 </size>
                                 </property>
                                 <layout class="QGridLayout" name="gridLayout_13">
                                  <property name="leftMargin">
@@ -2773,7 +2801,7 @@ Line{
                                            <number>-1</number>
                                           </property>
                                           <item>
-                                           <widget class="QLabel" name="label_13">
+                                           <widget class="QLabel" name="label_page_download_1_install_fabric_list_bata_list_up">
                                             <property name="text">
                                              <string>测试版</string>
                                             </property>
@@ -2793,7 +2821,7 @@ Line{
                                            </spacer>
                                           </item>
                                           <item>
-                                           <widget class="QPushButton" name="pushButton_12">
+                                           <widget class="QPushButton" name="pushButton_page_download_1_install_fabric_list_bata_list_up">
                                             <property name="text">
                                              <string/>
                                             </property>
@@ -2831,7 +2859,7 @@ Line{
                                            <number>0</number>
                                           </property>
                                           <item row="1" column="1">
-                                           <widget class="QListWidget" name="listWidget">
+                                           <widget class="QListWidget" name="listWidget_page_download_1_install_fabric_list_bata_list">
                                             <property name="sizePolicy">
                                              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                                               <horstretch>0</horstretch>
@@ -2909,7 +2937,7 @@ Line{
                                            <number>-1</number>
                                           </property>
                                           <item>
-                                           <widget class="QLabel" name="label_15">
+                                           <widget class="QLabel" name="label_page_download_1_install_fabric_list_version_list_up">
                                             <property name="text">
                                              <string>正式版</string>
                                             </property>
@@ -2929,7 +2957,7 @@ Line{
                                            </spacer>
                                           </item>
                                           <item>
-                                           <widget class="QPushButton" name="pushButton_14">
+                                           <widget class="QPushButton" name="pushButton_page_download_1_install_fabric_list_version_list_up">
                                             <property name="text">
                                              <string/>
                                             </property>
@@ -2973,7 +3001,7 @@ Line{
                                            <number>0</number>
                                           </property>
                                           <item row="1" column="1">
-                                           <widget class="QListWidget" name="listWidget_2">
+                                           <widget class="QListWidget" name="listWidget_page_download_1_install_fabric_list_version">
                                             <property name="sizePolicy">
                                              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                                               <horstretch>0</horstretch>
@@ -3177,7 +3205,7 @@ Line{
                                            <number>-1</number>
                                           </property>
                                           <item>
-                                           <widget class="QLabel" name="label_17">
+                                           <widget class="QLabel" name="label_page_download_1_install_optifine_list_bata_list_up">
                                             <property name="text">
                                              <string>测试版</string>
                                             </property>
@@ -3197,7 +3225,7 @@ Line{
                                            </spacer>
                                           </item>
                                           <item>
-                                           <widget class="QPushButton" name="pushButton_16">
+                                           <widget class="QPushButton" name="pushButton_page_download_1_install_optifine_list_bata_list_up">
                                             <property name="text">
                                              <string/>
                                             </property>
@@ -3241,7 +3269,7 @@ Line{
                                            <number>0</number>
                                           </property>
                                           <item row="1" column="1">
-                                           <widget class="QListWidget" name="listWidget_5">
+                                           <widget class="QListWidget" name="listWidget_page_download_1_install_optifine_list_bata_list">
                                             <property name="sizePolicy">
                                              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                                               <horstretch>0</horstretch>
@@ -3335,7 +3363,7 @@ Line{
                                            <number>-1</number>
                                           </property>
                                           <item>
-                                           <widget class="QLabel" name="label_18">
+                                           <widget class="QLabel" name="label_page_download_1_install_optifine_list_version_list_up">
                                             <property name="text">
                                              <string>正式版</string>
                                             </property>
@@ -3355,7 +3383,7 @@ Line{
                                            </spacer>
                                           </item>
                                           <item>
-                                           <widget class="QPushButton" name="pushButton_17">
+                                           <widget class="QPushButton" name="pushButton_page_download_1_install_optifine_list_version_list_up">
                                             <property name="text">
                                              <string/>
                                             </property>
@@ -3399,7 +3427,7 @@ Line{
                                            <number>0</number>
                                           </property>
                                           <item row="1" column="1">
-                                           <widget class="QListWidget" name="listWidget_6">
+                                           <widget class="QListWidget" name="listWidget_page_download_1_install_optifine_list_version_list">
                                             <property name="sizePolicy">
                                              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                                               <horstretch>0</horstretch>
@@ -3450,7 +3478,7 @@ Line{
                                            </spacer>
                                           </item>
                                           <item row="0" column="0" colspan="2">
-                                           <widget class="Line" name="line_8">
+                                           <widget class="Line" name="line_page_download_1_install_optifine_list_version_list">
                                             <property name="maximumSize">
                                              <size>
                                               <width>16777215</width>
@@ -3504,7 +3532,7 @@ Line{
                                </widget>
                               </item>
                               <item row="1" column="1">
-                               <widget class="QWidget" name="widget_page_download_1_install_optifine_up" native="true">
+                               <widget class="MyQWidget" name="widget_page_download_1_install_optifine_up" native="true">
                                 <layout class="QHBoxLayout" name="horizontalLayout_25">
                                  <property name="leftMargin">
                                   <number>13</number>
@@ -3519,7 +3547,7 @@ Line{
                                   <number>4</number>
                                  </property>
                                  <item>
-                                  <widget class="QLabel" name="label_7">
+                                  <widget class="QLabel" name="label_page_download_1_install_optifine_up_icon">
                                    <property name="minimumSize">
                                     <size>
                                      <width>42</width>
@@ -3544,7 +3572,7 @@ Line{
                                   </widget>
                                  </item>
                                  <item>
-                                  <widget class="QLabel" name="label_8">
+                                  <widget class="QLabel" name="label_page_download_1_install_optifine_up_txt">
                                    <property name="sizePolicy">
                                     <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
                                      <horstretch>0</horstretch>
@@ -3571,7 +3599,7 @@ Line{
                                   </spacer>
                                  </item>
                                  <item>
-                                  <widget class="QPushButton" name="pushButton_6">
+                                  <widget class="QPushButton" name="pushButton_page_download_1_install_optifine_up_close">
                                    <property name="text">
                                     <string/>
                                    </property>
@@ -3588,7 +3616,7 @@ Line{
                                   </widget>
                                  </item>
                                  <item>
-                                  <widget class="QPushButton" name="pushButton_7">
+                                  <widget class="QPushButton" name="pushButton_page_download_1_install_optifine_up_ok">
                                    <property name="text">
                                     <string/>
                                    </property>
@@ -3638,7 +3666,7 @@ Line{
                                <number>4</number>
                               </property>
                               <item>
-                               <widget class="QLabel" name="label_9">
+                               <widget class="QLabel" name="label_page_download_1_install_quilt_txt">
                                 <property name="minimumSize">
                                  <size>
                                   <width>42</width>
@@ -3663,7 +3691,7 @@ Line{
                                </widget>
                               </item>
                               <item>
-                               <widget class="QLabel" name="label_10">
+                               <widget class="QLabel" name="label_page_download_1_install_quilt_icon">
                                 <property name="sizePolicy">
                                  <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
                                   <horstretch>0</horstretch>
@@ -3690,7 +3718,7 @@ Line{
                                </spacer>
                               </item>
                               <item>
-                               <widget class="QPushButton" name="pushButton_8">
+                               <widget class="QPushButton" name="pushButton_page_download_1_install_quilt_close">
                                 <property name="text">
                                  <string/>
                                 </property>
@@ -3707,7 +3735,7 @@ Line{
                                </widget>
                               </item>
                               <item>
-                               <widget class="QPushButton" name="pushButton_9">
+                               <widget class="QPushButton" name="pushButton_page_download_1_install_quilt_ok">
                                 <property name="text">
                                  <string/>
                                 </property>
@@ -3744,12 +3772,23 @@ Line{
                         </widget>
                        </item>
                        <item>
-                        <widget class="QWidget" name="widget_2" native="true">
+                        <widget class="QWidget" name="widget_page_download_1_install_bottom" native="true">
                          <layout class="QHBoxLayout" name="horizontalLayout_18">
+                          <property name="leftMargin">
+                           <number>17</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>15</number>
+                          </property>
                           <item>
-                           <widget class="QLabel" name="label">
+                           <widget class="QLabel" name="label_page_download_1_install_bottom">
+                            <property name="font">
+                             <font>
+                              <pointsize>16</pointsize>
+                             </font>
+                            </property>
                             <property name="text">
-                             <string>TextLabel</string>
+                             <string>安装……</string>
                             </property>
                            </widget>
                           </item>
@@ -3767,19 +3806,45 @@ Line{
                            </spacer>
                           </item>
                           <item>
-                           <widget class="QLabel" name="label_2">
+                           <widget class="QLabel" name="label_page_download_1_install_bottom_GameName">
+                            <property name="font">
+                             <font>
+                              <pointsize>14</pointsize>
+                             </font>
+                            </property>
                             <property name="text">
-                             <string>TextLabel</string>
+                             <string>游戏名</string>
                             </property>
                            </widget>
                           </item>
                           <item>
-                           <widget class="QLineEdit" name="lineEdit"/>
+                           <widget class="QLineEdit" name="lineEdit_page_download_1_install_bottom_GameName">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>38</height>
+                             </size>
+                            </property>
+                            <property name="placeholderText">
+                             <string>1.12.2</string>
+                            </property>
+                           </widget>
                           </item>
                           <item>
-                           <widget class="QPushButton" name="pushButton">
+                           <widget class="QPushButton" name="pushButton_page_download_1_install_bottom_ok">
+                            <property name="minimumSize">
+                             <size>
+                              <width>132</width>
+                              <height>38</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <pointsize>16</pointsize>
+                             </font>
+                            </property>
                             <property name="text">
-                             <string>PushButton</string>
+                             <string>安装</string>
                             </property>
                            </widget>
                           </item>
@@ -4289,6 +4354,12 @@ Line{
            </item>
            <item row="3" column="0" colspan="3">
             <widget class="Line" name="line">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>1</height>
+              </size>
+             </property>
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
