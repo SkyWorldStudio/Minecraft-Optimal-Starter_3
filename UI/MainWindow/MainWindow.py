@@ -225,7 +225,7 @@ class Ui_MainWindow(object):
 "    /*border-top: 1px solid rgba(214, 214, 214,0);*/\n"
 "    border-bottom: 1px solid rgba(214, 214, 214,0);\n"
 "}\n"
-"#scrollAreaWidgetContents_page_download_1_install > QWidget{\n"
+"#scrollAreaWidgetContents_page_download_1_install > *{\n"
 "    background-color: rgba(191, 191, 191, 54);\n"
 "    border-radius: 8px;\n"
 "}\n"
@@ -1296,7 +1296,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_12.setContentsMargins(12, 8, 14, 10)
         self.verticalLayout_12.setSpacing(10)
         self.verticalLayout_12.setObjectName("verticalLayout_12")
-        self.widget_page_download_1_install_forge = QtWidgets.QWidget(self.scrollAreaWidgetContents_page_download_1_install)
+        self.widget_page_download_1_install_forge = MyQWidget(self.scrollAreaWidgetContents_page_download_1_install)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -1313,6 +1313,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.widget_page_download_1_install_forge_up.sizePolicy().hasHeightForWidth())
         self.widget_page_download_1_install_forge_up.setSizePolicy(sizePolicy)
+        self.widget_page_download_1_install_forge_up.setMinimumSize(QtCore.QSize(0, 52))
         self.widget_page_download_1_install_forge_up.setMaximumSize(QtCore.QSize(16777215, 52))
         self.widget_page_download_1_install_forge_up.setObjectName("widget_page_download_1_install_forge_up")
         self.horizontalLayout_19 = QtWidgets.QHBoxLayout(self.widget_page_download_1_install_forge_up)
@@ -1404,7 +1405,7 @@ class Ui_MainWindow(object):
         self.gridLayout_12.addWidget(self.line_download_1_install_forge_list, 0, 0, 1, 2)
         self.gridLayout_11.addWidget(self.widget_page_download_1_install_forge_list, 1, 0, 1, 2)
         self.verticalLayout_12.addWidget(self.widget_page_download_1_install_forge)
-        self.widget_page_download_1_install_fabric = QtWidgets.QWidget(self.scrollAreaWidgetContents_page_download_1_install)
+        self.widget_page_download_1_install_fabric = MyQWidget(self.scrollAreaWidgetContents_page_download_1_install)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -1416,6 +1417,7 @@ class Ui_MainWindow(object):
         self.gridLayout_14.setVerticalSpacing(0)
         self.gridLayout_14.setObjectName("gridLayout_14")
         self.widget_page_download_1_install_fabric_up = MyQWidget(self.widget_page_download_1_install_fabric)
+        self.widget_page_download_1_install_fabric_up.setMinimumSize(QtCore.QSize(0, 52))
         self.widget_page_download_1_install_fabric_up.setMaximumSize(QtCore.QSize(16777215, 52))
         self.widget_page_download_1_install_fabric_up.setObjectName("widget_page_download_1_install_fabric_up")
         self.horizontalLayout_23 = QtWidgets.QHBoxLayout(self.widget_page_download_1_install_fabric_up)
@@ -1493,6 +1495,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_20.addWidget(self.pushButton_page_download_1_install_fabric_list_bata_list_up)
         self.verticalLayout_15.addWidget(self.widget_page_download_1_install_fabric_list_bata_list_up)
         self.widget_page_download_1_install_fabric_list_bata_list = QtWidgets.QWidget(self.widget_page_download_1_install_fabric_list_bata)
+        self.widget_page_download_1_install_fabric_list_bata_list.setMaximumSize(QtCore.QSize(16777215, 0))
         self.widget_page_download_1_install_fabric_list_bata_list.setObjectName("widget_page_download_1_install_fabric_list_bata_list")
         self.gridLayout_16 = QtWidgets.QGridLayout(self.widget_page_download_1_install_fabric_list_bata_list)
         self.gridLayout_16.setContentsMargins(0, 0, 0, 0)
@@ -1592,7 +1595,7 @@ class Ui_MainWindow(object):
         self.gridLayout_13.addWidget(self.line_download_1_install_forge_list_2, 0, 0, 1, 3)
         self.gridLayout_14.addWidget(self.widget_page_download_1_install_fabric_list, 1, 0, 1, 1)
         self.verticalLayout_12.addWidget(self.widget_page_download_1_install_fabric)
-        self.widget_page_download_1_install_optifine = QtWidgets.QWidget(self.scrollAreaWidgetContents_page_download_1_install)
+        self.widget_page_download_1_install_optifine = MyQWidget(self.scrollAreaWidgetContents_page_download_1_install)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -1746,6 +1749,7 @@ class Ui_MainWindow(object):
         self.gridLayout_20.addWidget(self.line_download_1_install_forge_list_4, 0, 0, 1, 3)
         self.gridLayout_23.addWidget(self.widget_page_download_1_install_optifine_list, 2, 1, 1, 1)
         self.widget_page_download_1_install_optifine_up = MyQWidget(self.widget_page_download_1_install_optifine)
+        self.widget_page_download_1_install_optifine_up.setMinimumSize(QtCore.QSize(0, 52))
         self.widget_page_download_1_install_optifine_up.setObjectName("widget_page_download_1_install_optifine_up")
         self.horizontalLayout_25 = QtWidgets.QHBoxLayout(self.widget_page_download_1_install_optifine_up)
         self.horizontalLayout_25.setContentsMargins(13, 4, 14, 4)
@@ -1782,12 +1786,13 @@ class Ui_MainWindow(object):
         self.horizontalLayout_25.addWidget(self.pushButton_page_download_1_install_optifine_up_ok)
         self.gridLayout_23.addWidget(self.widget_page_download_1_install_optifine_up, 1, 1, 1, 1)
         self.verticalLayout_12.addWidget(self.widget_page_download_1_install_optifine)
-        self.widget_page_download_1_install_quilt = QtWidgets.QWidget(self.scrollAreaWidgetContents_page_download_1_install)
+        self.widget_page_download_1_install_quilt = MyQWidget(self.scrollAreaWidgetContents_page_download_1_install)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.widget_page_download_1_install_quilt.sizePolicy().hasHeightForWidth())
         self.widget_page_download_1_install_quilt.setSizePolicy(sizePolicy)
+        self.widget_page_download_1_install_quilt.setMinimumSize(QtCore.QSize(0, 52))
         self.widget_page_download_1_install_quilt.setMaximumSize(QtCore.QSize(16777215, 52))
         self.widget_page_download_1_install_quilt.setObjectName("widget_page_download_1_install_quilt")
         self.horizontalLayout_22 = QtWidgets.QHBoxLayout(self.widget_page_download_1_install_quilt)
@@ -2149,13 +2154,13 @@ class Ui_MainWindow(object):
         self.action8.setObjectName("action8")
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget_main.setCurrentIndex(1)
-        self.stackedWidget_main_2.setCurrentIndex(1)
+        self.stackedWidget_main.setCurrentIndex(0)
+        self.stackedWidget_main_2.setCurrentIndex(3)
         self.stackedWidget_page_users_down.setCurrentIndex(1)
         self.stackedWidget_page_home.setCurrentIndex(0)
         self.stackedWidget_page_home_game_left.setCurrentIndex(0)
         self.stackedWidget_page_download.setCurrentIndex(0)
-        self.stackedWidget_page_download_1.setCurrentIndex(0)
+        self.stackedWidget_page_download_1.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

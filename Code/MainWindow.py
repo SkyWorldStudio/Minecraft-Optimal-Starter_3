@@ -491,25 +491,27 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
     def DownloadPage_stackedWidget_install_fabric_list_bata(self):
         """下载页面 -> 选择安装 -> Fabric -> 测试版"""
-        pass
+        self.widget_page_download_1_install_fabric_list_bata_list.setMaximumSize(16777215, 16777215)
     def DownloadPage_stackedWidget_install_fabric_list_version(self):
         """下载页面 -> 选择安装 -> Fabric -> 稳定版"""
-        pass
-    def DownloadPage_stackedWidget_install_fabric_up(self):
+        self.widget_page_download_1_install_fabric_list_version_list.setMaximumSize(16777215, 16777215)
+    def DownloadPage_stackedWidget_install_fabric(self):
         """下载页面 -> 选择安装 -> Fabric"""
-        pass
-    def DownloadPage_stackedWidget_install_forge_up(self):
+        self.widget_page_download_1_install_fabric_list.setMaximumSize(16777215, 16777215)
+
+    def DownloadPage_stackedWidget_install_forge(self):
         """下载页面 -> 选择安装 -> Forge"""
-        pass
+        self.widget_page_download_1_install_forge_up.setStyleSheet('background-color: rgba(191, 191, 191, 54);')
+        self.widget_page_download_1_install_forge_list.setMaximumSize(16777215,16777215)
     def DownloadPage_stackedWidget_install_optifine_list_bata(self):
         """下载页面 -> 选择安装 -> Optifine -> 测试版"""
-        pass
+        self.widget_page_download_1_install_optifine_list_bata_list.setMaximumSize(16777215,16777215)
     def DownloadPage_stackedWidget_install_optifine_list_version(self):
         """下载页面 -> 选择安装 -> Optifine -> 稳定版"""
-        pass
-    def DownloadPage_stackedWidget_install_optifine_up(self):
+        self.widget_page_download_1_install_optifine_list_version_list.setMaximumSize(16777215,16777215)
+    def DownloadPage_stackedWidget_install_optifine(self):
         """下载页面 -> 选择安装 -> Optifine"""
-        pass
+        self.widget_page_download_1_install_optifine_list.setMaximumSize(16777215,16777215)
 
     def DownloadPage_MC_Official(self):
         self.checkBox_page_download_mc_test.setChecked(False)
@@ -1101,13 +1103,13 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.checkBox_page_download_mc_test.clicked.connect(self.DownloadPage_MC_Text)
         self.checkBox_page_download_mc_previously.clicked.connect(self.DownloadPage_MC_Previously)
         self.listWidget_page_1_download.itemPressed.connect(self.DownloadPage_stackedWidget_GameList_Clicked)
-        self.widget_page_download_1_install_fabric_list_bata.clicked.connect(self.DownloadPage_stackedWidget_install_fabric_list_bata)
-        self.widget_page_download_1_install_fabric_list_version.clicked.connect(self.DownloadPage_stackedWidget_install_fabric_list_version)
-        self.widget_page_download_1_install_fabric_up.clicked.connect(self.DownloadPage_stackedWidget_install_fabric_up)
-        self.widget_page_download_1_install_forge_up.clicked.connect(self.DownloadPage_stackedWidget_install_forge_up)
-        self.widget_page_download_1_install_optifine_list_bata.clicked.connect(self.DownloadPage_stackedWidget_install_optifine_list_bata)
-        self.widget_page_download_1_install_optifine_list_version.clicked.connect(self.DownloadPage_stackedWidget_install_optifine_list_version)
-        self.widget_page_download_1_install_optifine_up.clicked.connect(self.DownloadPage_stackedWidget_install_optifine_up)
+        self.widget_page_download_1_install_fabric_list_bata.mouseEnterEvent.connect(self.DownloadPage_stackedWidget_install_fabric_list_bata)
+        self.widget_page_download_1_install_fabric_list_version.mouseEnterEvent.connect(self.DownloadPage_stackedWidget_install_fabric_list_version)
+        self.widget_page_download_1_install_fabric.mouseEnterEvent.connect(self.DownloadPage_stackedWidget_install_fabric)
+        self.widget_page_download_1_install_forge.mouseEnterEvent.connect(self.DownloadPage_stackedWidget_install_forge)
+        self.widget_page_download_1_install_optifine_list_bata.mouseEnterEvent.connect(self.DownloadPage_stackedWidget_install_optifine_list_bata)
+        self.widget_page_download_1_install_optifine_list_version.mouseEnterEvent.connect(self.DownloadPage_stackedWidget_install_optifine_list_version)
+        self.widget_page_download_1_install_optifine.mouseEnterEvent.connect(self.DownloadPage_stackedWidget_install_optifine)
 
         # 设置页面
         self.radioButton_settings_background_none.clicked.connect(self.SettingsPage_Background_None_Clicked)

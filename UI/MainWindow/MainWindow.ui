@@ -688,7 +688,7 @@ Line{
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="page_main">
        <property name="styleSheet">
@@ -952,7 +952,7 @@ Line{
               <string notr="true"/>
              </property>
              <property name="currentIndex">
-              <number>1</number>
+              <number>3</number>
              </property>
              <widget class="QWidget" name="page_users">
               <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -2215,7 +2215,7 @@ Line{
                    <item>
                     <widget class="QStackedWidget" name="stackedWidget_page_download_1">
                      <property name="currentIndex">
-                      <number>0</number>
+                      <number>1</number>
                      </property>
                      <widget class="QWidget" name="page_download_1_main">
                       <layout class="QVBoxLayout" name="verticalLayout_11">
@@ -2324,7 +2324,7 @@ Line{
                             <number>10</number>
                            </property>
                            <item>
-                            <widget class="QWidget" name="widget_page_download_1_install_forge" native="true">
+                            <widget class="MyQWidget" name="widget_page_download_1_install_forge" native="true">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                                <horstretch>0</horstretch>
@@ -2354,6 +2354,12 @@ Line{
                                   <horstretch>0</horstretch>
                                   <verstretch>0</verstretch>
                                  </sizepolicy>
+                                </property>
+                                <property name="minimumSize">
+                                 <size>
+                                  <width>0</width>
+                                  <height>52</height>
+                                 </size>
                                 </property>
                                 <property name="maximumSize">
                                  <size>
@@ -2595,7 +2601,7 @@ Line{
                             </widget>
                            </item>
                            <item>
-                            <widget class="QWidget" name="widget_page_download_1_install_fabric" native="true">
+                            <widget class="MyQWidget" name="widget_page_download_1_install_fabric" native="true">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                                <horstretch>0</horstretch>
@@ -2620,6 +2626,12 @@ Line{
                               </property>
                               <item row="0" column="0">
                                <widget class="MyQWidget" name="widget_page_download_1_install_fabric_up" native="true">
+                                <property name="minimumSize">
+                                 <size>
+                                  <width>0</width>
+                                  <height>52</height>
+                                 </size>
+                                </property>
                                 <property name="maximumSize">
                                  <size>
                                   <width>16777215</width>
@@ -2842,6 +2854,12 @@ Line{
                                        </item>
                                        <item>
                                         <widget class="QWidget" name="widget_page_download_1_install_fabric_list_bata_list" native="true">
+                                         <property name="maximumSize">
+                                          <size>
+                                           <width>16777215</width>
+                                           <height>0</height>
+                                          </size>
+                                         </property>
                                          <layout class="QGridLayout" name="gridLayout_16">
                                           <property name="leftMargin">
                                            <number>0</number>
@@ -3109,7 +3127,7 @@ Line{
                             </widget>
                            </item>
                            <item>
-                            <widget class="QWidget" name="widget_page_download_1_install_optifine" native="true">
+                            <widget class="MyQWidget" name="widget_page_download_1_install_optifine" native="true">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                                <horstretch>0</horstretch>
@@ -3533,6 +3551,12 @@ Line{
                               </item>
                               <item row="1" column="1">
                                <widget class="MyQWidget" name="widget_page_download_1_install_optifine_up" native="true">
+                                <property name="minimumSize">
+                                 <size>
+                                  <width>0</width>
+                                  <height>52</height>
+                                 </size>
+                                </property>
                                 <layout class="QHBoxLayout" name="horizontalLayout_25">
                                  <property name="leftMargin">
                                   <number>13</number>
@@ -3639,12 +3663,18 @@ Line{
                             </widget>
                            </item>
                            <item>
-                            <widget class="QWidget" name="widget_page_download_1_install_quilt" native="true">
+                            <widget class="MyQWidget" name="widget_page_download_1_install_quilt" native="true">
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
                                <horstretch>0</horstretch>
                                <verstretch>0</verstretch>
                               </sizepolicy>
+                             </property>
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>52</height>
+                              </size>
                              </property>
                              <property name="maximumSize">
                               <size>
