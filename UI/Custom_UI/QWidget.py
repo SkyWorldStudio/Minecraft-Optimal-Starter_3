@@ -3,7 +3,7 @@
 from PyQt6 import QtWidgets, QtCore, QtGui
 
 
-class MyQWidget(QtWidgets.QWidget):
+class MyQWidget(QtWidgets.QFrame):
     # 自定义单击信号
     clicked = QtCore.pyqtSignal()
     mouseEnterEvent = QtCore.pyqtSignal()

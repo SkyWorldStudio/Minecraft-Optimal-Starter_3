@@ -491,27 +491,75 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
     def DownloadPage_stackedWidget_install_fabric_list_bata(self):
         """下载页面 -> 选择安装 -> Fabric -> 测试版"""
-        self.widget_page_download_1_install_fabric_list_bata_list.setMaximumSize(16777215, 16777215)
+        if self.widget_page_download_1_install_fabric_list_bata_list.geometry().height() == 0:
+            M = 'Go'
+        else:M = 'Back'
+        self.DownloadPage_stackedWidget(self.widget_page_download_1_install_fabric_list_bata_list,
+                                        self.scrollArea_page_download_1_install,
+                                        M
+                                        )
+        # self.widget_page_download_1_install_fabric_list_bata_list.setMaximumSize(16777215, 16777215)
     def DownloadPage_stackedWidget_install_fabric_list_version(self):
         """下载页面 -> 选择安装 -> Fabric -> 稳定版"""
-        self.widget_page_download_1_install_fabric_list_version_list.setMaximumSize(16777215, 16777215)
+        if self.widget_page_download_1_install_fabric_list_version_list.geometry().height() == 0:
+            M = 'Go'
+        else:M = 'Back'
+        self.DownloadPage_stackedWidget(self.widget_page_download_1_install_fabric_list_version_list,
+                                        self.scrollArea_page_download_1_install,
+                                        M
+                                        )
+        # self.widget_page_download_1_install_fabric_list_version_list.setMaximumSize(16777215, 16777215)
     def DownloadPage_stackedWidget_install_fabric(self):
         """下载页面 -> 选择安装 -> Fabric"""
-        self.widget_page_download_1_install_fabric_list.setMaximumSize(16777215, 16777215)
+        if self.widget_page_download_1_install_fabric_list.geometry().height() == 0:
+            M = 'Go'
+        else:M = 'Back'
+        self.DownloadPage_stackedWidget(self.widget_page_download_1_install_fabric_list,
+                                        self.scrollArea_page_download_1_install,
+                                        M
+                                        )
+        # self.widget_page_download_1_install_fabric_list.setMaximumSize(16777215, 16777215)
 
     def DownloadPage_stackedWidget_install_forge(self):
         """下载页面 -> 选择安装 -> Forge"""
-        self.widget_page_download_1_install_forge_up.setStyleSheet('background-color: rgba(191, 191, 191, 54);')
-        self.widget_page_download_1_install_forge_list.setMaximumSize(16777215,16777215)
+        if self.widget_page_download_1_install_forge_list.geometry().height() == 0:
+            M = 'Go'
+        else:M = 'Back'
+        self.DownloadPage_stackedWidget(self.widget_page_download_1_install_forge_list,
+                                        self.scrollArea_page_download_1_install,
+                                        M
+                                        )
+        #self.widget_page_download_1_install_forge_list.setMaximumSize(16777215,16777215)
     def DownloadPage_stackedWidget_install_optifine_list_bata(self):
         """下载页面 -> 选择安装 -> Optifine -> 测试版"""
-        self.widget_page_download_1_install_optifine_list_bata_list.setMaximumSize(16777215,16777215)
+        if self.widget_page_download_1_install_optifine_list_bata_list.geometry().height() == 0:
+            M = 'Go'
+        else:M = 'Back'
+        self.DownloadPage_stackedWidget(self.widget_page_download_1_install_optifine_list_bata_list,
+                                        self.scrollArea_page_download_1_install,
+                                        M
+                                        )
+        #self.widget_page_download_1_install_optifine_list_bata_list.setMaximumSize(16777215,16777215)
     def DownloadPage_stackedWidget_install_optifine_list_version(self):
         """下载页面 -> 选择安装 -> Optifine -> 稳定版"""
-        self.widget_page_download_1_install_optifine_list_version_list.setMaximumSize(16777215,16777215)
+        if self.widget_page_download_1_install_optifine_list_version_list.geometry().height() == 0:
+            M = 'Go'
+        else:M = 'Back'
+        self.DownloadPage_stackedWidget(self.widget_page_download_1_install_optifine_list_version_list,
+                                        self.scrollArea_page_download_1_install,
+                                        M
+                                        )
+        #self.widget_page_download_1_install_optifine_list_version_list.setMaximumSize(16777215,16777215)
     def DownloadPage_stackedWidget_install_optifine(self):
         """下载页面 -> 选择安装 -> Optifine"""
-        self.widget_page_download_1_install_optifine_list.setMaximumSize(16777215,16777215)
+        if self.widget_page_download_1_install_optifine_list.geometry().height() == 0:
+            M = 'Go'
+        else:M = 'Back'
+        self.DownloadPage_stackedWidget(self.widget_page_download_1_install_optifine_list,
+                                        self.scrollArea_page_download_1_install,
+                                        M
+                                        )
+        #self.widget_page_download_1_install_optifine_list.setMaximumSize(16777215,16777215)
 
     def DownloadPage_MC_Official(self):
         self.checkBox_page_download_mc_test.setChecked(False)
@@ -862,6 +910,71 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 self.SetCurrentIndex(False, 3, 3, H)
             elif Want == 'Settings':
                 self.SetCurrentIndex(False, 4, 4, H)
+
+    def DownloadPage_stackedWidget(self, U, U_P, M, S=False):
+        """
+           用户鼠标悬浮/离开下载页面的列表时, 产生动画
+           :param U: 要影响的控件
+           :param U_P: U的父级(用于获取父级的高)
+           :param M: 展开(Go) /收起(Back)
+           :param S: 是否开启"减少动画"功能(False True)
+        """
+        self.DownloadPage_stackedWidget_time = 5  # 刷新速度
+        self.DownloadPage_stackedWidget_From_ = U.geometry().height()
+        if M == 'Go':
+            if S == False:
+                self.DownloadPage_stackedWidget_To_ = -1  # 当值为-1时，默认直接全展开, 否则会展开到指定的值(减少动画效果的模式下, To_动画展开到str(U_P的高)), 其余部分不需要动画 直接展开)
+            else:
+                self.DownloadPage_stackedWidget_To_ = U_P.geometry()
+        else:
+            self.DownloadPage_stackedWidget_To_ = 0
+
+        self.DownloadPage_stackedWidget_B_ = 4  # 设置步长
+
+        self.DownloadPage_stackedWidget_D_ = int(self.DownloadPage_stackedWidget_From_)  #当前值
+        self.DownloadPage_stackedWidget_O_ = int(self.DownloadPage_stackedWidget_From_)  # 设置之后控件实际的值
+        self.DownloadPage_stackedWidget_Q_ = int(self.DownloadPage_stackedWidget_From_)  # 设置之前控件实际的值
+        self.DownloadPage_stackedWidget_J_ = int(self.DownloadPage_stackedWidget_D_)  # 将要变为
+
+        def Run_Go():
+            """动画模块-展开"""
+            print('GO!')
+            self.DownloadPage_stackedWidget_J_ += self.DownloadPage_stackedWidget_B_
+            if self.DownloadPage_stackedWidget_To_ == -1:
+                self.DownloadPage_stackedWidget_Q_ = U.geometry().height()
+                U.setMaximumSize(16777215, self.DownloadPage_stackedWidget_J_)
+                print(U.geometry().height())
+                print(self.DownloadPage_stackedWidget_J_)
+                self.DownloadPage_stackedWidget_O_ = U.geometry().height()
+                if self.DownloadPage_stackedWidget_Q_ != self.DownloadPage_stackedWidget_O_:
+                    self.DownloadPage_stackedWidget_QTime.stop()
+
+            else:
+                if self.DownloadPage_stackedWidget_J_ < self.DownloadPage_stackedWidget_To_:
+                    U.setMaximumSize(16777215, self.DownloadPage_stackedWidget_J_)
+                elif self.DownloadPage_stackedWidget_J_ == self.DownloadPage_stackedWidget_To_:
+                    self.DownloadPage_stackedWidget_QTime.stop()
+                elif self.DownloadPage_stackedWidget_J_ > self.DownloadPage_stackedWidget_To_:
+                    U.setMaximumSize(16777215, self.DownloadPage_stackedWidget_To_)
+
+
+        def Run_Back():
+            """动画模块-收回"""
+            self.DownloadPage_stackedWidget_J_ -= self.DownloadPage_stackedWidget_B_
+            if self.DownloadPage_stackedWidget_J_ > self.DownloadPage_stackedWidget_To_:
+                U.setMaximumSize(16777215, self.DownloadPage_stackedWidget_J_)
+            elif self.DownloadPage_stackedWidget_J_ == self.DownloadPage_stackedWidget_To_:
+                self.DownloadPage_stackedWidget_QTime.stop()
+            elif self.DownloadPage_stackedWidget_J_ < self.DownloadPage_stackedWidget_To_:
+                U.setMaximumSize(16777215, self.DownloadPage_stackedWidget_To_)
+
+        self.DownloadPage_stackedWidget_QTime = QTimer()
+        self.DownloadPage_stackedWidget_QTime.start(self.DownloadPage_stackedWidget_time)
+        if M == 'Go':
+            self.DownloadPage_stackedWidget_QTime.timeout.connect(Run_Go)
+        else:
+            self.DownloadPage_stackedWidget_QTime.timeout.connect(Run_Back)
+
 
     def RunInitialize(self, First=True):
         """在启动器启动后初始化启动器(读取设置+设置启动器)"""
