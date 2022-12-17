@@ -498,13 +498,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.DownloadPage_stackedWidget(self.widget_page_download_1_install_fabric_list_bata_list,
                                         self.scrollArea_page_download_1_install,
                                         M,
-                                        False,
-                                        [self.widget_page_download_1_install_fabric_list_bata_list,
-                                         self.widget_page_download_1_install_forge_list,
-                                         self.widget_page_download_1_install_optifine_list_bata_list,
-                                         self.widget_page_download_1_install_optifine_list_version_list,
-                                         self.widget_page_download_1_install_optifine_list
-                                         ]
+                                        False
                                         )
         # self.widget_page_download_1_install_fabric_list_bata_list.setMaximumSize(16777215, 16777215)
     def DownloadPage_stackedWidget_install_fabric_list_version(self):
@@ -515,17 +509,12 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.DownloadPage_stackedWidget(self.widget_page_download_1_install_fabric_list_version_list,
                                         self.scrollArea_page_download_1_install,
                                         M,
-                                        False,
-                                        [self.widget_page_download_1_install_fabric_list_version_list,
-                                         self.widget_page_download_1_install_forge_list,
-                                         self.widget_page_download_1_install_optifine_list_bata_list,
-                                         self.widget_page_download_1_install_optifine_list_version_list,
-                                         self.widget_page_download_1_install_optifine_list
-                                         ]
+                                        False
                                         )
         # self.widget_page_download_1_install_fabric_list_version_list.setMaximumSize(16777215, 16777215)
     def DownloadPage_stackedWidget_install_fabric(self):
         """下载页面 -> 选择安装 -> Fabric"""
+        print('ss')
         print(self.widget_page_download_1_install_fabric_list.geometry().height())
         if self.widget_page_download_1_install_fabric_list.geometry().height() == 0:
             M = 'Go'
@@ -533,15 +522,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.DownloadPage_stackedWidget(self.widget_page_download_1_install_fabric_list,
                                         self.scrollArea_page_download_1_install,
                                         M,
-                                        False,
-                                        [self.widget_page_download_1_install_fabric_list_bata_list,
-                                         self.widget_page_download_1_install_fabric_list_version_list,
-                                         self.widget_page_download_1_install_fabric_list,
-                                         self.widget_page_download_1_install_forge_list,
-                                         self.widget_page_download_1_install_optifine_list_bata_list,
-                                         self.widget_page_download_1_install_optifine_list_version_list,
-                                         self.widget_page_download_1_install_optifine_list
-                                         ]
+                                        False
                                         )
         # self.widget_page_download_1_install_fabric_list.setMaximumSize(16777215, 16777215)
 
@@ -550,18 +531,13 @@ class RunUi(QMainWindow, Ui_MainWindow):
         if self.widget_page_download_1_install_forge_list.geometry().height() == 0:
             M = 'Go'
         else:M = 'Back'
+        i = self.listWidget_download_1_install_forge_list.count()
+        s = i*28 + i
+        print(i)
         self.DownloadPage_stackedWidget(self.widget_page_download_1_install_forge_list,
                                         self.scrollArea_page_download_1_install,
                                         M,
-                                        False,
-                                        [self.widget_page_download_1_install_fabric_list_bata_list,
-                                         self.widget_page_download_1_install_fabric_list_version_list,
-                                         self.widget_page_download_1_install_fabric_list,
-                                         self.widget_page_download_1_install_forge_list,
-                                         self.widget_page_download_1_install_optifine_list_bata_list,
-                                         self.widget_page_download_1_install_optifine_list_version_list,
-                                         self.widget_page_download_1_install_optifine_list
-                                         ]
+                                        False,To=s
                                         )
         #self.widget_page_download_1_install_forge_list.setMaximumSize(16777215,16777215)
     def DownloadPage_stackedWidget_install_optifine_list_bata(self):
@@ -572,12 +548,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.DownloadPage_stackedWidget(self.widget_page_download_1_install_optifine_list_bata_list,
                                         self.scrollArea_page_download_1_install,
                                         M,
-                                        False,
-                                        [self.widget_page_download_1_install_fabric_list_bata_list,
-                                         self.widget_page_download_1_install_fabric_list,
-                                         self.widget_page_download_1_install_forge_list,
-                                         self.widget_page_download_1_install_optifine_list_version_list
-                                         ]
+                                        False
                                         )
         #self.widget_page_download_1_install_optifine_list_bata_list.setMaximumSize(16777215,16777215)
     def DownloadPage_stackedWidget_install_optifine_list_version(self):
@@ -588,31 +559,19 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.DownloadPage_stackedWidget(self.widget_page_download_1_install_optifine_list_version_list,
                                         self.scrollArea_page_download_1_install,
                                         M,
-                                        False,
-                                        [self.widget_page_download_1_install_fabric_list_bata_list,
-                                         self.widget_page_download_1_install_fabric_list_version_list,
-                                         self.widget_page_download_1_install_fabric_list,
-                                         self.widget_page_download_1_install_forge_list,
-                                         self.widget_page_download_1_install_optifine_list_bata_list
-                                         ]
+                                        False
                                         )
         #self.widget_page_download_1_install_optifine_list_version_list.setMaximumSize(16777215,16777215)
     def DownloadPage_stackedWidget_install_optifine(self):
         """下载页面 -> 选择安装 -> Optifine"""
         if self.widget_page_download_1_install_optifine_list.geometry().height() == 0:
             M = 'Go'
-        else:M = 'Back'
+        else:
+            M = 'Back'
         self.DownloadPage_stackedWidget(self.widget_page_download_1_install_optifine_list,
                                         self.scrollArea_page_download_1_install,
                                         M,
-                                        False,
-                                        [self.widget_page_download_1_install_fabric_list_bata_list,
-                                         self.widget_page_download_1_install_fabric_list_version_list,
-                                         self.widget_page_download_1_install_fabric_list,
-                                         self.widget_page_download_1_install_forge_list,
-                                         self.widget_page_download_1_install_optifine_list_bata_list,
-                                         self.widget_page_download_1_install_optifine_list_version_list
-                                         ]
+                                        False
                                         )
         #self.widget_page_download_1_install_optifine_list.setMaximumSize(16777215,16777215)
 
@@ -966,7 +925,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             elif Want == 'Settings':
                 self.SetCurrentIndex(False, 4, 4, H)
 
-    def DownloadPage_stackedWidget(self, U, U_P, M, S=False, F=None):
+    def DownloadPage_stackedWidget(self, U, U_P, M, S=False, To=None, F=None):
         """
            用户鼠标悬浮/离开下载页面的列表时, 产生动画
            :param U: 要影响的控件
@@ -975,6 +934,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
            :param S: 是否开启"减少动画"功能(False True)
            :param F: 运行前对控件(朋友)进行检查(None List), 如果没有完全收缩 ==> 收缩
         """
+        self.DownloadPage_stackedWidget_To__ = To
         def Run_Go():
             """动画模块-展开"""
             # print('GO!')
@@ -982,7 +942,12 @@ class RunUi(QMainWindow, Ui_MainWindow):
             if self.DownloadPage_stackedWidget_To_ == -1:
                 self.DownloadPage_stackedWidget_Q_ = int(U.geometry().height())
                 # print(self.DownloadPage_stackedWidget_Q_)
-                U.setMaximumSize(16777215, self.DownloadPage_stackedWidget_J_)
+                if self.DownloadPage_stackedWidget_To__ == None:
+                    U.setMaximumSize(16777215, self.DownloadPage_stackedWidget_J_)
+                else:
+                    print('sadaskdasdajjsjsjsjjjjjjjjjjjjssjsjssssssssssssssssss')
+                    U.setMaximumSize(16777215, 8888)
+                    U.setMinimumSize(0, 8888)
                 # print(self.DownloadPage_stackedWidget_J_)
                 self.DownloadPage_stackedWidget_O_ = int(U.geometry().height())
                 # print(self.DownloadPage_stackedWidget_O_)
@@ -1000,13 +965,15 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
         def Run_Back():
             """动画模块-收回"""
+            U.setMinimumSize(0,0)
             self.DownloadPage_stackedWidget_J_ -= self.DownloadPage_stackedWidget_B_
             if self.DownloadPage_stackedWidget_J_ > self.DownloadPage_stackedWidget_To_:
                 U.setMaximumSize(16777215, self.DownloadPage_stackedWidget_J_)
             elif self.DownloadPage_stackedWidget_J_ == self.DownloadPage_stackedWidget_To_:
+                U.setMaximumSize(16777215, 0)
                 Stop()
             elif self.DownloadPage_stackedWidget_J_ < self.DownloadPage_stackedWidget_To_:
-                U.setMaximumSize(16777215, self.DownloadPage_stackedWidget_To_)
+                U.setMaximumSize(16777215, 0)
                 Stop()
 
         def Run_Backs():
@@ -1043,17 +1010,21 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 print(self.DownloadPage_stackedWidget_start_list)
 
 
-        self.DownloadPage_stackedWidget_time = 5  # 刷新速度
+        self.DownloadPage_stackedWidget_time = 0  # 刷新速度
         self.DownloadPage_stackedWidget_From_ = int(U.geometry().height())
-        if M == 'Go':
-            if S == False:
-                self.DownloadPage_stackedWidget_To_ = -1  # 当值为-1时，默认直接全展开, 否则会展开到指定的值(减少动画效果的模式下, To_动画展开到str(U_P的高)), 其余部分不需要动画 直接展开)
+        if To == None:
+            if M == 'Go':
+                if S == False:
+                    self.DownloadPage_stackedWidget_To_ = -1  # 当值为-1时，默认直接全展开, 否则会展开到指定的值(减少动画效果的模式下, To_动画展开到str(U_P的高)), 其余部分不需要动画 直接展开)
+                else:
+                    self.DownloadPage_stackedWidget_To_ = U_P.geometry()
             else:
-                self.DownloadPage_stackedWidget_To_ = U_P.geometry()
+                self.DownloadPage_stackedWidget_To_ = 0
         else:
-            self.DownloadPage_stackedWidget_To_ = 0
+            self.DownloadPage_stackedWidget_To_ = To
 
-        self.DownloadPage_stackedWidget_B_ = 12  # 设置步长
+
+        self.DownloadPage_stackedWidget_B_ = 15  # 设置步长
 
         self.DownloadPage_stackedWidget_D_ = int(self.DownloadPage_stackedWidget_From_)  #当前值
         self.DownloadPage_stackedWidget_O_ = int(self.DownloadPage_stackedWidget_From_)  # 设置之后控件实际的值
@@ -1065,7 +1036,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         except AttributeError:
             self.DownloadPage_stackedWidget_start = True
 
-        if len(self.DownloadPage_stackedWidget_start_list) >= 1:
+        if F != None and len(self.DownloadPage_stackedWidget_start_list) >= 1:
             self.DownloadPage_stackedWidget_QTime_Backs = QTimer()
             self.DownloadPage_stackedWidget_QTime_Backs.start(self.DownloadPage_stackedWidget_time)
             self.DownloadPage_stackedWidget_QTime_Backs.timeout.connect(Run_Backs)
@@ -1318,13 +1289,13 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.checkBox_page_download_mc_test.clicked.connect(self.DownloadPage_MC_Text)
         self.checkBox_page_download_mc_previously.clicked.connect(self.DownloadPage_MC_Previously)
         self.listWidget_page_1_download.itemPressed.connect(self.DownloadPage_stackedWidget_GameList_Clicked)
-        self.widget_page_download_1_install_fabric_list_bata.mouseEnterEvent.connect(self.DownloadPage_stackedWidget_install_fabric_list_bata)
-        self.widget_page_download_1_install_fabric_list_version.mouseEnterEvent.connect(self.DownloadPage_stackedWidget_install_fabric_list_version)
-        self.widget_page_download_1_install_fabric.mouseEnterEvent.connect(self.DownloadPage_stackedWidget_install_fabric)
-        self.widget_page_download_1_install_forge.mouseEnterEvent.connect(self.DownloadPage_stackedWidget_install_forge)
-        self.widget_page_download_1_install_optifine_list_bata.mouseEnterEvent.connect(self.DownloadPage_stackedWidget_install_optifine_list_bata)
-        self.widget_page_download_1_install_optifine_list_version.mouseEnterEvent.connect(self.DownloadPage_stackedWidget_install_optifine_list_version)
-        self.widget_page_download_1_install_optifine.mouseEnterEvent.connect(self.DownloadPage_stackedWidget_install_optifine)
+        self.widget_page_download_1_install_fabric_list_bata.clicked.connect(self.DownloadPage_stackedWidget_install_fabric_list_bata)
+        self.widget_page_download_1_install_fabric_list_version.clicked.connect(self.DownloadPage_stackedWidget_install_fabric_list_version)
+        self.widget_page_download_1_install_fabric_up.clicked.connect(self.DownloadPage_stackedWidget_install_fabric)
+        self.widget_page_download_1_install_forge_up.clicked.connect(self.DownloadPage_stackedWidget_install_forge)
+        self.widget_page_download_1_install_optifine_list_bata.clicked.connect(self.DownloadPage_stackedWidget_install_optifine_list_bata)
+        self.widget_page_download_1_install_optifine_list_version.clicked.connect(self.DownloadPage_stackedWidget_install_optifine_list_version)
+        self.widget_page_download_1_install_optifine_up.clicked.connect(self.DownloadPage_stackedWidget_install_optifine)
 
         # 设置页面
         self.radioButton_settings_background_none.clicked.connect(self.SettingsPage_Background_None_Clicked)
