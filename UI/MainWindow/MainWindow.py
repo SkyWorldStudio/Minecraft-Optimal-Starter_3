@@ -1872,13 +1872,13 @@ class Ui_MainWindow(object):
         self.action8.setObjectName("action8")
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget_main.setCurrentIndex(0)
-        self.stackedWidget_main_2.setCurrentIndex(3)
+        self.stackedWidget_main.setCurrentIndex(1)
+        self.stackedWidget_main_2.setCurrentIndex(1)
         self.stackedWidget_page_users_down.setCurrentIndex(0)
         self.stackedWidget_page_home.setCurrentIndex(0)
         self.stackedWidget_page_home_game_left.setCurrentIndex(0)
         self.stackedWidget_page_download.setCurrentIndex(0)
-        self.stackedWidget_page_download_1.setCurrentIndex(1)
+        self.stackedWidget_page_download_1.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

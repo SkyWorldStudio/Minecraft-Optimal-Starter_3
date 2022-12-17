@@ -488,17 +488,45 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.label_page_download_1_install_bottom.setText(str(t) + '安装')
         self.lineEdit_page_download_1_install_bottom_GameName.setPlaceholderText(str(t))
         self.SetCurrentIndex(self.stackedWidget_page_download_1, 1, 3, True)
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start(str(t))
+
+    def DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start(self,MCName):
+        """启动 根据版本获取Forge,Fabric,Optifine列表"""
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Forge = DownloadPage_stackedWidget_GameList_Clicked_Get_Thread('Forge',MCName)
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Forge.SinOut.connect(self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut)
+        #self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Forge.SinOut_OK.connect()
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Forge.start()
+
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Fabric = DownloadPage_stackedWidget_GameList_Clicked_Get_Thread('Fabric', MCName)
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Fabric.SinOut.connect(self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut)
+        #self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Fabric.SinOut_OK.connect()
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Fabric.start()
+
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Optifine = DownloadPage_stackedWidget_GameList_Clicked_Get_Thread('Optifine', MCName)
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Optifine.SinOut.connect(self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut)
+        #self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Optifine.SinOut_OK.connect()
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Optifine.start()
+
+    def DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut(self, Kind, Name, Time, State):
+        """
+            根据版本获取Forge,Fabric,Optifine列表线程的SinOut
+            :param Kind: 种类(Forge,Fabric,Optifine)
+            :param Name: 名字
+            :param Time: 时间
+            :param State: 状态(Stable,Bata)
+        """
+        print(Kind + '|' + Name + '|' + Time + '|' + State)
 
     def DownloadPage_stackedWidget_install_fabric(self):
         """下载页面 -> 选择安装 -> Fabric"""
-        pass
+        self.SetCurrentIndex(self.stackedWidget_page_download_1, 3, 3, True)
 
     def DownloadPage_stackedWidget_install_forge(self):
         """下载页面 -> 选择安装 -> Forge"""
-        pass
+        self.SetCurrentIndex(self.stackedWidget_page_download_1, 2, 3, True)
     def DownloadPage_stackedWidget_install_optifine(self):
         """下载页面 -> 选择安装 -> Optifine"""
-        pass
+        self.SetCurrentIndex(self.stackedWidget_page_download_1, 4, 3, True)
 
     def DownloadPage_MC_Official(self):
         self.checkBox_page_download_mc_test.setChecked(False)
@@ -1493,6 +1521,54 @@ class DownloadPage_stackedWidget_GetGameList_Thread(QThread):
         import gc
         del a,b,l,N,T
         gc.collect()
+
+class DownloadPage_stackedWidget_GameList_Clicked_Get_Thread(QThread):
+    SinOut = pyqtSignal(str,str,str,str)
+    SinOut_OK = pyqtSignal()
+    def __init__(self, Kind, V):
+        """
+            多线程 根据版本获取Forge,Fabric,Optifine列表
+            :param Kind: 种类(Forge,Fabric,Optifine)
+            :param V: 版本号
+        """
+        super(DownloadPage_stackedWidget_GameList_Clicked_Get_Thread, self).__init__()
+        self.Kind = Kind
+        self.V = V
+    def run(self):
+        print('start')
+        if self.Kind == 'Forge':
+            self.URL = 'https://bmclapi2.bangbang93.com/forge/minecraft/' + str(self.V)
+        elif self.Kind == 'Fabric':
+            self.URL = 'https://bmclapi2.bangbang93.com/fabric-meta/v2/versions/loader/' + str(self.V)
+        elif self.Kind == 'Optifine':
+            self.URL = 'https://bmclapi2.bangbang93.com/optifine/' + str(self.V)
+        import requests, gc
+        r = requests.get(self.URL)
+        j = r.json()
+        print(self.URL)
+        for a in j:
+            if self.Kind == 'Forge':
+                n = a['version']
+                t = a['modified']
+                k = None
+            elif self.Kind == 'Fabric':
+                n = a['loader']['version']
+                t = None
+                if a['loader']['stable'] == True:
+                    k = 'Stable'
+                else:
+                    k = 'Bata'
+            elif self.Kind == 'Optifine':
+                n = a['type']
+                t = None
+                if 'forge' in a:
+                    k = 'Stable'
+                else:
+                    k = 'Bata'
+                    n = n + '_' + a['patch']
+            self.SinOut.emit(self.Kind,n,t,k)
+
+
 
 def Return_Window_XY():
     """返回窗口的坐标"""

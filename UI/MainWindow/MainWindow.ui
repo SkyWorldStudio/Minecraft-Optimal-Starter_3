@@ -688,7 +688,7 @@ Line{
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page_main">
        <property name="styleSheet">
@@ -952,7 +952,7 @@ Line{
               <string notr="true"/>
              </property>
              <property name="currentIndex">
-              <number>3</number>
+              <number>1</number>
              </property>
              <widget class="QWidget" name="page_users">
               <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -2215,7 +2215,7 @@ Line{
                    <item>
                     <widget class="QStackedWidget" name="stackedWidget_page_download_1">
                      <property name="currentIndex">
-                      <number>1</number>
+                      <number>0</number>
                      </property>
                      <widget class="QWidget" name="page_download_1_main">
                       <layout class="QVBoxLayout" name="verticalLayout_11">
