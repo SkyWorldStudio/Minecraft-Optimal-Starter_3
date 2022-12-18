@@ -42,7 +42,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 if len(self.H_B) > 2:
                     B = self.H_B[-1]
                     if B['Left'] != False:
-                        B_1 = B['Index_L']
+                        B_1 = B['Left_L']
                         if B_1 == 0:
                             self.Sidebar_Clicked(Want='User', H=False)
                         elif B_1 == 1:
@@ -516,6 +516,63 @@ class RunUi(QMainWindow, Ui_MainWindow):
             :param State: 状态(Stable,Bata)
         """
         print(Kind + '|' + Name + '|' + Time + '|' + State)
+        if Kind == 'Forge':
+            U = self.listWidget_page_download_1_install_forge
+            IconFile = ':/widget_Sidebar/images/MC_Forge.png'
+        elif Kind == 'Fabric':
+            U = self.listWidget_page_download_1_install_fabric
+            IconFile = ':/widget_Sidebar/images/MC_Fabric.png'
+        elif Kind == 'Optifine':
+            U = self.listWidget_page_download_1_install_optifine
+            IconFile = ':/widget_Sidebar/images/MC_Optifine.png'
+
+        item = QListWidgetItem()
+        item.setText(Name)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(IconFile), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        item.setIcon(icon)
+        widget = QWidget()
+        QVBoxLayout_ = QVBoxLayout()
+
+        # l_1
+        l_1 = QLabel()
+        l_1.setText(Name)
+        font = QFont()
+        font.setPointSize(17)
+        l_1.setFont(font)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(l_1.sizePolicy().hasHeightForWidth())
+        l_1.setSizePolicy(sizePolicy)
+
+        if Time != None:
+            # l_2
+            l_2 = QLabel()
+            l_2.setText(Time)
+            font = QFont()
+            font.setPointSize(11)
+            l_2.setFont(font)
+            sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+            sizePolicy.setHorizontalStretch(0)
+            sizePolicy.setVerticalStretch(0)
+            sizePolicy.setHeightForWidth(l_2.sizePolicy().hasHeightForWidth())
+            l_2.setSizePolicy(sizePolicy)
+
+
+        # add in Widget
+        QVBoxLayout_.addWidget(l_1)
+        if Time != None:
+            QVBoxLayout_.addWidget(l_2)
+        QVBoxLayout_.setContentsMargins(0, 0, 0, 0)
+        QVBoxLayout_.setSpacing(3)
+        widget.setLayout(QVBoxLayout_)
+        widget.setContentsMargins(0, 0, 0, 0)
+
+        # add in listWidget item
+        U.addItem(item)
+        U.setItemWidget(item, widget)
+
 
     def DownloadPage_stackedWidget_install_fabric(self):
         """下载页面 -> 选择安装 -> Fabric"""

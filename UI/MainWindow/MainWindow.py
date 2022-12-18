@@ -205,7 +205,7 @@ class Ui_MainWindow(object):
 "    padding-bottom:9px;\n"
 "}\n"
 "\n"
-"#listWidget_page_1_download::item {\n"
+"#page_download_1 QStackedWidget QWidget > QListWidget::item {\n"
 "    color: rgba(255, 255, 255, 0);\n"
 "    height: 28px;\n"
 "    padding: 12px;\n"
@@ -213,13 +213,13 @@ class Ui_MainWindow(object):
 "    /*border-top: 1px solid rgb(169, 169, 169);*/\n"
 "    border-bottom: 1px solid rgb(169, 169, 169);\n"
 "}\n"
-"#listWidget_page_1_download::item:hover {\n"
+"#page_download_1 QStackedWidget QWidget > QListWidget:hover {\n"
 "    background-color: rgba(235, 235, 235,0);\n"
 "    border-left: 0px solid rgba(214, 214, 214,0);\n"
 "    /*border-top: 1px solid rgb(214, 214, 214);*/\n"
 "    border-bottom: 1px solid rgb(214, 214, 214);\n"
 "}\n"
-"#listWidget_page_1_download::item:selected {\n"
+"#page_download_1 QStackedWidget QWidget > QListWidget::item:selected {\n"
 "    background-color: rgba(235, 235, 235,0);\n"
 "    border-left: 0px solid rgba(214, 214, 214,0);\n"
 "    /*border-top: 1px solid rgba(214, 214, 214,0);*/\n"
@@ -227,10 +227,6 @@ class Ui_MainWindow(object):
 "}\n"
 "#scrollAreaWidgetContents_page_download_1_install > QWidget{\n"
 "    background-color: rgba(191, 191, 191, 54);\n"
-"    border-radius: 8px;\n"
-"}\n"
-"#widget_page_download_1_install_fabric_list_all > QWidget{\n"
-"    background-color: rgba(255, 255, 255, 40%);\n"
 "    border-radius: 8px;\n"
 "}\n"
 "#page_download_1_install QListWidget::item{\n"
@@ -270,6 +266,9 @@ class Ui_MainWindow(object):
 "}\n"
 "#scrollAreaWidgetContents_page_download_1_install QPushButton:pressed{\n"
 "    background-color: rgba(255, 255, 255, 0);\n"
+"}\n"
+"#page_download_1 QStackedWidget QWidget > QListWidget::item{\n"
+"    color: rgba(255, 255, 255, 0);\n"
 "}\n"
 "/*设置页面*/\n"
 "#scrollAreaWidgetContents_page_settings > QWidget\n"
@@ -1527,18 +1526,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout_20.setObjectName("horizontalLayout_20")
         self.listWidget_page_download_1_install_forge = QtWidgets.QListWidget(self.page_download_1_install_forge)
         self.listWidget_page_download_1_install_forge.setObjectName("listWidget_page_download_1_install_forge")
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_page_download_1_install_forge.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_page_download_1_install_forge.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_page_download_1_install_forge.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_page_download_1_install_forge.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_page_download_1_install_forge.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_page_download_1_install_forge.addItem(item)
         self.horizontalLayout_20.addWidget(self.listWidget_page_download_1_install_forge)
         self.stackedWidget_page_download_1.addWidget(self.page_download_1_install_forge)
         self.page_download_1_install_fabric = QtWidgets.QWidget()
@@ -1548,18 +1535,6 @@ class Ui_MainWindow(object):
         self.verticalLayout_14.setObjectName("verticalLayout_14")
         self.listWidget_page_download_1_install_fabric = QtWidgets.QListWidget(self.page_download_1_install_fabric)
         self.listWidget_page_download_1_install_fabric.setObjectName("listWidget_page_download_1_install_fabric")
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_page_download_1_install_fabric.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_page_download_1_install_fabric.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_page_download_1_install_fabric.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_page_download_1_install_fabric.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_page_download_1_install_fabric.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_page_download_1_install_fabric.addItem(item)
         self.verticalLayout_14.addWidget(self.listWidget_page_download_1_install_fabric)
         self.stackedWidget_page_download_1.addWidget(self.page_download_1_install_fabric)
         self.page_download_1_install_optifine = QtWidgets.QWidget()
@@ -1569,18 +1544,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout_21.setObjectName("horizontalLayout_21")
         self.listWidget_page_download_1_install_optifine = QtWidgets.QListWidget(self.page_download_1_install_optifine)
         self.listWidget_page_download_1_install_optifine.setObjectName("listWidget_page_download_1_install_optifine")
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_page_download_1_install_optifine.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_page_download_1_install_optifine.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_page_download_1_install_optifine.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_page_download_1_install_optifine.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_page_download_1_install_optifine.addItem(item)
-        item = QtWidgets.QListWidgetItem()
-        self.listWidget_page_download_1_install_optifine.addItem(item)
         self.horizontalLayout_21.addWidget(self.listWidget_page_download_1_install_optifine)
         self.stackedWidget_page_download_1.addWidget(self.page_download_1_install_optifine)
         self.horizontalLayout_17.addWidget(self.stackedWidget_page_download_1)
@@ -1946,51 +1909,6 @@ class Ui_MainWindow(object):
         self.label_page_download_1_install_bottom_GameName.setText(_translate("MainWindow", "游戏名"))
         self.lineEdit_page_download_1_install_bottom_GameName.setPlaceholderText(_translate("MainWindow", "1.12.2"))
         self.pushButton_page_download_1_install_bottom_ok.setText(_translate("MainWindow", "安装"))
-        __sortingEnabled = self.listWidget_page_download_1_install_forge.isSortingEnabled()
-        self.listWidget_page_download_1_install_forge.setSortingEnabled(False)
-        item = self.listWidget_page_download_1_install_forge.item(0)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_page_download_1_install_forge.item(1)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_page_download_1_install_forge.item(2)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_page_download_1_install_forge.item(3)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_page_download_1_install_forge.item(4)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_page_download_1_install_forge.item(5)
-        item.setText(_translate("MainWindow", "新建项目"))
-        self.listWidget_page_download_1_install_forge.setSortingEnabled(__sortingEnabled)
-        __sortingEnabled = self.listWidget_page_download_1_install_fabric.isSortingEnabled()
-        self.listWidget_page_download_1_install_fabric.setSortingEnabled(False)
-        item = self.listWidget_page_download_1_install_fabric.item(0)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_page_download_1_install_fabric.item(1)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_page_download_1_install_fabric.item(2)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_page_download_1_install_fabric.item(3)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_page_download_1_install_fabric.item(4)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_page_download_1_install_fabric.item(5)
-        item.setText(_translate("MainWindow", "新建项目"))
-        self.listWidget_page_download_1_install_fabric.setSortingEnabled(__sortingEnabled)
-        __sortingEnabled = self.listWidget_page_download_1_install_optifine.isSortingEnabled()
-        self.listWidget_page_download_1_install_optifine.setSortingEnabled(False)
-        item = self.listWidget_page_download_1_install_optifine.item(0)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_page_download_1_install_optifine.item(1)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_page_download_1_install_optifine.item(2)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_page_download_1_install_optifine.item(3)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_page_download_1_install_optifine.item(4)
-        item.setText(_translate("MainWindow", "新建项目"))
-        item = self.listWidget_page_download_1_install_optifine.item(5)
-        item.setText(_translate("MainWindow", "新建项目"))
-        self.listWidget_page_download_1_install_optifine.setSortingEnabled(__sortingEnabled)
         self.label_page_settings_h1.setText(_translate("MainWindow", "个性化外观设置"))
         self.label_page_settings_subject_h2.setText(_translate("MainWindow", "主题"))
         self.radioButton_settings_subject_light.setToolTip(_translate("MainWindow", "浅色模式"))

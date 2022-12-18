@@ -207,7 +207,7 @@
     padding-bottom:9px;
 }
 
-#listWidget_page_1_download::item {
+#page_download_1 QStackedWidget QWidget &gt; QListWidget::item {
 	color: rgba(255, 255, 255, 0);
     height: 28px;
 	padding: 12px;
@@ -215,13 +215,13 @@
 	/*border-top: 1px solid rgb(169, 169, 169);*/
 	border-bottom: 1px solid rgb(169, 169, 169);
 }
-#listWidget_page_1_download::item:hover {
+#page_download_1 QStackedWidget QWidget &gt; QListWidget:hover {
 	background-color: rgba(235, 235, 235,0);
 	border-left: 0px solid rgba(214, 214, 214,0);
 	/*border-top: 1px solid rgb(214, 214, 214);*/
 	border-bottom: 1px solid rgb(214, 214, 214);
 }
-#listWidget_page_1_download::item:selected {
+#page_download_1 QStackedWidget QWidget &gt; QListWidget::item:selected {
 	background-color: rgba(235, 235, 235,0);
 	border-left: 0px solid rgba(214, 214, 214,0);
 	/*border-top: 1px solid rgba(214, 214, 214,0);*/
@@ -229,10 +229,6 @@
 }
 #scrollAreaWidgetContents_page_download_1_install &gt; QWidget{
 	background-color: rgba(191, 191, 191, 54);
-	border-radius: 8px;
-}
-#widget_page_download_1_install_fabric_list_all &gt; QWidget{
-	background-color: rgba(255, 255, 255, 40%);
 	border-radius: 8px;
 }
 #page_download_1_install QListWidget::item{
@@ -272,6 +268,9 @@
 }
 #scrollAreaWidgetContents_page_download_1_install QPushButton:pressed{
 	background-color: rgba(255, 255, 255, 0);
+}
+#page_download_1 QStackedWidget QWidget &gt; QListWidget::item{
+	color: rgba(255, 255, 255, 0);
 }
 /*设置页面*/
 #scrollAreaWidgetContents_page_settings &gt; QWidget
@@ -2954,38 +2953,7 @@ Line{
                         <number>10</number>
                        </property>
                        <item>
-                        <widget class="QListWidget" name="listWidget_page_download_1_install_forge">
-                         <item>
-                          <property name="text">
-                           <string>新建项目</string>
-                          </property>
-                         </item>
-                         <item>
-                          <property name="text">
-                           <string>新建项目</string>
-                          </property>
-                         </item>
-                         <item>
-                          <property name="text">
-                           <string>新建项目</string>
-                          </property>
-                         </item>
-                         <item>
-                          <property name="text">
-                           <string>新建项目</string>
-                          </property>
-                         </item>
-                         <item>
-                          <property name="text">
-                           <string>新建项目</string>
-                          </property>
-                         </item>
-                         <item>
-                          <property name="text">
-                           <string>新建项目</string>
-                          </property>
-                         </item>
-                        </widget>
+                        <widget class="QListWidget" name="listWidget_page_download_1_install_forge"/>
                        </item>
                       </layout>
                      </widget>
@@ -3004,38 +2972,7 @@ Line{
                         <number>10</number>
                        </property>
                        <item>
-                        <widget class="QListWidget" name="listWidget_page_download_1_install_fabric">
-                         <item>
-                          <property name="text">
-                           <string>新建项目</string>
-                          </property>
-                         </item>
-                         <item>
-                          <property name="text">
-                           <string>新建项目</string>
-                          </property>
-                         </item>
-                         <item>
-                          <property name="text">
-                           <string>新建项目</string>
-                          </property>
-                         </item>
-                         <item>
-                          <property name="text">
-                           <string>新建项目</string>
-                          </property>
-                         </item>
-                         <item>
-                          <property name="text">
-                           <string>新建项目</string>
-                          </property>
-                         </item>
-                         <item>
-                          <property name="text">
-                           <string>新建项目</string>
-                          </property>
-                         </item>
-                        </widget>
+                        <widget class="QListWidget" name="listWidget_page_download_1_install_fabric"/>
                        </item>
                       </layout>
                      </widget>
@@ -3054,38 +2991,7 @@ Line{
                         <number>10</number>
                        </property>
                        <item>
-                        <widget class="QListWidget" name="listWidget_page_download_1_install_optifine">
-                         <item>
-                          <property name="text">
-                           <string>新建项目</string>
-                          </property>
-                         </item>
-                         <item>
-                          <property name="text">
-                           <string>新建项目</string>
-                          </property>
-                         </item>
-                         <item>
-                          <property name="text">
-                           <string>新建项目</string>
-                          </property>
-                         </item>
-                         <item>
-                          <property name="text">
-                           <string>新建项目</string>
-                          </property>
-                         </item>
-                         <item>
-                          <property name="text">
-                           <string>新建项目</string>
-                          </property>
-                         </item>
-                         <item>
-                          <property name="text">
-                           <string>新建项目</string>
-                          </property>
-                         </item>
-                        </widget>
+                        <widget class="QListWidget" name="listWidget_page_download_1_install_optifine"/>
                        </item>
                       </layout>
                      </widget>
