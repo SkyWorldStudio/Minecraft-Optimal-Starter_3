@@ -1150,7 +1150,7 @@ Line{
                <item>
                 <widget class="QStackedWidget" name="stackedWidget_page_users_down">
                  <property name="currentIndex">
-                  <number>0</number>
+                  <number>1</number>
                  </property>
                  <widget class="QWidget" name="stackedWidget_page_users_downPage1">
                   <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -2243,31 +2243,6 @@ Line{
                            <height>40</height>
                           </size>
                          </property>
-                         <item>
-                          <property name="text">
-                           <string>新建项目</string>
-                          </property>
-                         </item>
-                         <item>
-                          <property name="text">
-                           <string>新建项目</string>
-                          </property>
-                         </item>
-                         <item>
-                          <property name="text">
-                           <string>新建项目</string>
-                          </property>
-                         </item>
-                         <item>
-                          <property name="text">
-                           <string>新建项目</string>
-                          </property>
-                         </item>
-                         <item>
-                          <property name="text">
-                           <string>新建项目</string>
-                          </property>
-                         </item>
                         </widget>
                        </item>
                       </layout>
@@ -2438,7 +2413,7 @@ Line{
                                   </spacer>
                                  </item>
                                  <item>
-                                  <widget class="QLabel" name="label">
+                                  <widget class="QLabel" name="label_page_download_1_install_forge_up_state">
                                    <property name="text">
                                     <string>加载中</string>
                                    </property>
@@ -2571,7 +2546,7 @@ Line{
                                   </spacer>
                                  </item>
                                  <item>
-                                  <widget class="QLabel" name="label_2">
+                                  <widget class="QLabel" name="label_page_download_1_install_fabric_up_state">
                                    <property name="text">
                                     <string>加载中</string>
                                    </property>
@@ -2698,7 +2673,7 @@ Line{
                                   </spacer>
                                  </item>
                                  <item>
-                                  <widget class="QLabel" name="label_3">
+                                  <widget class="QLabel" name="label_page_download_1_install_optifine_up_state">
                                    <property name="text">
                                     <string>加载中</string>
                                    </property>
@@ -2941,57 +2916,78 @@ Line{
                      <widget class="QWidget" name="page_download_1_install_forge">
                       <layout class="QHBoxLayout" name="horizontalLayout_20">
                        <property name="leftMargin">
-                        <number>12</number>
+                        <number>8</number>
                        </property>
                        <property name="topMargin">
-                        <number>12</number>
+                        <number>5</number>
                        </property>
                        <property name="rightMargin">
-                        <number>19</number>
+                        <number>6</number>
                        </property>
                        <property name="bottomMargin">
                         <number>10</number>
                        </property>
                        <item>
-                        <widget class="QListWidget" name="listWidget_page_download_1_install_forge"/>
+                        <widget class="QListWidget" name="listWidget_page_download_1_install_forge">
+                         <property name="iconSize">
+                          <size>
+                           <width>40</width>
+                           <height>40</height>
+                          </size>
+                         </property>
+                        </widget>
                        </item>
                       </layout>
                      </widget>
                      <widget class="QWidget" name="page_download_1_install_fabric">
                       <layout class="QVBoxLayout" name="verticalLayout_14">
                        <property name="leftMargin">
-                        <number>12</number>
+                        <number>8</number>
                        </property>
                        <property name="topMargin">
-                        <number>12</number>
+                        <number>5</number>
                        </property>
                        <property name="rightMargin">
-                        <number>19</number>
+                        <number>6</number>
                        </property>
                        <property name="bottomMargin">
                         <number>10</number>
                        </property>
                        <item>
-                        <widget class="QListWidget" name="listWidget_page_download_1_install_fabric"/>
+                        <widget class="QListWidget" name="listWidget_page_download_1_install_fabric">
+                         <property name="iconSize">
+                          <size>
+                           <width>40</width>
+                           <height>40</height>
+                          </size>
+                         </property>
+                        </widget>
                        </item>
                       </layout>
                      </widget>
                      <widget class="QWidget" name="page_download_1_install_optifine">
                       <layout class="QHBoxLayout" name="horizontalLayout_21">
                        <property name="leftMargin">
-                        <number>12</number>
+                        <number>8</number>
                        </property>
                        <property name="topMargin">
-                        <number>12</number>
+                        <number>5</number>
                        </property>
                        <property name="rightMargin">
-                        <number>19</number>
+                        <number>6</number>
                        </property>
                        <property name="bottomMargin">
                         <number>10</number>
                        </property>
                        <item>
-                        <widget class="QListWidget" name="listWidget_page_download_1_install_optifine"/>
+                        <widget class="QListWidget" name="listWidget_page_download_1_install_optifine">
+                         <property name="iconSize">
+                          <size>
+                           <width>40</width>
+                           <height>40</height>
+                          </size>
+                         </property>
+                        </widget>
                        </item>
                       </layout>
                      </widget>

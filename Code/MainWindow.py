@@ -488,23 +488,26 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.label_page_download_1_install_bottom.setText(str(t) + '安装')
         self.lineEdit_page_download_1_install_bottom_GameName.setPlaceholderText(str(t))
         self.SetCurrentIndex(self.stackedWidget_page_download_1, 1, 3, True)
+        self.listWidget_page_download_1_install_forge.clear()
+        self.listWidget_page_download_1_install_fabric.clear()
+        self.listWidget_page_download_1_install_optifine.clear()
         self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start(str(t))
 
     def DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start(self,MCName):
         """启动 根据版本获取Forge,Fabric,Optifine列表"""
         self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Forge = DownloadPage_stackedWidget_GameList_Clicked_Get_Thread('Forge',MCName)
         self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Forge.SinOut.connect(self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut)
-        #self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Forge.SinOut_OK.connect()
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Forge.SinOut_OK.connect(self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut_OK)
         self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Forge.start()
 
         self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Fabric = DownloadPage_stackedWidget_GameList_Clicked_Get_Thread('Fabric', MCName)
         self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Fabric.SinOut.connect(self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut)
-        #self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Fabric.SinOut_OK.connect()
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Fabric.SinOut_OK.connect(self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut_OK)
         self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Fabric.start()
 
         self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Optifine = DownloadPage_stackedWidget_GameList_Clicked_Get_Thread('Optifine', MCName)
         self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Optifine.SinOut.connect(self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut)
-        #self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Optifine.SinOut_OK.connect()
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Optifine.SinOut_OK.connect(self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut_OK)
         self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Optifine.start()
 
     def DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut(self, Kind, Name, Time, State):
@@ -519,12 +522,15 @@ class RunUi(QMainWindow, Ui_MainWindow):
         if Kind == 'Forge':
             U = self.listWidget_page_download_1_install_forge
             IconFile = ':/widget_Sidebar/images/MC_Forge.png'
+            Layout_ = QVBoxLayout()
         elif Kind == 'Fabric':
             U = self.listWidget_page_download_1_install_fabric
             IconFile = ':/widget_Sidebar/images/MC_Fabric.png'
+            Layout_ = QHBoxLayout()
         elif Kind == 'Optifine':
             U = self.listWidget_page_download_1_install_optifine
             IconFile = ':/widget_Sidebar/images/MC_Optifine.png'
+            Layout_ = QHBoxLayout()
 
         item = QListWidgetItem()
         item.setText(Name)
@@ -532,7 +538,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         icon.addPixmap(QtGui.QPixmap(IconFile), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         item.setIcon(icon)
         widget = QWidget()
-        QVBoxLayout_ = QVBoxLayout()
+
 
         # l_1
         l_1 = QLabel()
@@ -540,13 +546,13 @@ class RunUi(QMainWindow, Ui_MainWindow):
         font = QFont()
         font.setPointSize(17)
         l_1.setFont(font)
-        sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(l_1.sizePolicy().hasHeightForWidth())
         l_1.setSizePolicy(sizePolicy)
 
-        if Time != None:
+        if Time != '':
             # l_2
             l_2 = QLabel()
             l_2.setText(Time)
@@ -559,19 +565,61 @@ class RunUi(QMainWindow, Ui_MainWindow):
             sizePolicy.setHeightForWidth(l_2.sizePolicy().hasHeightForWidth())
             l_2.setSizePolicy(sizePolicy)
 
+        if State != '':
+            if State == 'Bata':
+                T = ' 测试版 '
+                S = "background-color: rgb(255, 147, 0);color: rgb(255, 255, 255);border-radius: 4px;"
+            else:
+                T = ' 稳定版 '
+                S = "background-color: rgb(94, 99, 204);color: rgb(255, 255, 255);border-radius: 4px;"
+            l_3 = QLabel()
+            l_3.setText(T)
+            font = QFont()
+            font.setPointSize(13)
+            l_3.setFont(font)
+            sizePolicy = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Fixed)
+            sizePolicy.setHorizontalStretch(0)
+            sizePolicy.setVerticalStretch(0)
+            sizePolicy.setHeightForWidth(l_3.sizePolicy().hasHeightForWidth())
+            l_3.setSizePolicy(sizePolicy)
+            l_3.setStyleSheet(S)
+            l_3.setMinimumSize(0,20)
+
+            l_4 = QLabel()
+            sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+            sizePolicy.setHorizontalStretch(0)
+            sizePolicy.setVerticalStretch(0)
+            sizePolicy.setHeightForWidth(l_3.sizePolicy().hasHeightForWidth())
+            l_4.setSizePolicy(sizePolicy)
+
 
         # add in Widget
-        QVBoxLayout_.addWidget(l_1)
-        if Time != None:
-            QVBoxLayout_.addWidget(l_2)
-        QVBoxLayout_.setContentsMargins(0, 0, 0, 0)
-        QVBoxLayout_.setSpacing(3)
-        widget.setLayout(QVBoxLayout_)
+        Layout_.addWidget(l_1)
+        if Time != '':
+            Layout_.addWidget(l_2)
+        if State != '':
+            Layout_.addWidget(l_3)
+            Layout_.addWidget(l_4)
+        Layout_.setContentsMargins(0, 0, 0, 0)
+        Layout_.setSpacing(3)
+        widget.setLayout(Layout_)
         widget.setContentsMargins(0, 0, 0, 0)
 
         # add in listWidget item
         U.addItem(item)
         U.setItemWidget(item, widget)
+
+    def DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut_OK(self,Kind):
+        """
+            根据版本获取Forge,Fabric,Optifine列表线程的SinOut_OK
+            :param Kind: 种类(Forge,Fabric,Optifine)
+        """
+        if Kind == 'Forge':
+            self.label_page_download_1_install_forge_up_state.setText('')
+        elif Kind == 'Fabric':
+            self.label_page_download_1_install_fabric_up_state.setText('')
+        elif Kind == 'Optifine':
+            self.label_page_download_1_install_optifine_up_state.setText('')
 
 
     def DownloadPage_stackedWidget_install_fabric(self):
@@ -1581,7 +1629,7 @@ class DownloadPage_stackedWidget_GetGameList_Thread(QThread):
 
 class DownloadPage_stackedWidget_GameList_Clicked_Get_Thread(QThread):
     SinOut = pyqtSignal(str,str,str,str)
-    SinOut_OK = pyqtSignal()
+    SinOut_OK = pyqtSignal(str)
     def __init__(self, Kind, V):
         """
             多线程 根据版本获取Forge,Fabric,Optifine列表
@@ -1624,6 +1672,8 @@ class DownloadPage_stackedWidget_GameList_Clicked_Get_Thread(QThread):
                     k = 'Bata'
                     n = n + '_' + a['patch']
             self.SinOut.emit(self.Kind,n,t,k)
+        self.SinOut_OK.emit(self.Kind)
+        gc.collect()
 
 
 
