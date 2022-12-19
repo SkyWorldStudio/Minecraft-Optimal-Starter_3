@@ -518,7 +518,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             :param Time: 时间
             :param State: 状态(Stable,Bata)
         """
-        print(Kind + '|' + Name + '|' + Time + '|' + State)
+        # print(Kind + '|' + Name + '|' + Time + '|' + State)
         if Kind == 'Forge':
             U = self.listWidget_page_download_1_install_forge
             IconFile = ':/widget_Sidebar/images/MC_Forge.png'
@@ -533,7 +533,6 @@ class RunUi(QMainWindow, Ui_MainWindow):
             Layout_ = QHBoxLayout()
 
         item = QListWidgetItem()
-        item.setText(Name)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(IconFile), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         item.setIcon(icon)
@@ -572,6 +571,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             else:
                 T = ' 稳定版 '
                 S = "background-color: rgb(94, 99, 204);color: rgb(255, 255, 255);border-radius: 4px;"
+            item.setText(Name + '|' + T)
             l_3 = QLabel()
             l_3.setText(T)
             font = QFont()
@@ -591,6 +591,9 @@ class RunUi(QMainWindow, Ui_MainWindow):
             sizePolicy.setVerticalStretch(0)
             sizePolicy.setHeightForWidth(l_3.sizePolicy().hasHeightForWidth())
             l_4.setSizePolicy(sizePolicy)
+
+        else:
+            item.setText(Name)
 
 
         # add in Widget
@@ -632,6 +635,77 @@ class RunUi(QMainWindow, Ui_MainWindow):
     def DownloadPage_stackedWidget_install_optifine(self):
         """下载页面 -> 选择安装 -> Optifine"""
         self.SetCurrentIndex(self.stackedWidget_page_download_1, 4, 3, True)
+    def DownloadPage_stackedWidget_install_forge_itemPressed(self):
+        """下载页面 -> 选择安装 -> Forge -> 点击项目"""
+        item = self.listWidget_page_download_1_install_forge.currentItem()
+        self.label_page_download_1_install_forge_up_state.setText(item.text())
+        self.Back_Clicked()
+
+    def DownloadPage_stackedWidget_install_fabric_itemPressed(self):
+        """下载页面 -> 选择安装 -> Fabric -> 点击项目"""
+        item = self.listWidget_page_download_1_install_fabric.currentItem()
+        t = item.text().split('|')
+        t_n = t[0]
+        t_s = t[1]
+        self.label_page_download_1_install_fabric_up_state_2.setText(t_n)
+        if t_s == ' 测试版 ':
+            s = "background-color: rgb(255, 147, 0);color: rgb(255, 255, 255);border-radius: 4px;"
+        else:
+            s = "background-color: rgb(94, 99, 204);color: rgb(255, 255, 255);border-radius: 4px;"
+        self.label_page_download_1_install_fabric_up_state.setText(t_s)
+        self.label_page_download_1_install_fabric_up_state.setStyleSheet(s)
+        self.Back_Clicked()
+
+    def DownloadPage_stackedWidget_install_optifine_itemPressed(self):
+        """下载页面 -> 选择安装 -> Optifine -> 点击项目"""
+        item = self.listWidget_page_download_1_install_optifine.currentItem()
+        t = item.text().split('|')
+        t_n = t[0]
+        t_s = t[1]
+        self.label_page_download_1_install_optifine_up_state_2.setText(t_n)
+        if t_s == ' 测试版 ':
+            s = "background-color: rgb(255, 147, 0);color: rgb(255, 255, 255);border-radius: 4px;"
+        else:
+            s = "background-color: rgb(94, 99, 204);color: rgb(255, 255, 255);border-radius: 4px;"
+        self.label_page_download_1_install_optifine_up_state.setText(t_s)
+        self.label_page_download_1_install_optifine_up_state.setStyleSheet(s)
+        self.Back_Clicked()
+
+    def DownloadPage_stackedWidget_install_forge_close(self):
+        """下载页面 -> 选择安装 -> Forge -> 取消"""
+        self.label_page_download_1_install_forge_up_state.setText('')
+        self.label_page_download_1_install_forge_up_state_2.setText('')
+
+    def DownloadPage_stackedWidget_install_fabric_close(self):
+        """下载页面 -> 选择安装 -> Fabric -> 取消"""
+        self.label_page_download_1_install_fabric_up_state.setText('')
+        self.label_page_download_1_install_fabric_up_state_2.setText('')
+
+    def DownloadPage_stackedWidget_install_optifine_close(self):
+        """下载页面 -> 选择安装 -> Optifine -> 取消"""
+        self.label_page_download_1_install_optifine_up_state.setText('')
+        self.label_page_download_1_install_optifine_up_state_2.setText('')
+
+    def DownloadPage_stackedWidget_install_ok(self):
+        """下载页面 -> 选择安装 -> 安装"""
+        if self.lineEdit_page_download_1_install_bottom_GameName.text() == '':
+            self.lineEdit_page_download_1_install_bottom_GameName.setStyleSheet("border: 2px solid rgb(255, 38, 0);")
+
+    def DownloadPage_stackedWidget_install_lineEdit(self):
+        """下载页面 -> 选择安装 -> 输入游戏名"""
+        T = self.lineEdit_page_download_1_install_bottom_GameName.text()
+        i = self.Json_MOS['GameFile_List_Clicked']
+        text = self.Json_MOS['GameFile_List'][i]
+        F = self.Json_MOS['GameFile'][text]['File']
+        F = os.path.join(F,'versions',T)
+        if os.path.isdir(F):
+            self.label_page_download_1_install_bottom_GameName.setText('游戏名(重复)')
+            self.label_page_download_1_install_bottom_GameName.setStyleSheet("color: 2px solid rgb(255, 38, 0);")
+            self.lineEdit_page_download_1_install_bottom_GameName.setStyleSheet("border: 2px solid rgb(255, 38, 0);")
+        else:
+            self.label_page_download_1_install_bottom_GameName.setText('游戏名')
+            self.lineEdit_page_download_1_install_bottom_GameName.setStyleSheet("border: 2px solid rgb(56, 56, 56);")
+
 
     def DownloadPage_MC_Official(self):
         self.checkBox_page_download_mc_test.setChecked(False)
@@ -1226,6 +1300,14 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.widget_page_download_1_install_fabric_up.clicked.connect(self.DownloadPage_stackedWidget_install_fabric)
         self.widget_page_download_1_install_forge_up.clicked.connect(self.DownloadPage_stackedWidget_install_forge)
         self.widget_page_download_1_install_optifine_up.clicked.connect(self.DownloadPage_stackedWidget_install_optifine)
+        self.listWidget_page_download_1_install_forge.itemPressed.connect(self.DownloadPage_stackedWidget_install_forge_itemPressed)
+        self.listWidget_page_download_1_install_fabric.itemPressed.connect(self.DownloadPage_stackedWidget_install_fabric_itemPressed)
+        self.listWidget_page_download_1_install_optifine.itemPressed.connect(self.DownloadPage_stackedWidget_install_optifine_itemPressed)
+        self.pushButton_page_download_1_install_forge_up_close.clicked.connect(self.DownloadPage_stackedWidget_install_forge_close)
+        self.pushButton_page_download_1_install_fabric_up_close.clicked.connect(self.DownloadPage_stackedWidget_install_fabric_close)
+        self.pushButton_page_download_1_install_optifine_up_close.clicked.connect(self.DownloadPage_stackedWidget_install_optifine_close)
+        self.pushButton_page_download_1_install_bottom_ok.clicked.connect(self.DownloadPage_stackedWidget_install_ok)
+        self.lineEdit_page_download_1_install_bottom_GameName.textChanged.connect(self.DownloadPage_stackedWidget_install_lineEdit)
 
         # 设置页面
         self.radioButton_settings_background_none.clicked.connect(self.SettingsPage_Background_None_Clicked)
@@ -1387,6 +1469,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         """检测游戏目录下的游戏线程 输出处理"""
         item = QListWidgetItem()
         item.setText(Name)
+        print(Name)
         widget = QWidget()
         hLayout = QHBoxLayout()
 

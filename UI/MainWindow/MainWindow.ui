@@ -154,6 +154,7 @@
 	border-radius: 8px;
 }
 #listWidget_page_home_game_right_gamefile_game::item{
+	color: rgb(0, 0, 0);
 	height: 35px;
 }
 /*      游戏目录添加页面*/
@@ -2413,10 +2414,50 @@ Line{
                                   </spacer>
                                  </item>
                                  <item>
-                                  <widget class="QLabel" name="label_page_download_1_install_forge_up_state">
-                                   <property name="text">
-                                    <string>加载中</string>
-                                   </property>
+                                  <widget class="QWidget" name="widget_page_download_1_install_forge_up_state" native="true">
+                                   <layout class="QHBoxLayout" name="horizontalLayout_24">
+                                    <property name="spacing">
+                                     <number>5</number>
+                                    </property>
+                                    <property name="leftMargin">
+                                     <number>0</number>
+                                    </property>
+                                    <property name="topMargin">
+                                     <number>0</number>
+                                    </property>
+                                    <property name="rightMargin">
+                                     <number>0</number>
+                                    </property>
+                                    <property name="bottomMargin">
+                                     <number>0</number>
+                                    </property>
+                                    <item>
+                                     <widget class="QLabel" name="label_page_download_1_install_forge_up_state_2">
+                                      <property name="sizePolicy">
+                                       <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                       </sizepolicy>
+                                      </property>
+                                      <property name="text">
+                                       <string/>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                    <item>
+                                     <widget class="QLabel" name="label_page_download_1_install_forge_up_state">
+                                      <property name="sizePolicy">
+                                       <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                       </sizepolicy>
+                                      </property>
+                                      <property name="text">
+                                       <string>加载中</string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                   </layout>
                                   </widget>
                                  </item>
                                  <item>
@@ -2546,10 +2587,50 @@ Line{
                                   </spacer>
                                  </item>
                                  <item>
-                                  <widget class="QLabel" name="label_page_download_1_install_fabric_up_state">
-                                   <property name="text">
-                                    <string>加载中</string>
-                                   </property>
+                                  <widget class="QWidget" name="widget_page_download_1_install_fabric_up_state" native="true">
+                                   <layout class="QHBoxLayout" name="horizontalLayout_27">
+                                    <property name="spacing">
+                                     <number>5</number>
+                                    </property>
+                                    <property name="leftMargin">
+                                     <number>0</number>
+                                    </property>
+                                    <property name="topMargin">
+                                     <number>0</number>
+                                    </property>
+                                    <property name="rightMargin">
+                                     <number>0</number>
+                                    </property>
+                                    <property name="bottomMargin">
+                                     <number>0</number>
+                                    </property>
+                                    <item>
+                                     <widget class="QLabel" name="label_page_download_1_install_fabric_up_state_2">
+                                      <property name="sizePolicy">
+                                       <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                       </sizepolicy>
+                                      </property>
+                                      <property name="text">
+                                       <string/>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                    <item>
+                                     <widget class="QLabel" name="label_page_download_1_install_fabric_up_state">
+                                      <property name="sizePolicy">
+                                       <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                       </sizepolicy>
+                                      </property>
+                                      <property name="text">
+                                       <string>加载中</string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                   </layout>
                                   </widget>
                                  </item>
                                  <item>
@@ -2673,10 +2754,50 @@ Line{
                                   </spacer>
                                  </item>
                                  <item>
-                                  <widget class="QLabel" name="label_page_download_1_install_optifine_up_state">
-                                   <property name="text">
-                                    <string>加载中</string>
-                                   </property>
+                                  <widget class="QWidget" name="widget_page_download_1_install_optifine_up_state" native="true">
+                                   <layout class="QHBoxLayout" name="horizontalLayout_26">
+                                    <property name="spacing">
+                                     <number>5</number>
+                                    </property>
+                                    <property name="leftMargin">
+                                     <number>0</number>
+                                    </property>
+                                    <property name="topMargin">
+                                     <number>0</number>
+                                    </property>
+                                    <property name="rightMargin">
+                                     <number>0</number>
+                                    </property>
+                                    <property name="bottomMargin">
+                                     <number>0</number>
+                                    </property>
+                                    <item>
+                                     <widget class="QLabel" name="label_page_download_1_install_optifine_up_state_2">
+                                      <property name="sizePolicy">
+                                       <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                       </sizepolicy>
+                                      </property>
+                                      <property name="text">
+                                       <string/>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                    <item>
+                                     <widget class="QLabel" name="label_page_download_1_install_optifine_up_state">
+                                      <property name="sizePolicy">
+                                       <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                       </sizepolicy>
+                                      </property>
+                                      <property name="text">
+                                       <string>加载中</string>
+                                      </property>
+                                     </widget>
+                                    </item>
+                                   </layout>
                                   </widget>
                                  </item>
                                  <item>
@@ -2879,9 +3000,15 @@ Line{
                           </item>
                           <item>
                            <widget class="QLineEdit" name="lineEdit_page_download_1_install_bottom_GameName">
+                            <property name="sizePolicy">
+                             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                              <horstretch>0</horstretch>
+                              <verstretch>0</verstretch>
+                             </sizepolicy>
+                            </property>
                             <property name="minimumSize">
                              <size>
-                              <width>0</width>
+                              <width>400</width>
                               <height>38</height>
                              </size>
                             </property>
