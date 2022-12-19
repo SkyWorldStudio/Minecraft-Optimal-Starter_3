@@ -698,10 +698,14 @@ class RunUi(QMainWindow, Ui_MainWindow):
         text = self.Json_MOS['GameFile_List'][i]
         F = self.Json_MOS['GameFile'][text]['File']
         F = os.path.join(F,'versions',T)
-        if os.path.isdir(F):
-            self.label_page_download_1_install_bottom_GameName.setText('游戏名(重复)')
-            self.label_page_download_1_install_bottom_GameName.setStyleSheet("color: 2px solid rgb(255, 38, 0);")
-            self.lineEdit_page_download_1_install_bottom_GameName.setStyleSheet("border: 2px solid rgb(255, 38, 0);")
+        if T != '':
+            if os.path.isdir(F):
+                self.label_page_download_1_install_bottom_GameName.setText('游戏名(重复)')
+                self.label_page_download_1_install_bottom_GameName.setStyleSheet("color: 2px solid rgb(255, 38, 0);")
+                self.lineEdit_page_download_1_install_bottom_GameName.setStyleSheet("border: 2px solid rgb(255, 38, 0);")
+            else:
+                self.label_page_download_1_install_bottom_GameName.setText('游戏名')
+                self.lineEdit_page_download_1_install_bottom_GameName.setStyleSheet("border: 2px solid rgb(56, 56, 56);")
         else:
             self.label_page_download_1_install_bottom_GameName.setText('游戏名')
             self.lineEdit_page_download_1_install_bottom_GameName.setStyleSheet("border: 2px solid rgb(56, 56, 56);")
