@@ -272,10 +272,15 @@ class Ui_MainWindow(object):
 "    color: rgba(255, 255, 255, 0);\n"
 "}\n"
 "/*设置页面*/\n"
-"#scrollAreaWidgetContents_page_settings > QWidget\n"
+"#page_settings Line{\n"
+"    background-color: rgb(166, 166, 166);\n"
+"    border:none;\n"
+"}\n"
+"#stackedWidget_page_settings > QWidget > QWidget\n"
 "{\n"
 "    border-image: url(:/widget_Sidebar/images/Scrub_Settings-Z_B15.png);\n"
 "}\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -606,6 +611,67 @@ class Ui_MainWindow(object):
 "QCheckBox::indicator:checked:pressed {\n"
 "    border-image: url(:/widget_Sidebar/images/QCheckBox_Checked-Pressed.png)；\n"
 "}\n"
+"\n"
+"\n"
+"QComboBox {\n"
+"    border: 2px solid rgb(42, 130, 228); /* border: 宽度 线类型 颜色 */\n"
+"    background-color: rgba(255,255,255,0);\n"
+"    border-radius:5px;\n"
+"}\n"
+"/*下拉框的样式*/\n"
+"QComboBox QAbstractItemView\n"
+"{\n"
+"    outline: 0px solid gray;  /*取消选中虚线*/\n"
+"    border: 1px solid rgb(31, 156, 255);\n"
+"    color: rgb(66, 66, 66);\n"
+"    background-color: rgb(255, 255, 255);\n"
+"    selection-background-color: rgb(0, 150, 255);\n"
+"    border-radius:5px;\n"
+"    border:None;\n"
+"}\n"
+"/*选中每一项的字体颜色和背景颜色*/\n"
+"QComboBox::item:selected \n"
+"{\n"
+"    color: rgb(255, 255, 255);\n"
+"    background-color: rgb(0, 150, 255);\n"
+"    border-radius:5px;\n"
+"}\n"
+"/*右边*/\n"
+"QComboBox::drop-down{border: 2px solid rgba(0, 150, 255,0);}\n"
+"QComboBox::down-arrow\n"
+"{\n"
+"    image: url(:/img/back_blue_down.png);\n"
+"    width: 25px;\n"
+"    height: 35px;\n"
+"    right:6px;\n"
+"    border-left: 2px solid rgb(192, 192, 192);\n"
+"    border-right: 1px solid rgba(214, 214, 214,0);\n"
+"}\n"
+"QComboBox::down-arrow:on\n"
+"{\n"
+"    image: url(:/img/back_blue_up.png);\n"
+"    width: 25px;\n"
+"    height: 35px;\n"
+"    right:6px;\n"
+"    border-left: 2px solid rgb(192, 192, 192);\n"
+"    border-right: 1px solid rgba(214, 214, 214,0);\n"
+"}\n"
+"/*QComboBox::down-arrow::hover{}*\n"
+"/* QComboBox中的垂直滚动条 */\n"
+"QComboBox QAbstractScrollArea QScrollBar:vertical {\n"
+"    width: 10px;\n"
+"    height: 8px;\n"
+"    background-color: rgb(255, 64, 255);   /* 空白区域的背景色*/\n"
+"    border-style:none;\n"
+"}\n"
+"QComboBox QAbstractScrollArea QScrollBar::handle:vertical {\n"
+"    border-radius: 5px;   /* 圆角 */\n"
+"    background: rgb(160,160,160);   /* 小方块的背景色深灰lightblue */\n"
+"}\n"
+"QComboBox QAbstractScrollArea QScrollBar::handle:vertical:hover {\n"
+"    background: rgb(255, 255, 255);   /* 越过小方块的背景色*/\n"
+"}\n"
+"\n"
 "\n"
 "QTreeWidget::item {\n"
 "    height: 20px;\n"
@@ -1639,22 +1705,116 @@ class Ui_MainWindow(object):
         self.page_settings.setStyleSheet("")
         self.page_settings.setObjectName("page_settings")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.page_settings)
-        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.widget_page_settings_up = QtWidgets.QWidget(self.page_settings)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.widget_page_settings_up.sizePolicy().hasHeightForWidth())
+        self.widget_page_settings_up.setSizePolicy(sizePolicy)
+        self.widget_page_settings_up.setMaximumSize(QtCore.QSize(16777215, 40))
+        self.widget_page_settings_up.setObjectName("widget_page_settings_up")
+        self.horizontalLayout_28 = QtWidgets.QHBoxLayout(self.widget_page_settings_up)
+        self.horizontalLayout_28.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_28.setSpacing(12)
+        self.horizontalLayout_28.setObjectName("horizontalLayout_28")
+        self.widget_page_settings_up_ = QtWidgets.QWidget(self.widget_page_settings_up)
+        self.widget_page_settings_up_.setMinimumSize(QtCore.QSize(0, 40))
+        self.widget_page_settings_up_.setObjectName("widget_page_settings_up_")
+        self.horizontalLayout_29 = QtWidgets.QHBoxLayout(self.widget_page_settings_up_)
+        self.horizontalLayout_29.setContentsMargins(0, 4, 0, 4)
+        self.horizontalLayout_29.setSpacing(7)
+        self.horizontalLayout_29.setObjectName("horizontalLayout_29")
+        self.label_page_settings_game_settings = MyQLabel(self.widget_page_settings_up_)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_page_settings_game_settings.sizePolicy().hasHeightForWidth())
+        self.label_page_settings_game_settings.setSizePolicy(sizePolicy)
+        self.label_page_settings_game_settings.setMinimumSize(QtCore.QSize(110, 0))
+        font = QtGui.QFont()
+        font.setPointSize(17)
+        self.label_page_settings_game_settings.setFont(font)
+        self.label_page_settings_game_settings.setStyleSheet("border-bottom: 2px solid rgb(0, 119, 225);")
+        self.label_page_settings_game_settings.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.label_page_settings_game_settings.setObjectName("label_page_settings_game_settings")
+        self.horizontalLayout_29.addWidget(self.label_page_settings_game_settings)
+        self.line_3 = QtWidgets.QFrame(self.widget_page_settings_up_)
+        self.line_3.setMaximumSize(QtCore.QSize(1, 16777215))
+        self.line_3.setFrameShape(QtWidgets.QFrame.Shape.VLine)
+        self.line_3.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line_3.setObjectName("line_3")
+        self.horizontalLayout_29.addWidget(self.line_3)
+        self.label_page_settings_appearance = MyQLabel(self.widget_page_settings_up_)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_page_settings_appearance.sizePolicy().hasHeightForWidth())
+        self.label_page_settings_appearance.setSizePolicy(sizePolicy)
+        self.label_page_settings_appearance.setMinimumSize(QtCore.QSize(45, 0))
+        self.label_page_settings_appearance.setMaximumSize(QtCore.QSize(45, 16777215))
+        font = QtGui.QFont()
+        font.setPointSize(17)
+        self.label_page_settings_appearance.setFont(font)
+        self.label_page_settings_appearance.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.label_page_settings_appearance.setObjectName("label_page_settings_appearance")
+        self.horizontalLayout_29.addWidget(self.label_page_settings_appearance)
+        self.label_page_settings_download = MyQLabel(self.widget_page_settings_up_)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_page_settings_download.sizePolicy().hasHeightForWidth())
+        self.label_page_settings_download.setSizePolicy(sizePolicy)
+        self.label_page_settings_download.setMinimumSize(QtCore.QSize(45, 0))
+        self.label_page_settings_download.setMaximumSize(QtCore.QSize(45, 16777215))
+        font = QtGui.QFont()
+        font.setPointSize(17)
+        self.label_page_settings_download.setFont(font)
+        self.label_page_settings_download.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.label_page_settings_download.setObjectName("label_page_settings_download")
+        self.horizontalLayout_29.addWidget(self.label_page_settings_download)
+        self.label_page_settings_else = MyQLabel(self.widget_page_settings_up_)
+        self.label_page_settings_else.setMinimumSize(QtCore.QSize(45, 0))
+        self.label_page_settings_else.setMaximumSize(QtCore.QSize(45, 16777215))
+        font = QtGui.QFont()
+        font.setPointSize(17)
+        self.label_page_settings_else.setFont(font)
+        self.label_page_settings_else.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.label_page_settings_else.setObjectName("label_page_settings_else")
+        self.horizontalLayout_29.addWidget(self.label_page_settings_else)
+        self.horizontalLayout_28.addWidget(self.widget_page_settings_up_)
+        spacerItem16 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_28.addItem(spacerItem16)
+        self.label_page_settings_about = MyQLabel(self.widget_page_settings_up)
+        self.label_page_settings_about.setMinimumSize(QtCore.QSize(45, 0))
+        self.label_page_settings_about.setMaximumSize(QtCore.QSize(45, 16777215))
+        font = QtGui.QFont()
+        font.setPointSize(17)
+        self.label_page_settings_about.setFont(font)
+        self.label_page_settings_about.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.label_page_settings_about.setObjectName("label_page_settings_about")
+        self.horizontalLayout_28.addWidget(self.label_page_settings_about)
+        self.verticalLayout_3.addWidget(self.widget_page_settings_up)
         self.scrollArea_page_settings = QtWidgets.QScrollArea(self.page_settings)
         self.scrollArea_page_settings.setWidgetResizable(True)
         self.scrollArea_page_settings.setObjectName("scrollArea_page_settings")
         self.scrollAreaWidgetContents_page_settings = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_page_settings.setGeometry(QtCore.QRect(0, 0, 380, 336))
+        self.scrollAreaWidgetContents_page_settings.setGeometry(QtCore.QRect(0, 0, 1095, 538))
         self.scrollAreaWidgetContents_page_settings.setObjectName("scrollAreaWidgetContents_page_settings")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_page_settings)
+        self.gridLayout_12 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents_page_settings)
+        self.gridLayout_12.setContentsMargins(0, 0, 0, -1)
+        self.gridLayout_12.setObjectName("gridLayout_12")
+        self.stackedWidget_page_settings = QtWidgets.QStackedWidget(self.scrollAreaWidgetContents_page_settings)
+        self.stackedWidget_page_settings.setObjectName("stackedWidget_page_settings")
+        self.page_page_settings_gameSettings = QtWidgets.QWidget()
+        self.page_page_settings_gameSettings.setObjectName("page_page_settings_gameSettings")
+        self.stackedWidget_page_settings.addWidget(self.page_page_settings_gameSettings)
+        self.page_page_settings_appearance = QtWidgets.QWidget()
+        self.page_page_settings_appearance.setObjectName("page_page_settings_appearance")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.page_page_settings_appearance)
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.label_page_settings_h1 = QtWidgets.QLabel(self.scrollAreaWidgetContents_page_settings)
-        self.label_page_settings_h1.setScaledContents(False)
-        self.label_page_settings_h1.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.label_page_settings_h1.setObjectName("label_page_settings_h1")
-        self.verticalLayout_2.addWidget(self.label_page_settings_h1)
-        self.widget_page_settings_subject = QtWidgets.QWidget(self.scrollAreaWidgetContents_page_settings)
+        self.widget_page_settings_subject = QtWidgets.QWidget(self.page_page_settings_appearance)
         self.widget_page_settings_subject.setObjectName("widget_page_settings_subject")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.widget_page_settings_subject)
         self.horizontalLayout_3.setSpacing(25)
@@ -1665,8 +1825,8 @@ class Ui_MainWindow(object):
         self.label_page_settings_subject_h2.setFont(font)
         self.label_page_settings_subject_h2.setObjectName("label_page_settings_subject_h2")
         self.horizontalLayout_3.addWidget(self.label_page_settings_subject_h2)
-        spacerItem16 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem16)
+        spacerItem17 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem17)
         self.radioButton_settings_subject_light = QtWidgets.QRadioButton(self.widget_page_settings_subject)
         self.radioButton_settings_subject_light.setObjectName("radioButton_settings_subject_light")
         self.horizontalLayout_3.addWidget(self.radioButton_settings_subject_light)
@@ -1677,7 +1837,7 @@ class Ui_MainWindow(object):
         self.radioButton_settings_subject_automatic.setObjectName("radioButton_settings_subject_automatic")
         self.horizontalLayout_3.addWidget(self.radioButton_settings_subject_automatic)
         self.verticalLayout_2.addWidget(self.widget_page_settings_subject)
-        self.widget_page_settings_background = QtWidgets.QWidget(self.scrollAreaWidgetContents_page_settings)
+        self.widget_page_settings_background = QtWidgets.QWidget(self.page_page_settings_appearance)
         self.widget_page_settings_background.setObjectName("widget_page_settings_background")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.widget_page_settings_background)
         self.gridLayout_2.setHorizontalSpacing(0)
@@ -1715,7 +1875,7 @@ class Ui_MainWindow(object):
         self.label_page_settings_background_h2.setObjectName("label_page_settings_background_h2")
         self.gridLayout_2.addWidget(self.label_page_settings_background_h2, 0, 0, 1, 4)
         self.verticalLayout_2.addWidget(self.widget_page_settings_background)
-        self.widget_page_settings_Sidebar = QtWidgets.QWidget(self.scrollAreaWidgetContents_page_settings)
+        self.widget_page_settings_Sidebar = QtWidgets.QWidget(self.page_page_settings_appearance)
         self.widget_page_settings_Sidebar.setStyleSheet("")
         self.widget_page_settings_Sidebar.setObjectName("widget_page_settings_Sidebar")
         self.gridLayout_7 = QtWidgets.QGridLayout(self.widget_page_settings_Sidebar)
@@ -1772,8 +1932,58 @@ class Ui_MainWindow(object):
         self.label_page_settings_background_h3_2.setObjectName("label_page_settings_background_h3_2")
         self.gridLayout_7.addWidget(self.label_page_settings_background_h3_2, 1, 2, 1, 1)
         self.verticalLayout_2.addWidget(self.widget_page_settings_Sidebar)
-        spacerItem17 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.verticalLayout_2.addItem(spacerItem17)
+        spacerItem18 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.verticalLayout_2.addItem(spacerItem18)
+        self.stackedWidget_page_settings.addWidget(self.page_page_settings_appearance)
+        self.page_page_settings_download = QtWidgets.QWidget()
+        self.page_page_settings_download.setObjectName("page_page_settings_download")
+        self.verticalLayout_15 = QtWidgets.QVBoxLayout(self.page_page_settings_download)
+        self.verticalLayout_15.setObjectName("verticalLayout_15")
+        self.widget = QtWidgets.QWidget(self.page_page_settings_download)
+        self.widget.setObjectName("widget")
+        self.gridLayout_13 = QtWidgets.QGridLayout(self.widget)
+        self.gridLayout_13.setHorizontalSpacing(0)
+        self.gridLayout_13.setObjectName("gridLayout_13")
+        self.label_2 = QtWidgets.QLabel(self.widget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_2.sizePolicy().hasHeightForWidth())
+        self.label_2.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        self.label_2.setFont(font)
+        self.label_2.setObjectName("label_2")
+        self.gridLayout_13.addWidget(self.label_2, 2, 1, 1, 1)
+        spacerItem19 = QtWidgets.QSpacerItem(10, 0, QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.gridLayout_13.addItem(spacerItem19, 2, 0, 1, 1)
+        self.label = QtWidgets.QLabel(self.widget)
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        self.label.setFont(font)
+        self.label.setObjectName("label")
+        self.gridLayout_13.addWidget(self.label, 0, 0, 1, 4)
+        self.checkBox = QtWidgets.QCheckBox(self.widget)
+        self.checkBox.setObjectName("checkBox")
+        self.gridLayout_13.addWidget(self.checkBox, 3, 0, 1, 2)
+        self.comboBox = QtWidgets.QComboBox(self.widget)
+        self.comboBox.setMinimumSize(QtCore.QSize(0, 30))
+        self.comboBox.setObjectName("comboBox")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.gridLayout_13.addWidget(self.comboBox, 2, 3, 1, 2)
+        self.verticalLayout_15.addWidget(self.widget)
+        spacerItem20 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.verticalLayout_15.addItem(spacerItem20)
+        self.stackedWidget_page_settings.addWidget(self.page_page_settings_download)
+        self.page_page_settings_else = QtWidgets.QWidget()
+        self.page_page_settings_else.setObjectName("page_page_settings_else")
+        self.stackedWidget_page_settings.addWidget(self.page_page_settings_else)
+        self.page_page_settings_about = QtWidgets.QWidget()
+        self.page_page_settings_about.setObjectName("page_page_settings_about")
+        self.stackedWidget_page_settings.addWidget(self.page_page_settings_about)
+        self.gridLayout_12.addWidget(self.stackedWidget_page_settings, 0, 0, 1, 1)
         self.scrollArea_page_settings.setWidget(self.scrollAreaWidgetContents_page_settings)
         self.verticalLayout_3.addWidget(self.scrollArea_page_settings)
         self.stackedWidget_main_2.addWidget(self.page_settings)
@@ -1784,12 +1994,12 @@ class Ui_MainWindow(object):
         self.page_initialize.setObjectName("page_initialize")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.page_initialize)
         self.gridLayout_3.setObjectName("gridLayout_3")
-        spacerItem18 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.gridLayout_3.addItem(spacerItem18, 1, 0, 1, 1)
-        spacerItem19 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.gridLayout_3.addItem(spacerItem19, 0, 2, 1, 1)
-        spacerItem20 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.gridLayout_3.addItem(spacerItem20, 1, 3, 1, 1)
+        spacerItem21 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.gridLayout_3.addItem(spacerItem21, 1, 0, 1, 1)
+        spacerItem22 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.gridLayout_3.addItem(spacerItem22, 0, 2, 1, 1)
+        spacerItem23 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.gridLayout_3.addItem(spacerItem23, 1, 3, 1, 1)
         self.widget_page_loading = QtWidgets.QWidget(self.page_initialize)
         self.widget_page_loading.setMinimumSize(QtCore.QSize(161, 172))
         self.widget_page_loading.setObjectName("widget_page_loading")
@@ -1803,10 +2013,10 @@ class Ui_MainWindow(object):
         self.label_loading_gif.setScaledContents(True)
         self.label_loading_gif.setObjectName("label_loading_gif")
         self.gridLayout_4.addWidget(self.label_loading_gif, 1, 1, 1, 1)
-        spacerItem21 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.gridLayout_4.addItem(spacerItem21, 1, 0, 1, 1)
-        spacerItem22 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.gridLayout_4.addItem(spacerItem22, 1, 2, 1, 1)
+        spacerItem24 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.gridLayout_4.addItem(spacerItem24, 1, 0, 1, 1)
+        spacerItem25 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.gridLayout_4.addItem(spacerItem25, 1, 2, 1, 1)
         self.label_loading_text_1 = QtWidgets.QLabel(self.widget_page_loading)
         font = QtGui.QFont()
         font.setPointSize(14)
@@ -1825,8 +2035,8 @@ class Ui_MainWindow(object):
         self.label_loading_text_2.setObjectName("label_loading_text_2")
         self.gridLayout_4.addWidget(self.label_loading_text_2, 4, 0, 1, 3)
         self.gridLayout_3.addWidget(self.widget_page_loading, 1, 2, 1, 1)
-        spacerItem23 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.gridLayout_3.addItem(spacerItem23, 2, 2, 1, 1)
+        spacerItem26 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.gridLayout_3.addItem(spacerItem26, 2, 2, 1, 1)
         self.stackedWidget_main.addWidget(self.page_initialize)
         self.page_hello = QtWidgets.QWidget()
         self.page_hello.setObjectName("page_hello")
@@ -1834,26 +2044,26 @@ class Ui_MainWindow(object):
         self.gridLayout_5.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_5.setSpacing(0)
         self.gridLayout_5.setObjectName("gridLayout_5")
-        spacerItem24 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.gridLayout_5.addItem(spacerItem24, 2, 1, 1, 1)
-        spacerItem25 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.gridLayout_5.addItem(spacerItem25, 0, 2, 3, 1)
-        spacerItem26 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.gridLayout_5.addItem(spacerItem26, 0, 1, 1, 1)
-        spacerItem27 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.gridLayout_5.addItem(spacerItem27, 0, 0, 3, 1)
+        spacerItem27 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.gridLayout_5.addItem(spacerItem27, 2, 1, 1, 1)
+        spacerItem28 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.gridLayout_5.addItem(spacerItem28, 0, 2, 3, 1)
+        spacerItem29 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.gridLayout_5.addItem(spacerItem29, 0, 1, 1, 1)
+        spacerItem30 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.gridLayout_5.addItem(spacerItem30, 0, 0, 3, 1)
         self.widget_hello = QtWidgets.QWidget(self.page_hello)
         self.widget_hello.setObjectName("widget_hello")
         self.gridLayout_6 = QtWidgets.QGridLayout(self.widget_hello)
         self.gridLayout_6.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_6.setHorizontalSpacing(0)
         self.gridLayout_6.setObjectName("gridLayout_6")
-        spacerItem28 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.gridLayout_6.addItem(spacerItem28, 3, 4, 1, 1)
-        spacerItem29 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.gridLayout_6.addItem(spacerItem29, 0, 3, 1, 1)
-        spacerItem30 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.gridLayout_6.addItem(spacerItem30, 3, 2, 1, 1)
+        spacerItem31 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.gridLayout_6.addItem(spacerItem31, 3, 4, 1, 1)
+        spacerItem32 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.gridLayout_6.addItem(spacerItem32, 0, 3, 1, 1)
+        spacerItem33 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.gridLayout_6.addItem(spacerItem33, 3, 2, 1, 1)
         self.pushButton_hello_text = QtWidgets.QPushButton(self.widget_hello)
         self.pushButton_hello_text.setText("")
         icon10 = QtGui.QIcon()
@@ -1887,8 +2097,8 @@ class Ui_MainWindow(object):
         self.pushButton_hello_line.setIconSize(QtCore.QSize(21, 253))
         self.pushButton_hello_line.setObjectName("pushButton_hello_line")
         self.gridLayout_6.addWidget(self.pushButton_hello_line, 0, 1, 6, 1)
-        spacerItem31 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.gridLayout_6.addItem(spacerItem31, 5, 2, 1, 3)
+        spacerItem34 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.gridLayout_6.addItem(spacerItem34, 5, 2, 1, 3)
         self.gridLayout_5.addWidget(self.widget_hello, 1, 1, 1, 1)
         self.stackedWidget_main.addWidget(self.page_hello)
         self.horizontalLayout_2.addWidget(self.stackedWidget_main)
@@ -1899,11 +2109,13 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.stackedWidget_main.setCurrentIndex(1)
         self.stackedWidget_main_2.setCurrentIndex(1)
-        self.stackedWidget_page_users_down.setCurrentIndex(1)
+        self.stackedWidget_page_users_down.setCurrentIndex(0)
         self.stackedWidget_page_home.setCurrentIndex(0)
         self.stackedWidget_page_home_game_left.setCurrentIndex(0)
+        self.stackedWidget_2.setCurrentIndex(0)
         self.stackedWidget_page_download.setCurrentIndex(0)
-        self.stackedWidget_page_download_1.setCurrentIndex(0)
+        self.stackedWidget_page_download_1.setCurrentIndex(1)
+        self.stackedWidget_page_settings.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -1958,7 +2170,11 @@ class Ui_MainWindow(object):
         self.label_page_download_1_install_bottom_GameName.setText(_translate("MainWindow", "游戏名"))
         self.lineEdit_page_download_1_install_bottom_GameName.setPlaceholderText(_translate("MainWindow", "1.12.2"))
         self.pushButton_page_download_1_install_bottom_ok.setText(_translate("MainWindow", "安装"))
-        self.label_page_settings_h1.setText(_translate("MainWindow", "个性化外观设置"))
+        self.label_page_settings_game_settings.setText(_translate("MainWindow", "全局游戏设置"))
+        self.label_page_settings_appearance.setText(_translate("MainWindow", "外观"))
+        self.label_page_settings_download.setText(_translate("MainWindow", "下载"))
+        self.label_page_settings_else.setText(_translate("MainWindow", "更多"))
+        self.label_page_settings_about.setText(_translate("MainWindow", "关于"))
         self.label_page_settings_subject_h2.setText(_translate("MainWindow", "主题"))
         self.radioButton_settings_subject_light.setToolTip(_translate("MainWindow", "浅色模式"))
         self.radioButton_settings_subject_light.setText(_translate("MainWindow", "浅色"))
@@ -1979,6 +2195,12 @@ class Ui_MainWindow(object):
         self.label_page_settings_sidebar_h2.setText(_translate("MainWindow", "左边栏动画设置"))
         self.spinBox_page_settings_sidebar.setSuffix(_translate("MainWindow", " mm"))
         self.label_page_settings_background_h3_2.setText(_translate("MainWindow", "预计 450mm (0.45s)完成"))
+        self.label_2.setText(_translate("MainWindow", "下载源"))
+        self.label.setText(_translate("MainWindow", "下载源"))
+        self.checkBox.setText(_translate("MainWindow", "节点文件出现问题时，自动尝试其他节点"))
+        self.comboBox.setItemText(0, _translate("MainWindow", "新建项目"))
+        self.comboBox.setItemText(1, _translate("MainWindow", "新建项目"))
+        self.comboBox.setItemText(2, _translate("MainWindow", "新建项目"))
         self.label_loading_text_1.setText(_translate("MainWindow", "正在初始化启动器……"))
         self.label_loading_text_2.setText(_translate("MainWindow", "正在读取设置(1/3)"))
         self.action8.setText(_translate("MainWindow", "8"))
