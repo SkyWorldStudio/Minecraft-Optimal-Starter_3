@@ -735,6 +735,66 @@ class RunUi(QMainWindow, Ui_MainWindow):
         else:
             self.DownloadPage_stackedWidget_setButtonStyleSheet(I)
 
+    def SettingsPage_Page_Settings_Game_Settings(self):
+        """设置页面 -> 游戏全局设置"""
+        if self.stackedWidget_page_settings.currentIndex() == 0:
+            pass
+        else:
+            self.label_page_settings_game_settings.setStyleSheet("border-bottom: 2px solid rgb(0, 119, 225);")
+            self.label_page_settings_appearance.setStyleSheet('')
+            self.label_page_settings_download.setStyleSheet('')
+            self.label_page_settings_else.setStyleSheet('')
+            self.label_page_settings_about.setStyleSheet('')
+            self.SetCurrentIndex(self.stackedWidget_page_settings, 0, 4, True)
+
+    def SettingsPage_Page_Settings_Game_Appearance(self):
+        """设置页面 -> 外观"""
+        if self.stackedWidget_page_settings.currentIndex() == 1:
+            pass
+        else:
+            self.label_page_settings_game_settings.setStyleSheet('')
+            self.label_page_settings_appearance.setStyleSheet("border-bottom: 2px solid rgb(0, 119, 225);")
+            self.label_page_settings_download.setStyleSheet('')
+            self.label_page_settings_else.setStyleSheet('')
+            self.label_page_settings_about.setStyleSheet('')
+            self.SetCurrentIndex(self.stackedWidget_page_settings, 1, 4, True)
+
+    def SettingsPage_Page_Settings_Game_Download(self):
+        """设置页面 -> 下载"""
+        if self.stackedWidget_page_settings.currentIndex() == 2:
+            pass
+        else:
+            self.label_page_settings_game_settings.setStyleSheet('')
+            self.label_page_settings_appearance.setStyleSheet('')
+            self.label_page_settings_download.setStyleSheet("border-bottom: 2px solid rgb(0, 119, 225);")
+            self.label_page_settings_else.setStyleSheet('')
+            self.label_page_settings_about.setStyleSheet('')
+            self.SetCurrentIndex(self.stackedWidget_page_settings, 2, 4, True)
+
+    def SettingsPage_Page_Settings_Game_Else(self):
+        """设置页面 -> 其他"""
+        if self.stackedWidget_page_settings.currentIndex() == 3:
+            pass
+        else:
+            self.label_page_settings_game_settings.setStyleSheet('')
+            self.label_page_settings_appearance.setStyleSheet('')
+            self.label_page_settings_download.setStyleSheet('')
+            self.label_page_settings_else.setStyleSheet("border-bottom: 2px solid rgb(0, 119, 225);")
+            self.label_page_settings_about.setStyleSheet('')
+            self.SetCurrentIndex(self.stackedWidget_page_settings, 3, 4, True)
+
+    def SettingsPage_Page_Settings_Game_About(self):
+        """设置页面 -> 关于"""
+        if self.stackedWidget_page_settings.currentIndex() == 4:
+            pass
+        else:
+            self.label_page_settings_game_settings.setStyleSheet('')
+            self.label_page_settings_appearance.setStyleSheet('')
+            self.label_page_settings_download.setStyleSheet('')
+            self.label_page_settings_else.setStyleSheet('')
+            self.label_page_settings_about.setStyleSheet("border-bottom: 2px solid rgb(0, 119, 225);")
+            self.SetCurrentIndex(self.stackedWidget_page_settings, 4, 4, True)
+
     def SettingsPage_Background_None_Clicked(self):
         """设置页面 -> 背景设置:选择：无"""
         self.MainWinowMainBackground(None)
@@ -853,6 +913,28 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 # 如果不是初始化 就改变json配置
                 self.Json_MOS['BackGround'] = Want
                 JsonWrite(self.Json_MOS, self.JsonFile)
+
+    def SettingsPage_Page_Download_Settings_Download(self):
+        """设置页面 -> 下载 -> 下载源选择"""
+        i = self.comboBox_page_settings_download.currentIndex()
+        if i == 0:
+            self.Json_MOS['Download_Source'] = 'MCBBS'
+            JsonWrite(self.Json_MOS, self.JsonFile)
+        elif i == 1:
+            self.Json_MOS['Download_Source'] = 'BMCLAPI'
+            JsonWrite(self.Json_MOS, self.JsonFile)
+        elif i == 2:
+            self.Json_MOS['Download_Source'] = 'MC'
+            JsonWrite(self.Json_MOS, self.JsonFile)
+
+    def SettingsPage_Page_Download_Settings_DownloadExceptionHandling(self,cb):
+        """设置页面 -> 下载 -> 节点文件出现问题时，自动尝试其他节点"""
+        if self.checkBox_page_settings_download_exceptionHandling.checkState() == 2:
+            self.Json_MOS['Download_Source_ExceptionHandling'] = True
+        else:
+            self.Json_MOS['Download_Source_ExceptionHandling'] = False
+        JsonWrite(self.Json_MOS, self.JsonFile)
+
 
     def Sidebar_Clicked(self, Want=None, H=True):
         """
@@ -1125,6 +1207,16 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 elif self.Json_MOS['BackGround'] == 7:
                     self.radioButton_settings_background_7.setChecked(True)
 
+            if self.Json_MOS['Download_Source'] == 'MCBBS':
+                pass
+            elif self.Json_MOS['Download_Source'] == 'BMCLAPI':
+                self.comboBox_page_settings_download.setCurrentIndex(1)
+            elif self.Json_MOS['Download_Source'] == 'MC':
+                self.comboBox_page_settings_download.setCurrentIndex(2)
+
+            if self.Json_MOS['Download_Source_ExceptionHandling'] == False:
+                self.checkBox_page_settings_download_exceptionHandling.setChecked(False)
+
         if First == True:
             self.RunInitialize_.stop()
 
@@ -1322,6 +1414,13 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.radioButton_settings_background_5.clicked.connect(self.SettingsPage_Background_5_Clicked)
         self.radioButton_settings_background_6.clicked.connect(self.SettingsPage_Background_6_Clicked)
         self.radioButton_settings_background_7.clicked.connect(self.SettingsPage_Background_7_Clicked)
+        self.label_page_settings_game_settings.clicked.connect(self.SettingsPage_Page_Settings_Game_Settings)
+        self.label_page_settings_appearance.clicked.connect(self.SettingsPage_Page_Settings_Game_Appearance)
+        self.label_page_settings_download.clicked.connect(self.SettingsPage_Page_Settings_Game_Download)
+        self.label_page_settings_else.clicked.connect(self.SettingsPage_Page_Settings_Game_Else)
+        self.label_page_settings_about.clicked.connect(self.SettingsPage_Page_Settings_Game_About)
+        self.comboBox_page_settings_download.currentIndexChanged.connect(self.SettingsPage_Page_Download_Settings_Download)
+        self.checkBox_page_settings_download_exceptionHandling.stateChanged.connect(self.SettingsPage_Page_Download_Settings_DownloadExceptionHandling)
 
         self.horizontalSlider_page_settings_sidebar.sliderMoved.connect(self.SettingsPage_Sidebar_horizontalSlider)
         self.horizontalSlider_page_settings_sidebar.sliderPressed.connect(self.SettingsPage_Sidebar_horizontalSlider)

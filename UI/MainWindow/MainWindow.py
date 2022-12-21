@@ -618,43 +618,54 @@ class Ui_MainWindow(object):
 "    background-color: rgba(255,255,255,0);\n"
 "    border-radius:5px;\n"
 "}\n"
-"/*下拉框的样式*/\n"
-"QComboBox QAbstractItemView\n"
-"{\n"
-"    outline: 0px solid gray;  /*取消选中虚线*/\n"
-"    border: 1px solid rgb(31, 156, 255);\n"
-"    color: rgb(66, 66, 66);\n"
-"    background-color: rgb(255, 255, 255);\n"
-"    selection-background-color: rgb(0, 150, 255);\n"
-"    border-radius:5px;\n"
-"    border:None;\n"
-"}\n"
+"QComboBox::drop-down {\n"
+"    border: 2px solid rgba(0, 150, 255,0);\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 15px;\n"
+"  }\n"
 "/*选中每一项的字体颜色和背景颜色*/\n"
 "QComboBox::item:selected \n"
 "{\n"
 "    color: rgb(255, 255, 255);\n"
 "    background-color: rgb(0, 150, 255);\n"
-"    border-radius:5px;\n"
 "}\n"
 "/*右边*/\n"
-"QComboBox::drop-down{border: 2px solid rgba(0, 150, 255,0);}\n"
 "QComboBox::down-arrow\n"
 "{\n"
-"    image: url(:/img/back_blue_down.png);\n"
+"    image: url(:/widget_Sidebar/images/Dowe_QComboBox_Blue.png);\n"
 "    width: 25px;\n"
 "    height: 35px;\n"
 "    right:6px;\n"
-"    border-left: 2px solid rgb(192, 192, 192);\n"
+"    border-left: 2px solid rgb(31, 156, 255);\n"
 "    border-right: 1px solid rgba(214, 214, 214,0);\n"
 "}\n"
 "QComboBox::down-arrow:on\n"
 "{\n"
-"    image: url(:/img/back_blue_up.png);\n"
+"    image: url(:/widget_Sidebar/images/Up_QComboBox_Blue.png);\n"
 "    width: 25px;\n"
 "    height: 35px;\n"
 "    right:6px;\n"
-"    border-left: 2px solid rgb(192, 192, 192);\n"
+"    border-left: 2px solid rgb(31, 156, 255);\n"
 "    border-right: 1px solid rgba(214, 214, 214,0);\n"
+"}\n"
+"QComboBox QAbstractItemView{\n"
+"    border-bottom-right-radius:4px;\n"
+"    border-bottom-left-radius:4px;\n"
+"}\n"
+"QComboBox QAbstractItemView::item{\n"
+"    height:36px;\n"
+"    color:#666666;\n"
+"    padding-left:9px;\n"
+"    background-color:#FFFFFF;\n"
+"}\n"
+"QComboBox QAbstractItemView::item:hover{\n"
+"  background-color:#409CE1;\n"
+"  color:#ffffff;\n"
+"}\n"
+"QComboBox QAbstractItemView::item:selected{\n"
+"  background-color:#409CE1;\n"
+"  color:#ffffff;\n"
 "}\n"
 "/*QComboBox::down-arrow::hover{}*\n"
 "/* QComboBox中的垂直滚动条 */\n"
@@ -1938,42 +1949,44 @@ class Ui_MainWindow(object):
         self.page_page_settings_download = QtWidgets.QWidget()
         self.page_page_settings_download.setObjectName("page_page_settings_download")
         self.verticalLayout_15 = QtWidgets.QVBoxLayout(self.page_page_settings_download)
+        self.verticalLayout_15.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_15.setObjectName("verticalLayout_15")
-        self.widget = QtWidgets.QWidget(self.page_page_settings_download)
-        self.widget.setObjectName("widget")
-        self.gridLayout_13 = QtWidgets.QGridLayout(self.widget)
+        self.widget_page_settings_download = QtWidgets.QWidget(self.page_page_settings_download)
+        self.widget_page_settings_download.setObjectName("widget_page_settings_download")
+        self.gridLayout_13 = QtWidgets.QGridLayout(self.widget_page_settings_download)
         self.gridLayout_13.setHorizontalSpacing(0)
         self.gridLayout_13.setObjectName("gridLayout_13")
-        self.label_2 = QtWidgets.QLabel(self.widget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Preferred)
+        self._page_settings_download_h2 = QtWidgets.QLabel(self.widget_page_settings_download)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_2.sizePolicy().hasHeightForWidth())
-        self.label_2.setSizePolicy(sizePolicy)
+        sizePolicy.setHeightForWidth(self._page_settings_download_h2.sizePolicy().hasHeightForWidth())
+        self._page_settings_download_h2.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setPointSize(15)
-        self.label_2.setFont(font)
-        self.label_2.setObjectName("label_2")
-        self.gridLayout_13.addWidget(self.label_2, 2, 1, 1, 1)
+        self._page_settings_download_h2.setFont(font)
+        self._page_settings_download_h2.setObjectName("_page_settings_download_h2")
+        self.gridLayout_13.addWidget(self._page_settings_download_h2, 2, 1, 1, 1)
         spacerItem19 = QtWidgets.QSpacerItem(10, 0, QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Minimum)
         self.gridLayout_13.addItem(spacerItem19, 2, 0, 1, 1)
-        self.label = QtWidgets.QLabel(self.widget)
+        self.label_page_settings_download_h1 = QtWidgets.QLabel(self.widget_page_settings_download)
         font = QtGui.QFont()
         font.setPointSize(15)
-        self.label.setFont(font)
-        self.label.setObjectName("label")
-        self.gridLayout_13.addWidget(self.label, 0, 0, 1, 4)
-        self.checkBox = QtWidgets.QCheckBox(self.widget)
-        self.checkBox.setObjectName("checkBox")
-        self.gridLayout_13.addWidget(self.checkBox, 3, 0, 1, 2)
-        self.comboBox = QtWidgets.QComboBox(self.widget)
-        self.comboBox.setMinimumSize(QtCore.QSize(0, 30))
-        self.comboBox.setObjectName("comboBox")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.gridLayout_13.addWidget(self.comboBox, 2, 3, 1, 2)
-        self.verticalLayout_15.addWidget(self.widget)
+        self.label_page_settings_download_h1.setFont(font)
+        self.label_page_settings_download_h1.setObjectName("label_page_settings_download_h1")
+        self.gridLayout_13.addWidget(self.label_page_settings_download_h1, 0, 0, 1, 4)
+        self.comboBox_page_settings_download = QtWidgets.QComboBox(self.widget_page_settings_download)
+        self.comboBox_page_settings_download.setMinimumSize(QtCore.QSize(0, 30))
+        self.comboBox_page_settings_download.setObjectName("comboBox_page_settings_download")
+        self.comboBox_page_settings_download.addItem("")
+        self.comboBox_page_settings_download.addItem("")
+        self.comboBox_page_settings_download.addItem("")
+        self.gridLayout_13.addWidget(self.comboBox_page_settings_download, 2, 3, 1, 2)
+        self.checkBox_page_settings_download_exceptionHandling = QtWidgets.QCheckBox(self.widget_page_settings_download)
+        self.checkBox_page_settings_download_exceptionHandling.setChecked(True)
+        self.checkBox_page_settings_download_exceptionHandling.setObjectName("checkBox_page_settings_download_exceptionHandling")
+        self.gridLayout_13.addWidget(self.checkBox_page_settings_download_exceptionHandling, 3, 1, 1, 2)
+        self.verticalLayout_15.addWidget(self.widget_page_settings_download)
         spacerItem20 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         self.verticalLayout_15.addItem(spacerItem20)
         self.stackedWidget_page_settings.addWidget(self.page_page_settings_download)
@@ -2114,7 +2127,7 @@ class Ui_MainWindow(object):
         self.stackedWidget_page_home_game_left.setCurrentIndex(0)
         self.stackedWidget_2.setCurrentIndex(0)
         self.stackedWidget_page_download.setCurrentIndex(0)
-        self.stackedWidget_page_download_1.setCurrentIndex(1)
+        self.stackedWidget_page_download_1.setCurrentIndex(0)
         self.stackedWidget_page_settings.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -2195,12 +2208,12 @@ class Ui_MainWindow(object):
         self.label_page_settings_sidebar_h2.setText(_translate("MainWindow", "左边栏动画设置"))
         self.spinBox_page_settings_sidebar.setSuffix(_translate("MainWindow", " mm"))
         self.label_page_settings_background_h3_2.setText(_translate("MainWindow", "预计 450mm (0.45s)完成"))
-        self.label_2.setText(_translate("MainWindow", "下载源"))
-        self.label.setText(_translate("MainWindow", "下载源"))
-        self.checkBox.setText(_translate("MainWindow", "节点文件出现问题时，自动尝试其他节点"))
-        self.comboBox.setItemText(0, _translate("MainWindow", "新建项目"))
-        self.comboBox.setItemText(1, _translate("MainWindow", "新建项目"))
-        self.comboBox.setItemText(2, _translate("MainWindow", "新建项目"))
+        self._page_settings_download_h2.setText(_translate("MainWindow", "下载源"))
+        self.label_page_settings_download_h1.setText(_translate("MainWindow", "下载源"))
+        self.comboBox_page_settings_download.setItemText(0, _translate("MainWindow", "我的世界中文论坛-MCBBS源"))
+        self.comboBox_page_settings_download.setItemText(1, _translate("MainWindow", "BMCLAPI源-BangBang93源"))
+        self.comboBox_page_settings_download.setItemText(2, _translate("MainWindow", "官方源(Optifine安装自动使用BMCL源)"))
+        self.checkBox_page_settings_download_exceptionHandling.setText(_translate("MainWindow", "节点文件出现问题时，自动尝试其他节点"))
         self.label_loading_text_1.setText(_translate("MainWindow", "正在初始化启动器……"))
         self.label_loading_text_2.setText(_translate("MainWindow", "正在读取设置(1/3)"))
         self.action8.setText(_translate("MainWindow", "8"))

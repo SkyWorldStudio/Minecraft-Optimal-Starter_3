@@ -620,43 +620,54 @@ QComboBox {
     background-color: rgba(255,255,255,0);
     border-radius:5px;
 }
-/*下拉框的样式*/
-QComboBox QAbstractItemView
-{
-    outline: 0px solid gray;  /*取消选中虚线*/
-    border: 1px solid rgb(31, 156, 255);
-    color: rgb(66, 66, 66);
-    background-color: rgb(255, 255, 255);
-    selection-background-color: rgb(0, 150, 255);
-    border-radius:5px;
-    border:None;
-}
+QComboBox::drop-down {
+	border: 2px solid rgba(0, 150, 255,0);
+	subcontrol-origin: padding;
+	subcontrol-position: top right;
+	width: 15px;
+  }
 /*选中每一项的字体颜色和背景颜色*/
 QComboBox::item:selected 
 {
     color: rgb(255, 255, 255);
     background-color: rgb(0, 150, 255);
-    border-radius:5px;
 }
 /*右边*/
-QComboBox::drop-down{border: 2px solid rgba(0, 150, 255,0);}
 QComboBox::down-arrow
 {
-    image: url(:/img/back_blue_down.png);
+    image: url(:/widget_Sidebar/images/Dowe_QComboBox_Blue.png);
     width: 25px;
     height: 35px;
     right:6px;
-    border-left: 2px solid rgb(192, 192, 192);
+    border-left: 2px solid rgb(31, 156, 255);
     border-right: 1px solid rgba(214, 214, 214,0);
 }
 QComboBox::down-arrow:on
 {
-    image: url(:/img/back_blue_up.png);
+    image: url(:/widget_Sidebar/images/Up_QComboBox_Blue.png);
     width: 25px;
     height: 35px;
     right:6px;
-    border-left: 2px solid rgb(192, 192, 192);
+    border-left: 2px solid rgb(31, 156, 255);
     border-right: 1px solid rgba(214, 214, 214,0);
+}
+QComboBox QAbstractItemView{
+	border-bottom-right-radius:4px;
+	border-bottom-left-radius:4px;
+}
+QComboBox QAbstractItemView::item{
+	height:36px;
+	color:#666666;
+	padding-left:9px;
+	background-color:#FFFFFF;
+}
+QComboBox QAbstractItemView::item:hover{
+  background-color:#409CE1;
+  color:#ffffff;
+}
+QComboBox QAbstractItemView::item:selected{
+  background-color:#409CE1;
+  color:#ffffff;
 }
 /*QComboBox::down-arrow::hover{}*
 /* QComboBox中的垂直滚动条 */
@@ -2284,7 +2295,7 @@ Line{
                    <item>
                     <widget class="QStackedWidget" name="stackedWidget_page_download_1">
                      <property name="currentIndex">
-                      <number>1</number>
+                      <number>0</number>
                      </property>
                      <widget class="QWidget" name="page_download_1_main">
                       <layout class="QVBoxLayout" name="verticalLayout_11">
@@ -3795,8 +3806,20 @@ Line{
                      </widget>
                      <widget class="QWidget" name="page_page_settings_download">
                       <layout class="QVBoxLayout" name="verticalLayout_15">
+                       <property name="leftMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
                        <item>
-                        <widget class="QWidget" name="widget" native="true">
+                        <widget class="QWidget" name="widget_page_settings_download" native="true">
                          <layout class="QGridLayout" name="gridLayout_13">
                           <property name="horizontalSpacing">
                            <number>0</number>
@@ -3805,9 +3828,9 @@ Line{
                            <number>-1</number>
                           </property>
                           <item row="2" column="1">
-                           <widget class="QLabel" name="label_2">
+                           <widget class="QLabel" name="_page_settings_download_h2">
                             <property name="sizePolicy">
-                             <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
                               <horstretch>0</horstretch>
                               <verstretch>0</verstretch>
                              </sizepolicy>
@@ -3839,7 +3862,7 @@ Line{
                            </spacer>
                           </item>
                           <item row="0" column="0" colspan="4">
-                           <widget class="QLabel" name="label">
+                           <widget class="QLabel" name="label_page_settings_download_h1">
                             <property name="font">
                              <font>
                               <pointsize>15</pointsize>
@@ -3850,15 +3873,8 @@ Line{
                             </property>
                            </widget>
                           </item>
-                          <item row="3" column="0" colspan="2">
-                           <widget class="QCheckBox" name="checkBox">
-                            <property name="text">
-                             <string>节点文件出现问题时，自动尝试其他节点</string>
-                            </property>
-                           </widget>
-                          </item>
                           <item row="2" column="3" colspan="2">
-                           <widget class="QComboBox" name="comboBox">
+                           <widget class="QComboBox" name="comboBox_page_settings_download">
                             <property name="minimumSize">
                              <size>
                               <width>0</width>
@@ -3867,19 +3883,29 @@ Line{
                             </property>
                             <item>
                              <property name="text">
-                              <string>新建项目</string>
+                              <string>我的世界中文论坛-MCBBS源</string>
                              </property>
                             </item>
                             <item>
                              <property name="text">
-                              <string>新建项目</string>
+                              <string>BMCLAPI源-BangBang93源</string>
                              </property>
                             </item>
                             <item>
                              <property name="text">
-                              <string>新建项目</string>
+                              <string>官方源(Optifine安装自动使用BMCL源)</string>
                              </property>
                             </item>
+                           </widget>
+                          </item>
+                          <item row="3" column="1" colspan="2">
+                           <widget class="QCheckBox" name="checkBox_page_settings_download_exceptionHandling">
+                            <property name="text">
+                             <string>节点文件出现问题时，自动尝试其他节点</string>
+                            </property>
+                            <property name="checked">
+                             <bool>true</bool>
+                            </property>
                            </widget>
                           </item>
                          </layout>
@@ -4341,7 +4367,6 @@ Line{
  </customwidgets>
  <resources>
   <include location="img.qrc"/>
-  <include location="../Gif.qrc"/>
   <include location="../Gif.qrc"/>
  </resources>
  <connections/>

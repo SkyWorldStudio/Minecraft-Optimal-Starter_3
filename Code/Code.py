@@ -77,7 +77,9 @@ def Json_InitializeFirst():
         },
         'GameFile_List':['当前目录'],
         'GameFile_List_Clicked': 0,
-        'Game_List_Clicked': 0
+        'Game_List_Clicked': 0,
+        'Download_Source':'MCBBS',
+        'Download_Source_ExceptionHandling':True
     }
     return J
 

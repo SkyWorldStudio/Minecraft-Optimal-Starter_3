@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="widget_Sidebar">
+    <file>../../images/Dowe_QComboBox_Blue.png</file>
+    <file>../../images/Up_QComboBox_Blue.png</file>
     <file>../../images/MCDownloadPage_Up.png</file>
     <file>../../images/MCDownloadPage_Close.png</file>
     <file>../../images/MCDownloadPage_Dowe.png</file>
