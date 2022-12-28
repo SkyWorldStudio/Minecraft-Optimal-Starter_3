@@ -1,5 +1,6 @@
 # coding=utf-8
 import json
+import os
 
 import requests
 
@@ -13,7 +14,7 @@ class GameInstall():
             :param GameFile_V: 游戏目录
             :param File: MOS缓存目录
             :param Download_Source: 下载源(MCBBS, BMCLAPI, MC)
-            :param V_JsonFile: 游戏Json目录
+            :param V_JsonFile: 游戏Json目录(版本列表的)
             :param V: MC版本
             :param Name: 游戏名
             :param V_Forge: Forge版本
@@ -61,9 +62,23 @@ class GameInstall():
             url = self.Download_Source_Url_Json_Q + 'version/' + self.V + '/json'
 
         # 下载
-        V_Json = requests.get(url)
+        V_Json_Get = requests.get(url)
+        V_Json = V_Json_Get.json()
+        V_Json['id'] = self.Name
+        os.makedirs(self.GameFile_V, exist_ok=True)
+        V_Json_File = os.path.join(self.GameFile_V,str(self.Name + '.json'))
+        with open(V_Json_File, 'w+', encoding='utf-8') as f:
+            json.dump(V_Json, f, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
 
 
 if __name__ == '__main__':
-    pass
+    #a = GameInstall('/Users/xyj/Documents/.minecraft','/Users/xyj/Documents/.minecraft/versions/1.18.1/','/Users/xyj/Documents/.MOS','MCBBS','/Users/xyj/Documents/.MOS/Versions/Versions.json',
+    #      '1.18.1','1.18.1',None,None,None)
+    a = GameInstall('/Users/xyj/Documents/.minecraft', '/Users/xyj/Documents/.minecraft/versions/a1.0.11/',
+                    '/Users/xyj/Documents/.MOS', 'MCBBS', '/Users/xyj/Documents/.MOS/Versions/Versions.json',
+                    'a1.0.11', 'a1.0.11', None, None, None)
+    #a = GameInstall('/Users/xyj/Documents/.minecraft', '/Users/xyj/Documents/.minecraft/versions/1.9.1/',
+    #                '/Users/xyj/Documents/.MOS', 'MCBBS', '/Users/xyj/Documents/.MOS/Versions/Versions.json',
+    #                '1.9.1', '1.9.1', None, None, None)
+    a.Run()
