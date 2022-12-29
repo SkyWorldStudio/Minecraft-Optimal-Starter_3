@@ -7,7 +7,8 @@ import requests
 
 class GameInstall():
     def __init__(self, GameFile_M, GameFile_V, File, Download_Source, V_JsonFile,
-                 V, Name, V_Forge,V_Fabric,V_Optifine):
+                 V, Name, V_Forge,V_Fabric,V_Optifine,
+                 Systeam,Systeam_V):
         """
             游戏安装
             :param GameFile_M: 游戏根目录(.minecraft目录)
@@ -20,6 +21,8 @@ class GameInstall():
             :param V_Forge: Forge版本
             :param V_Fabric: Fabric版本
             :param V_Optifine: Optifine版本
+            :param Systeam: 系统种类(Windows, Mac, Linux)
+            :param Systeam_V: 系统版本(10,14.4.1)
         """
         self.GameFile_M = GameFile_M
         self.GameFile_V = GameFile_V
@@ -31,6 +34,8 @@ class GameInstall():
         self.V_Forge = V_Forge
         self.V_Fabric = V_Fabric
         self.V_Optifine = V_Optifine
+        self.Systeam = Systeam
+        self.Systeam_V = Systeam_V
 
         if self.Download_Source == 'MC':
             # self.Download_Source_Url_Json_Q = 'http://launchermeta.mojang.com/'
@@ -70,6 +75,118 @@ class GameInstall():
         with open(V_Json_File, 'w+', encoding='utf-8') as f:
             json.dump(V_Json, f, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
+        Libraries = []
+        Assets = []
+
+        import re
+        for L in V_Json['libraries']:
+            if 'rules' in L:
+                for R in L['rules']:
+                    if len(R) != 1:
+                        if R['action'] == 'disallow':
+                            # 如果写的是禁止
+                            R.pop('action')
+                            for a in R:
+                                if R[a]['name'] == 'osx':
+                                    if self.Systeam == 'Mac':
+                                        # 如果系统匹配就进行正则表达式判断
+                                        r = R[a]['version']
+                                        m=re.search(r,self.Systeam_V)
+                                        if m == None:
+                                            # 如果不在限制以内,就添加
+                                            if 'artifact' in L['downloads']:
+                                                A = L['downloads']['artifact']
+                                            else:
+                                                A = L['downloads']['classifiers']['natives-osx']
+                                            Libraries.append([A['url'],A['size'],A['sha1'],A['path']])
+                                elif R[a]['name'] == 'windows':
+                                    if self.Systeam == 'Win':
+                                        # 如果系统匹配就进行正则表达式判断
+                                        r = R[a]['version']
+                                        m = re.search(r, self.Systeam_V)
+                                        if m == None:
+                                            # 如果不在限制以内,就添加
+                                            if 'artifact' in L['downloads']:
+                                                A = L['downloads']['artifact']
+                                            else:
+                                                A = L['downloads']['classifiers']['natives-windows']
+                                            Libraries.append([A['url'],A['size'],A['sha1'],A['path']])
+                                elif R[a]['name'] == 'linux':
+                                    if self.Systeam == 'Linux':
+                                        # 如果系统匹配就进行正则表达式判断
+                                        r = R[a]['version']
+                                        m = re.search(r, self.Systeam_V)
+                                        if m == None:
+                                            # 如果不在限制以内,就添加
+                                            if 'artifact' in L['downloads']:
+                                                A = L['downloads']['artifact']
+                                            else:
+                                                A = L['downloads']['classifiers']['natives-linux']
+                                            Libraries.append([A['url'],A['size'],A['sha1'],A['path']])
+                        elif R['action'] == 'allow':
+                            # 如果写的是允许
+                            R.pop('action')
+                            for a in R:
+                                if R[a]['name'] == 'osx':
+                                    if self.Systeam == 'Mac':
+                                        # 如果系统匹配就进行正则表达式判断
+                                        r = R[a]['version']
+                                        m = re.search(r, self.Systeam_V)
+                                        if m != None:
+                                            # 如果在允许以内,就添加
+                                            if 'artifact' in L['downloads']:
+                                                A = L['downloads']['artifact']
+                                            else:
+                                                A = L['downloads']['classifiers']['natives-osx']
+                                            Libraries.append([A['url'],A['size'],A['sha1'],A['path']])
+                                elif R[a]['name'] == 'windows':
+                                    if self.Systeam == 'Win':
+                                        # 如果系统匹配就进行正则表达式判断
+                                        r = R[a]['version']
+                                        m = re.search(r, self.Systeam_V)
+                                        if m != None:
+                                            # 如果在允许以内,就添加
+                                            if 'artifact' in L['downloads']:
+                                                A = L['downloads']['artifact']
+                                            else:
+                                                A = L['downloads']['classifiers']['natives-windows']
+                                            Libraries.append([A['url'],A['size'],A['sha1'],A['path']])
+                                elif R[a]['name'] == 'linux':
+                                    if self.Systeam == 'Linux':
+                                        # 如果系统匹配就进行正则表达式判断
+                                        r = R[a]['version']
+                                        m = re.search(r, self.Systeam_V)
+                                        if m != None:
+                                            # 如果在允许以内,就添加
+                                            if 'artifact' in L['downloads']:
+                                                A = L['downloads']['artifact']
+                                            else:
+                                                A = L['downloads']['classifiers']['natives-linux']
+                                            Libraries.append([A['url'],A['size'],A['sha1'],A['path']])
+            else:
+                # 没有规则限制
+                if self.Systeam == 'Mac':
+                    if 'artifact' in L['downloads']:
+                        A = L['downloads']['artifact']
+                    else:
+                        A = L['downloads']['classifiers']['natives-osx']
+                    Libraries.append([A['url'], A['size'], A['sha1'], A['path']])
+                elif self.Systeam == 'Win':
+                    if 'artifact' in L['downloads']:
+                        A = L['downloads']['artifact']
+                    else:
+                        A = L['downloads']['classifiers']['natives-windows']
+                elif self.Systeam == 'Linux':
+                    if 'artifact' in L['downloads']:
+                        A = L['downloads']['artifact']
+                    else:
+                        A = L['downloads']['classifiers']['natives-linux']
+                    Libraries.append([A['url'], A['size'], A['sha1'], A['path']])
+
+        print(Libraries)
+        print(len(Libraries))
+
+
 
 
 if __name__ == '__main__':
@@ -77,7 +194,7 @@ if __name__ == '__main__':
     #      '1.18.1','1.18.1',None,None,None)
     a = GameInstall('/Users/xyj/Documents/.minecraft', '/Users/xyj/Documents/.minecraft/versions/a1.0.11/',
                     '/Users/xyj/Documents/.MOS', 'MCBBS', '/Users/xyj/Documents/.MOS/Versions/Versions.json',
-                    'a1.0.11', 'a1.0.11', None, None, None)
+                    'a1.0.11', 'a1.0.11', None, None, None,'Mac','11.6.5')
     #a = GameInstall('/Users/xyj/Documents/.minecraft', '/Users/xyj/Documents/.minecraft/versions/1.9.1/',
     #                '/Users/xyj/Documents/.MOS', 'MCBBS', '/Users/xyj/Documents/.MOS/Versions/Versions.json',
     #                '1.9.1', '1.9.1', None, None, None)

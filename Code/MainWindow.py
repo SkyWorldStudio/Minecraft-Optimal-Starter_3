@@ -1167,6 +1167,26 @@ class RunUi(QMainWindow, Ui_MainWindow):
             if self.Systeam != 'Mac':
                 self.radioButton_settings_subject_automatic.setEnabled(False)
                 self.radioButton_settings_subject_automatic.setToolTip('跟随系统(只限于Mac系统)-当前不可用')
+            if self.Systeam == 'Mac':
+                # 如果是Mac
+                M = 'sw_vers'
+                import subprocess
+                M_ = subprocess.Popen(M,shell=True,encoding='utf-8',stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+                M_T = M_.communicate()
+                M_T = str(M_T[0]).split('\n')[1]
+                Systeam_V = M_T.split('\t')[1]
+                self.Json_MOS['Systeam_V'] = Systeam_V
+            elif self.Systeam == 'Win':
+                import platform
+                M_T = platform.platform()
+                Systeam_V = str(M_T).split('-')[1]
+                self.Json_MOS['Systeam_V'] = Systeam_V
+            else:
+                import platform
+                Systeam_V = platform.release()
+                self.Json_MOS['Systeam_V'] = Systeam_V
+
+            self.Json_MOS['Systeam'] = self.Systeam
 
             if self.Json_MOS['Subject'] == 'Light':
                 self.radioButton_settings_subject_light.setChecked(True)
@@ -1246,6 +1266,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             # 如果有 就进行下一步
             self.label_loading_text_2.setText('正在设置启动器(3/7)')
             Settings_()
+            JsonWrite(self.Json_MOS, self.JsonFile)
 
             print_('Info', '程序启动(初始化设置): 读取用户账户')
             self.label_loading_text_2.setText('正在设置启动器(6/7)')
