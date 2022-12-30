@@ -2,6 +2,7 @@
 import json
 import os
 from sys import platform
+from hashlib import new as hashlib_new
 from .Log import print_
 
 
@@ -135,3 +136,16 @@ def Systeam():
     elif a == 'linux' or a == 'aix':
         s = 'Linux'
     return s
+
+
+
+
+def Sha1(File) -> str:
+    """
+        文件Sha1值计算
+        :param File: 文件路径
+        :return: Sha1值(str)
+    """
+    with open(File, 'rb') as f:
+        return hashlib_new('sha1', f.read()).hexdigest()
+
