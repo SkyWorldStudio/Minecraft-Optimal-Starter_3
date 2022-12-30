@@ -4,7 +4,7 @@ import os
 
 import requests
 
-from Code.Code import Sha1
+from Code.Code import Sha1, Hash
 
 
 class GameInstall():
@@ -80,6 +80,21 @@ class GameInstall():
         with open(V_Json_File, 'w+', encoding='utf-8') as f:
             json.dump(V_Json, f, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
+        # 下载Assets List Json文件
+        AssetsList_Json = V_Json['assetIndex']
+        try:
+            url = self.Download_Source_Url_Json_Q + AssetsList_Json['url'].split('https://piston-meta.mojang.com/')[1]
+        except IndexError:
+            url = self.Download_Source_Url_Json_Q + AssetsList_Json['url'].split('https://launchermeta.mojang.com/')[1]
+        id = AssetsList_Json['id']
+        path_up = os.path.join(self.GameFile_M, 'assets', 'indexes')
+        path = os.path.join(path_up, id + '.json')
+        AssetsList_Json_Get = requests.get(url)
+        AssetsList_Json = AssetsList_Json_Get.json()
+        os.makedirs(path_up, exist_ok=True)
+        with open(path, 'w+', encoding='utf-8') as f:
+            json.dump(AssetsList_Json, f, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
+
         Libraries = []
         Assets = []
 
@@ -96,12 +111,18 @@ class GameInstall():
                                 if R[a]['name'] == 'osx':
                                     if self.Systeam == 'Mac':
                                         # 如果系统匹配就进行正则表达式判断
-                                        r = R[a]['version']
+                                        if 'version' in R[a]:
+                                            # 如果写了系统版本限制规则
+                                            r = R[a]['version']
+                                            m = re.search(r, self.Systeam_V)
+                                        else:
+                                            m = ''  # 让下面的if, 识别为"允许"
                                         Sh = A['sha1']
-                                        m=re.search(r,self.Systeam_V)
                                         if m == None:
                                             # 如果不在限制以内,就添加
-                                            Path = os.path.join(self.GameFile_M,'libraries',A['path'])
+                                            URL = self.Download_Source_Url_Libraries_Q + A['url'].split('https://libraries.minecraft.net/')[1]
+                                            Path_Up = os.path.join(self.GameFile_M, 'libraries')
+                                            Path = os.path.join(Path_Up,A['path'])
                                             if os.path.exists(Path):
                                                 # 如果目录存在
                                                 if self.Sha1Cleck:
@@ -113,7 +134,7 @@ class GameInstall():
                                                         else:
                                                             A = L['downloads']['classifiers']['natives-osx']
                                                             Zip = True
-                                                        Libraries.append([A['url'], A['size'], Sh, Path, Zip])
+                                                        Libraries.append([URL, Path_Up, Path, A['size'], Sh, Zip])
                                             else:
                                                 if 'artifact' in L['downloads']:
                                                     A = L['downloads']['artifact']
@@ -121,17 +142,23 @@ class GameInstall():
                                                 else:
                                                     A = L['downloads']['classifiers']['natives-osx']
                                                     Zip = True
-                                                Libraries.append([A['url'], A['size'], Sh, Path, Zip])
+                                                Libraries.append([URL, Path_Up, Path, A['size'], Sh, Zip])
 
                                 elif R[a]['name'] == 'windows':
                                     if self.Systeam == 'Win':
                                         # 如果系统匹配就进行正则表达式判断
-                                        r = R[a]['version']
+                                        if 'version' in R[a]:
+                                            # 如果写了系统版本限制规则
+                                            r = R[a]['version']
+                                            m = re.search(r, self.Systeam_V)
+                                        else:
+                                            m = ''  # 让下面的if, 识别为"允许"
                                         Sh = A['sha1']
-                                        m = re.search(r, self.Systeam_V)
                                         if m == None:
                                             # 如果不在限制以内,就添加
-                                            Path = os.path.join(self.GameFile_M,'libraries',A['path'])
+                                            URL = self.Download_Source_Url_Libraries_Q + A['url'].split('https://libraries.minecraft.net/')[1]
+                                            Path_Up = os.path.join(self.GameFile_M, 'libraries')
+                                            Path = os.path.join(Path_Up, A['path'])
                                             if os.path.exists(Path):
                                                 # 如果目录存在
                                                 if self.Sha1Cleck:
@@ -143,7 +170,7 @@ class GameInstall():
                                                         else:
                                                             A = L['downloads']['classifiers']['natives-windows']
                                                             Zip = True
-                                                        Libraries.append([A['url'], A['size'], Sh, Path, Zip])
+                                                        Libraries.append([URL, Path_Up, Path, A['size'], Sh, Zip])
                                             else:
                                                 if 'artifact' in L['downloads']:
                                                     A = L['downloads']['artifact']
@@ -151,17 +178,23 @@ class GameInstall():
                                                 else:
                                                     A = L['downloads']['classifiers']['natives-windows']
                                                     Zip = True
-                                                Libraries.append([A['url'], A['size'], Sh, Path, Zip])
+                                                Libraries.append([URL, Path_Up, Path, A['size'], Sh, Zip])
                                                 
                                 elif R[a]['name'] == 'linux':
                                     if self.Systeam == 'Linux':
                                         # 如果系统匹配就进行正则表达式判断
-                                        r = R[a]['version']
+                                        if 'version' in R[a]:
+                                            # 如果写了系统版本限制规则
+                                            r = R[a]['version']
+                                            m = re.search(r, self.Systeam_V)
+                                        else:
+                                            m = ''  # 让下面的if, 识别为"允许"
                                         Sh = A['sha1']
-                                        m = re.search(r, self.Systeam_V)
                                         if m == None:
                                             # 如果不在限制以内,就添加
-                                            Path = os.path.join(self.GameFile_M,'libraries',A['path'])
+                                            URL = self.Download_Source_Url_Libraries_Q + A['url'].split('https://libraries.minecraft.net/')[1]
+                                            Path_Up = os.path.join(self.GameFile_M, 'libraries')
+                                            Path = os.path.join(Path_Up, A['path'])
                                             if os.path.exists(Path):
                                                 # 如果目录存在
                                                 if self.Sha1Cleck:
@@ -173,7 +206,7 @@ class GameInstall():
                                                         else:
                                                             A = L['downloads']['classifiers']['natives-linux']
                                                             Zip = True
-                                                        Libraries.append([A['url'], A['size'], Sh, Path, Zip])
+                                                        Libraries.append([URL, Path_Up, Path, A['size'], Sh, Zip])
                                             else:
                                                 if 'artifact' in L['downloads']:
                                                     A = L['downloads']['artifact']
@@ -181,7 +214,7 @@ class GameInstall():
                                                 else:
                                                     A = L['downloads']['classifiers']['natives-linux']
                                                     Zip = True
-                                                Libraries.append([A['url'], A['size'], Sh, Path, Zip])
+                                                Libraries.append([URL, Path_Up, Path, A['size'], Sh, Zip])
 
                         elif R['action'] == 'allow':
                             # 如果写的是允许
@@ -190,12 +223,18 @@ class GameInstall():
                                 if R[a]['name'] == 'osx':
                                     if self.Systeam == 'Mac':
                                         # 如果系统匹配就进行正则表达式判断
-                                        r = R[a]['version']
+                                        if 'version' in R[a]:
+                                            # 如果写了系统版本限制规则
+                                            r = R[a]['version']
+                                            m = re.search(r, self.Systeam_V)
+                                        else:
+                                            m = ''  # 让下面的if, 识别为"允许"
                                         Sh = A['sha1']
-                                        m = re.search(r, self.Systeam_V)
                                         if m != None:
                                             # 如果在允许以内,就添加
-                                            Path = os.path.join(self.GameFile_M,'libraries',A['path'])
+                                            URL = self.Download_Source_Url_Libraries_Q + A['url'].split('https://libraries.minecraft.net/')[1]
+                                            Path_Up = os.path.join(self.GameFile_M, 'libraries')
+                                            Path = os.path.join(Path_Up,A['path'])
                                             if os.path.exists(Path):
                                                 # 如果目录存在
                                                 if self.Sha1Cleck:
@@ -207,7 +246,7 @@ class GameInstall():
                                                         else:
                                                             A = L['downloads']['classifiers']['natives-osx']
                                                             Zip = True
-                                                        Libraries.append([A['url'], A['size'], Sh, Path, Zip])
+                                                        Libraries.append([URL, Path_Up, Path, A['size'], Sh, Zip])
                                             else:
                                                 if 'artifact' in L['downloads']:
                                                     A = L['downloads']['artifact']
@@ -215,17 +254,23 @@ class GameInstall():
                                                 else:
                                                     A = L['downloads']['classifiers']['natives-osx']
                                                     Zip = True
-                                                Libraries.append([A['url'], A['size'], Sh, Path, Zip])
+                                                Libraries.append([URL, Path_Up, Path, A['size'], Sh, Zip])
 
                                 elif R[a]['name'] == 'windows':
                                     if self.Systeam == 'Win':
                                         # 如果系统匹配就进行正则表达式判断
-                                        r = R[a]['version']
+                                        if 'version' in R[a]:
+                                            # 如果写了系统版本限制规则
+                                            r = R[a]['version']
+                                            m = re.search(r, self.Systeam_V)
+                                        else:
+                                            m = ''  # 让下面的if, 识别为"允许"
                                         Sh = A['sha1']
-                                        m = re.search(r, self.Systeam_V)
                                         if m != None:
                                             # 如果在允许以内,就添加
-                                            Path = os.path.join(self.GameFile_M,'libraries',A['path'])
+                                            URL = self.Download_Source_Url_Libraries_Q + A['url'].split('https://libraries.minecraft.net/')[1]
+                                            Path_Up = os.path.join(self.GameFile_M, 'libraries')
+                                            Path = os.path.join(Path_Up,A['path'])
                                             if os.path.exists(Path):
                                                 # 如果目录存在
                                                 if self.Sha1Cleck:
@@ -237,7 +282,7 @@ class GameInstall():
                                                         else:
                                                             A = L['downloads']['classifiers']['natives-windows']
                                                             Zip = True
-                                                        Libraries.append([A['url'], A['size'], Sh, Path, Zip])
+                                                        Libraries.append([URL, Path_Up, Path, A['size'], Sh, Zip])
                                             else:
                                                 if 'artifact' in L['downloads']:
                                                     A = L['downloads']['artifact']
@@ -245,17 +290,23 @@ class GameInstall():
                                                 else:
                                                     A = L['downloads']['classifiers']['natives-windows']
                                                     Zip = True
-                                                Libraries.append([A['url'], A['size'], Sh, Path, Zip])
+                                                Libraries.append([URL, Path_Up, Path, A['size'], Sh, Zip])
 
                                 elif R[a]['name'] == 'linux':
                                     if self.Systeam == 'Linux':
                                         # 如果系统匹配就进行正则表达式判断
-                                        r = R[a]['version']
+                                        if 'version' in R[a]:
+                                            # 如果写了系统版本限制规则
+                                            r = R[a]['version']
+                                            m = re.search(r, self.Systeam_V)
+                                        else:
+                                            m = ''  # 让下面的if, 识别为"允许"
                                         Sh = A['sha1']
-                                        m = re.search(r, self.Systeam_V)
                                         if m != None:
                                             # 如果在允许以内,就添加
-                                            Path = os.path.join(self.GameFile_M,'libraries',A['path'])
+                                            URL = self.Download_Source_Url_Libraries_Q + A['url'].split('https://libraries.minecraft.net/')[1]
+                                            Path_Up = os.path.join(self.GameFile_M, 'libraries')
+                                            Path = os.path.join(Path_Up,A['path'])
                                             if os.path.exists(Path):
                                                 # 如果目录存在
                                                 if self.Sha1Cleck:
@@ -267,7 +318,7 @@ class GameInstall():
                                                         else:
                                                             A = L['downloads']['classifiers']['natives-linux']
                                                             Zip = True
-                                                        Libraries.append([A['url'], A['size'], Sh, Path, Zip])
+                                                        Libraries.append([URL, Path_Up, Path, A['size'], Sh, Zip])
                                             else:
                                                 if 'artifact' in L['downloads']:
                                                     A = L['downloads']['artifact']
@@ -275,7 +326,7 @@ class GameInstall():
                                                 else:
                                                     A = L['downloads']['classifiers']['natives-linux']
                                                     Zip = True
-                                                Libraries.append([A['url'], A['size'], Sh, Path, Zip])
+                                                Libraries.append([URL, Path_Up, Path, A['size'], Sh, Zip])
 
             else:
                 # 没有规则限制
@@ -300,25 +351,43 @@ class GameInstall():
                     else:
                         A = L['downloads']['classifiers']['natives-linux']
                         Zip = True
-                Libraries.append([A['url'], A['size'], A['sha1'], A['path'], Zip])
+                URL = self.Download_Source_Url_Libraries_Q + A['url'].split('https://libraries.minecraft.net/')[1]
+                Path_Up = os.path.join(self.GameFile_M, 'libraries')
+                Path = os.path.join(Path_Up, A['path'])
+                Libraries.append([URL, Path_Up,Path, A['size'], A['sha1'], Zip])
 
         # Assets文件解析
-        for A in V_Json['downloads']:
-            pass
+        for A in AssetsList_Json['objects']:
+            hash = AssetsList_Json['objects'][A]['hash']
+            url = self.Download_Source_Url_Resources_Q + hash[0:2] + '/' +hash
+            size = AssetsList_Json['objects'][A]['size']
+            path_up = os.path.join(self.GameFile_M,'assets','objects',hash[0:2])
+            path = os.path.join(path_up,hash)
+            if os.path.exists(path):
+                # 如果文件存在就判断hash值
+                h = Hash(path)
+                if h != hash:
+                    Assets.append([url, path_up, path, hash, size])
+            else:
+                Assets.append([url, path_up, path, hash, size])
 
         print(Libraries)
         print(len(Libraries))
+        print('================')
+        print(Assets)
+        print(len(Assets))
+
 
 
 
 
 if __name__ == '__main__':
     #a = GameInstall('/Users/xyj/Documents/.minecraft','/Users/xyj/Documents/.minecraft/versions/1.18.1/','/Users/xyj/Documents/.MOS','MCBBS','/Users/xyj/Documents/.MOS/Versions/Versions.json',
-    #      '1.18.1','1.18.1',None,None,None)
+    #      '1.18.1','1.18.1',None,None,None,'Mac','11.6.5',True)
     a = GameInstall('/Users/xyj/Documents/.minecraft', '/Users/xyj/Documents/.minecraft/versions/a1.0.11/',
                     '/Users/xyj/Documents/.MOS', 'MCBBS', '/Users/xyj/Documents/.MOS/Versions/Versions.json',
                     'a1.0.11', 'a1.0.11', None, None, None,'Mac','11.6.5',True)
     #a = GameInstall('/Users/xyj/Documents/.minecraft', '/Users/xyj/Documents/.minecraft/versions/1.9.1/',
     #                '/Users/xyj/Documents/.MOS', 'MCBBS', '/Users/xyj/Documents/.MOS/Versions/Versions.json',
-    #                '1.9.1', '1.9.1', None, None, None)
+    #                '1.9.1', '1.9.1', None, None, None,'Mac','11.6.5',True)
     a.Run()

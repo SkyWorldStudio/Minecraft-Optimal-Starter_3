@@ -3,6 +3,7 @@ import json
 import os
 from sys import platform
 from hashlib import new as hashlib_new
+from hashlib import md5 as hashlib_md5
 from .Log import print_
 
 
@@ -148,4 +149,22 @@ def Sha1(File) -> str:
     """
     with open(File, 'rb') as f:
         return hashlib_new('sha1', f.read()).hexdigest()
+
+def Hash(File,Bytes=1024) -> str:
+    """
+        文件Hash值计算
+        :param File: 文件路径
+        :param Bytes: 阅读……字节
+        :return: Sha1值(str)
+    """
+    md5_1 = hashlib_md5()  # 创建一个md5算法对象
+    with open(File, 'rb') as f:  # 打开一个文件，必须是'rb'模式打开
+        while 1:
+            data = f.read(Bytes)  # 由于是一个文件，每次只读取固定字节
+            if data:  # 当读取内容不为空时对读取内容进行update
+                md5_1.update(data)
+            else:  # 当整个文件读完之后停止update
+                break
+    ret = md5_1.hexdigest()  # 获取这个文件的MD5值
+    return ret
 
