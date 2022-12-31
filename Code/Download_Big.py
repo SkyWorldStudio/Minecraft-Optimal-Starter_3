@@ -41,7 +41,7 @@ class Download:
             asyncio.set_event_loop(self.new_loop)
             asyncio.run(self.Download_Subsection_Start_Start())
         else:
-            r = requests.get(url,stream=False)
+            r = requests.get(url,stream=True)
             with open(path, 'wb') as fb:
                 fb.write(r.content)
                
@@ -157,19 +157,26 @@ class Download:
                 asyncio.sleep(10)
         print('OK')
 
-    def DownloadAll(self, url_list, path_list):
-        """
-        first arg:
-            url_list is a list,include the url of file you want to download
-        second arg:
-            path_list is a list,include the path of file you want to download
-        """
-        j = 0
-        li = []
-        for i in url_list:
-            li.append(gevent.spawn(Download.download, i, path_list[j]))
-            j += 1
-        gevent.joinall(li)
+
+    #def DownloadAll(List):
+    #    """
+    #        异步多下载(不是分段下载)
+    #        :param List: 列表[['url','path_up','path','…']['url','path_up','path','…']]
+    #        :return:
+    #    """
+    #    li = []
+    #    for i in List:
+    #        li.append(gevent.spawn(Download.DownloadAll_Download, i))
+    #    gevent.joinall(li)
+
+    #def DownloadAll_Download(list):
+    #    print(list)
+    #    r=requests.get(list[0],stream=True)
+    #    os.makedirs(list[1], exist_ok=True)
+    #    with open(list[2],'wb') as fb:
+    #        fb.write(r.content)
+    #        print('ok')
+
 
 if __name__ == '__main__':
     # U = 'https://download-ssl.firefox.com.cn/releases/firefox/107.0/zh-CN/Firefox-latest.dmg'
