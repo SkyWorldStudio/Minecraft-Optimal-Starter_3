@@ -95,8 +95,14 @@ class GameInstall():
         with open(path, 'w+', encoding='utf-8') as f:
             json.dump(AssetsList_Json, f, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
+        MainJar = {}
         Libraries = []
         Assets = []
+
+        # Jar文件解析
+        MainJar['url'] = V_Json['downloads']['client']['url']
+        MainJar['size'] = V_Json['downloads']['client']['size']
+        MainJar['sha1'] = V_Json['downloads']['client']['sha1']
 
         import re
         # Libraries文件解析
@@ -371,11 +377,14 @@ class GameInstall():
             else:
                 Assets.append([url, path_up, path, hash, size])
 
+        print(MainJar)
+        print('================')
         print(Libraries)
         print(len(Libraries))
         print('================')
         print(Assets)
         print(len(Assets))
+
 
 
 
