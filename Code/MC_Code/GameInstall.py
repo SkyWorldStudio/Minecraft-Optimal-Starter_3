@@ -2,6 +2,7 @@
 import asyncio
 import json
 import os
+
 import random
 import time
 import traceback
@@ -421,10 +422,11 @@ class GameInstall():
         print('开始下载')
         while True:
             if len(self.AllList) !=0:
-                if len(self.AllList) <= len(self.Assets):
-                    i = 60
-                else:
-                    i = 30
+                #if len(self.AllList) <= len(self.Assets):
+                #    i = 80
+                #else:
+                #    i = 80
+                i = 100
                 self.new_loop = asyncio.new_event_loop()
                 asyncio.set_event_loop(self.new_loop)
                 asyncio.run(self.DownloadTaskMake(i))
@@ -436,13 +438,13 @@ class GameInstall():
         time = (time_stop-time_start)
         print('用时' + str(time))
 
-
-    async def DownloadTaskMake(self,i):
+    async def DownloadTaskMake(self,i: int):
         b = []
         for a in self.AllList[0:i]:
-            # b.append(asyncio.ensure_future(self.Download(a)))
-            b.append(self.Download(a))
-        await asyncio.wait(b)
+            b.append(asyncio.ensure_future(self.Download(a)))
+            #b.append(self.Download(a))
+        for b_1 in b:
+            await b_1
 
 
 
@@ -461,12 +463,10 @@ class GameInstall():
     #        except:
     #            traceback.print_exc()
 
-
-
-    async def Download(self,list):
+    async def Download(self,list: list):
         """异步任务"""
         print('任务运行')
-        print(list)
+        #print(list)
         headers = {}
         url = list[1]
         path_up = list[2]
@@ -478,7 +478,7 @@ class GameInstall():
         #    a = random.sample(range(1, 10), 1)
         #    await asyncio.sleep(a/100)
         try:
-            async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(connect=20)) as session:
+            async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(connect=3)) as session:
                 f = await session.get(url, headers=headers, ssl=False)
                 f_code = await f.read()
                 with open(path, 'wb') as f:
@@ -488,13 +488,13 @@ class GameInstall():
                 print(str(len(self.AllList)) + 'ok')
                 #break
         except aiohttp.client_exceptions.ServerTimeoutError:
-            pass
+            print('error_ServerTimeoutError')
         except aiohttp.client_exceptions.ServerDisconnectedError:
-            pass
+            print('error_ServerDisconnectedError')
         except aiohttp.client_exceptions.ClientConnectorError:
-            pass
+            print('error_ClientConnectorError')
         except aiohttp.client_exceptions.ClientOSError:
-            pass
+            print('error_ClientOSError')
         except:
             traceback.print_exc()
             print("出现异常")
