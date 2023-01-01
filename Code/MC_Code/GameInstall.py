@@ -2,6 +2,8 @@
 import asyncio
 import json
 import os
+import random
+import time
 import traceback
 
 import aiohttp
@@ -102,8 +104,8 @@ class GameInstall():
             json.dump(AssetsList_Json, f, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
         MainJar = {}
-        Libraries = []
-        Assets = []
+        self.Libraries = []
+        self.Assets = []
 
         # Jar文件解析
         MainJar['url'] = V_Json['downloads']['client']['url']
@@ -140,13 +142,14 @@ class GameInstall():
                                                 if self.Sha1Cleck:
                                                     s = Sha1(Path)
                                                     if s != Sh:
+                                                        print('l_on')
                                                         if 'artifact' in L['downloads']:
                                                             A = L['downloads']['artifact']
                                                             Zip = False
                                                         else:
                                                             A = L['downloads']['classifiers']['natives-osx']
                                                             Zip = True
-                                                        Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
+                                                        self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
                                             else:
                                                 if 'artifact' in L['downloads']:
                                                     A = L['downloads']['artifact']
@@ -154,7 +157,7 @@ class GameInstall():
                                                 else:
                                                     A = L['downloads']['classifiers']['natives-osx']
                                                     Zip = True
-                                                Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
+                                                self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
 
                                 elif R[a]['name'] == 'windows':
                                     if self.Systeam == 'Win':
@@ -182,7 +185,7 @@ class GameInstall():
                                                         else:
                                                             A = L['downloads']['classifiers']['natives-windows']
                                                             Zip = True
-                                                        Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
+                                                        self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
                                             else:
                                                 if 'artifact' in L['downloads']:
                                                     A = L['downloads']['artifact']
@@ -190,7 +193,7 @@ class GameInstall():
                                                 else:
                                                     A = L['downloads']['classifiers']['natives-windows']
                                                     Zip = True
-                                                Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
+                                                self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
 
                                 elif R[a]['name'] == 'linux':
                                     if self.Systeam == 'Linux':
@@ -218,7 +221,7 @@ class GameInstall():
                                                         else:
                                                             A = L['downloads']['classifiers']['natives-linux']
                                                             Zip = True
-                                                        Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
+                                                        self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
                                             else:
                                                 if 'artifact' in L['downloads']:
                                                     A = L['downloads']['artifact']
@@ -226,7 +229,7 @@ class GameInstall():
                                                 else:
                                                     A = L['downloads']['classifiers']['natives-linux']
                                                     Zip = True
-                                                Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
+                                                self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
 
                         elif R['action'] == 'allow':
                             # 如果写的是允许
@@ -258,7 +261,7 @@ class GameInstall():
                                                         else:
                                                             A = L['downloads']['classifiers']['natives-osx']
                                                             Zip = True
-                                                        Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
+                                                        self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
                                             else:
                                                 if 'artifact' in L['downloads']:
                                                     A = L['downloads']['artifact']
@@ -266,7 +269,7 @@ class GameInstall():
                                                 else:
                                                     A = L['downloads']['classifiers']['natives-osx']
                                                     Zip = True
-                                                Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
+                                                self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
 
                                 elif R[a]['name'] == 'windows':
                                     if self.Systeam == 'Win':
@@ -294,7 +297,7 @@ class GameInstall():
                                                         else:
                                                             A = L['downloads']['classifiers']['natives-windows']
                                                             Zip = True
-                                                        Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
+                                                        self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
                                             else:
                                                 if 'artifact' in L['downloads']:
                                                     A = L['downloads']['artifact']
@@ -302,7 +305,7 @@ class GameInstall():
                                                 else:
                                                     A = L['downloads']['classifiers']['natives-windows']
                                                     Zip = True
-                                                Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
+                                                self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
 
                                 elif R[a]['name'] == 'linux':
                                     if self.Systeam == 'Linux':
@@ -330,7 +333,7 @@ class GameInstall():
                                                         else:
                                                             A = L['downloads']['classifiers']['natives-linux']
                                                             Zip = True
-                                                        Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
+                                                        self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
                                             else:
                                                 if 'artifact' in L['downloads']:
                                                     A = L['downloads']['artifact']
@@ -338,7 +341,7 @@ class GameInstall():
                                                 else:
                                                     A = L['downloads']['classifiers']['natives-linux']
                                                     Zip = True
-                                                Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
+                                                self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
 
             else:
                 # 没有规则限制
@@ -366,10 +369,25 @@ class GameInstall():
                 URL = self.Download_Source_Url_Libraries_Q + A['url'].split('https://libraries.minecraft.net/')[1]
                 Path = os.path.join(self.GameFile_M, 'libraries', A['path'])
                 Path_Up = os.path.abspath(os.path.join(Path, ".."))
-                Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], A['sha1'], Zip])
+                Sh = A['sha1']
+                if os.path.exists(Path):
+                    # 如果目录存在
+                    if self.Sha1Cleck:
+                        s = Sha1(Path)
+                        if s != Sh:
+                            if 'artifact' in L['downloads']:
+                                A = L['downloads']['artifact']
+                                Zip = False
+                            else:
+                                A = L['downloads']['classifiers']['natives-linux']
+                                Zip = True
+                            self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
+                else:
+                    self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
 
         # Assets文件解析
         for A in AssetsList_Json['objects']:
+            # 注意, MC官方这里写的hash其实是sha1算法
             hash = AssetsList_Json['objects'][A]['hash']
             url = self.Download_Source_Url_Resources_Q + hash[0:2] + '/' +hash
             size = AssetsList_Json['objects'][A]['size']
@@ -377,51 +395,71 @@ class GameInstall():
             path = os.path.join(path_up,hash)
             if os.path.exists(path):
                 # 如果文件存在就判断hash值
-                h = Hash(path)
+                h = Sha1(path)
                 if h != hash:
-                    Assets.append(['Assets',url, path_up, path, hash, size])
+                    print('no')
+                    self.Assets.append(['Assets',url, path_up, path, hash, size])
             else:
-                Assets.append(['Assets',url, path_up, path, hash, size])
+                self.Assets.append(['Assets',url, path_up, path, hash, size])
 
         print(MainJar)
         print('================')
-        print(Libraries)
-        print(len(Libraries))
+        #print(self.Libraries)
+        print(len(self.Libraries))
         print('================')
         #print(Assets)
-        print(len(Assets))
+        print(len(self.Assets))
 
         print('准备下载')
-        AllList = Libraries + Assets
-        self.I = len(AllList) + 1
+        self.AllList = self.Libraries + self.Assets
+        self.I = len(self.AllList) + 1
         print('一共' + str(self.I) + '项文件')
 
-
+        import time
         # 创建
-        self.new_loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(self.new_loop)
-        asyncio.run(self.DownloadTaskMake(AllList))
+        time_start = time.perf_counter()
+        print('开始下载')
+        while True:
+            if len(self.AllList) !=0:
+                if len(self.AllList) <= len(self.Assets):
+                    i = 60
+                else:
+                    i = 30
+                self.new_loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(self.new_loop)
+                asyncio.run(self.DownloadTaskMake(i))
+            else:
+                break
+
+        print('下载完成')
+        time_stop = time.perf_counter()
+        time = (time_stop-time_start)
+        print('用时' + str(time))
 
 
-    async def DownloadTaskMake(self,list):
+    async def DownloadTaskMake(self,i):
         b = []
-        for a in list:
-            b.append(asyncio.ensure_future(self.Download(a)))
+        for a in self.AllList[0:i]:
+            # b.append(asyncio.ensure_future(self.Download(a)))
+            b.append(self.Download(a))
         await asyncio.wait(b)
 
-    async def DownloadTask(self, queue,list):
-        while True:
-            try:
-                print('取出')
-                # 从队列中取出任务
-                task = await queue.get()
-                # 处理任务
-                # await self.Download(task)
-                await asyncio.wait([self.Download(task)])
-                # 通知队列任务已被处理完成
-                queue.task_done()
-            except:
-                traceback.print_exc()
+
+
+    #async def DownloadTask(self, queue,list):
+    #    while True:
+    #        try:
+    #            print('取出')
+    #            # 从队列中取出任务
+    #            task = await queue.get()
+    #            # 处理任务
+    #            # await self.Download(task)
+    #            await asyncio.wait([self.Download(task)])
+    #            if task not in self.AllList:
+    #                # 通知队列任务已被处理完成
+    #                queue.task_done()
+    #        except:
+    #            traceback.print_exc()
 
 
 
@@ -434,22 +472,34 @@ class GameInstall():
         path_up = list[2]
         path = list[3]
         os.makedirs(path_up, exist_ok=True)
-        while True:
-            try:
-                async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(connect=30)) as session:
-                    f = await session.get(url, headers=headers, ssl=False)
-                    f_code = await f.read()
-                    with open(path, 'wb') as f:
-                        f.write(f_code)
-                    f_code = ''  # 释放缓存
-                    break
-            except aiohttp.client_exceptions.ServerTimeoutError:
-                pass
-            except:
-                traceback.print_exc()
+        #a = random.sample(range(1, 2), 1)
+        #if a == 1:
+        #    # 50%的概率进行等待
+        #    a = random.sample(range(1, 10), 1)
+        #    await asyncio.sleep(a/100)
+        try:
+            async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(connect=20)) as session:
+                f = await session.get(url, headers=headers, ssl=False)
+                f_code = await f.read()
+                with open(path, 'wb') as f:
+                    f.write(f_code)
+                # f_code = ''  # 释放缓存
+                self.AllList.remove(list)
+                print(str(len(self.AllList)) + 'ok')
+                #break
+        except aiohttp.client_exceptions.ServerTimeoutError:
+            pass
+        except aiohttp.client_exceptions.ServerDisconnectedError:
+            pass
+        except aiohttp.client_exceptions.ClientConnectorError:
+            pass
+        except aiohttp.client_exceptions.ClientOSError:
+            pass
+        except:
+            traceback.print_exc()
+            print("出现异常")
+            #break
 
-
-        print('ok')
 
 
 
@@ -460,9 +510,15 @@ class GameInstall():
 if __name__ == '__main__':
     #a = GameInstall('/Users/xyj/Documents/.minecraft','/Users/xyj/Documents/.minecraft/versions/1.18.1/','/Users/xyj/Documents/.MOS','MCBBS','/Users/xyj/Documents/.MOS/Versions/Versions.json',
     #      '1.18.1','1.18.1',None,None,None,'Mac','11.6.5',True)
-    a = GameInstall('/Users/xyj/Documents/.minecraft', '/Users/xyj/Documents/.minecraft/versions/a1.0.11/',
+    #a = GameInstall('/Users/xyj/Documents/.minecraft', '/Users/xyj/Documents/.minecraft/versions/a1.0.11/',
+    #                '/Users/xyj/Documents/.MOS', 'MCBBS', '/Users/xyj/Documents/.MOS/Versions/Versions.json',
+    #                'a1.0.11', 'a1.0.11', None, None, None,'Mac','11.6.5',True,0)
+    a = GameInstall('/Users/xyj/Documents/.minecraft', '/Users/xyj/Documents/.minecraft/versions/1.12.2/',
                     '/Users/xyj/Documents/.MOS', 'MCBBS', '/Users/xyj/Documents/.MOS/Versions/Versions.json',
-                    'a1.0.11', 'a1.0.11', None, None, None,'Mac','11.6.5',True,0)
+                    '1.12.2', '1.12.2', None, None, None,'Mac','11.6.5',True,0)
+    #a = GameInstall('/Users/xyj/Documents/.minecraft', '/Users/xyj/Documents/.minecraft/versions/1.16.1/',
+    #                '/Users/xyj/Documents/.MOS', 'MCBBS', '/Users/xyj/Documents/.MOS/Versions/Versions.json',
+    #                '1.16.1', '1.16.1', None, None, None, 'Mac', '11.6.5', True, 0)
     #a = GameInstall('/Users/xyj/Documents/.minecraft', '/Users/xyj/Documents/.minecraft/versions/1.9.1/',
     #                '/Users/xyj/Documents/.MOS', 'MCBBS', '/Users/xyj/Documents/.MOS/Versions/Versions.json',
     #                '1.9.1', '1.9.1', None, None, None,'Mac','11.6.5',True)

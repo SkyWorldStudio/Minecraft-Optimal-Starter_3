@@ -151,10 +151,10 @@ class Download:
 
             except aiohttp.client_exceptions.ClientConnectorError:
                 print('客户端链接错误')
-                asyncio.sleep(10)
+                await asyncio.sleep(10)
             except aiohttp.client_exceptions.ClientPayloadError:
                 print('客户端网络错误')
-                asyncio.sleep(10)
+                await asyncio.sleep(10)
         print('OK')
 
 
