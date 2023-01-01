@@ -2,6 +2,7 @@
 import asyncio
 import json
 import os
+import zipfile
 
 import random
 import time
@@ -18,7 +19,7 @@ class GameInstall():
     def __init__(self, GameFile_M, GameFile_V, File, Download_Source, V_JsonFile,
                  V, Name, V_Forge,V_Fabric,V_Optifine,
                  Systeam,Systeam_V,
-                 Sha1Cleck,MaxConcurrence):
+                 AssetsFileDownloadMethod,Sha1Cleck,MaxConcurrence):
         """
             游戏安装
             :param GameFile_M: 游戏根目录(.minecraft目录)
@@ -33,6 +34,7 @@ class GameInstall():
             :param V_Optifine: Optifine版本
             :param Systeam: 系统种类(Windows, Mac, Linux)
             :param Systeam_V: 系统版本(10,14.4.1)
+            :param AssetsFileDownloadMethod: 资源文件下载方式(A,B-尚未完成)
             :param Sha1Cleck: 是否进行Sha1检查
             :param MaxConcurrence: 最大并发数
         """
@@ -48,6 +50,7 @@ class GameInstall():
         self.V_Optifine = V_Optifine
         self.Systeam = Systeam
         self.Systeam_V = Systeam_V
+        self.AssetsFileDownloadMethod = AssetsFileDownloadMethod
         self.Sha1Cleck = Sha1Cleck
         self.MaxConcurrence = MaxConcurrence
 
@@ -57,10 +60,12 @@ class GameInstall():
             self.Download_Source_Url_Resources_Q = 'http://resources.download.minecraft.net/'  # 资源文件
         elif self.Download_Source == 'MCBBS':
             self.Download_Source_Url_Json_Q = 'http://download.mcbbs.net/'  # json文件
+            self.Download_Source_Url_Jar_Q = 'http://download.mcbbs.net/version/'  # Jar文件
             self.Download_Source_Url_Libraries_Q = 'http://download.mcbbs.net/maven/'  # 依赖
             self.Download_Source_Url_Resources_Q = 'http://download.mcbbs.net/assets/'  # 资源文件
         else:
             self.Download_Source_Url_Json_Q = 'http://bmclapi2.bangbang93.com/'  # json文件
+            self.Download_Source_Url_Jar_Q = 'http://bmclapi2.bangbang93.com/version/'  # Jar文件
             self.Download_Source_Url_Libraries_Q = 'http://bmclapi2.bangbang93.com/maven/'  # 依赖
             self.Download_Source_Url_Resources_Q = 'http://bmclapi2.bangbang93.com/assets/'  # 资源文件
 
@@ -104,14 +109,19 @@ class GameInstall():
         with open(path, 'w+', encoding='utf-8') as f:
             json.dump(AssetsList_Json, f, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
 
-        MainJar = {}
+        self.MainJar = []
         self.Libraries = []
         self.Assets = []
 
         # Jar文件解析
-        MainJar['url'] = V_Json['downloads']['client']['url']
-        MainJar['size'] = V_Json['downloads']['client']['size']
-        MainJar['sha1'] = V_Json['downloads']['client']['sha1']
+        a = V_Json['downloads']['client']
+        if self.Download_Source != 'MC':
+            url = self.Download_Source_Url_Jar_Q + self.V + '/client'
+        else:
+            url = a['url']
+        self.MainJar = ['MCJar',url,
+                        self.GameFile_V,os.path.join(self.GameFile_V,str(self.Name)+'.jar'),
+                        a['sha1'],a['size']]
 
         import re
         # Libraries文件解析
@@ -386,57 +396,68 @@ class GameInstall():
                 else:
                     self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
 
-        # Assets文件解析
-        for A in AssetsList_Json['objects']:
-            # 注意, MC官方这里写的hash其实是sha1算法
-            hash = AssetsList_Json['objects'][A]['hash']
-            url = self.Download_Source_Url_Resources_Q + hash[0:2] + '/' +hash
-            size = AssetsList_Json['objects'][A]['size']
-            path_up = os.path.join(self.GameFile_M,'assets','objects',hash[0:2])
-            path = os.path.join(path_up,hash)
-            if os.path.exists(path):
-                # 如果文件存在就判断hash值
-                h = Sha1(path)
-                if h != hash:
-                    print('no')
-                    self.Assets.append(['Assets',url, path_up, path, hash, size])
-            else:
-                self.Assets.append(['Assets',url, path_up, path, hash, size])
 
-        print(MainJar)
+        # 如果使用方法A，就进行Assets文件解析
+        if self.AssetsFileDownloadMethod == 'A':
+            for A in AssetsList_Json['objects']:
+                # 注意, MC官方这里写的hash其实是sha1算法
+                hash = AssetsList_Json['objects'][A]['hash']
+                url = self.Download_Source_Url_Resources_Q + hash[0:2] + '/' + hash
+                size = AssetsList_Json['objects'][A]['size']
+                path_up = os.path.join(self.GameFile_M, 'assets', 'objects', hash[0:2])
+                path = os.path.join(path_up, hash)
+                if os.path.exists(path):
+                    # 如果文件存在就判断hash值
+                    h = Sha1(path)
+                    if h != hash:
+                        print('no')
+                        self.Assets.append(['Assets', url, path_up, path, hash, size])
+                else:
+                    self.Assets.append(['Assets', url, path_up, path, hash, size])
+
+
+        print(self.MainJar)
         print('================')
-        #print(self.Libraries)
+        print(self.Libraries)
         print(len(self.Libraries))
         print('================')
         #print(Assets)
         print(len(self.Assets))
 
         print('准备下载')
-        self.AllList = self.Libraries + self.Assets
-        self.I = len(self.AllList) + 1
-        print('一共' + str(self.I) + '项文件')
 
-        import time
         # 创建
+        import time
         time_start = time.perf_counter()
         print('开始下载')
-        while True:
-            if len(self.AllList) !=0:
-                #if len(self.AllList) <= len(self.Assets):
-                #    i = 80
-                #else:
-                #    i = 80
-                i = 100
-                self.new_loop = asyncio.new_event_loop()
-                asyncio.set_event_loop(self.new_loop)
-                asyncio.run(self.DownloadTaskMake(i))
-            else:
-                break
+        if len(self.Libraries) != 0 or len(self.Assets) != 0:
+            self.AllList = self.Libraries + self.Assets
+            self.I = len(self.AllList) + 1
+            print('一共' + str(self.I) + '项文件')
+
+            while True:
+                if len(self.AllList) != 0:
+                    # if len(self.AllList) <= len(self.Assets):
+                    #    i = 80
+                    # else:
+                    #    i = 80
+                    self.new_loop = asyncio.new_event_loop()
+                    asyncio.set_event_loop(self.new_loop)
+                    asyncio.run(self.DownloadTaskMake(self.MaxConcurrence))
+                else:
+                    break
+        else:
+            print('一共' + '1'+ '项文件')
+
+        from Code.Download_Big import Download as JarDownload
+        a = JarDownload()
+        a.download(self.MainJar[1],self.MainJar[3],
+                   os.path.join(self.File, 'Caches'))
 
         print('下载完成')
         time_stop = time.perf_counter()
-        time = (time_stop-time_start)
-        print('用时' + str(time))
+        time_ = (time_stop-time_start)
+        print('用时' + str(time_))
 
     async def DownloadTaskMake(self,i: int):
         b = []
@@ -472,21 +493,22 @@ class GameInstall():
         path_up = list[2]
         path = list[3]
         os.makedirs(path_up, exist_ok=True)
-        #a = random.sample(range(1, 2), 1)
-        #if a == 1:
-        #    # 50%的概率进行等待
-        #    a = random.sample(range(1, 10), 1)
-        #    await asyncio.sleep(a/100)
         try:
-            async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(connect=3)) as session:
-                f = await session.get(url, headers=headers, ssl=False)
+            async with aiohttp.ClientSession(timeout = aiohttp.ClientTimeout(connect=3),trust_env = True) as session:
+                f = await session.get(url, headers=headers, ssl=False,timeout=10)
                 f_code = await f.read()
                 with open(path, 'wb') as f:
                     f.write(f_code)
                 # f_code = ''  # 释放缓存
                 self.AllList.remove(list)
                 print(str(len(self.AllList)) + 'ok')
-                #break
+            if list[0] == 'Libraries':
+                if list[6] == True:
+                    path_z = os.path.join(self.GameFile_V, os.path.basename(path))
+                    f = zipfile.ZipFile(path, 'r')  # 压缩文件位置
+                    for file in f.namelist():
+                        f.extract(file, path_z)  # 解压位置
+                    f.close()
         except aiohttp.client_exceptions.ServerTimeoutError:
             print('error_ServerTimeoutError')
         except aiohttp.client_exceptions.ServerDisconnectedError:
@@ -495,10 +517,14 @@ class GameInstall():
             print('error_ClientConnectorError')
         except aiohttp.client_exceptions.ClientOSError:
             print('error_ClientOSError')
+        except asyncio.exceptions.CancelledError:
+            print('error_CancelledError')
+        except asyncio.exceptions.TimeoutError:
+            print('error_TimeoutError')
         except:
             traceback.print_exc()
             print("出现异常")
-            #break
+
 
 
 
@@ -513,12 +539,12 @@ if __name__ == '__main__':
     #a = GameInstall('/Users/xyj/Documents/.minecraft', '/Users/xyj/Documents/.minecraft/versions/a1.0.11/',
     #                '/Users/xyj/Documents/.MOS', 'MCBBS', '/Users/xyj/Documents/.MOS/Versions/Versions.json',
     #                'a1.0.11', 'a1.0.11', None, None, None,'Mac','11.6.5',True,0)
-    a = GameInstall('/Users/xyj/Documents/.minecraft', '/Users/xyj/Documents/.minecraft/versions/1.12.2/',
-                    '/Users/xyj/Documents/.MOS', 'MCBBS', '/Users/xyj/Documents/.MOS/Versions/Versions.json',
-                    '1.12.2', '1.12.2', None, None, None,'Mac','11.6.5',True,0)
-    #a = GameInstall('/Users/xyj/Documents/.minecraft', '/Users/xyj/Documents/.minecraft/versions/1.16.1/',
+    #a = GameInstall('/Users/xyj/Documents/.minecraft', '/Users/xyj/Documents/.minecraft/versions/1.12.2/',
     #                '/Users/xyj/Documents/.MOS', 'MCBBS', '/Users/xyj/Documents/.MOS/Versions/Versions.json',
-    #                '1.16.1', '1.16.1', None, None, None, 'Mac', '11.6.5', True, 0)
+    #                '1.12.2', '1.12.2', None, None, None,'Mac','11.6.5',True,0)
+    a = GameInstall('/Users/xyj/Documents/.minecraft', '/Users/xyj/Documents/.minecraft/versions/1.16.5/',
+                    '/Users/xyj/Documents/.MOS', 'MCBBS', '/Users/xyj/Documents/.MOS/Versions/Versions.json',
+                    '1.16.5', '1.16.5', None, None, None, 'Mac', '11.6.5', 'A',True, 120)
     #a = GameInstall('/Users/xyj/Documents/.minecraft', '/Users/xyj/Documents/.minecraft/versions/1.9.1/',
     #                '/Users/xyj/Documents/.MOS', 'MCBBS', '/Users/xyj/Documents/.MOS/Versions/Versions.json',
     #                '1.9.1', '1.9.1', None, None, None,'Mac','11.6.5',True)
