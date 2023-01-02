@@ -525,6 +525,15 @@ class GameInstall():
             traceback.print_exc()
             print("出现异常")
 
+    def GetSchedule(self):
+        """
+            获得安装进度,代码在写
+            :return: [X/XX(支持库文件进度),X/XX(资源文件进度),X%原版Jar下载进度]
+        """
+        return [len()]
+
+
+
 
 
 
