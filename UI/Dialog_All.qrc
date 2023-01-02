@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="image">
+    <file>../images/PopUpWindow.png</file>
     <file>../images/Warning.png</file>
   </qresource>
 </RCC>
