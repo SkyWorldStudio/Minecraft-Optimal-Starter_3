@@ -1,6 +1,6 @@
 # coding=utf-8
 from PyQt6 import QtGui, QtCore
-from PyQt6.QtCore import QPropertyAnimation, Qt, pyqtSignal
+from PyQt6.QtCore import QPropertyAnimation, Qt, pyqtSignal, QThread
 from PyQt6.QtGui import QColor
 
 from UI.GameInstallWindow.GameInstallWindow import Ui_Dialog_GameInstall
@@ -32,7 +32,6 @@ class Dialog_GameInstallWindows_(QDialog, Ui_Dialog_GameInstall):
             :param AssetsFileDownloadMethod: 资源文件下载方式(A,B-尚未完成)
             :param Sha1Cleck: 是否进行Sha1检查
             :param MaxConcurrence: 最大并发数
-            :param ProgressGetModule: 进度通知模块, 在进度改变后自动通知
         """
 
         super(Dialog_GameInstallWindows_, self).__init__()
@@ -51,6 +50,34 @@ class Dialog_GameInstallWindows_(QDialog, Ui_Dialog_GameInstall):
         self.effect_shadow.setColor(QColor(121, 121, 121, 200))  # 阴影颜色
         self.effect_shadow.setBlurRadius(18)  # 阴影圆角
         self.setGraphicsEffect(self.effect_shadow)  # 将设置套用到窗口中
+
+        self.GameFile_M = GameFile_M
+        self.GameFile_V = GameFile_V
+        self.File = File
+        self.Download_Source = Download_Source
+        self.V_JsonFile = V_JsonFile
+        self.V = V
+        self.Name = Name
+        self.V_Forge = V_Forge
+        self.V_Fabric = V_Fabric
+        self.V_Optifine = V_Optifine
+        self.Systeam = Systeam
+        self.Systeam_V = Systeam_V
+        self.AssetsFileDownloadMethod = AssetsFileDownloadMethod
+        self.Sha1Cleck = Sha1Cleck
+        self.MaxConcurrence = MaxConcurrence
+
+    def Run(self):
+        self.Install_Thread_ = \
+            Install_Thread(self.GameFile_M, self.GameFile_V, self.File, self.Download_Source, self.V_JsonFile,
+                           self.V, self.Name, self.V_Forge,self.V_Fabric,self.V_Optifine,
+                           self.Systeam,self.Systeam_V,
+                           self.AssetsFileDownloadMethod,self.Sha1Cleck,self.MaxConcurrence)
+        #self.Install_Thread_.SinOut.connect(self)
+        #self.Install_Thread_.SinOut_OK.connect(self)
+        self.Install_Thread_.start()
+
+
 
 
 
@@ -94,3 +121,59 @@ class Dialog_GameInstallWindows_(QDialog, Ui_Dialog_GameInstall):
 
     def close_(self):
         self.close()
+
+
+class Install_Thread(QThread):
+    SinOut = pyqtSignal(str,str,str,str)
+    SinOut_OK = pyqtSignal(str)
+    def __init__(self, GameFile_M, GameFile_V, File, Download_Source, V_JsonFile,
+                 V, Name, V_Forge,V_Fabric,V_Optifine,
+                 Systeam,Systeam_V,
+                 AssetsFileDownloadMethod,Sha1Cleck,MaxConcurrence):
+        """
+            多线程安装
+            :param GameFile_M: 游戏根目录(.minecraft目录)
+            :param GameFile_V: 游戏目录
+            :param File: MOS缓存目录
+            :param Download_Source: 下载源(MCBBS, BMCLAPI, MC)
+            :param V_JsonFile: 游戏Json目录(版本列表的)
+            :param V: MC版本
+            :param Name: 游戏名
+            :param V_Forge: Forge版本
+            :param V_Fabric: Fabric版本
+            :param V_Optifine: Optifine版本
+            :param Systeam: 系统种类(Windows, Mac, Linux)
+            :param Systeam_V: 系统版本(10,14.4.1)
+            :param AssetsFileDownloadMethod: 资源文件下载方式(A,B-尚未完成)
+            :param Sha1Cleck: 是否进行Sha1检查
+            :param MaxConcurrence: 最大并发数
+        """
+        super(Install_Thread, self).__init__()
+        self.GameFile_M = GameFile_M
+        self.GameFile_V = GameFile_V
+        self.File = File
+        self.Download_Source = Download_Source
+        self.V_JsonFile = V_JsonFile
+        self.V = V
+        self.Name = Name
+        self.V_Forge = V_Forge
+        self.V_Fabric = V_Fabric
+        self.V_Optifine = V_Optifine
+        self.Systeam = Systeam
+        self.Systeam_V = Systeam_V
+        self.AssetsFileDownloadMethod = AssetsFileDownloadMethod
+        self.Sha1Cleck = Sha1Cleck
+        self.MaxConcurrence = MaxConcurrence
+
+    def run(self):
+        import gc
+        from Code.MC_Code.GameInstall import GameInstall
+        a = GameInstall(self.GameFile_M, self.GameFile_V, self.File, self.Download_Source, self.V_JsonFile,
+                        self.V, self.Name, self.V_Forge, self.V_Fabric, self.V_Optifine,
+                        self.Systeam, self.Systeam_V,
+                        self.AssetsFileDownloadMethod, self.Sha1Cleck, self.MaxConcurrence, self.ProgressSinOut)
+        a.Run()
+        gc.collect()
+
+    def ProgressSinOut(self,text):
+        print(text)

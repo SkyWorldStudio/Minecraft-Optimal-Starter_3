@@ -742,6 +742,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
             self.Dialog_GameInstallWindows_.show()
 
+            self.Dialog_GameInstallWindows_.Run()
+
     def GameInstallWindow_Progress(self,Progress):
         pass
 
