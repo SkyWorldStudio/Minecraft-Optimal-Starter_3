@@ -1,3 +1,4 @@
+# coding=utf-8
 """异步下载大文件"""
 
 import asyncio
@@ -17,10 +18,11 @@ class Download:
     def __init__(self) -> None:
         super(Download, self).__init__()
 
-    def download(self, url, path, parh_cache):
+    def download(self, url, path, parh_cache, ProgressGetModule_=None):
         self.parh_cache = parh_cache
         self.url = url
         self.path = path
+        self.ProgressGetModule_ = ProgressGetModule_
         # 先检查文件大小
         headers={
             "Accept-Encoding": "identity",
@@ -56,6 +58,7 @@ class Download:
         # self.Download_Subsection = {}
         self.Download_Subsection_ = []
         self.Download_Subsection__ = []
+        self.N_Ok = 0
         while True:
             # file_size_str_l 和 file_size_str_l_to：从…下载到……
             if file_size_str_l < self.file_size_str:
@@ -90,6 +93,7 @@ class Download:
             else:
                 print(self.Download_Subsection)
                 break
+        self.ProgressGetModule(['start',len(self.Download_Subsection_)])
         await asyncio.wait([self.Download_Subsection_Start()])
     
     async def Download_Subsection_Start(self):
@@ -122,7 +126,7 @@ class Download:
                     r = f.read()
                     with open(self.path, 'ab') as f_1:
                         f_1.write(r)
-           
+
         await asyncio.wait([Cheak()])
         
         
@@ -156,6 +160,12 @@ class Download:
                 print('客户端网络错误')
                 await asyncio.sleep(10)
         print('OK')
+        self.N_Ok += 1
+        self.ProgressGetModule(['download',self.N_Ok])
+
+    def ProgressGetModule(self,Progress):
+        if self.ProgressGetModule_ != None:
+            self.ProgressGetModule_(Progress)
 
 
     #def DownloadAll(List):

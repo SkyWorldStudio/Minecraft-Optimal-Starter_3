@@ -19,7 +19,7 @@ class GameInstall():
     def __init__(self, GameFile_M, GameFile_V, File, Download_Source, V_JsonFile,
                  V, Name, V_Forge,V_Fabric,V_Optifine,
                  Systeam,Systeam_V,
-                 AssetsFileDownloadMethod,Sha1Cleck,MaxConcurrence):
+                 AssetsFileDownloadMethod,Sha1Cleck,MaxConcurrence,ProgressGetModule):
         """
             游戏安装
             :param GameFile_M: 游戏根目录(.minecraft目录)
@@ -37,6 +37,7 @@ class GameInstall():
             :param AssetsFileDownloadMethod: 资源文件下载方式(A,B-尚未完成)
             :param Sha1Cleck: 是否进行Sha1检查
             :param MaxConcurrence: 最大并发数
+            :param ProgressGetModule: 进度通知模块, 在进度改变后自动通知
         """
         self.GameFile_M = GameFile_M
         self.GameFile_V = GameFile_V
@@ -53,6 +54,7 @@ class GameInstall():
         self.AssetsFileDownloadMethod = AssetsFileDownloadMethod
         self.Sha1Cleck = Sha1Cleck
         self.MaxConcurrence = MaxConcurrence
+        self.ProgressGetModule = ProgressGetModule
 
         if self.Download_Source == 'MC':
             # self.Download_Source_Url_Json_Q = 'http://launchermeta.mojang.com/'
@@ -84,6 +86,7 @@ class GameInstall():
                     break
         else:
             url = self.Download_Source_Url_Json_Q + 'version/' + self.V + '/json'
+        self.Progress(['start',1,7])
 
         # 下载
         V_Json_Get = requests.get(url)
@@ -93,6 +96,7 @@ class GameInstall():
         V_Json_File = os.path.join(self.GameFile_V,str(self.Name + '.json'))
         with open(V_Json_File, 'w+', encoding='utf-8') as f:
             json.dump(V_Json, f, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
+        self.Progress(['start',2,7])
 
         # 下载Assets List Json文件
         AssetsList_Json = V_Json['assetIndex']
@@ -108,10 +112,14 @@ class GameInstall():
         os.makedirs(path_up, exist_ok=True)
         with open(path, 'w+', encoding='utf-8') as f:
             json.dump(AssetsList_Json, f, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
+        self.Progress(['start',3,7])
 
         self.MainJar = []
         self.Libraries = []
         self.Assets = []
+        self.Size_All = 0
+        self.Size_Ok = 0
+        self.Progress(['start',4,7])
 
         # Jar文件解析
         a = V_Json['downloads']['client']
@@ -119,9 +127,11 @@ class GameInstall():
             url = self.Download_Source_Url_Jar_Q + self.V + '/client'
         else:
             url = a['url']
+        self.Size_All += a['size']
         self.MainJar = ['MCJar',url,
                         self.GameFile_V,os.path.join(self.GameFile_V,str(self.Name)+'.jar'),
                         a['sha1'],a['size']]
+        self.Progress(['start',5,7])
 
         import re
         # Libraries文件解析
@@ -160,6 +170,7 @@ class GameInstall():
                                                         else:
                                                             A = L['downloads']['classifiers']['natives-osx']
                                                             Zip = True
+                                                        self.Size_All += A['size']
                                                         self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
                                             else:
                                                 if 'artifact' in L['downloads']:
@@ -168,6 +179,7 @@ class GameInstall():
                                                 else:
                                                     A = L['downloads']['classifiers']['natives-osx']
                                                     Zip = True
+                                                self.Size_All += A['size']
                                                 self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
 
                                 elif R[a]['name'] == 'windows':
@@ -196,6 +208,7 @@ class GameInstall():
                                                         else:
                                                             A = L['downloads']['classifiers']['natives-windows']
                                                             Zip = True
+                                                        self.Size_All += A['size']
                                                         self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
                                             else:
                                                 if 'artifact' in L['downloads']:
@@ -204,6 +217,7 @@ class GameInstall():
                                                 else:
                                                     A = L['downloads']['classifiers']['natives-windows']
                                                     Zip = True
+                                                self.Size_All += A['size']
                                                 self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
 
                                 elif R[a]['name'] == 'linux':
@@ -232,6 +246,7 @@ class GameInstall():
                                                         else:
                                                             A = L['downloads']['classifiers']['natives-linux']
                                                             Zip = True
+                                                        self.Size_All += A['size']
                                                         self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
                                             else:
                                                 if 'artifact' in L['downloads']:
@@ -240,6 +255,7 @@ class GameInstall():
                                                 else:
                                                     A = L['downloads']['classifiers']['natives-linux']
                                                     Zip = True
+                                                self.Size_All += A['size']
                                                 self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
 
                         elif R['action'] == 'allow':
@@ -272,6 +288,7 @@ class GameInstall():
                                                         else:
                                                             A = L['downloads']['classifiers']['natives-osx']
                                                             Zip = True
+                                                        self.Size_All += A['size']
                                                         self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
                                             else:
                                                 if 'artifact' in L['downloads']:
@@ -280,6 +297,7 @@ class GameInstall():
                                                 else:
                                                     A = L['downloads']['classifiers']['natives-osx']
                                                     Zip = True
+                                                self.Size_All += A['size']
                                                 self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
 
                                 elif R[a]['name'] == 'windows':
@@ -308,6 +326,7 @@ class GameInstall():
                                                         else:
                                                             A = L['downloads']['classifiers']['natives-windows']
                                                             Zip = True
+                                                        self.Size_All += A['size']
                                                         self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
                                             else:
                                                 if 'artifact' in L['downloads']:
@@ -316,6 +335,7 @@ class GameInstall():
                                                 else:
                                                     A = L['downloads']['classifiers']['natives-windows']
                                                     Zip = True
+                                                self.Size_All += A['size']
                                                 self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
 
                                 elif R[a]['name'] == 'linux':
@@ -344,6 +364,7 @@ class GameInstall():
                                                         else:
                                                             A = L['downloads']['classifiers']['natives-linux']
                                                             Zip = True
+                                                        self.Size_All += A['size']
                                                         self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
                                             else:
                                                 if 'artifact' in L['downloads']:
@@ -352,6 +373,7 @@ class GameInstall():
                                                 else:
                                                     A = L['downloads']['classifiers']['natives-linux']
                                                     Zip = True
+                                                self.Size_All += A['size']
                                                 self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
 
             else:
@@ -392,10 +414,12 @@ class GameInstall():
                             else:
                                 A = L['downloads']['classifiers']['natives-linux']
                                 Zip = True
+                            self.Size_All += A['size']
                             self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
                 else:
+                    self.Size_All += A['size']
                     self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
-
+        self.Progress(['start',6,7])
 
         # 如果使用方法A，就进行Assets文件解析
         if self.AssetsFileDownloadMethod == 'A':
@@ -410,19 +434,27 @@ class GameInstall():
                     # 如果文件存在就判断hash值
                     h = Sha1(path)
                     if h != hash:
-                        print('no')
+                        self.Size_All += size
                         self.Assets.append(['Assets', url, path_up, path, hash, size])
                 else:
+                    self.Size_All += size
                     self.Assets.append(['Assets', url, path_up, path, hash, size])
+        self.Progress(['start',7,7])
 
 
         print(self.MainJar)
         print('================')
         print(self.Libraries)
-        print(len(self.Libraries))
+        self.Libraries_N = len(self.Libraries)
+        print(self.Libraries_N)
         print('================')
         #print(Assets)
-        print(len(self.Assets))
+        self.Assets_N = len(self.Assets)
+        print(self.Assets_N)
+        self.Progress(['info',self.Libraries_N,self.Assets_N,self.Size_All])
+
+        self.Libraries_Ok = 0
+        self.Assets_Ok = 0
 
         print('准备下载')
 
@@ -452,12 +484,14 @@ class GameInstall():
         from Code.Download_Big import Download as JarDownload
         a = JarDownload()
         a.download(self.MainJar[1],self.MainJar[3],
-                   os.path.join(self.File, 'Caches'))
+                   os.path.join(self.File, 'Caches'),
+                   self.Progress)
 
         print('下载完成')
         time_stop = time.perf_counter()
         time_ = (time_stop-time_start)
         print('用时' + str(time_))
+        self.Progress(['ok'])
 
     async def DownloadTaskMake(self,i: int):
         b = []
@@ -466,7 +500,6 @@ class GameInstall():
             #b.append(self.Download(a))
         for b_1 in b:
             await b_1
-
 
 
     #async def DownloadTask(self, queue,list):
@@ -509,6 +542,12 @@ class GameInstall():
                     for file in f.namelist():
                         f.extract(file, path_z)  # 解压位置
                     f.close()
+                self.Libraries_Ok += 1
+            else:
+                self.Assets_Ok += 1
+
+            self.Size_Ok += list[5]
+            self.Progress(['download', self.Libraries_Ok, self.Assets_Ok,self.Size_Ok])
         except aiohttp.client_exceptions.ServerTimeoutError:
             print('error_ServerTimeoutError')
         except aiohttp.client_exceptions.ServerDisconnectedError:
@@ -525,12 +564,12 @@ class GameInstall():
             traceback.print_exc()
             print("出现异常")
 
-    def GetSchedule(self):
+    def Progress(self,Progress_):
         """
-            获得安装进度,代码在写
-            :return: [X/XX(支持库文件进度),X/XX(资源文件进度),X%原版Jar下载进度]
+            更改安装进度,并且主动通知
+            :param Progress_: 进度
         """
-        return [len()]
+        self.ProgressGetModule(Progress_)
 
 
 

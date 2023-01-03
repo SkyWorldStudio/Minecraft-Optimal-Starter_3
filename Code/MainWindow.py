@@ -41,18 +41,19 @@ class RunUi(QMainWindow, Ui_MainWindow):
             if self.label_Sidebar_QTime_Ok and self.label_Sidebar_B_QTime_Ok:
                 if len(self.H_B) > 2:
                     B = self.H_B[-1]
-                    if B['Left'] != False:
-                        B_1 = B['Left_L']
-                        if B_1 == 0:
-                            self.Sidebar_Clicked(Want='User', H=False)
-                        elif B_1 == 1:
-                            self.Sidebar_Clicked(Want='Home', H=False)
-                        elif B_1 == 2:
-                            self.Sidebar_Clicked(Want='Online', H=False)
-                        elif B_1 == 3:
-                            self.Sidebar_Clicked(Want='Download', H=False)
-                        elif B_1 == 4:
-                            self.Sidebar_Clicked(Want='Settings', H=False)
+                    if 'Left' in B and 'Left_L' in B:
+                        if B['Left'] != False:
+                            B_1 = B['Left_L']
+                            if B_1 == 0:
+                                self.Sidebar_Clicked(Want='User', H=False)
+                            elif B_1 == 1:
+                                self.Sidebar_Clicked(Want='Home', H=False)
+                            elif B_1 == 2:
+                                self.Sidebar_Clicked(Want='Online', H=False)
+                            elif B_1 == 3:
+                                self.Sidebar_Clicked(Want='Download', H=False)
+                            elif B_1 == 4:
+                                self.Sidebar_Clicked(Want='Settings', H=False)
                     if B['Name'] != False:
                         B_1 = B['Index_L']
                         if B_1 == 0:
@@ -81,7 +82,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
                 print(self.H_B)
 
-                if len(self.H_B) == 1:
+                if len(self.H_B)+1 == 1:
                     self.label_Sidebar_Back.setEnabled(False)
                     print_('Info', '返回系统: 返回失败, 无需返回 已将按钮改为禁用')
 
@@ -484,14 +485,14 @@ class RunUi(QMainWindow, Ui_MainWindow):
     def DownloadPage_stackedWidget_GameList_Clicked(self):
         """下载页面 -> 原版下载列表: 点击项目"""
         item = self.listWidget_page_1_download.currentItem()
-        t = item.text()
-        self.label_page_download_1_install_bottom.setText(str(t) + '安装')
-        self.lineEdit_page_download_1_install_bottom_GameName.setPlaceholderText(str(t))
+        self.DownloadPage_V = item.text()
+        self.label_page_download_1_install_bottom.setText(str(self.DownloadPage_V) + '安装')
+        self.lineEdit_page_download_1_install_bottom_GameName.setPlaceholderText(str(self.DownloadPage_V))
         self.SetCurrentIndex(self.stackedWidget_page_download_1, 1, 3, True)
         self.listWidget_page_download_1_install_forge.clear()
         self.listWidget_page_download_1_install_fabric.clear()
         self.listWidget_page_download_1_install_optifine.clear()
-        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start(str(t))
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start(str(self.DownloadPage_V))
 
     def DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start(self,MCName):
         """启动 根据版本获取Forge,Fabric,Optifine列表"""
@@ -690,6 +691,59 @@ class RunUi(QMainWindow, Ui_MainWindow):
         """下载页面 -> 选择安装 -> 安装"""
         if self.lineEdit_page_download_1_install_bottom_GameName.text() == '':
             self.lineEdit_page_download_1_install_bottom_GameName.setStyleSheet("border: 2px solid rgb(255, 38, 0);")
+        else:
+            # 显示窗口
+            from Code.GameInstallWindow import Dialog_GameInstallWindows_
+            GameFile_M = self.Json_MOS['GameFile_List'][self.Json_MOS['GameFile_List_Clicked']]
+            GameFile_M = self.Json_MOS['GameFile'][GameFile_M]['File']
+            Name = self.lineEdit_page_download_1_install_bottom_GameName.text()
+            GameFile_V  = os.path.join(GameFile_M,'versions',Name)
+            V_JsonFile = os.path.join(self.File,'Versions','Versions.json')
+            V_Forge = self.label_page_download_1_install_forge_up_state_2.text()
+            V_Fabric = self.label_page_download_1_install_fabric_up_state_2.text()
+            V_Optifine = self.label_page_download_1_install_optifine_up_state_2.text()
+            if V_Forge == '':
+                V_Forge = None
+            if V_Fabric == '':
+                V_Fabric = None
+            if V_Optifine == '':
+                V_Optifine = None
+            AssetsFileDownloadMethod = 'A'
+            Sha1Cleck = True
+            MaxConcurrence = 100
+            ProgressGetModule = self.GameInstallWindow_Progress
+            self.Dialog_GameInstallWindows_ = Dialog_GameInstallWindows_(GameFile_M, GameFile_V, self.File, self.Json_MOS['Download_Source'], V_JsonFile,
+                                                                        self.DownloadPage_V, Name, V_Forge,V_Fabric,V_Optifine,
+                                                                        self.Json_MOS['Systeam'],self.Json_MOS['Systeam_V'],
+                                                                        AssetsFileDownloadMethod,Sha1Cleck,MaxConcurrence)
+            self.Dialog_GameInstallWindows_.sinOut_Win_XY.connect(self.Window_XY)
+            self.Dialog_GameInstallWindows_.sinOut_OK.connect(self.AddUserWindow_OK)
+            self.Dialog_GameInstallWindows_.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
+            self.Dialog_GameInstallWindows_.setWindowFlags(
+                Qt.WindowType.Popup |  # 表示该窗口小部件是一个弹出式顶层窗口，即它是模态的，但有一个适合弹出式菜单的窗口系统框架。
+                Qt.WindowType.Tool |  # 表示小部件是一个工具窗口,如果有父级，则工具窗口将始终保留在其顶部,在 macOS 上，工具窗口对应于窗口的NSPanel类。这意味着窗口位于普通窗口之上，因此无法在其顶部放置普通窗口。默认情况下，当应用程序处于非活动状态时，工具窗口将消失。这可以通过WA_MacAlwaysShowToolWindow属性来控制。
+                Qt.WindowType.FramelessWindowHint |  # 生成无边框窗口
+                Qt.WindowType.MSWindowsFixedSizeDialogHint |  # 在 Windows 上为窗口提供一个细对话框边框。这种风格传统上用于固定大小的对话框。
+                Qt.WindowType.Dialog |  # 指示该小部件是一个应装饰为对话框的窗口（即，通常在标题栏中没有最大化或最小化按钮）。这是 的默认类型QDialog。如果要将其用作模式对话框，则应从另一个窗口启动它，或者具有父级并与该windowModality属性一起使用。如果将其设为模态，对话框将阻止应用程序中的其他顶级窗口获得任何输入。我们将具有父级的顶级窗口称为辅助窗口。
+                Qt.WindowType.NoDropShadowWindowHint  # 禁用支持平台上的窗口投影。
+            )
+
+            self.Dialog_GameInstallWindows_.setWindowModality(
+                Qt.WindowModality.ApplicationModal  # 该窗口对应用程序是模态的，并阻止对所有窗口的输入。
+            )
+
+            self.MainWindow_xy_size = self.geometry()  # 获取主界面 初始坐标
+            self.Dialog_GameInstallWindows_.move(
+                round(self.MainWindow_xy_size.x() + (
+                            self.size().width() / 2 - self.Dialog_GameInstallWindows_.size().width() / 2)),
+                round(self.MainWindow_xy_size.y() + (self.size().height() / 3)
+                      ))  # 子界面移动到 居中
+            self.UserPage_Up_AddUser()  # 窗口弹出后，主页面不再刷新，所以在窗口弹出前改变
+
+            self.Dialog_GameInstallWindows_.show()
+
+    def GameInstallWindow_Progress(self,Progress):
+        pass
 
     def DownloadPage_stackedWidget_install_lineEdit(self):
         """下载页面 -> 选择安装 -> 输入游戏名"""
@@ -1518,7 +1572,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.H_B.append({
                 "Name": U,  # 控件名
                 "Index_L": int(self.stackedWidget_main_2.currentIndex()),  # 原来页码
-                "Left": L  # 是否更改左边 如果改 值为改为多少 如果不改 值为False
+                "Left": L,  # 是否更改左边 如果改 值为改为多少 如果不改 值为False
+                "Left_L": int(self.stackedWidget_main_2.currentIndex())  # 原来左边页码
             })
             self.stackedWidget_main_2.setCurrentIndex(I)
         elif H == True and U != False:
@@ -1531,6 +1586,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
             })
             self.stackedWidget_main_2.setCurrentIndex(L)
             U.setCurrentIndex(I)
+        elif H == False:
+            self.stackedWidget_main_2.setCurrentIndex(L)
         if len(self.H_B) > 1 and self.label_Sidebar_QTime_Ok and self.label_Sidebar_B_QTime_Ok:
             self.label_Sidebar_Back.setEnabled(True)
         else:
