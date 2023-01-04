@@ -1,11 +1,13 @@
 # coding=utf-8
 from PyQt6 import QtGui, QtCore
-from PyQt6.QtCore import QPropertyAnimation, Qt, pyqtSignal, QThread
+from PyQt6.QtCore import QPropertyAnimation, Qt, pyqtSignal, QThread, QTimer
 from PyQt6.QtGui import QColor
 
 from UI.GameInstallWindow.GameInstallWindow import Ui_Dialog_GameInstall
 from Code.MainWindow import Return_Window_XY
 from PyQt6.QtWidgets import QDialog, QGraphicsDropShadowEffect
+
+import UI.Dialog_All_rc
 
 class Dialog_GameInstallWindows_(QDialog, Ui_Dialog_GameInstall):
     sinOut_Win_XY = pyqtSignal(int, int)
@@ -38,7 +40,7 @@ class Dialog_GameInstallWindows_(QDialog, Ui_Dialog_GameInstall):
         self.setupUi(self)
         self.show()
 
-        #self.pushButton_bottom_cancel.clicked.connect(self.pushButton_Cancel_Clicked)
+        self.pushButton_bottom_cancel.clicked.connect(self.stop)
         #self.pushButton_OffLine_Advanced.clicked.connect(self.pushButton_OffLine_Advanced_Clicked)
         #self.pushButton_bottom_cancel_confirm.clicked.connect(self.pushButton_Confirm_Clicked)
 
@@ -73,14 +75,90 @@ class Dialog_GameInstallWindows_(QDialog, Ui_Dialog_GameInstall):
                            self.V, self.Name, self.V_Forge,self.V_Fabric,self.V_Optifine,
                            self.Systeam,self.Systeam_V,
                            self.AssetsFileDownloadMethod,self.Sha1Cleck,self.MaxConcurrence)
-        #self.Install_Thread_.SinOut.connect(self)
-        #self.Install_Thread_.SinOut_OK.connect(self)
+        self.Install_Thread_.SinOut.connect(self.SinOut)
         self.Install_Thread_.start()
 
+    def SinOut(self,text):
+        print(text)
+        if text[0] == 'start':
+            # 如果进度是初始化
+            self.progressBar_start.setMaximum(text[2])
+            self.progressBar_start.setValue(text[1])
+
+        elif text[0] == 'info':
+            # 如果是报告下载量的
+            if text[1] == 0:
+                self.progressBar_inatall_libraryFile.setMaximum(-1)
+                self.progressBar_inatall_libraryFile.setMinimum(-2)
+                self.progressBar_inatall_libraryFile.setValue(-1)
+            else:
+                self.progressBar_inatall_libraryFile.setMaximum(text[1])
+            if text[2] == 0:
+                self.progressBar_inatall_assetsFile.setMaximum(-1)
+                self.progressBar_inatall_assetsFile.setMinimum(-2)
+                self.progressBar_inatall_assetsFile.setValue(-1)
+            else:
+                self.progressBar_inatall_assetsFile.setMaximum(text[2])
+
+            t = round(text[3]/1024/1024,2)  # 四舍五入保留2位
+            self.label_info_size.setText('0MB/'+str(t)+'MB')
+            self.stackedWidget.setCurrentIndex(1)
+
+        elif text[0] == 'download':
+            # 如果是正在下载
+            if self.progressBar_inatall_libraryFile.value() != -1:
+                self.progressBar_inatall_libraryFile.setValue(text[1])
+
+            if self.progressBar_inatall_assetsFile.value() != -1:
+                self.progressBar_inatall_assetsFile.setValue(text[2])
+
+            t = round(text[3]/1024/1024,2)  # 四舍五入保留2位
+            self.label_info_size.setText(
+                str(t) + 'MB/' + str(self.label_info_size.text()).split('/')[1]
+            )
+            self.label_Sidebar_B_QTime = QTimer()
+            self.label_Sidebar_B_QTime.start(1000)
+            self.label_Sidebar_B_QTime.timeout.connect(self.Spend_QTime)
+
+        elif text[0] == 'JarProgress':
+            # 如果在进行Jar下载
+            a = text[1]
+            if a[0] == 'start':
+                # 如果进入初始化
+                self.progressBar_inatall_Jar.setMaximum(a[1])
+            elif a[0] == 'download':
+                # 如果开始下载
+                self.progressBar_inatall_Jar.setValue(a[1])
 
 
+        elif text[0] == 'ok':
+            # 完成
+            self.close_()
 
+    def Spend_QTime(self):
+        try:
+            print(self.Spend_)
+            print(round(float(str(self.label_info_size.text()).split('MB/')[0])),2)
+            a = round(float(str(self.label_info_size.text()).split('MB/')[0]) - self.Spend_,2)
+            self.label_info_spend.setText(str(a) + 'MB/s')
+            self.Spend_ = float(str(self.label_info_size.text()).split('MB/')[0])
+        except AttributeError:
+            self.Spend_ = float(str(self.label_info_size.text()).split('MB')[0])
+            self.label_info_spend.setText(str(self.Spend_)+'MB/s')
 
+    def stop(self):
+        self.close_()
+
+    def close_(self):
+        def close__():
+            self.close()
+
+        self.anim = QPropertyAnimation(self, b"windowOpacity")  # 设置动画对象
+        self.anim.setDuration(300)  # 设置动画时长
+        self.anim.setStartValue(1)  # 设置初始属性，1.0为不透明
+        self.anim.setEndValue(0)  # 设置结束属性，0为完全透明
+        self.anim.finished.connect(close__)  # 动画结束时，关闭窗口
+        self.anim.start()  # 开始动画
 
 
     def clicked_pushButton_close(self):
@@ -119,13 +197,9 @@ class Dialog_GameInstallWindows_(QDialog, Ui_Dialog_GameInstall):
         if a0.button() == Qt.MouseButton.LeftButton:
             self.Is_Drag_ = False
 
-    def close_(self):
-        self.close()
-
 
 class Install_Thread(QThread):
-    SinOut = pyqtSignal(str,str,str,str)
-    SinOut_OK = pyqtSignal(str)
+    SinOut = pyqtSignal(list)
     def __init__(self, GameFile_M, GameFile_V, File, Download_Source, V_JsonFile,
                  V, Name, V_Forge,V_Fabric,V_Optifine,
                  Systeam,Systeam_V,
@@ -176,4 +250,4 @@ class Install_Thread(QThread):
         gc.collect()
 
     def ProgressSinOut(self,text):
-        print(text)
+        self.SinOut.emit(text)

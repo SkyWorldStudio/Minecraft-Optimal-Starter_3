@@ -138,6 +138,13 @@ class GameInstall():
         for L in V_Json['libraries']:
             if 'rules' in L:
                 for R in L['rules']:
+
+                    if 'artifact' in L['downloads']:
+                        A = L['downloads']['artifact']
+                    else:
+                        A = L['downloads']['classifiers']['natives-osx']
+                    Sh = A['sha1']
+
                     if len(R) != 1:
                         if R['action'] == 'disallow':
                             # 如果写的是禁止
@@ -152,7 +159,7 @@ class GameInstall():
                                             m = re.search(r, self.Systeam_V)
                                         else:
                                             m = ''  # 让下面的if, 识别为"允许"
-                                        Sh = A['sha1']
+                                        
                                         if m == None:
                                             # 如果不在限制以内,就添加
                                             URL = self.Download_Source_Url_Libraries_Q + A['url'].split('https://libraries.minecraft.net/')[1]
@@ -191,7 +198,7 @@ class GameInstall():
                                             m = re.search(r, self.Systeam_V)
                                         else:
                                             m = ''  # 让下面的if, 识别为"允许"
-                                        Sh = A['sha1']
+                                        
                                         if m == None:
                                             # 如果不在限制以内,就添加
                                             URL = self.Download_Source_Url_Libraries_Q + A['url'].split('https://libraries.minecraft.net/')[1]
@@ -229,7 +236,7 @@ class GameInstall():
                                             m = re.search(r, self.Systeam_V)
                                         else:
                                             m = ''  # 让下面的if, 识别为"允许"
-                                        Sh = A['sha1']
+                                        
                                         if m == None:
                                             # 如果不在限制以内,就添加
                                             URL = self.Download_Source_Url_Libraries_Q + A['url'].split('https://libraries.minecraft.net/')[1]
@@ -271,7 +278,7 @@ class GameInstall():
                                             m = re.search(r, self.Systeam_V)
                                         else:
                                             m = ''  # 让下面的if, 识别为"允许"
-                                        Sh = A['sha1']
+                                        
                                         if m != None:
                                             # 如果在允许以内,就添加
                                             URL = self.Download_Source_Url_Libraries_Q + A['url'].split('https://libraries.minecraft.net/')[1]
@@ -309,7 +316,7 @@ class GameInstall():
                                             m = re.search(r, self.Systeam_V)
                                         else:
                                             m = ''  # 让下面的if, 识别为"允许"
-                                        Sh = A['sha1']
+                                        
                                         if m != None:
                                             # 如果在允许以内,就添加
                                             URL = self.Download_Source_Url_Libraries_Q + A['url'].split('https://libraries.minecraft.net/')[1]
@@ -347,7 +354,7 @@ class GameInstall():
                                             m = re.search(r, self.Systeam_V)
                                         else:
                                             m = ''  # 让下面的if, 识别为"允许"
-                                        Sh = A['sha1']
+                                        
                                         if m != None:
                                             # 如果在允许以内,就添加
                                             URL = self.Download_Source_Url_Libraries_Q + A['url'].split('https://libraries.minecraft.net/')[1]
@@ -485,7 +492,7 @@ class GameInstall():
         a = JarDownload()
         a.download(self.MainJar[1],self.MainJar[3],
                    os.path.join(self.File, 'Caches'),
-                   self.Progress)
+                   self.JarProgress)
 
         print('下载完成')
         time_stop = time.perf_counter()
@@ -546,6 +553,7 @@ class GameInstall():
             else:
                 self.Assets_Ok += 1
 
+            print(list)
             self.Size_Ok += list[5]
             self.Progress(['download', self.Libraries_Ok, self.Assets_Ok,self.Size_Ok])
         except aiohttp.client_exceptions.ServerTimeoutError:
@@ -570,6 +578,14 @@ class GameInstall():
             :param Progress_: 进度
         """
         self.ProgressGetModule(Progress_)
+
+    def JarProgress(self,Progress_):
+        """
+            更改Jar下载进度,并且主动通知
+            :param Progress_: 进度
+        """
+        self.ProgressGetModule(['JarProgress',Progress_])
+
 
 
 

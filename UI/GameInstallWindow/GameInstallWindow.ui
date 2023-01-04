@@ -207,7 +207,7 @@ QProgressBar::chunk{
            <property name="currentIndex">
             <number>0</number>
            </property>
-           <widget class="QWidget" name="page_widget_middle_1">
+           <widget class="QWidget" name="page_widget_middle_start">
             <layout class="QVBoxLayout" name="verticalLayout_3">
              <property name="spacing">
               <number>-1</number>
@@ -237,7 +237,7 @@ QProgressBar::chunk{
               </widget>
              </item>
              <item>
-              <widget class="QProgressBar" name="progressBar_2">
+              <widget class="QProgressBar" name="progressBar_start">
                <property name="maximumSize">
                 <size>
                  <width>16777215</width>
@@ -273,7 +273,7 @@ QProgressBar::chunk{
              </item>
             </layout>
            </widget>
-           <widget class="QWidget" name="page_widget_middle_2">
+           <widget class="QWidget" name="page_widget_middle_inatall">
             <layout class="QHBoxLayout" name="horizontalLayout_2">
              <property name="leftMargin">
               <number>0</number>
@@ -297,8 +297,8 @@ QProgressBar::chunk{
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>597</width>
-                  <height>142</height>
+                  <width>527</width>
+                  <height>131</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout">
@@ -318,7 +318,7 @@ QProgressBar::chunk{
                   <number>0</number>
                  </property>
                  <item>
-                  <widget class="QLabel" name="label_3">
+                  <widget class="QLabel" name="label_inatall_Jar">
                    <property name="font">
                     <font>
                      <pointsize>14</pointsize>
@@ -330,15 +330,18 @@ QProgressBar::chunk{
                   </widget>
                  </item>
                  <item>
-                  <widget class="QProgressBar" name="progressBar_3">
+                  <widget class="QProgressBar" name="progressBar_inatall_Jar">
                    <property name="maximumSize">
                     <size>
                      <width>16777215</width>
                      <height>10</height>
                     </size>
                    </property>
+                   <property name="maximum">
+                    <number>-1</number>
+                   </property>
                    <property name="value">
-                    <number>24</number>
+                    <number>-1</number>
                    </property>
                    <property name="textVisible">
                     <bool>false</bool>
@@ -346,7 +349,7 @@ QProgressBar::chunk{
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLabel" name="label_2">
+                  <widget class="QLabel" name="label_inatall_assetsFile">
                    <property name="font">
                     <font>
                      <pointsize>14</pointsize>
@@ -358,7 +361,7 @@ QProgressBar::chunk{
                   </widget>
                  </item>
                  <item>
-                  <widget class="QProgressBar" name="progressBar_4">
+                  <widget class="QProgressBar" name="progressBar_inatall_assetsFile">
                    <property name="maximumSize">
                     <size>
                      <width>16777215</width>
@@ -374,7 +377,7 @@ QProgressBar::chunk{
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLabel" name="label_5">
+                  <widget class="QLabel" name="label_inatall_libraryFile">
                    <property name="font">
                     <font>
                      <pointsize>14</pointsize>
@@ -386,7 +389,7 @@ QProgressBar::chunk{
                   </widget>
                  </item>
                  <item>
-                  <widget class="QProgressBar" name="progressBar">
+                  <widget class="QProgressBar" name="progressBar_inatall_libraryFile">
                    <property name="maximumSize">
                     <size>
                      <width>16777215</width>
@@ -432,16 +435,16 @@ QProgressBar::chunk{
           <number>15</number>
          </property>
          <item>
-          <widget class="QLabel" name="label_6">
+          <widget class="QLabel" name="label_info_spend">
            <property name="text">
-            <string>1.1MB/s</string>
+            <string>0MB/s</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_7">
+          <widget class="QLabel" name="label_info_size">
            <property name="text">
-            <string>5MB/231MB</string>
+            <string>0MB/???MB</string>
            </property>
           </widget>
          </item>
