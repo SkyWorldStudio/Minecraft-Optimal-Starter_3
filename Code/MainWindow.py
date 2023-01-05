@@ -322,34 +322,39 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
     def DownloadPage_Game_Clicked(self):
         """下载页 -> 游戏本体"""
+        self.stackedWidget_2.setCurrentIndex(0)
         if self.stackedWidget_page_download.currentIndex() == 0:
             pass
         else:
             self.SetCurrentIndex(self.stackedWidget_page_download, 0, 3, True)
 
     def DownloadPage_Word_Clicked(self):
-        """下载页 -> 游戏本体"""
+        """下载页 -> 世界存档"""
+        self.stackedWidget_2.setCurrentIndex(1)
         if self.stackedWidget_page_download.currentIndex() == 1:
             pass
         else:
             self.SetCurrentIndex(self.stackedWidget_page_download, 1, 3, True)
 
     def DownloadPage_Mode_Clicked(self):
-        """下载页 -> 游戏本体"""
+        """下载页 -> mod"""
+        self.stackedWidget_2.setCurrentIndex(1)
         if self.stackedWidget_page_download.currentIndex() == 2:
             pass
         else:
             self.SetCurrentIndex(self.stackedWidget_page_download, 2, 3, True)
 
     def DownloadPage_Conformity_Clicked(self):
-        """下载页 -> 游戏本体"""
+        """下载页 -> 整合包"""
+        self.stackedWidget_2.setCurrentIndex(1)
         if self.stackedWidget_page_download.currentIndex() == 3:
             pass
         else:
             self.SetCurrentIndex(self.stackedWidget_page_download, 3, 3, True)
 
     def DownloadPage_Resource_Clicked(self):
-        """下载页 -> 游戏本体"""
+        """下载页 -> 资源包"""
+        self.stackedWidget_2.setCurrentIndex(1)
         if self.stackedWidget_page_download.currentIndex() == 4:
             pass
         else:
@@ -484,6 +489,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
     def DownloadPage_stackedWidget_GameList_Clicked(self):
         """下载页面 -> 原版下载列表: 点击项目"""
+        self.stackedWidget_2.setCurrentIndex(1)
         item = self.listWidget_page_1_download.currentItem()
         self.DownloadPage_V = item.text()
         self.label_page_download_1_install_bottom.setText(str(self.DownloadPage_V) + '安装')
@@ -693,6 +699,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.lineEdit_page_download_1_install_bottom_GameName.setStyleSheet("border: 2px solid rgb(255, 38, 0);")
         else:
             # 显示窗口
+            self.pushButton_page_download_1_install_bottom_ok.setEnabled(False)
             from Code.GameInstallWindow import Dialog_GameInstallWindows_
             GameFile_M = self.Json_MOS['GameFile_List'][self.Json_MOS['GameFile_List_Clicked']]
             GameFile_M = self.Json_MOS['GameFile'][GameFile_M]['File']
@@ -711,13 +718,13 @@ class RunUi(QMainWindow, Ui_MainWindow):
             AssetsFileDownloadMethod = 'A'
             Sha1Cleck = True
             MaxConcurrence = 100
-            ProgressGetModule = self.GameInstallWindow_Progress
+            # ProgressGetModule = self.GameInstallWindow_Progress
             self.Dialog_GameInstallWindows_ = Dialog_GameInstallWindows_(GameFile_M, GameFile_V, self.File, self.Json_MOS['Download_Source'], V_JsonFile,
                                                                         self.DownloadPage_V, Name, V_Forge,V_Fabric,V_Optifine,
                                                                         self.Json_MOS['Systeam'],self.Json_MOS['Systeam_V'],
                                                                         AssetsFileDownloadMethod,Sha1Cleck,MaxConcurrence)
             self.Dialog_GameInstallWindows_.sinOut_Win_XY.connect(self.Window_XY)
-            self.Dialog_GameInstallWindows_.sinOut_OK.connect(self.AddUserWindow_OK)
+            self.Dialog_GameInstallWindows_.sinOut_OK.connect(self.GameInstallWindow_OK)
             self.Dialog_GameInstallWindows_.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
             self.Dialog_GameInstallWindows_.setWindowFlags(
                 Qt.WindowType.Popup |  # 表示该窗口小部件是一个弹出式顶层窗口，即它是模态的，但有一个适合弹出式菜单的窗口系统框架。
@@ -744,8 +751,13 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
             self.Dialog_GameInstallWindows_.Run()
 
-    def GameInstallWindow_Progress(self,Progress):
-        pass
+
+    def GameInstallWindow_OK(self):
+        """安装完成"""
+        # 显示完成的窗口
+        # 切换页面
+        self.stackedWidget_page_download_1.setCurrentIndex(0)
+        self.stackedWidget_2.setCurrentIndex(0)
 
     def DownloadPage_stackedWidget_install_lineEdit(self):
         """下载页面 -> 选择安装 -> 输入游戏名"""

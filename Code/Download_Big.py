@@ -2,6 +2,8 @@
 """异步下载大文件"""
 
 import asyncio
+import traceback
+
 import aiohttp
 from collections import OrderedDict
 import datetime
@@ -18,11 +20,12 @@ class Download:
     def __init__(self) -> None:
         super(Download, self).__init__()
 
-    def download(self, url, path, parh_cache, ProgressGetModule_=None):
+    def download(self, url, path, parh_cache, ProgressGetModule_=None, SectionSize=4194304):
         self.parh_cache = parh_cache
         self.url = url
         self.path = path
         self.ProgressGetModule_ = ProgressGetModule_
+        self.SectionSize = SectionSize
         # 先检查文件大小
         headers={
             "Accept-Encoding": "identity",
@@ -69,7 +72,7 @@ class Download:
                 else:
                     file_size_str_l = int(file_size_str_l_to)
                     file_size_str_l += 1
-                file_size_str_l_to = file_size_str_l+ 4194304
+                file_size_str_l_to = file_size_str_l+ self.SectionSize
                 if file_size_str_l < self.file_size_str:
                     if file_size_str_l_to < self.file_size_str:
                         pass
@@ -159,6 +162,26 @@ class Download:
             except aiohttp.client_exceptions.ClientPayloadError:
                 print('客户端网络错误')
                 await asyncio.sleep(10)
+            except aiohttp.client_exceptions.ServerTimeoutError:
+                print('error_ServerTimeoutError')
+                await asyncio.sleep(10)
+            except aiohttp.client_exceptions.ServerDisconnectedError:
+                print('error_ServerDisconnectedError')
+                await asyncio.sleep(10)
+            except aiohttp.client_exceptions.ClientOSError:
+                print('error_ClientOSError')
+                await asyncio.sleep(10)
+            except asyncio.exceptions.CancelledError:
+                print('error_CancelledError')
+                await asyncio.sleep(10)
+            except asyncio.exceptions.TimeoutError:
+                print('error_TimeoutError')
+                await asyncio.sleep(10)
+            except:
+                traceback.print_exc()
+                print("出现异常")
+                break
+
         print('OK')
         self.N_Ok += 1
         self.ProgressGetModule(['download',self.N_Ok])

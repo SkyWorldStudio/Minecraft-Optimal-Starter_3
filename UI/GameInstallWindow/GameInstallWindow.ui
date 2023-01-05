@@ -337,11 +337,14 @@ QProgressBar::chunk{
                      <height>10</height>
                     </size>
                    </property>
+                   <property name="minimum">
+                    <number>0</number>
+                   </property>
                    <property name="maximum">
-                    <number>-1</number>
+                    <number>0</number>
                    </property>
                    <property name="value">
-                    <number>-1</number>
+                    <number>0</number>
                    </property>
                    <property name="textVisible">
                     <bool>false</bool>
@@ -368,8 +371,11 @@ QProgressBar::chunk{
                      <height>10</height>
                     </size>
                    </property>
+                   <property name="maximum">
+                    <number>100</number>
+                   </property>
                    <property name="value">
-                    <number>24</number>
+                    <number>0</number>
                    </property>
                    <property name="textVisible">
                     <bool>false</bool>
@@ -396,8 +402,11 @@ QProgressBar::chunk{
                      <height>10</height>
                     </size>
                    </property>
+                   <property name="maximum">
+                    <number>100</number>
+                   </property>
                    <property name="value">
-                    <number>24</number>
+                    <number>0</number>
                    </property>
                    <property name="textVisible">
                     <bool>false</bool>

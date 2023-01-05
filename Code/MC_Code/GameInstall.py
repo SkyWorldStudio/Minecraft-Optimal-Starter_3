@@ -7,12 +7,14 @@ import zipfile
 import random
 import time
 import traceback
+import threading
 
 import aiohttp
 import requests
 import queue
 
 from Code.Code import Sha1, Hash
+from Code.Download_Big import Download as JarAndBigFileDownload
 
 
 class GameInstall():
@@ -442,10 +444,10 @@ class GameInstall():
                     h = Sha1(path)
                     if h != hash:
                         self.Size_All += size
-                        self.Assets.append(['Assets', url, path_up, path, hash, size])
+                        self.Assets.append(['Assets', url, path_up, path, size, hash])
                 else:
                     self.Size_All += size
-                    self.Assets.append(['Assets', url, path_up, path, hash, size])
+                    self.Assets.append(['Assets', url, path_up, path, size, hash])
         self.Progress(['start',7,7])
 
 
@@ -488,8 +490,7 @@ class GameInstall():
         else:
             print('一共' + '1'+ '项文件')
 
-        from Code.Download_Big import Download as JarDownload
-        a = JarDownload()
+        a = JarAndBigFileDownload()
         a.download(self.MainJar[1],self.MainJar[3],
                    os.path.join(self.File, 'Caches'),
                    self.JarProgress)
@@ -533,44 +534,78 @@ class GameInstall():
         path_up = list[2]
         path = list[3]
         os.makedirs(path_up, exist_ok=True)
-        try:
-            async with aiohttp.ClientSession(timeout = aiohttp.ClientTimeout(connect=3),trust_env = True) as session:
-                f = await session.get(url, headers=headers, ssl=False,timeout=10)
-                f_code = await f.read()
-                with open(path, 'wb') as f:
-                    f.write(f_code)
-                # f_code = ''  # 释放缓存
-                self.AllList.remove(list)
-                print(str(len(self.AllList)) + 'ok')
-            if list[0] == 'Libraries':
-                if list[6] == True:
-                    path_z = os.path.join(self.GameFile_V, os.path.basename(path))
-                    f = zipfile.ZipFile(path, 'r')  # 压缩文件位置
-                    for file in f.namelist():
-                        f.extract(file, path_z)  # 解压位置
-                    f.close()
-                self.Libraries_Ok += 1
-            else:
-                self.Assets_Ok += 1
+        s = list[4]/1024/1024
+        if s< 1:
+            timeOut = 3
+            One = True
+        elif s >= 1 and s< 2:
+            # 如果大于等于1MB,小于等于2MB
+            timeOut = 5
+            One = True
+        elif s>=2 and s< 4:
+            timeOut = 10
+            One = True
+        elif s>= 5:
+            timeOut = 15
+            One = True
+        else:
+            timeOut = 30
+            One = True
 
-            print(list)
-            self.Size_Ok += list[5]
-            self.Progress(['download', self.Libraries_Ok, self.Assets_Ok,self.Size_Ok])
-        except aiohttp.client_exceptions.ServerTimeoutError:
-            print('error_ServerTimeoutError')
-        except aiohttp.client_exceptions.ServerDisconnectedError:
-            print('error_ServerDisconnectedError')
-        except aiohttp.client_exceptions.ClientConnectorError:
-            print('error_ClientConnectorError')
-        except aiohttp.client_exceptions.ClientOSError:
-            print('error_ClientOSError')
-        except asyncio.exceptions.CancelledError:
-            print('error_CancelledError')
-        except asyncio.exceptions.TimeoutError:
-            print('error_TimeoutError')
-        except:
-            traceback.print_exc()
-            print("出现异常")
+        if One:
+            try:
+                async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(connect=4), trust_env=True) as session:
+                    f = await session.get(url, headers=headers, ssl=False, timeout=timeOut)
+                    f_code = await f.read()
+                    with open(path, 'wb') as f:
+                        f.write(f_code)
+                    # f_code = ''  # 释放缓存
+                    self.AllList.remove(list)
+                    print(str(len(self.AllList)) + 'ok')
+                if list[0] == 'Libraries':
+                    if list[6] == True:
+                        path_z = os.path.join(self.GameFile_V, os.path.basename(path))
+                        f = zipfile.ZipFile(path, 'r')  # 压缩文件位置
+                        for file in f.namelist():
+                            f.extract(file, path_z)  # 解压位置
+                        f.close()
+                    self.Libraries_Ok += 1
+                else:
+                    self.Assets_Ok += 1
+
+                print(list)
+                self.Size_Ok += list[4]
+                self.Progress(['download', self.Libraries_Ok, self.Assets_Ok, self.Size_Ok])
+            except aiohttp.client_exceptions.ServerTimeoutError:
+                print('error_ServerTimeoutError')
+            except aiohttp.client_exceptions.ServerDisconnectedError:
+                print('error_ServerDisconnectedError')
+            except aiohttp.client_exceptions.ClientConnectorError:
+                print('error_ClientConnectorError')
+            except aiohttp.client_exceptions.ClientOSError:
+                print('error_ClientOSError')
+            except asyncio.exceptions.CancelledError:
+                print('error_CancelledError')
+            except asyncio.exceptions.TimeoutError:
+                print('error_TimeoutError'+str(list))
+            except:
+                traceback.print_exc()
+                print("出现异常")
+        #else:
+        #    SectionSize = 4194304
+        #    def BigFile_Progress(list):
+        #        if list[0] == 'download':
+        #            self.Size_Ok += SectionSize
+        #    def Run():
+        #        a = JarAndBigFileDownload()
+        #        a.download(url, path, path_up, BigFile_Progress, SectionSize)
+        #    thread1 = threading.Thread(name='t1', target=Run)
+        #    thread1.start()  # 启动线程1
+        #    thread1.join()
+
+
+
+
 
     def Progress(self,Progress_):
         """

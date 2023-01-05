@@ -88,16 +88,20 @@ class Dialog_GameInstallWindows_(QDialog, Ui_Dialog_GameInstall):
         elif text[0] == 'info':
             # 如果是报告下载量的
             if text[1] == 0:
+                self.librarysFileNoNone = False
                 self.progressBar_inatall_libraryFile.setMaximum(-1)
                 self.progressBar_inatall_libraryFile.setMinimum(-2)
                 self.progressBar_inatall_libraryFile.setValue(-1)
             else:
+                self.librarysFileNoNone = True
                 self.progressBar_inatall_libraryFile.setMaximum(text[1])
             if text[2] == 0:
+                self.assetsFileNoNone = False
                 self.progressBar_inatall_assetsFile.setMaximum(-1)
                 self.progressBar_inatall_assetsFile.setMinimum(-2)
                 self.progressBar_inatall_assetsFile.setValue(-1)
             else:
+                self.assetsFileNoNone = True
                 self.progressBar_inatall_assetsFile.setMaximum(text[2])
 
             t = round(text[3]/1024/1024,2)  # 四舍五入保留2位
@@ -106,10 +110,10 @@ class Dialog_GameInstallWindows_(QDialog, Ui_Dialog_GameInstall):
 
         elif text[0] == 'download':
             # 如果是正在下载
-            if self.progressBar_inatall_libraryFile.value() != -1:
+            if self.librarysFileNoNone:
                 self.progressBar_inatall_libraryFile.setValue(text[1])
 
-            if self.progressBar_inatall_assetsFile.value() != -1:
+            if self.assetsFileNoNone:
                 self.progressBar_inatall_assetsFile.setValue(text[2])
 
             t = round(text[3]/1024/1024,2)  # 四舍五入保留2位
@@ -133,6 +137,7 @@ class Dialog_GameInstallWindows_(QDialog, Ui_Dialog_GameInstall):
 
         elif text[0] == 'ok':
             # 完成
+            self.sinOut_OK.emit()
             self.close_()
 
     def Spend_QTime(self):
@@ -152,7 +157,10 @@ class Dialog_GameInstallWindows_(QDialog, Ui_Dialog_GameInstall):
     def close_(self):
         def close__():
             self.close()
-
+        try:
+            self.label_Sidebar_B_QTime.stop()
+        except AttributeError:
+            pass
         self.anim = QPropertyAnimation(self, b"windowOpacity")  # 设置动画对象
         self.anim.setDuration(300)  # 设置动画时长
         self.anim.setStartValue(1)  # 设置初始属性，1.0为不透明
