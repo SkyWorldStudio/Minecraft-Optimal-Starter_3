@@ -83,6 +83,7 @@ def Json_InitializeFirst():
         'Download_Source':'MCBBS',
         'Download_Source_ExceptionHandling':True,
         'Systeam':'',
+        'Systeam_Places':'',
         'Systeam_V':''
     }
     return J

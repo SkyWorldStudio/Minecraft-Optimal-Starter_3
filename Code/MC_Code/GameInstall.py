@@ -143,9 +143,10 @@ class GameInstall():
 
                     if 'artifact' in L['downloads']:
                         A = L['downloads']['artifact']
+                        Zip = False
                     else:
                         A = L['downloads']['classifiers']['natives-osx']
-                    Sh = A['sha1']
+                        Zip = True
 
                     if len(R) != 1:
                         if R['action'] == 'disallow':
@@ -173,21 +174,9 @@ class GameInstall():
                                                     s = Sha1(Path)
                                                     if s != Sh:
                                                         print('l_on')
-                                                        if 'artifact' in L['downloads']:
-                                                            A = L['downloads']['artifact']
-                                                            Zip = False
-                                                        else:
-                                                            A = L['downloads']['classifiers']['natives-osx']
-                                                            Zip = True
                                                         self.Size_All += A['size']
                                                         self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
                                             else:
-                                                if 'artifact' in L['downloads']:
-                                                    A = L['downloads']['artifact']
-                                                    Zip = False
-                                                else:
-                                                    A = L['downloads']['classifiers']['natives-osx']
-                                                    Zip = True
                                                 self.Size_All += A['size']
                                                 self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
 
@@ -211,21 +200,9 @@ class GameInstall():
                                                 if self.Sha1Cleck:
                                                     s = Sha1(Path)
                                                     if s != Sh:
-                                                        if 'artifact' in L['downloads']:
-                                                            A = L['downloads']['artifact']
-                                                            Zip = False
-                                                        else:
-                                                            A = L['downloads']['classifiers']['natives-windows']
-                                                            Zip = True
                                                         self.Size_All += A['size']
                                                         self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
                                             else:
-                                                if 'artifact' in L['downloads']:
-                                                    A = L['downloads']['artifact']
-                                                    Zip = False
-                                                else:
-                                                    A = L['downloads']['classifiers']['natives-windows']
-                                                    Zip = True
                                                 self.Size_All += A['size']
                                                 self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
 
@@ -249,21 +226,9 @@ class GameInstall():
                                                 if self.Sha1Cleck:
                                                     s = Sha1(Path)
                                                     if s != Sh:
-                                                        if 'artifact' in L['downloads']:
-                                                            A = L['downloads']['artifact']
-                                                            Zip = False
-                                                        else:
-                                                            A = L['downloads']['classifiers']['natives-linux']
-                                                            Zip = True
                                                         self.Size_All += A['size']
                                                         self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
                                             else:
-                                                if 'artifact' in L['downloads']:
-                                                    A = L['downloads']['artifact']
-                                                    Zip = False
-                                                else:
-                                                    A = L['downloads']['classifiers']['natives-linux']
-                                                    Zip = True
                                                 self.Size_All += A['size']
                                                 self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
 
@@ -291,21 +256,9 @@ class GameInstall():
                                                 if self.Sha1Cleck:
                                                     s = Sha1(Path)
                                                     if s != Sh:
-                                                        if 'artifact' in L['downloads']:
-                                                            A = L['downloads']['artifact']
-                                                            Zip = False
-                                                        else:
-                                                            A = L['downloads']['classifiers']['natives-osx']
-                                                            Zip = True
                                                         self.Size_All += A['size']
                                                         self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
                                             else:
-                                                if 'artifact' in L['downloads']:
-                                                    A = L['downloads']['artifact']
-                                                    Zip = False
-                                                else:
-                                                    A = L['downloads']['classifiers']['natives-osx']
-                                                    Zip = True
                                                 self.Size_All += A['size']
                                                 self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
 
@@ -329,12 +282,6 @@ class GameInstall():
                                                 if self.Sha1Cleck:
                                                     s = Sha1(Path)
                                                     if s != Sh:
-                                                        if 'artifact' in L['downloads']:
-                                                            A = L['downloads']['artifact']
-                                                            Zip = False
-                                                        else:
-                                                            A = L['downloads']['classifiers']['natives-windows']
-                                                            Zip = True
                                                         self.Size_All += A['size']
                                                         self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
                                             else:
@@ -367,21 +314,9 @@ class GameInstall():
                                                 if self.Sha1Cleck:
                                                     s = Sha1(Path)
                                                     if s != Sh:
-                                                        if 'artifact' in L['downloads']:
-                                                            A = L['downloads']['artifact']
-                                                            Zip = False
-                                                        else:
-                                                            A = L['downloads']['classifiers']['natives-linux']
-                                                            Zip = True
                                                         self.Size_All += A['size']
                                                         self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
                                             else:
-                                                if 'artifact' in L['downloads']:
-                                                    A = L['downloads']['artifact']
-                                                    Zip = False
-                                                else:
-                                                    A = L['downloads']['classifiers']['natives-linux']
-                                                    Zip = True
                                                 self.Size_All += A['size']
                                                 self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
 

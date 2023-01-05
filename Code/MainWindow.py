@@ -1244,14 +1244,18 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 M_T = str(M_T[0]).split('\n')[1]
                 Systeam_V = M_T.split('\t')[1]
                 self.Json_MOS['Systeam_V'] = Systeam_V
+                self.Json_MOS['Systeam_Places'] = 64
             elif self.Systeam == 'Win':
                 import platform
                 M_T = platform.platform()
                 Systeam_V = str(M_T).split('-')[1]
+                Places = int(str(platform.architecture()[1]).split('bit')[0])
+                self.Json_MOS['Systeam_Places'] = Places
                 self.Json_MOS['Systeam_V'] = Systeam_V
             else:
                 import platform
                 Systeam_V = platform.release()
+                self.Json_MOS['Systeam_Places'] = 64
                 self.Json_MOS['Systeam_V'] = Systeam_V
 
             self.Json_MOS['Systeam'] = self.Systeam
