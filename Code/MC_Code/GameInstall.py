@@ -20,7 +20,7 @@ from Code.Download_Big import Download as JarAndBigFileDownload
 class GameInstall():
     def __init__(self, GameFile_M, GameFile_V, File, Download_Source, V_JsonFile,
                  V, Name, V_Forge,V_Fabric,V_Optifine,
-                 Systeam,Systeam_V,
+                 System,System_V,System_Places,
                  AssetsFileDownloadMethod,Sha1Cleck,MaxConcurrence,ProgressGetModule):
         """
             游戏安装
@@ -34,8 +34,9 @@ class GameInstall():
             :param V_Forge: Forge版本
             :param V_Fabric: Fabric版本
             :param V_Optifine: Optifine版本
-            :param Systeam: 系统种类(Windows, Mac, Linux)
-            :param Systeam_V: 系统版本(10,14.4.1)
+            :param System: 系统种类(Windows, Mac, Linux)
+            :param System_V: 系统版本(10,14.4.1)
+            :param System_Places: 系统架构位数
             :param AssetsFileDownloadMethod: 资源文件下载方式(A,B-尚未完成)
             :param Sha1Cleck: 是否进行Sha1检查
             :param MaxConcurrence: 最大并发数
@@ -51,8 +52,9 @@ class GameInstall():
         self.V_Forge = V_Forge
         self.V_Fabric = V_Fabric
         self.V_Optifine = V_Optifine
-        self.Systeam = Systeam
-        self.Systeam_V = Systeam_V
+        self.System = System
+        self.System_V = System_V
+        self.System_Places = System_Places
         self.AssetsFileDownloadMethod = AssetsFileDownloadMethod
         self.Sha1Cleck = Sha1Cleck
         self.MaxConcurrence = MaxConcurrence
@@ -140,13 +142,30 @@ class GameInstall():
         for L in V_Json['libraries']:
             if 'rules' in L:
                 for R in L['rules']:
-
                     if 'artifact' in L['downloads']:
-                        A = L['downloads']['artifact']
                         Zip = False
+                        A = L['downloads']['artifact']
                     else:
-                        A = L['downloads']['classifiers']['natives-osx']
                         Zip = True
+                        a = L['downloads']['classifiers']
+                        if self.System  == 'Win':
+                            b = 'natives-windows'
+                            if self.Sytem_Places == 64:
+                                # 如果为60位
+                                c = 'natives-windows-64"'
+                            else:
+                                c = 'natives-windows-32'
+                            if b in a:
+                                A = a[b]
+                            else:
+                                A = a[c]
+                        elif self.System  == 'Mac':
+                            b = 'natives-macos'
+                            A = a[b]
+                        elif self.System  == 'Linux':
+                            b = 'natives-linux'
+                            A = a[b]
+
 
                     if len(R) != 1:
                         if R['action'] == 'disallow':
@@ -154,12 +173,12 @@ class GameInstall():
                             R.pop('action')
                             for a in R:
                                 if R[a]['name'] == 'osx':
-                                    if self.Systeam == 'Mac':
+                                    if self.System == 'Mac':
                                         # 如果系统匹配就进行正则表达式判断
                                         if 'version' in R[a]:
                                             # 如果写了系统版本限制规则
                                             r = R[a]['version']
-                                            m = re.search(r, self.Systeam_V)
+                                            m = re.search(r, self.System_V)
                                         else:
                                             m = ''  # 让下面的if, 识别为"允许"
                                         
@@ -181,12 +200,12 @@ class GameInstall():
                                                 self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
 
                                 elif R[a]['name'] == 'windows':
-                                    if self.Systeam == 'Win':
+                                    if self.System == 'Win':
                                         # 如果系统匹配就进行正则表达式判断
                                         if 'version' in R[a]:
                                             # 如果写了系统版本限制规则
                                             r = R[a]['version']
-                                            m = re.search(r, self.Systeam_V)
+                                            m = re.search(r, self.System_V)
                                         else:
                                             m = ''  # 让下面的if, 识别为"允许"
                                         
@@ -207,12 +226,12 @@ class GameInstall():
                                                 self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
 
                                 elif R[a]['name'] == 'linux':
-                                    if self.Systeam == 'Linux':
+                                    if self.System == 'Linux':
                                         # 如果系统匹配就进行正则表达式判断
                                         if 'version' in R[a]:
                                             # 如果写了系统版本限制规则
                                             r = R[a]['version']
-                                            m = re.search(r, self.Systeam_V)
+                                            m = re.search(r, self.System_V)
                                         else:
                                             m = ''  # 让下面的if, 识别为"允许"
                                         
@@ -237,12 +256,12 @@ class GameInstall():
                             R.pop('action')
                             for a in R:
                                 if R[a]['name'] == 'osx':
-                                    if self.Systeam == 'Mac':
+                                    if self.System == 'Mac':
                                         # 如果系统匹配就进行正则表达式判断
                                         if 'version' in R[a]:
                                             # 如果写了系统版本限制规则
                                             r = R[a]['version']
-                                            m = re.search(r, self.Systeam_V)
+                                            m = re.search(r, self.System_V)
                                         else:
                                             m = ''  # 让下面的if, 识别为"允许"
                                         
@@ -263,12 +282,12 @@ class GameInstall():
                                                 self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
 
                                 elif R[a]['name'] == 'windows':
-                                    if self.Systeam == 'Win':
+                                    if self.System == 'Win':
                                         # 如果系统匹配就进行正则表达式判断
                                         if 'version' in R[a]:
                                             # 如果写了系统版本限制规则
                                             r = R[a]['version']
-                                            m = re.search(r, self.Systeam_V)
+                                            m = re.search(r, self.System_V)
                                         else:
                                             m = ''  # 让下面的if, 识别为"允许"
                                         
@@ -295,12 +314,12 @@ class GameInstall():
                                                 self.Libraries.append(['Libraries',URL, Path_Up, Path, A['size'], Sh, Zip])
 
                                 elif R[a]['name'] == 'linux':
-                                    if self.Systeam == 'Linux':
+                                    if self.System == 'Linux':
                                         # 如果系统匹配就进行正则表达式判断
                                         if 'version' in R[a]:
                                             # 如果写了系统版本限制规则
                                             r = R[a]['version']
-                                            m = re.search(r, self.Systeam_V)
+                                            m = re.search(r, self.System_V)
                                         else:
                                             m = ''  # 让下面的if, 识别为"允许"
                                         
@@ -322,21 +341,21 @@ class GameInstall():
 
             else:
                 # 没有规则限制
-                if self.Systeam == 'Mac':
+                if self.System == 'Mac':
                     if 'artifact' in L['downloads']:
                         A = L['downloads']['artifact']
                         Zip = False
                     else:
                         A = L['downloads']['classifiers']['natives-osx']
                         Zip = True
-                elif self.Systeam == 'Win':
+                elif self.System == 'Win':
                     if 'artifact' in L['downloads']:
                         A = L['downloads']['artifact']
                         Zip = False
                     else:
                         A = L['downloads']['classifiers']['natives-windows']
                         Zip = True
-                elif self.Systeam == 'Linux':
+                elif self.System == 'Linux':
                     if 'artifact' in L['downloads']:
                         A = L['downloads']['artifact']
                         Zip = False

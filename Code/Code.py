@@ -82,9 +82,9 @@ def Json_InitializeFirst():
         'Game_List_Clicked': 0,
         'Download_Source':'MCBBS',
         'Download_Source_ExceptionHandling':True,
-        'Systeam':'',
-        'Systeam_Places':'',
-        'Systeam_V':''
+        'System':'',
+        'System_Places':'',
+        'System_V':''
     }
     return J
 
@@ -107,7 +107,7 @@ def InitializeFirst():
 
 def File():
     """获取缓存目录"""
-    s = Systeam()
+    s = System()
     if s == 'Mac':
         # 获取当前系统用户目录
         UserFile = os.path.expanduser('~')
@@ -117,7 +117,7 @@ def File():
     return file
 
 
-def Systeam():
+def System():
     """
         return: Mac Win Linux
 

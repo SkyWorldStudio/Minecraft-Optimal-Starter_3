@@ -12,7 +12,7 @@ from pytz import timezone
 
 from Code.Log import print_, Log_Clear, Log_Return
 from UI.MainWindow.MainWindow import Ui_MainWindow
-from Code.Code import JsonRead, JsonFile, Systeam, JsonWrite, File, Json_Cheak
+from Code.Code import JsonRead, JsonFile, System, JsonWrite, File, Json_Cheak
 
 
 class RunUi(QMainWindow, Ui_MainWindow):
@@ -502,6 +502,10 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
     def DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start(self,MCName):
         """启动 根据版本获取Forge,Fabric,Optifine列表"""
+        self.widget_page_download_1_install_forge.setEnabled(True)
+        self.widget_page_download_1_install_fabric.setEnabled(True)
+        self.widget_page_download_1_install_optifine.setEnabled(True)
+
         self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Forge = DownloadPage_stackedWidget_GameList_Clicked_Get_Thread('Forge',MCName)
         self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Forge.SinOut.connect(self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut)
         self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Forge.SinOut_OK.connect(self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut_OK)
@@ -619,17 +623,31 @@ class RunUi(QMainWindow, Ui_MainWindow):
         U.addItem(item)
         U.setItemWidget(item, widget)
 
-    def DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut_OK(self,Kind):
+    def DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut_OK(self,Kind,Z=True):
         """
             根据版本获取Forge,Fabric,Optifine列表线程的SinOut_OK
             :param Kind: 种类(Forge,Fabric,Optifine)
+            :param Z: 有没项目
         """
-        if Kind == 'Forge':
-            self.label_page_download_1_install_forge_up_state.setText('')
-        elif Kind == 'Fabric':
-            self.label_page_download_1_install_fabric_up_state.setText('')
-        elif Kind == 'Optifine':
-            self.label_page_download_1_install_optifine_up_state.setText('')
+        if Z:
+            if Kind == 'Forge':
+                self.label_page_download_1_install_forge_up_state.setText('')
+            elif Kind == 'Fabric':
+                self.label_page_download_1_install_fabric_up_state.setText('')
+            elif Kind == 'Optifine':
+                self.label_page_download_1_install_optifine_up_state.setText('')
+        else:
+            print('=========')
+            print(Kind)
+            if Kind == 'Forge':
+                self.label_page_download_1_install_forge_up_state.setText('无')
+                self.widget_page_download_1_install_forge.setEnabled(False)
+            elif Kind == 'Fabric':
+                self.label_page_download_1_install_fabric_up_state.setText('无')
+                self.widget_page_download_1_install_fabric.setEnabled(False)
+            elif Kind == 'Optifine':
+                self.label_page_download_1_install_optifine_up_state.setText('无')
+                self.widget_page_download_1_install_optifine.setEnabled(False)
 
 
     def DownloadPage_stackedWidget_install_fabric(self):
@@ -721,7 +739,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             # ProgressGetModule = self.GameInstallWindow_Progress
             self.Dialog_GameInstallWindows_ = Dialog_GameInstallWindows_(GameFile_M, GameFile_V, self.File, self.Json_MOS['Download_Source'], V_JsonFile,
                                                                         self.DownloadPage_V, Name, V_Forge,V_Fabric,V_Optifine,
-                                                                        self.Json_MOS['Systeam'],self.Json_MOS['Systeam_V'],
+                                                                        self.Json_MOS['System'],self.Json_MOS['System_V'],self.Json_MOS['System_Places'],
                                                                         AssetsFileDownloadMethod,Sha1Cleck,MaxConcurrence)
             self.Dialog_GameInstallWindows_.sinOut_Win_XY.connect(self.Window_XY)
             self.Dialog_GameInstallWindows_.sinOut_OK.connect(self.GameInstallWindow_OK)
@@ -1218,8 +1236,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
             """设置启动器"""
             # 导入
             # 读取阶段(读取配置等)
-            self.Systeam = Systeam()
-            print_('Info', '系统检测: 系统：' + self.Systeam)
+            self.System = System()
+            print_('Info', '系统检测: 系统：' + self.System)
             self.Json_MOS = JsonRead(self.JsonFile)
             print_('Info', '程序启动(初始化设置): Json读取完成')
             C = Json_Cheak(self.JsonFile)
@@ -1232,33 +1250,33 @@ class RunUi(QMainWindow, Ui_MainWindow):
             print_('Info', '程序启动(初始化设置:Json检查): Json验证完成')
             self.label_loading_text_2.setText('正在设置启动器(4/7)')
             # 设置阶段
-            if self.Systeam != 'Mac':
+            if self.System != 'Mac':
                 self.radioButton_settings_subject_automatic.setEnabled(False)
                 self.radioButton_settings_subject_automatic.setToolTip('跟随系统(只限于Mac系统)-当前不可用')
-            if self.Systeam == 'Mac':
+            if self.System == 'Mac':
                 # 如果是Mac
                 M = 'sw_vers'
                 import subprocess
                 M_ = subprocess.Popen(M,shell=True,encoding='utf-8',stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
                 M_T = M_.communicate()
                 M_T = str(M_T[0]).split('\n')[1]
-                Systeam_V = M_T.split('\t')[1]
-                self.Json_MOS['Systeam_V'] = Systeam_V
-                self.Json_MOS['Systeam_Places'] = 64
-            elif self.Systeam == 'Win':
+                System_V = M_T.split('\t')[1]
+                self.Json_MOS['System_V'] = System_V
+                self.Json_MOS['System_Places'] = 64
+            elif self.System == 'Win':
                 import platform
                 M_T = platform.platform()
-                Systeam_V = str(M_T).split('-')[1]
+                System_V = str(M_T).split('-')[1]
                 Places = int(str(platform.architecture()[1]).split('bit')[0])
-                self.Json_MOS['Systeam_Places'] = Places
-                self.Json_MOS['Systeam_V'] = Systeam_V
+                self.Json_MOS['System_Places'] = Places
+                self.Json_MOS['System_V'] = System_V
             else:
                 import platform
-                Systeam_V = platform.release()
-                self.Json_MOS['Systeam_Places'] = 64
-                self.Json_MOS['Systeam_V'] = Systeam_V
+                System_V = platform.release()
+                self.Json_MOS['System_Places'] = 64
+                self.Json_MOS['System_V'] = System_V
 
-            self.Json_MOS['Systeam'] = self.Systeam
+            self.Json_MOS['System'] = self.System
 
             if self.Json_MOS['Subject'] == 'Light':
                 self.radioButton_settings_subject_light.setChecked(True)
@@ -1911,7 +1929,7 @@ class DownloadPage_stackedWidget_GetGameList_Thread(QThread):
 
 class DownloadPage_stackedWidget_GameList_Clicked_Get_Thread(QThread):
     SinOut = pyqtSignal(str,str,str,str)
-    SinOut_OK = pyqtSignal(str)
+    SinOut_OK = pyqtSignal(str,bool)
     def __init__(self, Kind, V):
         """
             多线程 根据版本获取Forge,Fabric,Optifine列表
@@ -1930,31 +1948,36 @@ class DownloadPage_stackedWidget_GameList_Clicked_Get_Thread(QThread):
         elif self.Kind == 'Optifine':
             self.URL = 'https://bmclapi2.bangbang93.com/optifine/' + str(self.V)
         import requests, gc
-        r = requests.get(self.URL)
-        j = r.json()
         print(self.URL)
-        for a in j:
-            if self.Kind == 'Forge':
-                n = a['version']
-                t = a['modified']
-                k = None
-            elif self.Kind == 'Fabric':
-                n = a['loader']['version']
-                t = None
-                if a['loader']['stable'] == True:
-                    k = 'Stable'
-                else:
-                    k = 'Bata'
-            elif self.Kind == 'Optifine':
-                n = a['type']
-                t = None
-                if 'forge' in a:
-                    k = 'Stable'
-                else:
-                    k = 'Bata'
-                    n = n + '_' + a['patch']
-            self.SinOut.emit(self.Kind,n,t,k)
-        self.SinOut_OK.emit(self.Kind)
+        r = requests.get(self.URL)
+        try:
+            j = r.json()
+            print(self.URL)
+            for a in j:
+                if self.Kind == 'Forge':
+                    n = a['version']
+                    t = a['modified']
+                    k = None
+                elif self.Kind == 'Fabric':
+                    n = a['loader']['version']
+                    t = None
+                    if a['loader']['stable'] == True:
+                        k = 'Stable'
+                    else:
+                        k = 'Bata'
+                elif self.Kind == 'Optifine':
+                    n = a['type']
+                    t = None
+                    if 'forge' in a:
+                        k = 'Stable'
+                    else:
+                        k = 'Bata'
+                        n = n + '_' + a['patch']
+                self.SinOut.emit(self.Kind, n, t, k)
+            self.SinOut_OK.emit(self.Kind,True)
+        except requests.exceptions.JSONDecodeError:
+            self.SinOut_OK.emit(self.Kind,False)
+
         gc.collect()
 
 

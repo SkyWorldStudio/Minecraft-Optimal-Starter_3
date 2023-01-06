@@ -2905,6 +2905,9 @@ Line{
                            </item>
                            <item>
                             <widget class="MyQWidget" name="widget_page_download_1_install_quilt" native="true">
+                             <property name="enabled">
+                              <bool>false</bool>
+                             </property>
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
                                <horstretch>0</horstretch>
@@ -3478,8 +3481,8 @@ Line{
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>1095</width>
-                    <height>538</height>
+                    <width>551</width>
+                    <height>300</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_12">

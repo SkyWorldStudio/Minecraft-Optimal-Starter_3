@@ -15,7 +15,7 @@ class Dialog_GameInstallWindows_(QDialog, Ui_Dialog_GameInstall):
 
     def __init__(self, GameFile_M, GameFile_V, File, Download_Source, V_JsonFile,
                  V, Name, V_Forge,V_Fabric,V_Optifine,
-                 Systeam,Systeam_V,
+                 System,System_V,System_Places,
                  AssetsFileDownloadMethod,Sha1Cleck,MaxConcurrence):
         """
             游戏安装窗口
@@ -29,8 +29,9 @@ class Dialog_GameInstallWindows_(QDialog, Ui_Dialog_GameInstall):
             :param V_Forge: Forge版本
             :param V_Fabric: Fabric版本
             :param V_Optifine: Optifine版本
-            :param Systeam: 系统种类(Windows, Mac, Linux)
-            :param Systeam_V: 系统版本(10,14.4.1)
+            :param System: 系统种类(Windows, Mac, Linux)
+            :param System_V: 系统版本(10,14.4.1)
+            :param System_Places: 系统架构位数
             :param AssetsFileDownloadMethod: 资源文件下载方式(A,B-尚未完成)
             :param Sha1Cleck: 是否进行Sha1检查
             :param MaxConcurrence: 最大并发数
@@ -63,8 +64,9 @@ class Dialog_GameInstallWindows_(QDialog, Ui_Dialog_GameInstall):
         self.V_Forge = V_Forge
         self.V_Fabric = V_Fabric
         self.V_Optifine = V_Optifine
-        self.Systeam = Systeam
-        self.Systeam_V = Systeam_V
+        self.System = System
+        self.System_V = System_V
+        self.System_Places = System_Places
         self.AssetsFileDownloadMethod = AssetsFileDownloadMethod
         self.Sha1Cleck = Sha1Cleck
         self.MaxConcurrence = MaxConcurrence
@@ -73,7 +75,7 @@ class Dialog_GameInstallWindows_(QDialog, Ui_Dialog_GameInstall):
         self.Install_Thread_ = \
             Install_Thread(self.GameFile_M, self.GameFile_V, self.File, self.Download_Source, self.V_JsonFile,
                            self.V, self.Name, self.V_Forge,self.V_Fabric,self.V_Optifine,
-                           self.Systeam,self.Systeam_V,
+                           self.System,self.System_V,self.System_Places,
                            self.AssetsFileDownloadMethod,self.Sha1Cleck,self.MaxConcurrence)
         self.Install_Thread_.SinOut.connect(self.SinOut)
         self.Install_Thread_.start()
@@ -210,7 +212,7 @@ class Install_Thread(QThread):
     SinOut = pyqtSignal(list)
     def __init__(self, GameFile_M, GameFile_V, File, Download_Source, V_JsonFile,
                  V, Name, V_Forge,V_Fabric,V_Optifine,
-                 Systeam,Systeam_V,
+                 System,System_V,System_Places,
                  AssetsFileDownloadMethod,Sha1Cleck,MaxConcurrence):
         """
             多线程安装
@@ -224,8 +226,9 @@ class Install_Thread(QThread):
             :param V_Forge: Forge版本
             :param V_Fabric: Fabric版本
             :param V_Optifine: Optifine版本
-            :param Systeam: 系统种类(Windows, Mac, Linux)
-            :param Systeam_V: 系统版本(10,14.4.1)
+            :param System: 系统种类(Windows, Mac, Linux)
+            :param System_V: 系统版本(10,14.4.1)
+            :param System_Places: 系统架构位数
             :param AssetsFileDownloadMethod: 资源文件下载方式(A,B-尚未完成)
             :param Sha1Cleck: 是否进行Sha1检查
             :param MaxConcurrence: 最大并发数
@@ -241,8 +244,9 @@ class Install_Thread(QThread):
         self.V_Forge = V_Forge
         self.V_Fabric = V_Fabric
         self.V_Optifine = V_Optifine
-        self.Systeam = Systeam
-        self.Systeam_V = Systeam_V
+        self.System = System
+        self.System_V = System_V
+        self.System_Places = System_Places
         self.AssetsFileDownloadMethod = AssetsFileDownloadMethod
         self.Sha1Cleck = Sha1Cleck
         self.MaxConcurrence = MaxConcurrence
@@ -252,7 +256,7 @@ class Install_Thread(QThread):
         from Code.MC_Code.GameInstall import GameInstall
         a = GameInstall(self.GameFile_M, self.GameFile_V, self.File, self.Download_Source, self.V_JsonFile,
                         self.V, self.Name, self.V_Forge, self.V_Fabric, self.V_Optifine,
-                        self.Systeam, self.Systeam_V,
+                        self.System, self.System_V,self.System_Places,
                         self.AssetsFileDownloadMethod, self.Sha1Cleck, self.MaxConcurrence, self.ProgressSinOut)
         a.Run()
         gc.collect()
