@@ -38,6 +38,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         # self.Sidebar_Clicked(Want='Back')
         try:
             print_('Info', '返回系统: 开始返回上一个')
+            print(self.H_B)
             if self.label_Sidebar_QTime_Ok and self.label_Sidebar_B_QTime_Ok:
                 if len(self.H_B) > 2:
                     B = self.H_B[-1]
@@ -68,6 +69,13 @@ class RunUi(QMainWindow, Ui_MainWindow):
                             self.Sidebar_Clicked(Want='Settings', H=False)
                         B['Name'].setCurrentIndex(B['Index_L'])
                     # B['Name'].setCurrentIndex(B['Index_L'])
+
+                    if B['And_']:
+                        for a in B['And_']:
+                            a_1 = a[0]
+                            a_1.setCurrentIndex(a[1])
+                        self.Sidebar_Clicked(Want='Home', H=False)
+
                     print_('Info', '返回系统: 返回完成 本次执行配置值: ' + str(self.H_B[-1]))
                     self.H_B.remove(self.H_B[-1])
 
@@ -77,10 +85,17 @@ class RunUi(QMainWindow, Ui_MainWindow):
                     if B['Name'] != False:
                         B['Name'].setCurrentIndex(B['Index_L'])
                     self.Sidebar_Clicked(Want='Home', H=False)
+
+                    if B['And_']:
+                        for a in B['And_']:
+                            a_1 = a[0]
+                            a_1.setCurrentIndex(a[1])
+                        self.Sidebar_Clicked(Want='Home', H=False)
+
+
                     print_('Info', '返回系统: 返回完成 本次执行配置值: ' + str(self.H_B[-1]))
                     self.H_B.remove(self.H_B[-1])
 
-                print(self.H_B)
 
                 if len(self.H_B)+1 == 1:
                     self.label_Sidebar_Back.setEnabled(False)
@@ -494,7 +509,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.DownloadPage_V = item.text()
         self.label_page_download_1_install_bottom.setText(str(self.DownloadPage_V) + '安装')
         self.lineEdit_page_download_1_install_bottom_GameName.setPlaceholderText(str(self.DownloadPage_V))
-        self.SetCurrentIndex(self.stackedWidget_page_download_1, 1, 3, True)
+        self.SetCurrentIndex(self.stackedWidget_page_download_1, 1, 3, True, [[self.stackedWidget_2,0]])
         self.listWidget_page_download_1_install_forge.clear()
         self.listWidget_page_download_1_install_fabric.clear()
         self.listWidget_page_download_1_install_optifine.clear()
@@ -1595,7 +1610,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
                     f.write(log_)
         Log_Clear()
 
-    def SetCurrentIndex(self, U, I, L=False, H=True):
+    def SetCurrentIndex(self, U, I, L=False, H=True, And_=False):
         """
             更改控件的页数，并记录历史
             参数:
@@ -1603,13 +1618,15 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 I: 要将控件更改为第……页 \n
                 L: 是否需要更改左边边栏显示(False, 如果更改->int) \n
                 H: 是否记录(True False)
+                And_: 如果记录,在返回的时候同时执行的其他翻页[[执行控件,页码],[执行控件,页码],[执行控件,页码]]
         """
         if H == True and U == False:
             self.H_B.append({
                 "Name": U,  # 控件名
                 "Index_L": int(self.stackedWidget_main_2.currentIndex()),  # 原来页码
                 "Left": L,  # 是否更改左边 如果改 值为改为多少 如果不改 值为False
-                "Left_L": int(self.stackedWidget_main_2.currentIndex())  # 原来左边页码
+                "Left_L": int(self.stackedWidget_main_2.currentIndex()),  # 原来左边页码
+                "And_": And_
             })
             self.stackedWidget_main_2.setCurrentIndex(I)
         elif H == True and U != False:
@@ -1618,7 +1635,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 "Index": I,  # 页码
                 "Index_L": int(U.currentIndex()),  # 原来页码
                 "Left": L,  # 是否更改左边 如果改 值为改为多少 如果不改 值为False
-                "Left_L": int(self.stackedWidget_main_2.currentIndex())  # 原来左边页码
+                "Left_L": int(self.stackedWidget_main_2.currentIndex()),  # 原来左边页码
+                "And_" : And_
             })
             self.stackedWidget_main_2.setCurrentIndex(L)
             U.setCurrentIndex(I)
