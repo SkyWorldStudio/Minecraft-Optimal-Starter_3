@@ -1282,7 +1282,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 import platform
                 M_T = platform.platform()
                 System_V = str(M_T).split('-')[1]
-                Places = int(str(platform.architecture()[1]).split('bit')[0])
+                Places = int(str(platform.architecture()[0]).split('bit')[0])
                 self.Json_MOS['System_Places'] = Places
                 self.Json_MOS['System_V'] = System_V
             else:
