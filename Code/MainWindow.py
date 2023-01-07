@@ -1950,33 +1950,36 @@ class DownloadPage_stackedWidget_GameList_Clicked_Get_Thread(QThread):
         import requests, gc
         print(self.URL)
         r = requests.get(self.URL)
-        try:
-            j = r.json()
-            print(self.URL)
-            for a in j:
-                if self.Kind == 'Forge':
-                    n = a['version']
-                    t = a['modified']
-                    k = None
-                elif self.Kind == 'Fabric':
-                    n = a['loader']['version']
-                    t = None
-                    if a['loader']['stable'] == True:
-                        k = 'Stable'
-                    else:
-                        k = 'Bata'
-                elif self.Kind == 'Optifine':
-                    n = a['type']
-                    t = None
-                    if 'forge' in a:
-                        k = 'Stable'
-                    else:
-                        k = 'Bata'
-                        n = n + '_' + a['patch']
-                self.SinOut.emit(self.Kind, n, t, k)
-            self.SinOut_OK.emit(self.Kind,True)
-        except requests.exceptions.JSONDecodeError:
-            self.SinOut_OK.emit(self.Kind,False)
+        if r.text != '[]':
+            try:
+                j = r.json()
+                print(self.URL)
+                for a in j:
+                    if self.Kind == 'Forge':
+                        n = a['version']
+                        t = a['modified']
+                        k = None
+                    elif self.Kind == 'Fabric':
+                        n = a['loader']['version']
+                        t = None
+                        if a['loader']['stable'] == True:
+                            k = 'Stable'
+                        else:
+                            k = 'Bata'
+                    elif self.Kind == 'Optifine':
+                        n = a['type']
+                        t = None
+                        if 'forge' in a:
+                            k = 'Stable'
+                        else:
+                            k = 'Bata'
+                            n = n + '_' + a['patch']
+                    self.SinOut.emit(self.Kind, n, t, k)
+                self.SinOut_OK.emit(self.Kind, True)
+            except requests.exceptions.JSONDecodeError:
+                self.SinOut_OK.emit(self.Kind, False)
+        else:
+            self.SinOut_OK.emit(self.Kind, False)
 
         gc.collect()
 

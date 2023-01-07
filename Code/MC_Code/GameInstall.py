@@ -168,7 +168,7 @@ class GameInstall():
                                                 A = L['downloads']['artifact']
                                             else:
                                                 Zip = True
-                                                b = 'natives-macos'
+                                                b = L['natives']['osx']
                                                 A = L['downloads']['classifiers'][b]
                                             Sh = A['sha1']
 
@@ -208,13 +208,13 @@ class GameInstall():
                                                 A = L['downloads']['artifact']
                                             else:
                                                 Zip = True
-                                                b = 'natives-windows'
+                                                b = L['natives']['windows']
                                                 if self.Sytem_Places == 64:
                                                     # 如果为60位
                                                     c = 'natives-windows-64"'
                                                 else:
                                                     c = 'natives-windows-32'
-                                                if b in L['downloads']['classifiers']:
+                                                if b != 'natives-windows-${arch}':
                                                     A = L['downloads']['classifiers'][b]
                                                 else:
                                                     A = L['downloads']['classifiers'][c]
@@ -255,7 +255,7 @@ class GameInstall():
                                                 A = L['downloads']['artifact']
                                             else:
                                                 Zip = True
-                                                b = 'natives-linux'
+                                                b = L['natives']['linux']
                                                 A = L['downloads']['classifiers'][b]
                                             Sh = A['sha1']
 
@@ -298,10 +298,8 @@ class GameInstall():
                                                 A = L['downloads']['artifact']
                                             else:
                                                 Zip = True
-                                                b = ['natives-macos', 'natives-osx']
-                                                for b_1 in b:
-                                                    if b_1 in L['downloads']['classifiers']:
-                                                        A = L['downloads']['classifiers'][b]
+                                                b = L['natives']['osx']
+                                                A = L['downloads']['classifiers'][b]
                                             Sh = A['sha1']
 
                                             if os.path.exists(Path):
@@ -339,17 +337,17 @@ class GameInstall():
                                                 A = L['downloads']['artifact']
                                             else:
                                                 Zip = True
-                                                b = 'natives-windows'
+                                                b = L['natives']['windows']
                                                 if self.Sytem_Places == 64:
                                                     # 如果为60位
                                                     c = 'natives-windows-64"'
                                                 else:
                                                     c = 'natives-windows-32'
-                                                if b in a:
+                                                if b != 'natives-windows-${arch}':
                                                     A = L['downloads']['classifiers'][b]
                                                 else:
                                                     A = L['downloads']['classifiers'][c]
-                                            Sh = A['sha1']
+                                                Sh = A['sha1']
 
                                             if os.path.exists(Path):
                                                 # 如果目录存在
@@ -392,8 +390,9 @@ class GameInstall():
                                                 A = L['downloads']['artifact']
                                             else:
                                                 Zip = True
-                                                b = 'natives-linux'
+                                                b = L['natives']['linux']
                                                 A = L['downloads']['classifiers'][b]
+                                            Sh = A['sha1']
 
                                             if os.path.exists(Path):
                                                 # 如果目录存在
