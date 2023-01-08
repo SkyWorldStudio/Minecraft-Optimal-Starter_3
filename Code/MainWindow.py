@@ -16,6 +16,9 @@ from Code.Code import JsonRead, JsonFile, System, JsonWrite, File, Json_Cheak
 
 
 class RunUi(QMainWindow, Ui_MainWindow):
+
+    SinOut_moveEvent = pyqtSignal(int,int)
+
     def __init__(self):
         super(RunUi, self).__init__()
 
@@ -23,6 +26,10 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         # self.setWindowFlags(Qt.WindowType.MacWindowToolBarButtonHint)
         self.show()
+        self.L_XY = {'X':self.x(),
+                     'Y':self.y()
+        }
+        self.SinOut_moveEvent.connect(self.L_XY_)
 
         print_('Info', "程序启动(UI显示): 已成功显示窗体")
         self.__init__setAll()
@@ -70,11 +77,15 @@ class RunUi(QMainWindow, Ui_MainWindow):
                         B['Name'].setCurrentIndex(B['Index_L'])
                     # B['Name'].setCurrentIndex(B['Index_L'])
 
-                    if B['And_']:
+                    if B['And_'] != None:
                         for a in B['And_']:
                             a_1 = a[0]
                             a_1.setCurrentIndex(a[1])
                         self.Sidebar_Clicked(Want='Home', H=False)
+
+                    if B['And__'] != None:
+                        a = B['And__']
+                        a()
 
                     print_('Info', '返回系统: 返回完成 本次执行配置值: ' + str(self.H_B[-1]))
                     self.H_B.remove(self.H_B[-1])
@@ -86,11 +97,15 @@ class RunUi(QMainWindow, Ui_MainWindow):
                         B['Name'].setCurrentIndex(B['Index_L'])
                     self.Sidebar_Clicked(Want='Home', H=False)
 
-                    if B['And_']:
+                    if B['And_'] != None:
                         for a in B['And_']:
                             a_1 = a[0]
                             a_1.setCurrentIndex(a[1])
                         self.Sidebar_Clicked(Want='Home', H=False)
+
+                    if B['And__'] != None:
+                        a = B['And__']
+                        a()
 
 
                     print_('Info', '返回系统: 返回完成 本次执行配置值: ' + str(self.H_B[-1]))
@@ -114,7 +129,15 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.Sidebar_Clicked(Want='Online')
 
     def Download_Clicked(self):
+        if self.stackedWidget_page_download.currentIndex() == 0:
+            self.stackedWidget_page_download_1.setCurrentIndex(0)
+        self.stackedWidget_2.setCurrentIndex(0)
         self.Sidebar_Clicked(Want='Download')
+
+    def DownloadPage_Cheak(self):
+        """下载页面,在合适的时候对部分控件进行翻页"""
+        if self.stackedWidget_page_download.currentIndex() == 0:
+            self.stackedWidget_2.setCurrentIndex(0)
 
     def Settings_Clicked(self):
         self.Sidebar_Clicked(Want='Settings')
@@ -143,9 +166,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
         # 显示窗口
         from Code.AddUserWindow import Dialog_AddUserWindows_
         self.Dialog_AddUserWindows_ = Dialog_AddUserWindows_(self.JsonFile)
-        self.Dialog_AddUserWindows_.sinOut_Win_XY.connect(self.Window_XY)
+        #self.Dialog_AddUserWindows_.sinOut_Win_XY.connect(self.Window_XY)
         self.Dialog_AddUserWindows_.sinOut_OK.connect(self.AddUserWindow_OK)
-        self.Dialog_AddUserWindows_.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
         self.Dialog_AddUserWindows_.setWindowFlags(
             Qt.WindowType.Popup |  # 表示该窗口小部件是一个弹出式顶层窗口，即它是模态的，但有一个适合弹出式菜单的窗口系统框架。
             Qt.WindowType.Tool |  # 表示小部件是一个工具窗口,如果有父级，则工具窗口将始终保留在其顶部,在 macOS 上，工具窗口对应于窗口的NSPanel类。这意味着窗口位于普通窗口之上，因此无法在其顶部放置普通窗口。默认情况下，当应用程序处于非活动状态时，工具窗口将消失。这可以通过WA_MacAlwaysShowToolWindow属性来控制。
@@ -154,7 +176,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             Qt.WindowType.Dialog |  # 指示该小部件是一个应装饰为对话框的窗口（即，通常在标题栏中没有最大化或最小化按钮）。这是 的默认类型QDialog。如果要将其用作模式对话框，则应从另一个窗口启动它，或者具有父级并与该windowModality属性一起使用。如果将其设为模态，对话框将阻止应用程序中的其他顶级窗口获得任何输入。我们将具有父级的顶级窗口称为辅助窗口。
             Qt.WindowType.NoDropShadowWindowHint  # 禁用支持平台上的窗口投影。
         )
-
+        self.Dialog_AddUserWindows_.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground,True)
         self.Dialog_AddUserWindows_.setWindowModality(
             Qt.WindowModality.ApplicationModal  # 该窗口对应用程序是模态的，并阻止对所有窗口的输入。
         )
@@ -165,6 +187,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             round(self.MainWindow_xy_size.y() + (self.size().height()/3)
         ))  # 子界面移动到 居中
         self.UserPage_Up_AddUser()  # 窗口弹出后，主页面不再刷新，所以在窗口弹出前改变
+        self.SinOut_moveEvent.connect(self.Dialog_AddUserWindows_.MoveXY)
 
         self.Dialog_AddUserWindows_.show()
 
@@ -341,7 +364,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         if self.stackedWidget_page_download.currentIndex() == 0:
             pass
         else:
-            self.SetCurrentIndex(self.stackedWidget_page_download, 0, 3, True)
+            self.SetCurrentIndex(self.stackedWidget_page_download, 0, 3, True, self.DownloadPage_Cheak)
 
     def DownloadPage_Word_Clicked(self):
         """下载页 -> 世界存档"""
@@ -349,7 +372,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         if self.stackedWidget_page_download.currentIndex() == 1:
             pass
         else:
-            self.SetCurrentIndex(self.stackedWidget_page_download, 1, 3, True)
+            self.SetCurrentIndex(self.stackedWidget_page_download, 1, 3, True, And__=self.DownloadPage_Cheak)
 
     def DownloadPage_Mode_Clicked(self):
         """下载页 -> mod"""
@@ -357,7 +380,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         if self.stackedWidget_page_download.currentIndex() == 2:
             pass
         else:
-            self.SetCurrentIndex(self.stackedWidget_page_download, 2, 3, True)
+            self.SetCurrentIndex(self.stackedWidget_page_download, 2, 3, True, And__=self.DownloadPage_Cheak)
 
     def DownloadPage_Conformity_Clicked(self):
         """下载页 -> 整合包"""
@@ -365,7 +388,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         if self.stackedWidget_page_download.currentIndex() == 3:
             pass
         else:
-            self.SetCurrentIndex(self.stackedWidget_page_download, 3, 3, True)
+            self.SetCurrentIndex(self.stackedWidget_page_download, 3, 3, True, And__=self.DownloadPage_Cheak)
 
     def DownloadPage_Resource_Clicked(self):
         """下载页 -> 资源包"""
@@ -373,7 +396,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         if self.stackedWidget_page_download.currentIndex() == 4:
             pass
         else:
-            self.SetCurrentIndex(self.stackedWidget_page_download, 4, 3, True)
+            self.SetCurrentIndex(self.stackedWidget_page_download, 4, 3, True, And__=self.DownloadPage_Cheak)
 
     def DownloadPage_stackedWidget_setButtonStyleSheet(self,I):
         """
@@ -425,27 +448,32 @@ class RunUi(QMainWindow, Ui_MainWindow):
     def DownloadPage_stackedWidget_GetGameList_(self):
         """启动多线程请求版本列表"""
         # release: 原版 / Snapshot: 快照版/ old_alpha: 远古版本
-        self.label_page_download_loading_ = QtGui.QMovie(":/Gif/images/Gif/Loaging.gif")
-        self.label_page_download_loading.setMovie(self.label_page_download_loading_)
-        self.label_page_download_loading_.start()
-        self.stackedWidget_page_download.setCurrentIndex(5)
+        if self.listWidget_page_1_download.count() == 0:
+            self.label_page_download_loading_ = QtGui.QMovie(":/Gif/images/Gif/Loaging.gif")
+            self.label_page_download_loading.setMovie(self.label_page_download_loading_)
+            self.label_page_download_loading_.start()
+            self.stackedWidget_page_download.setCurrentIndex(5)
 
-        if self.checkBox_page_download_mc_official.isChecked() == True:
-            self.Download_MC_Kind = 'release'
-            self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_Grass.png'
-        elif self.checkBox_page_download_mc_test.isChecked() == True:
-            self.Download_MC_Kind = 'snapshot'
-            self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_CommandBlock.png'
-        elif self.checkBox_page_download_mc_previously.isChecked() == True:
-            self.Download_MC_Kind = 'old_alpha'
-            self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_CraftingTable.png'
-        # print(self.File)
-        print('lllll')
-        self.DownloadPage_stackedWidget_GetGameList_Thread_Start_ = DownloadPage_stackedWidget_GetGameList_Thread( 'MCBBS',self.File,self.Download_MC_Kind)
-        self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.SinOut.connect(self.DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut)
-        self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.SinOut_OK.connect(self.DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut_OK)
-        self.listWidget_page_1_download.clear()
-        self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.start()
+            if self.checkBox_page_download_mc_official.isChecked() == True:
+                self.Download_MC_Kind = 'release'
+                self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_Grass.png'
+            elif self.checkBox_page_download_mc_test.isChecked() == True:
+                self.Download_MC_Kind = 'snapshot'
+                self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_CommandBlock.png'
+            elif self.checkBox_page_download_mc_previously.isChecked() == True:
+                self.Download_MC_Kind = 'old_alpha'
+                self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_CraftingTable.png'
+            # print(self.File)
+            print('lllll')
+            self.DownloadPage_stackedWidget_GetGameList_Thread_Start_ = DownloadPage_stackedWidget_GetGameList_Thread(
+                'MCBBS', self.File, self.Download_MC_Kind)
+            self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.SinOut.connect(
+                self.DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut)
+            self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.SinOut_OK.connect(
+                self.DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut_OK)
+            self.listWidget_page_1_download.clear()
+            self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.start()
+
 
     def DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut(self,name,time):
         """
@@ -756,7 +784,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
                                                                         self.DownloadPage_V, Name, V_Forge,V_Fabric,V_Optifine,
                                                                         self.Json_MOS['System'],self.Json_MOS['System_V'],self.Json_MOS['System_Places'],
                                                                         AssetsFileDownloadMethod,Sha1Cleck,MaxConcurrence)
-            self.Dialog_GameInstallWindows_.sinOut_Win_XY.connect(self.Window_XY)
+            #self.Dialog_GameInstallWindows_.sinOut_Win_XY.connect(self.Window_XY)
             self.Dialog_GameInstallWindows_.sinOut_OK.connect(self.GameInstallWindow_OK)
             self.Dialog_GameInstallWindows_.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
             self.Dialog_GameInstallWindows_.setWindowFlags(
@@ -778,7 +806,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
                             self.size().width() / 2 - self.Dialog_GameInstallWindows_.size().width() / 2)),
                 round(self.MainWindow_xy_size.y() + (self.size().height() / 3)
                       ))  # 子界面移动到 居中
-            self.UserPage_Up_AddUser()  # 窗口弹出后，主页面不再刷新，所以在窗口弹出前改变
+            self.SinOut_moveEvent.connect(self.Dialog_GameInstallWindows_.MoveXY)
 
             self.Dialog_GameInstallWindows_.show()
 
@@ -789,6 +817,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         """安装完成"""
         # 显示完成的窗口
         # 切换页面
+        self.SinOut_moveEvent.disconnect(self.Dialog_GameInstallWindows_.MoveXY)
         self.stackedWidget_page_download_1.setCurrentIndex(0)
         self.stackedWidget_2.setCurrentIndex(0)
 
@@ -959,6 +988,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.SettingsPage_Sidebar_horizontalSlider_sliderReleased()
 
     def AddUserWindow_OK(self):
+        self.SinOut_moveEvent.disconnect(self.Dialog_AddUserWindows_)
         self.Users_List_Refresh()
 
     def Users_List_Refresh(self):
@@ -1610,7 +1640,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
                     f.write(log_)
         Log_Clear()
 
-    def SetCurrentIndex(self, U, I, L=False, H=True, And_=False):
+    def SetCurrentIndex(self, U, I, L=False, H=True, And_=None, And__=None):
         """
             更改控件的页数，并记录历史
             参数:
@@ -1619,25 +1649,54 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 L: 是否需要更改左边边栏显示(False, 如果更改->int) \n
                 H: 是否记录(True False)
                 And_: 如果记录,在返回的时候同时执行的其他翻页[[执行控件,页码],[执行控件,页码],[执行控件,页码]]
+                And__: 如果记录,在返回后执行的函数
         """
+
+
+        if U != False:
+            if U.currentIndex() == I:
+                H = False
+        else:
+            if L != False:
+                if L == 0 and U == False:
+                    if L == self.stackedWidget_main_2.currentIndex():
+                        H=False
+                elif L == 1 and U == False and len(self.H_B)!=0:
+                    if L == self.stackedWidget_main_2.currentIndex():
+                        H=False
+                elif L == 2 and U == False:
+                    if L == self.stackedWidget_main_2.currentIndex():
+                        H=False
+                elif L == 3 and U == False:
+                    if L == self.stackedWidget_main_2.currentIndex():
+                        H=False
+                elif L == 4 and U == False:
+                    if L == self.stackedWidget_main_2.currentIndex():
+                        H=False
+
+
         if H == True and U == False:
-            self.H_B.append({
+            a = {
                 "Name": U,  # 控件名
                 "Index_L": int(self.stackedWidget_main_2.currentIndex()),  # 原来页码
                 "Left": L,  # 是否更改左边 如果改 值为改为多少 如果不改 值为False
                 "Left_L": int(self.stackedWidget_main_2.currentIndex()),  # 原来左边页码
-                "And_": And_
-            })
+                "And_": And_,
+                "And__": And__
+            }
+            self.H_B.append(a)
             self.stackedWidget_main_2.setCurrentIndex(I)
         elif H == True and U != False:
-            self.H_B.append({
+            a = {
                 "Name": U,  # 控件名
                 "Index": I,  # 页码
                 "Index_L": int(U.currentIndex()),  # 原来页码
                 "Left": L,  # 是否更改左边 如果改 值为改为多少 如果不改 值为False
                 "Left_L": int(self.stackedWidget_main_2.currentIndex()),  # 原来左边页码
-                "And_" : And_
-            })
+                "And_" : And_,
+                "And__": And__
+            }
+            self.H_B.append(a)
             self.stackedWidget_main_2.setCurrentIndex(L)
             U.setCurrentIndex(I)
         elif H == False:
@@ -1790,7 +1849,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             N,
             gamefile_name
         )
-        self.Dialog_DelateGameWindows_.sinOut_Win_XY.connect(self.Window_XY)
+        #self.Dialog_DelateGameWindows_.sinOut_Win_XY.connect(self.Window_XY)
         self.Dialog_DelateGameWindows_.sinOut_OK.connect(self.AddUserWindow_OK)
         self.Dialog_DelateGameWindows_.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
         self.Dialog_DelateGameWindows_.setWindowFlags(
@@ -1811,6 +1870,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             round(self.MainWindow_xy_size.x() + (self.size().width()/2 - self.Dialog_DelateGameWindows_.size().width()/2)),
             round(self.MainWindow_xy_size.y() + (self.size().height()/3)
         ))  # 子界面移动到 居中
+        self.SinOut_moveEvent.connect(self.Dialog_DelateGameWindows_.MoveXY)
 
         self.Dialog_DelateGameWindows_.show()
 
@@ -1863,6 +1923,23 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
         return super().eventFilter(obj, e)
 
+
+    def L_XY_(self,x,y):
+        """刷新XY坐标缓存"""
+        self.L_XY = {
+            'X': self.x(),
+            'Y': self.y()
+        }
+    def moveEvent(self, a0: QtGui.QMoveEvent):
+        """重写坐标变化信号"""
+        # 获取XY的变化
+        try:
+            x = self.x() - self.L_XY['X']
+            y = self.y() - self.L_XY['Y']
+            self.SinOut_moveEvent.emit(x,y)
+            #print([x,y])
+        except AttributeError:
+            pass
 
 class GameFiles_Read_Thread(QThread):
     SinOut = pyqtSignal(str)

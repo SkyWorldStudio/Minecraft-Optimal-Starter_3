@@ -505,7 +505,9 @@ class GameInstall():
                     #    i = 80
                     self.new_loop = asyncio.new_event_loop()
                     asyncio.set_event_loop(self.new_loop)
-                    asyncio.run(self.DownloadTaskMake(self.MaxConcurrence))
+                    #asyncio.run(self.DownloadTaskMake(self.MaxConcurrence))
+                    self.loop = asyncio.get_event_loop()
+                    self.loop.run_until_complete(self.DownloadTaskMake(self.MaxConcurrence))
                 else:
                     break
         else:
