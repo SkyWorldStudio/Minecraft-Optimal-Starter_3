@@ -15,6 +15,7 @@ import queue
 
 from Code.Code import Sha1, Hash
 from Code.Download_Big import Download as JarAndBigFileDownload
+from Code.Log import print_
 
 
 class GameInstall():
@@ -522,6 +523,21 @@ class GameInstall():
         time_stop = time.perf_counter()
         time_ = (time_stop - time_start)
         print('用时' + str(time_))
+
+        # 清理内存
+        self.AllList = ''
+        self.Libraries = ''
+        self.Assets = ''
+
+        self.loop.close()
+        self.new_loop.close()
+
+        del self.AllList,a,time_stop,time_,self.new_loop,self.loop,self.Assets,self.Libraries
+        print_('Info', '[有可能导致错误]开始进行强制内存清理')
+        import gc
+        gc.collect()
+        print_('Info', '[有可能导致错误]强制内存清理完成')
+
         self.Progress(['ok'])
 
     async def DownloadTaskMake(self, i: int):
@@ -581,7 +597,9 @@ class GameInstall():
                     f_code = await f.read()
                     with open(path, 'wb') as f:
                         f.write(f_code)
-                    # f_code = ''  # 释放缓存
+                    f_code = ''  # 释放缓存
+                    f = ''
+                    del f_code,f
                     self.AllList.remove(list)
                     print(str(len(self.AllList)) + 'ok')
                 if list[0] == 'Libraries':

@@ -40,6 +40,17 @@ class RunUi(QMainWindow, Ui_MainWindow):
         global Win_XY
         Win_XY = self.geometry()
 
+        self.MEM_Clear_QTime = QTimer()
+        self.MEM_Clear_QTime.start(60000)  # 60s一次
+        self.MEM_Clear_QTime.timeout.connect(self.MEM_Clear_)
+
+
+    def MEM_Clear_(self):
+        print_('Info','[有可能导致错误]开始进行强制内存清理')
+        import gc
+        gc.collect()
+        print_('Info', '[有可能导致错误]强制内存清理完成')
+
     # 左边栏"按钮"被点击后（槽）
     def Back_Clicked(self):
         # self.Sidebar_Clicked(Want='Back')
