@@ -158,8 +158,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
         i = self.stackedWidget_main_2.currentIndex()
         if i == 3:
             # 如果切换到了下载页后
-            print('knskldnaklsdnaksndlkasdnalskd')
-            self.DownloadPage_stackedWidget_GetGameList_()
+            if self.listWidget_page_1_download.count() == 0:
+                self.DownloadPage_stackedWidget_GetGameList_()
 
     def UserPage_Up_AddUser(self):
         icon2 = QtGui.QIcon()
@@ -377,6 +377,11 @@ class RunUi(QMainWindow, Ui_MainWindow):
         else:
             self.SetCurrentIndex(self.stackedWidget_page_download, 0, 3, True, self.DownloadPage_Cheak)
 
+    def DownloadPage_Game_Refresh_Clicked(self):
+        """下载页 -> 刷新"""
+        self.pushButton_page_download_mc_refresh.setEnabled(False)
+        self.DownloadPage_stackedWidget_GetGameList_()
+
     def DownloadPage_Word_Clicked(self):
         """下载页 -> 世界存档"""
         self.stackedWidget_2.setCurrentIndex(1)
@@ -459,31 +464,32 @@ class RunUi(QMainWindow, Ui_MainWindow):
     def DownloadPage_stackedWidget_GetGameList_(self):
         """启动多线程请求版本列表"""
         # release: 原版 / Snapshot: 快照版/ old_alpha: 远古版本
-        if self.listWidget_page_1_download.count() == 0:
-            self.label_page_download_loading_ = QtGui.QMovie(":/Gif/images/Gif/Loaging.gif")
-            self.label_page_download_loading.setMovie(self.label_page_download_loading_)
-            self.label_page_download_loading_.start()
-            self.stackedWidget_page_download.setCurrentIndex(5)
 
-            if self.checkBox_page_download_mc_official.isChecked() == True:
-                self.Download_MC_Kind = 'release'
-                self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_Grass.png'
-            elif self.checkBox_page_download_mc_test.isChecked() == True:
-                self.Download_MC_Kind = 'snapshot'
-                self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_CommandBlock.png'
-            elif self.checkBox_page_download_mc_previously.isChecked() == True:
-                self.Download_MC_Kind = 'old_alpha'
-                self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_CraftingTable.png'
-            # print(self.File)
-            print('lllll')
-            self.DownloadPage_stackedWidget_GetGameList_Thread_Start_ = DownloadPage_stackedWidget_GetGameList_Thread(
-                'MCBBS', self.File, self.Download_MC_Kind)
-            self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.SinOut.connect(
-                self.DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut)
-            self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.SinOut_OK.connect(
-                self.DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut_OK)
-            self.listWidget_page_1_download.clear()
-            self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.start()
+        self.pushButton_page_download_mc_refresh.setEnabled(False)
+
+        self.label_page_download_loading_ = QtGui.QMovie(":/Gif/images/Gif/Loaging.gif")
+        self.label_page_download_loading.setMovie(self.label_page_download_loading_)
+        self.label_page_download_loading_.start()
+        self.stackedWidget_page_download.setCurrentIndex(5)
+
+        if self.checkBox_page_download_mc_official.isChecked() == True:
+            self.Download_MC_Kind = 'release'
+            self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_Grass.png'
+        elif self.checkBox_page_download_mc_test.isChecked() == True:
+            self.Download_MC_Kind = 'snapshot'
+            self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_CommandBlock.png'
+        elif self.checkBox_page_download_mc_previously.isChecked() == True:
+            self.Download_MC_Kind = 'old_alpha'
+            self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_CraftingTable.png'
+        # print(self.File)
+        self.DownloadPage_stackedWidget_GetGameList_Thread_Start_ = DownloadPage_stackedWidget_GetGameList_Thread(
+            'MCBBS', self.File, self.Download_MC_Kind)
+        self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.SinOut.connect(
+            self.DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut)
+        self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.SinOut_OK.connect(
+            self.DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut_OK)
+        self.listWidget_page_1_download.clear()
+        self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.start()
 
 
     def DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut(self,name,time):
@@ -540,6 +546,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         """
         self.stackedWidget_page_download.setCurrentIndex(0)
         self.label_page_download_loading_.stop()
+        self.pushButton_page_download_mc_refresh.setEnabled(True)
 
     def DownloadPage_stackedWidget_GameList_Clicked(self):
         """下载页面 -> 原版下载列表: 点击项目"""
@@ -853,15 +860,28 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
 
     def DownloadPage_MC_Official(self):
+        self.checkBox_page_download_mc_official.setEnabled(False)
+        self.checkBox_page_download_mc_test.setEnabled(True)
+        self.checkBox_page_download_mc_previously.setEnabled(True)
+
         self.checkBox_page_download_mc_test.setChecked(False)
         self.checkBox_page_download_mc_previously.setChecked(False)
         self.DownloadPage_stackedWidget_GetGameList_()
     def DownloadPage_MC_Text(self):
+        self.checkBox_page_download_mc_official.setEnabled(True)
+        self.checkBox_page_download_mc_test.setEnabled(False)
+        self.checkBox_page_download_mc_previously.setEnabled(True)
+
         self.checkBox_page_download_mc_official.setChecked(False)
         self.checkBox_page_download_mc_previously.setChecked(False)
         self.DownloadPage_stackedWidget_GetGameList_()
 
     def DownloadPage_MC_Previously(self):
+        self.checkBox_page_download_mc_official.setEnabled(True)
+        self.checkBox_page_download_mc_test.setEnabled(True)
+        self.checkBox_page_download_mc_previously.setEnabled(False)
+
+        self.checkBox_page_download_mc_official.setEnabled(True)
         self.checkBox_page_download_mc_official.setChecked(False)
         self.checkBox_page_download_mc_test.setChecked(False)
         self.DownloadPage_stackedWidget_GetGameList_()
@@ -1551,6 +1571,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
         # 下载页面
         self.label_page_download_2_game.clicked.connect(self.DownloadPage_Game_Clicked)
+        self.pushButton_page_download_mc_refresh.clicked.connect(self.DownloadPage_Game_Refresh_Clicked)
         self.label_page_download_2_word.clicked.connect(self.DownloadPage_Word_Clicked)
         self.label_page_download_2_mode.clicked.connect(self.DownloadPage_Mode_Clicked)
         self.label_page_download_2_conformity.clicked.connect(self.DownloadPage_Conformity_Clicked)
