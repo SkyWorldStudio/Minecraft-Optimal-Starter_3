@@ -5,33 +5,37 @@ from PyQt6 import QtGui, QtCore
 from PyQt6.QtCore import QPropertyAnimation, Qt, pyqtSignal, QRect
 from PyQt6.QtGui import QColor
 
-from UI.DelateGameWindow.DelateGameWindow import Ui_Dialog_DelateGame
+from UI.GameInstallErrorWindow.GameInstallErrorWindow import Ui_Dialog_GameInstallError
 import UI.Dialog_All_rc
 from Code.MainWindow import Return_Window_XY
 from PyQt6.QtWidgets import QDialog, QGraphicsDropShadowEffect
 
 
-class Dialog_DelateGameWindows_(QDialog, Ui_Dialog_DelateGame):
+class Dialog_GameInstellErrorWindows_(QDialog, Ui_Dialog_GameInstallError):
     #sinOut_Win_XY = pyqtSignal(int, int)
     sinOut_OK = pyqtSignal()
 
-    def __init__(self, GameFile, GameName, GameFileName):
+    def __init__(self, GameName, Game_V,
+                 ErrorKind, ErrorCause, ErrorInfo
+                 ):
         """
             删除游戏确认
-            :param GameFile: 游戏文件夹所在文件夹
-            :param GameName: 游戏文件名
-            :param GameFileName: 存储游戏的游戏目录名
+            :param GameName: 游戏名
+            :param Game_V: 游戏版本
+            :param ErrorKind: 报错关键字（种类）
+            :param ErrorCause: 报错原因(str,None)
+            :param ErrorInfo: 报错信息(Py的输出)
         """
-        super(Dialog_DelateGameWindows_, self).__init__()
+        super(Dialog_GameInstellErrorWindows_, self).__init__()
         self.setupUi(self)
         self.show()
 
-        self.GameFile = GameFile
-        self.GameName = GameName
-        self.GameFileName = GameFileName
+        self.ErrorKind = ErrorKind
+        self.ErrorCause = ErrorCause
+        self.ErrorInfo = ErrorInfo
 
 
-        self.pushButton_cancel.clicked.connect(self.pushButton_Cancel_Clicked)
+        self.pushButton_copy.clicked.connect(self.pushButton_Copy_Clicked)
         self.pushButton_ok.clicked.connect(self.pushButton_OK_Clicked)
 
         # 添加阴影
@@ -44,19 +48,11 @@ class Dialog_DelateGameWindows_(QDialog, Ui_Dialog_DelateGame):
 
     def pushButton_OK_Clicked(self):
         """点击确定按钮"""
-        self.GameName = str(self.GameName).split(' 缺少Jar文件, 并且Json文件可能已损坏')[0]
-        self.GameName = str(self.GameName).split(' 缺少Jar文件')[0]
-        self.GameName = str(self.GameName).split(' 缺少Json文件')[0]
-        self.GameName = str(self.GameName).split(' Json文件可能已损坏')[0]
-        file = os.path.join(self.GameFile, self.GameName)
-        from shutil import rmtree
-        print(file)
-        rmtree(file)
-        self.pushButton_Cancel_Clicked()  # 关闭窗口
+        self.clicked_pushButton_close()  # 关闭窗口
 
-    def pushButton_Cancel_Clicked(self):
-        """点击取消按钮"""
-        self.clicked_pushButton_close()
+    def pushButton_Copy_Clicked(self):
+        """点击复制按钮"""
+        pass
 
     def clicked_pushButton_close(self):
         self.pushButton_ok.setEnabled(False)  # 为了防止重复操作 直接禁用按钮

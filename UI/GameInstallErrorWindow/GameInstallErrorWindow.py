@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'DelateGameWindow.ui'
+# Form implementation generated from reading ui file 'GameInstallErrorWindow.ui'
 #
 # Created by: PyQt6 UI code generator 6.3.1
 #
@@ -9,26 +9,23 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Dialog_DelateGame(object):
-    def setupUi(self, Dialog_DelateGame):
-        Dialog_DelateGame.setObjectName("Dialog_DelateGame")
-        Dialog_DelateGame.resize(450, 148)
-        Dialog_DelateGame.setStyleSheet("#widget_3{\n"
+class Ui_Dialog_GameInstallError(object):
+    def setupUi(self, Dialog_GameInstallError):
+        Dialog_GameInstallError.setObjectName("Dialog_GameInstallError")
+        Dialog_GameInstallError.resize(560, 202)
+        Dialog_GameInstallError.setStyleSheet("#widget_3{\n"
 "    background-color: rgb(255, 255, 255);\n"
 "    border: 1px solid rgb(33, 33, 33);\n"
 "    border-radius: 8px;\n"
 "    background-color: rgb(255, 255, 255);\n"
 "}\n"
-"\n"
-"\n"
 "QPushButton{border-style:none;}\n"
-"#pushButton_ok{\n"
-"    color: rgb(255, 38, 0);\n"
-"}")
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(Dialog_DelateGame)
+"")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(Dialog_GameInstallError)
         self.horizontalLayout_2.setContentsMargins(6, 4, 10, 11)
+        self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.widget_3 = QtWidgets.QWidget(Dialog_DelateGame)
+        self.widget_3 = QtWidgets.QWidget(Dialog_GameInstallError)
         self.widget_3.setObjectName("widget_3")
         self.gridLayout = QtWidgets.QGridLayout(self.widget_3)
         self.gridLayout.setContentsMargins(10, 5, 12, 11)
@@ -37,7 +34,7 @@ class Ui_Dialog_DelateGame(object):
         self.label.setMinimumSize(QtCore.QSize(50, 50))
         self.label.setMaximumSize(QtCore.QSize(50, 50))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap(":/image/images/Warning.png"))
+        self.label.setPixmap(QtGui.QPixmap(":/image/images/Error.png"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
@@ -78,14 +75,14 @@ class Ui_Dialog_DelateGame(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         spacerItem2 = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem2)
-        self.pushButton_cancel = QtWidgets.QPushButton(self.widget)
-        self.pushButton_cancel.setMinimumSize(QtCore.QSize(49, 22))
+        self.pushButton_copy = QtWidgets.QPushButton(self.widget)
+        self.pushButton_copy.setMinimumSize(QtCore.QSize(49, 22))
         font = QtGui.QFont()
         font.setPointSize(14)
-        self.pushButton_cancel.setFont(font)
-        self.pushButton_cancel.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
-        self.pushButton_cancel.setObjectName("pushButton_cancel")
-        self.horizontalLayout.addWidget(self.pushButton_cancel)
+        self.pushButton_copy.setFont(font)
+        self.pushButton_copy.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.pushButton_copy.setObjectName("pushButton_copy")
+        self.horizontalLayout.addWidget(self.pushButton_copy)
         self.pushButton_ok = QtWidgets.QPushButton(self.widget)
         self.pushButton_ok.setMinimumSize(QtCore.QSize(62, 22))
         font = QtGui.QFont()
@@ -96,13 +93,16 @@ class Ui_Dialog_DelateGame(object):
         self.gridLayout.addWidget(self.widget, 2, 0, 1, 2)
         self.horizontalLayout_2.addWidget(self.widget_3)
 
-        self.retranslateUi(Dialog_DelateGame)
-        QtCore.QMetaObject.connectSlotsByName(Dialog_DelateGame)
+        self.retranslateUi(Dialog_GameInstallError)
+        QtCore.QMetaObject.connectSlotsByName(Dialog_GameInstallError)
 
-    def retranslateUi(self, Dialog_DelateGame):
+    def retranslateUi(self, Dialog_GameInstallError):
         _translate = QtCore.QCoreApplication.translate
-        Dialog_DelateGame.setWindowTitle(_translate("Dialog_DelateGame", "Dialog"))
-        self.label_2.setText(_translate("Dialog_DelateGame", "警告"))
-        self.label_3.setText(_translate("Dialog_DelateGame", "您正在删除 游戏目录\"\"中的游戏\"\"，您确定要删除吗？此操作不可撤销"))
-        self.pushButton_cancel.setText(_translate("Dialog_DelateGame", "取消"))
-        self.pushButton_ok.setText(_translate("Dialog_DelateGame", "确认删除"))
+        Dialog_GameInstallError.setWindowTitle(_translate("Dialog_GameInstallError", "Dialog"))
+        self.label_2.setText(_translate("Dialog_GameInstallError", "游戏安装失败"))
+        self.label_3.setText(_translate("Dialog_GameInstallError", "在安装\"\"()时出现错误，部分文件安装/下载失败，可能是由于您……导致的。\n"
+"错误关键字: XXX\n"
+"\n"
+"您可以在关于中进行反馈"))
+        self.pushButton_copy.setText(_translate("Dialog_GameInstallError", "复制报错详细信息"))
+        self.pushButton_ok.setText(_translate("Dialog_GameInstallError", "确定"))

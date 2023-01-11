@@ -570,16 +570,19 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Forge = DownloadPage_stackedWidget_GameList_Clicked_Get_Thread('Forge',MCName)
         self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Forge.SinOut.connect(self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut)
         self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Forge.SinOut_OK.connect(self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut_OK)
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Forge.SinOut_Error.connect(self.GameInstallError)
         self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Forge.start()
 
         self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Fabric = DownloadPage_stackedWidget_GameList_Clicked_Get_Thread('Fabric', MCName)
         self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Fabric.SinOut.connect(self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut)
         self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Fabric.SinOut_OK.connect(self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut_OK)
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Fabric.SinOut_Error.connect(self.GameInstallError)
         self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Fabric.start()
 
         self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Optifine = DownloadPage_stackedWidget_GameList_Clicked_Get_Thread('Optifine', MCName)
         self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Optifine.SinOut.connect(self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut)
         self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Optifine.SinOut_OK.connect(self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut_OK)
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Optifine.SinOut_Error.connect(self.GameInstallError)
         self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Optifine.start()
 
     def DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut(self, Kind, Name, Time, State):
@@ -829,6 +832,44 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.Dialog_GameInstallWindows_.show()
 
             self.Dialog_GameInstallWindows_.Run()
+
+    def GameInstallError(self, GameName, Game_V, ErrorKind, ErrorCause, ErrorInfo):
+        """当游戏安装出现错误时, 调用错误弹框显示函数"""
+        self.GameInstallErrorWindow(GameName, Game_V, ErrorKind, ErrorCause, ErrorInfo)
+
+    def GameInstallErrorWindow(self, GameName, Game_V, ErrorKind, ErrorCause, ErrorInfo):
+        """显示游戏安装错误页面"""
+        from Code.GameInstallErrorWindow import Dialog_GameInstellErrorWindows_
+        self.Dialog_GameInstellErrorWindows_ = Dialog_GameInstellErrorWindows_(GameName, Game_V, ErrorKind, ErrorCause, ErrorInfo)
+        # self.Dialog_DelateGameWindows_.sinOut_Win_XY.connect(self.Window_XY)
+        self.Dialog_GameInstellErrorWindows_.sinOut_OK.connect(self.GameInstallErrorWindow_SinOut_OK)
+        self.Dialog_GameInstellErrorWindows_.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
+        self.Dialog_GameInstellErrorWindows_.setWindowFlags(
+            Qt.WindowType.Popup |  # 表示该窗口小部件是一个弹出式顶层窗口，即它是模态的，但有一个适合弹出式菜单的窗口系统框架。
+            Qt.WindowType.Tool |  # 表示小部件是一个工具窗口,如果有父级，则工具窗口将始终保留在其顶部,在 macOS 上，工具窗口对应于窗口的NSPanel类。这意味着窗口位于普通窗口之上，因此无法在其顶部放置普通窗口。默认情况下，当应用程序处于非活动状态时，工具窗口将消失。这可以通过WA_MacAlwaysShowToolWindow属性来控制。
+            Qt.WindowType.FramelessWindowHint |  # 生成无边框窗口
+            Qt.WindowType.MSWindowsFixedSizeDialogHint |  # 在 Windows 上为窗口提供一个细对话框边框。这种风格传统上用于固定大小的对话框。
+            Qt.WindowType.Dialog |  # 指示该小部件是一个应装饰为对话框的窗口（即，通常在标题栏中没有最大化或最小化按钮）。这是 的默认类型QDialog。如果要将其用作模式对话框，则应从另一个窗口启动它，或者具有父级并与该windowModality属性一起使用。如果将其设为模态，对话框将阻止应用程序中的其他顶级窗口获得任何输入。我们将具有父级的顶级窗口称为辅助窗口。
+            Qt.WindowType.NoDropShadowWindowHint  # 禁用支持平台上的窗口投影。
+        )
+
+        self.Dialog_GameInstellErrorWindows_.setWindowModality(
+            Qt.WindowModality.ApplicationModal  # 该窗口对应用程序是模态的，并阻止对所有窗口的输入。
+        )
+
+        self.MainWindow_xy_size = self.geometry()  # 获取主界面 初始坐标
+        self.Dialog_GameInstellErrorWindows_.move(
+            round(self.MainWindow_xy_size.x() + (
+                        self.size().width() / 2 - self.Dialog_GameInstellErrorWindows_.size().width() / 2)),
+            round(self.MainWindow_xy_size.y() + (self.size().height() / 3)
+                  ))  # 子界面移动到 居中
+        self.SinOut_moveEvent.connect(self.Dialog_GameInstellErrorWindows_.MoveXY)
+
+        self.Dialog_GameInstellErrorWindows_.show()
+
+    def GameInstallErrorWindow_SinOut_OK(self):
+        self.SinOut_moveEvent.disconnect(self.Dialog_GameInstellErrorWindows_.MoveXY)
+
 
 
     def GameInstallWindow_OK(self):
@@ -2056,6 +2097,7 @@ class DownloadPage_stackedWidget_GetGameList_Thread(QThread):
 
 class DownloadPage_stackedWidget_GameList_Clicked_Get_Thread(QThread):
     SinOut = pyqtSignal(str,str,str,str)
+    SinOut_Error = pyqtSignal(str,str,str,str,str)
     SinOut_OK = pyqtSignal(str,bool)
     def __init__(self, Kind, V):
         """
@@ -2067,48 +2109,53 @@ class DownloadPage_stackedWidget_GameList_Clicked_Get_Thread(QThread):
         self.Kind = Kind
         self.V = V
     def run(self):
-        print('start')
-        if self.Kind == 'Forge':
-            self.URL = 'https://bmclapi2.bangbang93.com/forge/minecraft/' + str(self.V)
-        elif self.Kind == 'Fabric':
-            self.URL = 'https://bmclapi2.bangbang93.com/fabric-meta/v2/versions/loader/' + str(self.V)
-        elif self.Kind == 'Optifine':
-            self.URL = 'https://bmclapi2.bangbang93.com/optifine/' + str(self.V)
-        import requests, gc
-        print(self.URL)
-        r = requests.get(self.URL)
-        if r.text != '[]':
-            try:
-                j = r.json()
-                print(self.URL)
-                for a in j:
-                    if self.Kind == 'Forge':
-                        n = a['version']
-                        t = a['modified']
-                        k = None
-                    elif self.Kind == 'Fabric':
-                        n = a['loader']['version']
-                        t = None
-                        if a['loader']['stable'] == True:
-                            k = 'Stable'
-                        else:
-                            k = 'Bata'
-                    elif self.Kind == 'Optifine':
-                        n = a['type']
-                        t = None
-                        if 'forge' in a:
-                            k = 'Stable'
-                        else:
-                            k = 'Bata'
-                            n = n + '_' + a['patch']
-                    self.SinOut.emit(self.Kind, n, t, k)
-                self.SinOut_OK.emit(self.Kind, True)
-            except requests.exceptions.JSONDecodeError:
+        try:
+            print('start')
+            if self.Kind == 'Forge':
+                self.URL = 'https://bmclapi2.bangbang93.com/forge/minecraft/' + str(self.V)
+            elif self.Kind == 'Fabric':
+                self.URL = 'https://bmclapi2.bangbang93.com/fabric-meta/v2/versions/loader/' + str(self.V)
+            elif self.Kind == 'Optifine':
+                self.URL = 'https://bmclapi2.bangbang93.com/optifine/' + str(self.V)
+            import requests, gc
+            print(self.URL)
+            r = requests.get(self.URL)
+
+            if r.text != '[]':
+                try:
+                    j = r.json()
+                    print(self.URL)
+                    for a in j:
+                        if self.Kind == 'Forge':
+                            n = a['version']
+                            t = a['modified']
+                            k = None
+                        elif self.Kind == 'Fabric':
+                            n = a['loader']['version']
+                            t = None
+                            if a['loader']['stable'] == True:
+                                k = 'Stable'
+                            else:
+                                k = 'Bata'
+                        elif self.Kind == 'Optifine':
+                            n = a['type']
+                            t = None
+                            if 'forge' in a:
+                                k = 'Stable'
+                            else:
+                                k = 'Bata'
+                                n = n + '_' + a['patch']
+                        self.SinOut.emit(self.Kind, n, t, k)
+                    self.SinOut_OK.emit(self.Kind, True)
+                except requests.exceptions.JSONDecodeError:
+                    self.SinOut_OK.emit(self.Kind, False)
+            else:
                 self.SinOut_OK.emit(self.Kind, False)
-        else:
-            self.SinOut_OK.emit(self.Kind, False)
+        except requests.exceptions.ConnectionError:
+            self.SinOut_Error.emit('','','','','')
 
         gc.collect()
+
 
 
 
