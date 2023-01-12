@@ -12,11 +12,12 @@ import UI.Dialog_All_rc
 class Dialog_GameInstallWindows_(QDialog, Ui_Dialog_GameInstall):
     #sinOut_Win_XY = pyqtSignal(int, int)
     sinOut_OK = pyqtSignal()
+    sinOut_Error = pyqtSignal()
 
     def __init__(self, GameFile_M, GameFile_V, File, Download_Source, V_JsonFile,
                  V, Name, V_Forge,V_Fabric,V_Optifine,
                  System,System_V,System_Places,
-                 AssetsFileDownloadMethod,Sha1Cleck,MaxConcurrence):
+                 AssetsFileDownloadMethod,Sha1Cleck,MaxConcurrence,ErrorModule):
         """
             游戏安装窗口
             :param GameFile_M: 游戏根目录(.minecraft目录)
@@ -35,6 +36,7 @@ class Dialog_GameInstallWindows_(QDialog, Ui_Dialog_GameInstall):
             :param AssetsFileDownloadMethod: 资源文件下载方式(A,B-尚未完成)
             :param Sha1Cleck: 是否进行Sha1检查
             :param MaxConcurrence: 最大并发数
+            :param ErrorModule: 再出现错误时运行错误处理模块
         """
 
         super(Dialog_GameInstallWindows_, self).__init__()
@@ -70,6 +72,7 @@ class Dialog_GameInstallWindows_(QDialog, Ui_Dialog_GameInstall):
         self.AssetsFileDownloadMethod = AssetsFileDownloadMethod
         self.Sha1Cleck = Sha1Cleck
         self.MaxConcurrence = MaxConcurrence
+        self.ErrorModule = ErrorModule
 
     def Run(self):
         self.Install_Thread_ = \
@@ -141,6 +144,16 @@ class Dialog_GameInstallWindows_(QDialog, Ui_Dialog_GameInstall):
             # 完成
             self.sinOut_OK.emit()
             self.close_()
+
+        elif text[0] == 'error':
+            self.close_()
+            self.sinOut_Error.emit()
+            GameName = text[1]
+            Game_V = text[2]
+            ErrorKind = text[3]
+            ErrorCause = text[4]
+            ErrorInfo = text[5]
+            self.ErrorModule(GameName,Game_V,ErrorKind,ErrorCause,ErrorInfo)
 
     def Spend_QTime(self):
         try:

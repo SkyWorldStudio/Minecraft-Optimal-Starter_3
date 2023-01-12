@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>560</width>
-    <height>202</height>
+    <width>611</width>
+    <height>200</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
@@ -111,13 +117,20 @@ QPushButton{border-style:none;}
          </item>
          <item>
           <widget class="QLabel" name="label_3">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="font">
             <font>
              <pointsize>15</pointsize>
             </font>
            </property>
            <property name="text">
-            <string>在安装&quot;&quot;()时出现错误，部分文件安装/下载失败，可能是由于您……导致的。
+            <string>在安装&quot;&quot;()时出现错误，部分文件安装/下载失败，可能是由于
+您……导致的。
 错误关键字: XXX
 
 您可以在关于中进行反馈</string>

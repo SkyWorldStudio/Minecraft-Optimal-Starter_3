@@ -8,7 +8,7 @@ from PyQt6.QtGui import QColor
 from UI.GameInstallErrorWindow.GameInstallErrorWindow import Ui_Dialog_GameInstallError
 import UI.Dialog_All_rc
 from Code.MainWindow import Return_Window_XY
-from PyQt6.QtWidgets import QDialog, QGraphicsDropShadowEffect
+from PyQt6.QtWidgets import QDialog, QGraphicsDropShadowEffect, QApplication
 
 
 class Dialog_GameInstellErrorWindows_(QDialog, Ui_Dialog_GameInstallError):
@@ -30,9 +30,21 @@ class Dialog_GameInstellErrorWindows_(QDialog, Ui_Dialog_GameInstallError):
         self.setupUi(self)
         self.show()
 
+        self.GameName = GameName
+        self.Game_V = Game_V
         self.ErrorKind = ErrorKind
         self.ErrorCause = ErrorCause
         self.ErrorInfo = ErrorInfo
+
+        if self.ErrorCause != None:
+            a = '报错原因未知'
+        else:
+            a = self.ErrorCause
+
+        self.info = '在安装"' + str(self.GameName) + '"(' + str(self.Game_V) + ')' + '时出现错误，部分文件安装/下载失败，'+ a + '\n错误关键字: '+ str(self.ErrorKind) +'\n\n您可以复制详细信息并在关于中进行反馈'
+        self.label_3.setText(self.info)
+
+        self.copt_info = '在安装"' + str(self.GameName) + '"(' + str(self.Game_V) + ')' + '时出现错误，部分文件安装/下载失败，'+ a + '\n错误关键字: '+ str(self.ErrorKind) + '\n\n异常输出: \n' + str(self.ErrorInfo) + '\n\n建议在反馈时附带日志文件，您可以在设置中打开日志文件夹'
 
 
         self.pushButton_copy.clicked.connect(self.pushButton_Copy_Clicked)
@@ -52,11 +64,15 @@ class Dialog_GameInstellErrorWindows_(QDialog, Ui_Dialog_GameInstallError):
 
     def pushButton_Copy_Clicked(self):
         """点击复制按钮"""
-        pass
+        # 实例化剪切板，标签设置为剪切板的文本并显示
+        clipboard = QApplication.clipboard()
+        clipboard.setText(self.copt_info)
+
+
 
     def clicked_pushButton_close(self):
         self.pushButton_ok.setEnabled(False)  # 为了防止重复操作 直接禁用按钮
-        self.pushButton_cancel.setEnabled(False)  # 为了防止重复操作 直接禁用按钮
+        self.pushButton_copy.setEnabled(False)  # 为了防止重复操作 直接禁用按钮
         self.anim = QPropertyAnimation(self, b"windowOpacity")  # 设置动画对象
         self.anim.setDuration(300)  # 设置动画时长
         self.anim.setStartValue(1)  # 设置初始属性，1.0为不透明

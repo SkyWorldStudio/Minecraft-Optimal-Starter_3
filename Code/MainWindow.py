@@ -804,9 +804,10 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.Dialog_GameInstallWindows_ = Dialog_GameInstallWindows_(GameFile_M, GameFile_V, self.File, self.Json_MOS['Download_Source'], V_JsonFile,
                                                                         self.DownloadPage_V, Name, V_Forge,V_Fabric,V_Optifine,
                                                                         self.Json_MOS['System'],self.Json_MOS['System_V'],self.Json_MOS['System_Places'],
-                                                                        AssetsFileDownloadMethod,Sha1Cleck,MaxConcurrence)
+                                                                        AssetsFileDownloadMethod,Sha1Cleck,MaxConcurrence,self.GameInstallError)
             #self.Dialog_GameInstallWindows_.sinOut_Win_XY.connect(self.Window_XY)
             self.Dialog_GameInstallWindows_.sinOut_OK.connect(self.GameInstallWindow_OK)
+            self.Dialog_GameInstallWindows_.sinOut_Error.connect(self.GameInstallWindow_Error)
             self.Dialog_GameInstallWindows_.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
             self.Dialog_GameInstallWindows_.setWindowFlags(
                 Qt.WindowType.Popup |  # 表示该窗口小部件是一个弹出式顶层窗口，即它是模态的，但有一个适合弹出式菜单的窗口系统框架。
@@ -853,9 +854,9 @@ class RunUi(QMainWindow, Ui_MainWindow):
             Qt.WindowType.NoDropShadowWindowHint  # 禁用支持平台上的窗口投影。
         )
 
-        self.Dialog_GameInstellErrorWindows_.setWindowModality(
-            Qt.WindowModality.ApplicationModal  # 该窗口对应用程序是模态的，并阻止对所有窗口的输入。
-        )
+        #self.Dialog_GameInstellErrorWindows_.setWindowModality(
+        #    Qt.WindowModality.ApplicationModal  # 该窗口对应用程序是模态的，并阻止对所有窗口的输入。
+        #)
 
         self.MainWindow_xy_size = self.geometry()  # 获取主界面 初始坐标
         self.Dialog_GameInstellErrorWindows_.move(
@@ -870,7 +871,11 @@ class RunUi(QMainWindow, Ui_MainWindow):
     def GameInstallErrorWindow_SinOut_OK(self):
         self.SinOut_moveEvent.disconnect(self.Dialog_GameInstellErrorWindows_.MoveXY)
 
-
+    def GameInstallWindow_Error(self):
+        """安装时出现错误"""
+        self.SinOut_moveEvent.disconnect(self.Dialog_GameInstallWindows_.MoveXY)
+        self.stackedWidget_page_download_1.setCurrentIndex(0)
+        self.stackedWidget_2.setCurrentIndex(0)
 
     def GameInstallWindow_OK(self):
         """安装完成"""

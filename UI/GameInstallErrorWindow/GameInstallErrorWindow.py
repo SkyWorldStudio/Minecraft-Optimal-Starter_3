@@ -12,7 +12,12 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_Dialog_GameInstallError(object):
     def setupUi(self, Dialog_GameInstallError):
         Dialog_GameInstallError.setObjectName("Dialog_GameInstallError")
-        Dialog_GameInstallError.resize(560, 202)
+        Dialog_GameInstallError.resize(611, 200)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(Dialog_GameInstallError.sizePolicy().hasHeightForWidth())
+        Dialog_GameInstallError.setSizePolicy(sizePolicy)
         Dialog_GameInstallError.setStyleSheet("#widget_3{\n"
 "    background-color: rgb(255, 255, 255);\n"
 "    border: 1px solid rgb(33, 33, 33);\n"
@@ -51,6 +56,11 @@ class Ui_Dialog_GameInstallError(object):
         self.label_2.setObjectName("label_2")
         self.verticalLayout.addWidget(self.label_2)
         self.label_3 = QtWidgets.QLabel(self.widget_2)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_3.sizePolicy().hasHeightForWidth())
+        self.label_3.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setPointSize(15)
         self.label_3.setFont(font)
@@ -100,7 +110,8 @@ class Ui_Dialog_GameInstallError(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog_GameInstallError.setWindowTitle(_translate("Dialog_GameInstallError", "Dialog"))
         self.label_2.setText(_translate("Dialog_GameInstallError", "游戏安装失败"))
-        self.label_3.setText(_translate("Dialog_GameInstallError", "在安装\"\"()时出现错误，部分文件安装/下载失败，可能是由于您……导致的。\n"
+        self.label_3.setText(_translate("Dialog_GameInstallError", "在安装\"\"()时出现错误，部分文件安装/下载失败，可能是由于\n"
+"您……导致的。\n"
 "错误关键字: XXX\n"
 "\n"
 "您可以在关于中进行反馈"))
