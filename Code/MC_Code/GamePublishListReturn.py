@@ -40,10 +40,10 @@ class GamePublishListReturn:
         JsonWrite(r.json(),File,BuBug=True)
         L = []
         for J_1 in J:
-            # print_('BeBug',J_1)
+            # print_('DeBug',J_1)
             if J_1['type'] == Kind:
                 L.append(J_1)
-        # print_('BeBug',L)
+        # print_('DeBug',L)
         return L
 
         # 释放缓存

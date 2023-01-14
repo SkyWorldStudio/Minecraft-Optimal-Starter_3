@@ -5,6 +5,7 @@ from PyQt6 import QtGui, QtCore
 from PyQt6.QtCore import QPropertyAnimation, Qt, pyqtSignal, QRect
 from PyQt6.QtGui import QColor
 
+from Code.Log import print_
 from UI.GameInstallErrorWindow.GameInstallErrorWindow import Ui_Dialog_GameInstallError
 import UI.Dialog_All_rc
 from Code.MainWindow import Return_Window_XY
@@ -36,15 +37,16 @@ class Dialog_GameInstellErrorWindows_(QDialog, Ui_Dialog_GameInstallError):
         self.ErrorCause = ErrorCause
         self.ErrorInfo = ErrorInfo
 
-        if self.ErrorCause != None:
+        if self.ErrorCause == 'None':
             a = '报错原因未知'
         else:
-            a = self.ErrorCause
+            a = '可能是由于您' + self.ErrorCause + '所导致的。'
 
-        self.info = '在安装"' + str(self.GameName) + '"(' + str(self.Game_V) + ')' + '时出现错误，部分文件安装/下载失败，'+ a + '\n错误关键字: '+ str(self.ErrorKind) +'\n\n您可以复制详细信息并在关于中进行反馈'
+        self.info = '在安装"' + str(self.GameName) + '"(' + str(self.Game_V) + ')' + '时出现错误，部分文件安装/下载失败，'+ a + '\n错误关键字: \n'+ str(self.ErrorKind) +'\n\n您可以复制详细信息并在关于中进行反馈'
         self.label_3.setText(self.info)
 
-        self.copt_info = '在安装"' + str(self.GameName) + '"(' + str(self.Game_V) + ')' + '时出现错误，部分文件安装/下载失败，'+ a + '\n错误关键字: '+ str(self.ErrorKind) + '\n\n异常输出: \n' + str(self.ErrorInfo) + '\n\n建议在反馈时附带日志文件，您可以在设置中打开日志文件夹'
+        self.copt_info = '在安装"' + str(self.GameName) + '"(' + str(self.Game_V) + ')' + '时出现错误，部分文件安装/下载失败，'+ a + '\n错误关键字: \n'+ str(self.ErrorKind) + '\n\n异常输出: \n' + str(self.ErrorInfo) + '\n\n建议在反馈时附带日志文件，您可以在设置中打开日志文件夹'
+        print_('Error',self.copt_info)
 
 
         self.pushButton_copy.clicked.connect(self.pushButton_Copy_Clicked)

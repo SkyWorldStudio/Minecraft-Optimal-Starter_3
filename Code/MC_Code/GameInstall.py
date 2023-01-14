@@ -5,7 +5,7 @@ import os
 import zipfile
 
 import traceback
-
+import aiofiles as aiofiles
 import aiohttp
 import requests
 import sys
@@ -57,6 +57,7 @@ class GameInstall():
         self.Sha1Cleck = Sha1Cleck
         self.MaxConcurrence = MaxConcurrence
         self.ProgressGetModule = ProgressGetModule
+        self.Stop_ = False
 
         if self.Download_Source == 'MC':
             # self.Download_Source_Url_Json_Q = 'http://launchermeta.mojang.com/'
@@ -473,72 +474,80 @@ class GameInstall():
                         self.Assets.append(['Assets', url, path_up, path, size, hash])
             self.Progress(['start', 7, 7])
 
-            print(self.MainJar)
-            print('================')
-            print(self.Libraries)
-            self.Libraries_N = len(self.Libraries)
-            print(self.Libraries_N)
-            print('================')
-            # print(Assets)
-            self.Assets_N = len(self.Assets)
-            print(self.Assets_N)
-            self.Progress(['info', self.Libraries_N, self.Assets_N, self.Size_All])
+            if self.Stop_ == False:
+                print(self.MainJar)
+                print('================')
+                print(self.Libraries)
+                self.Libraries_N = len(self.Libraries)
+                print(self.Libraries_N)
+                print('================')
+                # print(Assets)
+                self.Assets_N = len(self.Assets)
+                print(self.Assets_N)
+                self.Progress(['info', self.Libraries_N, self.Assets_N, self.Size_All])
 
-            self.Libraries_Ok = 0
-            self.Assets_Ok = 0
+                self.Libraries_Ok = 0
+                self.Assets_Ok = 0
 
-            print('准备下载')
+                print('准备下载')
 
-            # 创建
-            import time
-            time_start = time.perf_counter()
-            print('开始下载')
-            if len(self.Libraries) != 0 or len(self.Assets) != 0:
-                self.AllList = self.Libraries + self.Assets
-                self.I = len(self.AllList) + 1
-                print('一共' + str(self.I) + '项文件')
+            if self.Stop_ == False:
+                # 创建
+                import time
+                time_start = time.perf_counter()
+                print('开始下载')
+                if len(self.Libraries) != 0 or len(self.Assets) != 0:
+                    self.AllList = self.Libraries + self.Assets
+                    self.I = len(self.AllList) + 1
+                    print('一共' + str(self.I) + '项文件')
 
-                while True:
-                    if len(self.AllList) != 0:
-                        # if len(self.AllList) <= len(self.Assets):
-                        #    i = 80
-                        # else:
-                        #    i = 80
-                        self.new_loop = asyncio.new_event_loop()
-                        asyncio.set_event_loop(self.new_loop)
-                        # asyncio.run(self.DownloadTaskMake(self.MaxConcurrence))
-                        self.loop = asyncio.get_event_loop()
-                        self.loop.run_until_complete(self.DownloadTaskMake(self.MaxConcurrence))
-                    else:
-                        break
-            else:
-                print('一共' + '1' + '项文件')
+                    while True:
+                        if len(self.AllList) != 0:
+                            # if len(self.AllList) <= len(self.Assets):
+                            #    i = 80
+                            # else:
+                            #    i = 80
+                            self.new_loop = asyncio.new_event_loop()
+                            asyncio.set_event_loop(self.new_loop)
+                            # asyncio.run(self.DownloadTaskMake(self.MaxConcurrence))
+                            self.loop = asyncio.get_event_loop()
+                            self.loop.run_until_complete(self.DownloadTaskMake(self.MaxConcurrence))
+                        else:
+                            break
+                else:
+                    print('一共' + '1' + '项文件')
 
-            a = JarAndBigFileDownload()
-            a.download(self.MainJar[1], self.MainJar[3],
-                       os.path.join(self.File, 'Caches'),
-                       self.JarProgress)
+                if self.Stop_ == False:
+                    a = JarAndBigFileDownload()
+                    a.download(self.MainJar[1], self.MainJar[3],
+                               os.path.join(self.File, 'Caches'),
+                               self.JarProgress)
+                print('下载完成')
+                import time
+                time_stop = time.perf_counter()
+                time_ = (time_stop - time_start)
+                print('用时' + str(time_))
 
-            print('下载完成')
-            time_stop = time.perf_counter()
-            time_ = (time_stop - time_start)
-            print('用时' + str(time_))
+                # 清理内存
+                self.AllList = ''
+                self.Libraries = ''
+                self.Assets = ''
 
-            # 清理内存
-            self.AllList = ''
-            self.Libraries = ''
-            self.Assets = ''
+                self.loop.close()
+                self.new_loop.close()
 
-            self.loop.close()
-            self.new_loop.close()
+                del self.AllList, a, time_stop, time_, self.new_loop, self.loop, self.Assets, self.Libraries
+                print_('Info', '[有可能导致错误]开始进行强制内存清理')
+                import gc
+                gc.collect()
+                print_('Info', '[有可能导致错误]强制内存清理完成')
 
-            del self.AllList, a, time_stop, time_, self.new_loop, self.loop, self.Assets, self.Libraries
-            print_('Info', '[有可能导致错误]开始进行强制内存清理')
-            import gc
-            gc.collect()
-            print_('Info', '[有可能导致错误]强制内存清理完成')
+                self.Progress(['ok'])
 
-            self.Progress(['ok'])
+
+        except RuntimeError:
+            # 如果取消，则终止
+            print_('DeBug','[游戏安装程序]出现RuntimeError错误，这可能是用户点了取消，已忽略')
         except:
             ErrorKind = sys.exc_info()[1]
             ErrorCause = 'None'
@@ -547,10 +556,10 @@ class GameInstall():
 
 
     async def DownloadTaskMake(self, i: int):
-        b = []
+        self.loop_b = []
         for a in self.AllList[0:i]:
-            b.append(asyncio.ensure_future(self.Download(a)))
-        for b_1 in b:
+            self.loop_b.append(asyncio.ensure_future(self.Download(a)))
+        for b_1 in self.loop_b:
             await b_1
 
     # async def DownloadTask(self, queue,list):
@@ -598,13 +607,10 @@ class GameInstall():
         if One:
             try:
                 async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(connect=4), trust_env=True) as session:
-                    f = await session.get(url, headers=headers, ssl=False, timeout=timeOut)
-                    f_code = await f.read()
-                    with open(path, 'wb') as f:
-                        f.write(f_code)
-                    f_code = ''  # 释放缓存
-                    f = ''
-                    del f_code,f
+                    async with session.get(url, headers=headers, ssl=False, timeout=timeOut) as response:
+                        async with aiofiles.open(path, 'wb') as f:
+                            await f.write(await response.content.read())
+
                     self.AllList.remove(list)
                     print(str(len(self.AllList)) + 'ok')
                 if list[0] == 'Libraries':
@@ -625,17 +631,33 @@ class GameInstall():
                 print('error_ServerTimeoutError')
             except aiohttp.client_exceptions.ServerDisconnectedError:
                 print('error_ServerDisconnectedError')
+
             except aiohttp.client_exceptions.ClientConnectorError:
-                print('error_ClientConnectorError')
+                ErrorKind = sys.exc_info()[1]
+                ErrorCause = '未接入互联网'
+                ErrorInfo = traceback.format_exc()
+                print_('Error', '在安装游戏时出现异常,配置信息:' + str(list))
+                print_('DeBug', '由于安装出错,正在取消安装')
+                self.Stop()
+                print_('DeBug', '取消安装完成')
+                self.Progress(['error', self.Name, self.V, ErrorKind, ErrorCause, ErrorInfo])
+
             except aiohttp.client_exceptions.ClientOSError:
                 print('error_ClientOSError')
             except asyncio.exceptions.CancelledError:
                 print('error_CancelledError')
             except asyncio.exceptions.TimeoutError:
-                print('error_TimeoutError' + str(list))
+                print('error_TimeoutError')
             except:
-                traceback.print_exc()
-                print("出现异常")
+                ErrorKind = sys.exc_info()[1]
+                ErrorCause = 'None'
+                ErrorInfo = traceback.format_exc()
+                print_('Error', '在安装游戏时出现异常,配置信息:' + str(list))
+                print_('DeBug', '由于安装出错,正在取消安装')
+                self.Stop()
+                print_('DeBud', '取消安装完成')
+                self.Progress(['error', self.Name, self.V, ErrorKind, ErrorCause, ErrorInfo])
+
         # else:
         #    SectionSize = 4194304
         #    def BigFile_Progress(list):
@@ -661,6 +683,19 @@ class GameInstall():
             :param Progress_: 进度
         """
         self.ProgressGetModule(['JarProgress', Progress_])
+
+    def Stop(self):
+        try:
+            self.Stop_ = True
+            self.new_loop.stop()
+            self.loop.stop()
+            for a in self.loop_b:
+                a.cancel()
+        except AttributeError:
+            pass
+        #self.new_loop.close()
+        #self.loop.close()
+
 
 
 if __name__ == '__main__':

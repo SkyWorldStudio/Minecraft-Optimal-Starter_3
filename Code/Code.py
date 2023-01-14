@@ -34,12 +34,12 @@ def JsonWrite(Json_, JsonFile_,BuBug = False):
         json.dump(Json_, f, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
     if JsonFile_ == JsonFile():
         if BuBug == True:
-            print_('BeBug', str('写入Json(启动器配置Json) 目录: ' + JsonFile_ + ' 内容:\n') + str(Json_))
+            print_('DeBug', str('写入Json(启动器配置Json) 目录: ' + JsonFile_ + ' 内容:\n') + str(Json_))
         else:
             print_('Info',str('写入Json(启动器配置Json) 目录: ' + JsonFile_ + ' 内容:\n') + str(Json_))
     else:
         if BuBug == True:
-            print_('BeBug', str('写入Json 目录: ' + JsonFile_ + ' 内容:\n') + str(Json_))
+            print_('DeBug', str('写入Json 目录: ' + JsonFile_ + ' 内容:\n') + str(Json_))
         else:
             print_('Info', str('写入Json 目录: ' + JsonFile_ + ' 内容:\n') + str(Json_))
 

@@ -167,6 +167,11 @@ class Dialog_GameInstallWindows_(QDialog, Ui_Dialog_GameInstall):
             self.label_info_spend.setText(str(self.Spend_)+'MB/s')
 
     def stop(self):
+        self.pushButton_bottom_cancel.setText('正在取消……')
+        self.Install_Thread_.Stop()
+        self.Install_Thread_.exit()
+        self.Install_Thread_.quit()
+        self.Install_Thread_.wait()
         self.close_()
 
     def close_(self):
@@ -274,12 +279,15 @@ class Install_Thread(QThread):
     def run(self):
         import gc
         from Code.MC_Code.GameInstall import GameInstall
-        a = GameInstall(self.GameFile_M, self.GameFile_V, self.File, self.Download_Source, self.V_JsonFile,
+        self.a = GameInstall(self.GameFile_M, self.GameFile_V, self.File, self.Download_Source, self.V_JsonFile,
                         self.V, self.Name, self.V_Forge, self.V_Fabric, self.V_Optifine,
                         self.System, self.System_V,self.System_Places,
                         self.AssetsFileDownloadMethod, self.Sha1Cleck, self.MaxConcurrence, self.ProgressSinOut)
-        a.Run()
+        self.a.Run()
         gc.collect()
+
+    def Stop(self):
+        self.a.Stop()
 
     def ProgressSinOut(self,text):
         self.SinOut.emit(text)
