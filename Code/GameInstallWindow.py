@@ -130,14 +130,24 @@ class Dialog_GameInstallWindows_(QDialog, Ui_Dialog_GameInstall):
             self.label_Sidebar_B_QTime.timeout.connect(self.Spend_QTime)
 
         elif text[0] == 'JarProgress':
-            # 如果在进行Jar下载
             a = text[1]
+            # 如果在进行Jar下载
             if a[0] == 'start':
                 # 如果进入初始化
                 self.progressBar_inatall_Jar.setMaximum(a[1])
             elif a[0] == 'download':
                 # 如果开始下载
                 self.progressBar_inatall_Jar.setValue(a[1])
+            else:
+                self.close_()
+                self.sinOut_Error.emit()
+                GameName = self.Name
+                Game_V = self.V
+                ErrorKind = a[1]
+                ErrorCause = a[2]
+                ErrorInfo = a[3]
+                self.ErrorModule(GameName,Game_V,ErrorKind,ErrorCause,ErrorInfo)
+
 
 
         elif text[0] == 'ok':

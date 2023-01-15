@@ -496,6 +496,7 @@ class GameInstall():
                 import time
                 time_start = time.perf_counter()
                 print('开始下载')
+                self.error_quantity = 0  # 出现特定的error数量
                 if len(self.Libraries) != 0 or len(self.Assets) != 0:
                     self.AllList = self.Libraries + self.Assets
                     self.I = len(self.AllList) + 1
@@ -518,8 +519,8 @@ class GameInstall():
                     print('一共' + '1' + '项文件')
 
                 if self.Stop_ == False:
-                    a = JarAndBigFileDownload()
-                    a.download(self.MainJar[1], self.MainJar[3],
+                    self.JarDownload = JarAndBigFileDownload()
+                    self.JarDownload.download(self.MainJar[1], self.MainJar[3],
                                os.path.join(self.File, 'Caches'),
                                self.JarProgress)
                 print('下载完成')
@@ -633,14 +634,19 @@ class GameInstall():
                 print('error_ServerDisconnectedError')
 
             except aiohttp.client_exceptions.ClientConnectorError:
-                ErrorKind = sys.exc_info()[1]
-                ErrorCause = '未接入互联网'
-                ErrorInfo = traceback.format_exc()
-                print_('Error', '在安装游戏时出现异常,配置信息:' + str(list))
-                print_('DeBug', '由于安装出错,正在取消安装')
-                self.Stop()
-                print_('DeBug', '取消安装完成')
-                self.Progress(['error', self.Name, self.V, ErrorKind, ErrorCause, ErrorInfo])
+                if self.error_quantity >= 5:
+                    # 到达5次进行终止
+                    ErrorKind = sys.exc_info()[1]
+                    ErrorCause = '未接入互联网'
+                    ErrorInfo = traceback.format_exc()
+                    print_('Error', '在安装游戏时出现异常,配置信息:' + str(list))
+                    print_('DeBug', '由于安装出错,正在取消安装')
+                    self.Stop()
+                    print_('DeBug', '取消安装完成')
+                    self.Progress(['error', self.Name, self.V, ErrorKind, ErrorCause, ErrorInfo])
+                else:
+                    self.error_quantity += 1
+
 
             except aiohttp.client_exceptions.ClientOSError:
                 print('error_ClientOSError')
@@ -655,7 +661,7 @@ class GameInstall():
                 print_('Error', '在安装游戏时出现异常,配置信息:' + str(list))
                 print_('DeBug', '由于安装出错,正在取消安装')
                 self.Stop()
-                print_('DeBud', '取消安装完成')
+                print_('DeBug', '取消安装完成')
                 self.Progress(['error', self.Name, self.V, ErrorKind, ErrorCause, ErrorInfo])
 
         # else:
@@ -691,6 +697,7 @@ class GameInstall():
             self.loop.stop()
             for a in self.loop_b:
                 a.cancel()
+            self.JarDownload.D_cancel()
         except AttributeError:
             pass
         #self.new_loop.close()

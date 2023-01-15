@@ -1,5 +1,7 @@
 # coding=utf-8
 import json
+import sys
+import traceback
 
 import requests
 import os
@@ -32,19 +34,28 @@ class GamePublishListReturn:
         headers = {
                 'User-Agent': 'Mozilla/55.0 (Macintosh; Intel Mac OS X 55.55; rv:101.0) Gecko/20100101 Firefox/101.0'
                 }
-        r = requests.get(URL, headers=headers)
-        J = r.json()['versions']
-        File_ = os.path.join(self.File,'Versions')
-        os.makedirs(File_, exist_ok=True)
-        File = os.path.join(File_,'Versions.json')
-        JsonWrite(r.json(),File,BuBug=True)
-        L = []
-        for J_1 in J:
-            # print_('DeBug',J_1)
-            if J_1['type'] == Kind:
-                L.append(J_1)
-        # print_('DeBug',L)
-        return L
+        try:
+            r = requests.get(URL, headers=headers)
+            J = r.json()['versions']
+            File_ = os.path.join(self.File, 'Versions')
+            os.makedirs(File_, exist_ok=True)
+            File = os.path.join(File_, 'Versions.json')
+            JsonWrite(r.json(), File, BuBug=True)
+            L = []
+            for J_1 in J:
+                # print_('DeBug',J_1)
+                if J_1['type'] == Kind:
+                    L.append(J_1)
+            # print_('DeBug',L)
+            return L
+        except:
+            ErrorKind = sys.exc_info()[1]
+            # ErrorCause = 'None'
+            ErrorInfo = traceback.format_exc()
+            print_('Info', '在加载版本列表时出错')
+            print_('Error', '在加载版本列表时出现异常,异常关键字:\n' + str(ErrorKind) + '\n异常输出:\n' + str(ErrorInfo))
+            return 'Error'
+
 
         # 释放缓存
         # r.close()
