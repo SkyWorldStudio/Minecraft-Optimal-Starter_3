@@ -521,7 +521,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         l_l = QLabel()
         l_l.setText(name)
         font = QFont()
-        font.setPointSize(17)
+        font.setPixelSize(17)
         l_l.setFont(font)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -533,7 +533,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         l_l2 = QLabel()
         l_l2.setText(time)
         font = QFont()
-        font.setPointSize(11)
+        font.setPixelSize(11)
         l_l2.setFont(font)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -652,7 +652,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         l_1 = QLabel()
         l_1.setText(Name)
         font = QFont()
-        font.setPointSize(17)
+        font.setPixelSize(17)
         l_1.setFont(font)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -665,7 +665,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             l_2 = QLabel()
             l_2.setText(Time)
             font = QFont()
-            font.setPointSize(11)
+            font.setPixelSize(11)
             l_2.setFont(font)
             sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
             sizePolicy.setHorizontalStretch(0)
@@ -684,7 +684,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             l_3 = QLabel()
             l_3.setText(T)
             font = QFont()
-            font.setPointSize(13)
+            font.setPixelSize(13)
             l_3.setFont(font)
             sizePolicy = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Fixed)
             sizePolicy.setHorizontalStretch(0)
@@ -1170,7 +1170,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.SettingsPage_Sidebar_horizontalSlider_sliderReleased()
 
     def AddUserWindow_OK(self):
-        self.SinOut_moveEvent.disconnect(self.Dialog_AddUserWindows_)
+        self.SinOut_moveEvent.disconnect(self.Dialog_AddUserWindows_.MoveXY)
         self.Users_List_Refresh()
 
     def Users_List_Refresh(self):
@@ -1947,6 +1947,9 @@ class RunUi(QMainWindow, Ui_MainWindow):
         """检测游戏目录下的游戏线程 输出处理"""
         item = QListWidgetItem()
         item.setText(Name)
+        font = QFont()
+        font.setPixelSize(13)
+        item.setFont(font)
         print(Name)
         widget = QWidget()
         hLayout = QHBoxLayout()
@@ -2057,6 +2060,15 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.SinOut_moveEvent.connect(self.Dialog_DelateGameWindows_.MoveXY)
 
         self.Dialog_DelateGameWindows_.show()
+
+
+    def setUIFondSize(self,UI,followSystem=False):
+        """
+            设置制定Ui的字体大小
+            :param UI: 控件
+            :param followSystem:是否跟随系统,如果是Mac就使用
+        """
+        pass
 
 
     def Window_XY(self, X, Y):

@@ -191,6 +191,15 @@
 #page_download_1{
 	border-image: url(:/Scrub/images/Scrub_B15_FFFFFF-60_Main-User-2.png);
 	border-radius: 8px;
+	outline:0px;
+	border-left: 0px solid rgba(255, 255, 255,0);
+}
+#page_download_1 &gt; *{
+	outline:0px;
+}
+#scrollAreaWidgetContents_page_download_1_install{
+	outline:0px;
+	border-style:none;
 }
 #listWidget_page_1_download{
 	border-radius: 8px;
@@ -202,7 +211,7 @@
 #listWidget_page_1_download QScrollBar:vertical
 {
     width:10px;
-    background:rgba(0,0,0,0%);
+    background:rgba(0,0,0,0);
     margin:0px,0px,0px,0px;
     padding-top:9px;   /*留出9px给上面和下面的箭头*/
     padding-bottom:9px;
@@ -231,6 +240,7 @@
 #scrollAreaWidgetContents_page_download_1_install &gt; QWidget{
 	background-color: rgba(191, 191, 191, 54);
 	border-radius: 8px;
+	border-left: 0px solid rgba(255, 255, 255,0);
 }
 #page_download_1_install QListWidget::item{
 	border-left: 0px solid rgba(255, 255, 255,0);
@@ -2376,13 +2386,13 @@ Line{
                      <widget class="QWidget" name="page_download_1_install">
                       <layout class="QVBoxLayout" name="verticalLayout_13">
                        <property name="leftMargin">
-                        <number>0</number>
+                        <number>6</number>
                        </property>
                        <property name="topMargin">
                         <number>4</number>
                        </property>
                        <property name="rightMargin">
-                        <number>5</number>
+                        <number>6</number>
                        </property>
                        <property name="bottomMargin">
                         <number>0</number>
@@ -2397,8 +2407,8 @@ Line{
                            <rect>
                             <x>0</x>
                             <y>0</y>
-                            <width>1094</width>
-                            <height>467</height>
+                            <width>276</width>
+                            <height>266</height>
                            </rect>
                           </property>
                           <property name="sizePolicy">
@@ -2412,13 +2422,13 @@ Line{
                             <number>10</number>
                            </property>
                            <property name="leftMargin">
-                            <number>12</number>
+                            <number>7</number>
                            </property>
                            <property name="topMargin">
                             <number>8</number>
                            </property>
                            <property name="rightMargin">
-                            <number>14</number>
+                            <number>9</number>
                            </property>
                            <property name="bottomMargin">
                             <number>10</number>
@@ -3183,24 +3193,32 @@ Line{
                         <number>10</number>
                        </property>
                        <item>
-                        <widget class="QStackedWidget" name="stackedWidget">
+                        <widget class="QStackedWidget" name="stackedWidget_page_download_1_install_forge">
                          <widget class="QWidget" name="page_7">
-                          <widget class="QListWidget" name="listWidget_page_download_1_install_forge">
-                           <property name="geometry">
-                            <rect>
-                             <x>210</x>
-                             <y>-40</y>
-                             <width>538</width>
-                             <height>533</height>
-                            </rect>
+                          <layout class="QHBoxLayout" name="horizontalLayout_33">
+                           <property name="leftMargin">
+                            <number>0</number>
                            </property>
-                           <property name="iconSize">
-                            <size>
-                             <width>40</width>
-                             <height>40</height>
-                            </size>
+                           <property name="topMargin">
+                            <number>0</number>
                            </property>
-                          </widget>
+                           <property name="rightMargin">
+                            <number>0</number>
+                           </property>
+                           <property name="bottomMargin">
+                            <number>0</number>
+                           </property>
+                           <item>
+                            <widget class="QListWidget" name="listWidget_page_download_1_install_forge">
+                             <property name="iconSize">
+                              <size>
+                               <width>40</width>
+                               <height>40</height>
+                              </size>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
                          </widget>
                          <widget class="QWidget" name="page_8">
                           <layout class="QHBoxLayout" name="horizontalLayout_32">
