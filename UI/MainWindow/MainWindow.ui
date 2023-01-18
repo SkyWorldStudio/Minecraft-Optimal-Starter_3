@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -256,8 +259,11 @@
 	padding: 8px;
 }
 #pushButton_page_download_1_install_bottom_ok{
-	background-color: rgb(42, 130, 228);
+	background-color: rgb(135, 180, 235);
 	color: rgb(255, 255, 255);
+}
+#pushButton_page_download_1_install_bottom_ok:disabled{
+	background-color: rgb(56, 130, 221);
 }
 #pushButton_page_download_1_install_bottom_ok:hover{
 	background-color: rgb(74, 146, 228);
@@ -2407,8 +2413,8 @@ Line{
                            <rect>
                             <x>0</x>
                             <y>0</y>
-                            <width>276</width>
-                            <height>266</height>
+                            <width>1087</width>
+                            <height>467</height>
                            </rect>
                           </property>
                           <property name="sizePolicy">
@@ -3157,6 +3163,9 @@ Line{
                           </item>
                           <item>
                            <widget class="QPushButton" name="pushButton_page_download_1_install_bottom_ok">
+                            <property name="enabled">
+                             <bool>true</bool>
+                            </property>
                             <property name="minimumSize">
                              <size>
                               <width>132</width>

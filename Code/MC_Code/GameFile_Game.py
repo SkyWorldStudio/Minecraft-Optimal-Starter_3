@@ -72,7 +72,7 @@ class GameFile_Game:
                             'Name': GF_V_G,  # 游戏名称
                             'Jar_Exist': Jar_E,  # Jar文件是否存在
                             'Json_Exist': Json_E,  # Json文件是否存在
-                            'Json_Check': Json_C  # Jaon文件的初步检查是否通过
+                            'Json_Check': Json_C  # Json文件的初步检查是否通过
                         }
                         GF_All[GF_V_G] = State
 

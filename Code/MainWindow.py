@@ -493,6 +493,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.Download_MC_Kind = 'old_alpha'
             self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_CraftingTable.png'
         # print(self.File)
+        self.listWidget_page_1_download.clear()
         self.DownloadPage_stackedWidget_GetGameList_Thread_Start_ = DownloadPage_stackedWidget_GetGameList_Thread(
             'MCBBS', self.File, self.Download_MC_Kind)
         self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.SinOut.connect(

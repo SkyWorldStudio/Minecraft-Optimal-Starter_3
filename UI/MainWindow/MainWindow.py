@@ -12,6 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
+        MainWindow.setEnabled(True)
         MainWindow.resize(1168, 612)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/MOS_Logo_gif.gif"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
@@ -254,8 +255,11 @@ class Ui_MainWindow(object):
 "    padding: 8px;\n"
 "}\n"
 "#pushButton_page_download_1_install_bottom_ok{\n"
-"    background-color: rgb(42, 130, 228);\n"
+"    background-color: rgb(135, 180, 235);\n"
 "    color: rgb(255, 255, 255);\n"
+"}\n"
+"#pushButton_page_download_1_install_bottom_ok:disabled{\n"
+"    background-color: rgb(56, 130, 221);\n"
 "}\n"
 "#pushButton_page_download_1_install_bottom_ok:hover{\n"
 "    background-color: rgb(74, 146, 228);\n"
@@ -1384,7 +1388,7 @@ class Ui_MainWindow(object):
         self.scrollArea_page_download_1_install.setWidgetResizable(True)
         self.scrollArea_page_download_1_install.setObjectName("scrollArea_page_download_1_install")
         self.scrollAreaWidgetContents_page_download_1_install = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_page_download_1_install.setGeometry(QtCore.QRect(0, 0, 276, 266))
+        self.scrollAreaWidgetContents_page_download_1_install.setGeometry(QtCore.QRect(0, 0, 1087, 467))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -1680,6 +1684,7 @@ class Ui_MainWindow(object):
         self.lineEdit_page_download_1_install_bottom_GameName.setObjectName("lineEdit_page_download_1_install_bottom_GameName")
         self.horizontalLayout_18.addWidget(self.lineEdit_page_download_1_install_bottom_GameName)
         self.pushButton_page_download_1_install_bottom_ok = QtWidgets.QPushButton(self.widget_page_download_1_install_bottom)
+        self.pushButton_page_download_1_install_bottom_ok.setEnabled(True)
         self.pushButton_page_download_1_install_bottom_ok.setMinimumSize(QtCore.QSize(132, 38))
         font = QtGui.QFont()
         font.setPixelSize(16)
