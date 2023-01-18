@@ -84,7 +84,7 @@ class GameInstall():
                 with open(self.V_JsonFile, 'r', encoding='utf_8') as f:
                     b = json.load(f)
                 for b_1 in b['versions']:
-                    if b_1['id'] == self.MC:
+                    if b_1['id'] == self.V:
                         url = b_1['url']
                         break
             else:
@@ -104,11 +104,12 @@ class GameInstall():
             # 下载Assets List Json文件
             AssetsList_Json = V_Json['assetIndex']
             try:
-                url = self.Download_Source_Url_Json_Q + AssetsList_Json['url'].split('https://piston-meta.mojang.com/')[
-                    1]
+                url = self.Download_Source_Url_Json_Q + AssetsList_Json['url'].split('https://piston-meta.mojang.com/')[1]
             except IndexError:
                 url = self.Download_Source_Url_Json_Q + \
                       AssetsList_Json['url'].split('https://launchermeta.mojang.com/')[1]
+            except AttributeError:
+                url = AssetsList_Json['url']
             id = AssetsList_Json['id']
             path_up = os.path.join(self.GameFile_M, 'assets', 'indexes')
             path = os.path.join(path_up, id + '.json')
@@ -160,10 +161,6 @@ class GameInstall():
 
                                             if m == None:
                                                 # 如果不在限制以内,就添加
-                                                URL = self.Download_Source_Url_Libraries_Q + \
-                                                      A['url'].split('https://libraries.minecraft.net/')[1]
-                                                Path = os.path.join(self.GameFile_M, 'libraries', A['path'])
-                                                Path_Up = os.path.abspath(os.path.join(Path, ".."))
 
                                                 if 'artifact' in L['downloads']:
                                                     Zip = False
@@ -173,6 +170,11 @@ class GameInstall():
                                                     b = L['natives']['osx']
                                                     A = L['downloads']['classifiers'][b]
                                                 Sh = A['sha1']
+
+                                                URL = self.Download_Source_Url_Libraries_Q + \
+                                                      A['url'].split('https://libraries.minecraft.net/')[1]
+                                                Path = os.path.join(self.GameFile_M, 'libraries', A['path'])
+                                                Path_Up = os.path.abspath(os.path.join(Path, ".."))
 
                                                 if os.path.exists(Path):
                                                     # 如果目录存在
@@ -200,10 +202,6 @@ class GameInstall():
 
                                             if m == None:
                                                 # 如果不在限制以内,就添加
-                                                URL = self.Download_Source_Url_Libraries_Q + \
-                                                      A['url'].split('https://libraries.minecraft.net/')[1]
-                                                Path = os.path.join(self.GameFile_M, 'libraries', A['path'])
-                                                Path_Up = os.path.abspath(os.path.join(Path, ".."))
 
                                                 if 'artifact' in L['downloads']:
                                                     Zip = False
@@ -211,7 +209,7 @@ class GameInstall():
                                                 else:
                                                     Zip = True
                                                     b = L['natives']['windows']
-                                                    if self.Sytem_Places == 64:
+                                                    if self.System_Places == 64:
                                                         # 如果为60位
                                                         c = 'natives-windows-64"'
                                                     else:
@@ -221,6 +219,12 @@ class GameInstall():
                                                     else:
                                                         A = L['downloads']['classifiers'][c]
                                                     Sh = A['sha1']
+
+                                                # 添加
+                                                URL = self.Download_Source_Url_Libraries_Q + \
+                                                      A['url'].split('https://libraries.minecraft.net/')[1]
+                                                Path = os.path.join(self.GameFile_M, 'libraries', A['path'])
+                                                Path_Up = os.path.abspath(os.path.join(Path, ".."))
 
                                                 if os.path.exists(Path):
                                                     # 如果目录存在
@@ -247,10 +251,6 @@ class GameInstall():
 
                                             if m == None:
                                                 # 如果不在限制以内,就添加
-                                                URL = self.Download_Source_Url_Libraries_Q + \
-                                                      A['url'].split('https://libraries.minecraft.net/')[1]
-                                                Path = os.path.join(self.GameFile_M, 'libraries', A['path'])
-                                                Path_Up = os.path.abspath(os.path.join(Path, ".."))
 
                                                 if 'artifact' in L['downloads']:
                                                     Zip = False
@@ -260,6 +260,12 @@ class GameInstall():
                                                     b = L['natives']['linux']
                                                     A = L['downloads']['classifiers'][b]
                                                 Sh = A['sha1']
+
+
+                                                URL = self.Download_Source_Url_Libraries_Q + \
+                                                      A['url'].split('https://libraries.minecraft.net/')[1]
+                                                Path = os.path.join(self.GameFile_M, 'libraries', A['path'])
+                                                Path_Up = os.path.abspath(os.path.join(Path, ".."))
 
                                                 if os.path.exists(Path):
                                                     # 如果目录存在
@@ -290,10 +296,6 @@ class GameInstall():
 
                                             if m != None:
                                                 # 如果在允许以内,就添加
-                                                URL = self.Download_Source_Url_Libraries_Q + \
-                                                      A['url'].split('https://libraries.minecraft.net/')[1]
-                                                Path = os.path.join(self.GameFile_M, 'libraries', A['path'])
-                                                Path_Up = os.path.abspath(os.path.join(Path, ".."))
 
                                                 if 'artifact' in L['downloads']:
                                                     Zip = False
@@ -303,6 +305,12 @@ class GameInstall():
                                                     b = L['natives']['osx']
                                                     A = L['downloads']['classifiers'][b]
                                                 Sh = A['sha1']
+
+                                                # 添加
+                                                URL = self.Download_Source_Url_Libraries_Q + \
+                                                      A['url'].split('https://libraries.minecraft.net/')[1]
+                                                Path = os.path.join(self.GameFile_M, 'libraries', A['path'])
+                                                Path_Up = os.path.abspath(os.path.join(Path, ".."))
 
                                                 if os.path.exists(Path):
                                                     # 如果目录存在
@@ -329,10 +337,6 @@ class GameInstall():
 
                                             if m != None:
                                                 # 如果在允许以内,就添加
-                                                URL = self.Download_Source_Url_Libraries_Q + \
-                                                      A['url'].split('https://libraries.minecraft.net/')[1]
-                                                Path = os.path.join(self.GameFile_M, 'libraries', A['path'])
-                                                Path_Up = os.path.abspath(os.path.join(Path, ".."))
 
                                                 if 'artifact' in L['downloads']:
                                                     Zip = False
@@ -340,7 +344,7 @@ class GameInstall():
                                                 else:
                                                     Zip = True
                                                     b = L['natives']['windows']
-                                                    if self.Sytem_Places == 64:
+                                                    if self.System_Places == 64:
                                                         # 如果为60位
                                                         c = 'natives-windows-64"'
                                                     else:
@@ -350,6 +354,12 @@ class GameInstall():
                                                     else:
                                                         A = L['downloads']['classifiers'][c]
                                                     Sh = A['sha1']
+
+                                                # 添加
+                                                URL = self.Download_Source_Url_Libraries_Q + \
+                                                      A['url'].split('https://libraries.minecraft.net/')[1]
+                                                Path = os.path.join(self.GameFile_M, 'libraries', A['path'])
+                                                Path_Up = os.path.abspath(os.path.join(Path, ".."))
 
                                                 if os.path.exists(Path):
                                                     # 如果目录存在
@@ -456,6 +466,7 @@ class GameInstall():
 
             # 如果使用方法A，就进行Assets文件解析
             if self.AssetsFileDownloadMethod == 'A':
+                print(AssetsList_Json)
                 for A in AssetsList_Json['objects']:
                     # 注意, MC官方这里写的hash其实是sha1算法
                     hash = AssetsList_Json['objects'][A]['hash']
@@ -549,6 +560,11 @@ class GameInstall():
         except RuntimeError:
             # 如果取消，则终止
             print_('DeBug','[游戏安装程序]出现RuntimeError错误，这可能是用户点了取消，已忽略')
+        except requests.exceptions.ProxyError:
+            ErrorKind = sys.exc_info()[1]
+            ErrorCause = '出现系统代理错误，请关闭代理再试'
+            ErrorInfo = traceback.format_exc()
+            self.Progress(['error', self.Name, self.V, ErrorKind, ErrorCause, ErrorInfo])
         except:
             ErrorKind = sys.exc_info()[1]
             ErrorCause = 'None'
