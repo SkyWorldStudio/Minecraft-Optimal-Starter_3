@@ -19,28 +19,15 @@ jobs:
     - name: 运行脚本进行代码优化
       run: |
         python '.github/Code_Optimize.py'
-    #- name: Commit
-    #  id: commit
-    #  run: |
-    #    git config --global user.email ${{ secrets.BOTEMALI}}
-    #    git config --global user.name xianyongjian080402-Bot
-    #    git add .
-    #    git commit -m "[Bot]-[Code_OptimizeBot]"
-    #  continue-on-error: true
-    #- name: Push changes
-    #  uses: ad-m/github-push-action@master
-    #  with:
-    #    github_token: ${{ secrets.CODEOPTIMIZE}}
+    - name: Commit
+      id: commit
+      run: |
+        git config --global user.email ${{ secrets.BOTEMALI}}
+        git config --global user.name xianyongjian080402-Bot
+        git add .
+        git commit -m "[Bot]-[Code_OptimizeBot]"
+      continue-on-error: true
     - name: Push changes
-      # You may pin to the exact commit or the version.
-      # uses: actions-go/push@7ad7ce209f2a038e7bca929b7a4c92026363f856
-      uses: actions-go/push@v1
+      uses: ad-m/github-push-action@master
       with:
-        # The email that will appear in commits when changes needs to be committed
-        author-email: ${{ secrets.BOTEMALI}}
-        # The name that will appear in commits when changes needs to be committed
-        author-name: xianyongjian080402-Bot
-        # The commit message used when changes needs to be committed
-        commit-message: "[Bot]-[Code_OptimizeBot]"
-        # Auth token used to fetch the repository. The token is stored in the local git config, which enables your scripts to run authenticated git commands. The post-job step removes the token from the git config. [Learn more about creating and using encrypted secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)
-        token: ${{ secrets.CODEOPTIMIZE}}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
