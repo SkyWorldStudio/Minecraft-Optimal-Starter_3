@@ -297,7 +297,9 @@ class Install_Thread(QThread):
         gc.collect()
 
     def Stop(self):
-        self.a.Stop()
-
+        try:
+            self.a.Stop()
+        except AttributeError:
+            pass
     def ProgressSinOut(self,text):
         self.SinOut.emit(text)

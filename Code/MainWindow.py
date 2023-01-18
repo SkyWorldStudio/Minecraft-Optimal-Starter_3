@@ -587,6 +587,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.pushButton_page_download_1_install_forge_up_close.setEnabled(False)
         self.pushButton_page_download_1_install_fabric_up_close.setEnabled(False)
         self.pushButton_page_download_1_install_optifine_up_close.setEnabled(False)
+        self.pushButton_page_download_1_install_bottom_ok.setEnabled(False)
         self.lineEdit_page_download_1_install_bottom_GameName.setPlaceholderText(str(self.DownloadPage_V))
         self.lineEdit_page_download_1_install_bottom_GameName.setText(str(self.DownloadPage_V))
         self.SetCurrentIndex(self.stackedWidget_page_download_1, 1, 3, True, [[self.stackedWidget_2,0]])
@@ -999,15 +1000,36 @@ class RunUi(QMainWindow, Ui_MainWindow):
         F = os.path.join(F,'versions',T)
         if T != '':
             if os.path.isdir(F):
-                self.label_page_download_1_install_bottom_GameName.setText('游戏名(重复)')
+                self.label_page_download_1_install_bottom_GameName.setText('游戏名(版本名重复,请换一个名字)')
                 self.label_page_download_1_install_bottom_GameName.setStyleSheet("color: 2px solid rgb(255, 38, 0);")
                 self.lineEdit_page_download_1_install_bottom_GameName.setStyleSheet("border: 2px solid rgb(255, 38, 0);")
             else:
-                self.label_page_download_1_install_bottom_GameName.setText('游戏名')
-                self.lineEdit_page_download_1_install_bottom_GameName.setStyleSheet("border: 2px solid rgb(56, 56, 56);")
+                if len(T.split('/')) == 1 and len(T.split('\\')) == 1 and len(T.split('\\')) == 1:
+                    if len(T.split(' 缺少Jar文件, 并且Json文件可能已损坏')) == 1 and len(T.split(' 缺少Jar文件')) == 1 and len(T.split(' 缺少Json文件')) == 1 and len(T.split(' Json文件可能已损坏')) == 1:
+                        self.label_page_download_1_install_bottom_GameName.setText('游戏名')
+                        self.lineEdit_page_download_1_install_bottom_GameName.setStyleSheet(
+                            "border: 2px solid rgb(56, 56, 56);")
+                        self.pushButton_page_download_1_install_bottom_ok.setEnabled(True)
+                    else:
+                        self.label_page_download_1_install_bottom_GameName.setText('游戏名(你隔着卡Bug呢?)')
+                        self.label_page_download_1_install_bottom_GameName.setStyleSheet(
+                            "color: 2px solid rgb(255, 38, 0);")
+                        self.lineEdit_page_download_1_install_bottom_GameName.setStyleSheet(
+                            "border: 2px solid rgb(255, 38, 0);")
+                        self.pushButton_page_download_1_install_bottom_ok.setEnabled(False)
+
+                else:
+                    self.label_page_download_1_install_bottom_GameName.setText('游戏名(含有特殊字符)')
+                    self.label_page_download_1_install_bottom_GameName.setStyleSheet(
+                        "color: 2px solid rgb(255, 38, 0);")
+                    self.lineEdit_page_download_1_install_bottom_GameName.setStyleSheet(
+                        "border: 2px solid rgb(255, 38, 0);")
+                    self.pushButton_page_download_1_install_bottom_ok.setEnabled(False)
+
         else:
             self.label_page_download_1_install_bottom_GameName.setText('游戏名')
             self.lineEdit_page_download_1_install_bottom_GameName.setStyleSheet("border: 2px solid rgb(56, 56, 56);")
+            self.pushButton_page_download_1_install_bottom_ok.setEnabled(False)
 
 
     def DownloadPage_MC_Official(self):

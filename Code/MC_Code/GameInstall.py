@@ -700,6 +700,9 @@ class GameInstall():
             self.JarDownload.D_cancel()
         except AttributeError:
             pass
+        import shutil
+        print_('Info','由于取消安装，正在删除文件夹')
+        shutil.rmtree(self.GameFile_V)
         #self.new_loop.close()
         #self.loop.close()
 
