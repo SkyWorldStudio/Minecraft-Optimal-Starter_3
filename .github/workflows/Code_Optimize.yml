@@ -5,6 +5,8 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment:
+      name: Configure Code_Optimize
     strategy:
       matrix:
         python-version: ["3.8"]
