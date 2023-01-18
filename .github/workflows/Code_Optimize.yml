@@ -15,14 +15,14 @@ jobs:
     - name: 设置Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
-        python-version: $\{{ matrix.python-version }}
+        python-version: ${{ matrix.python-version }}
     - name: 运行脚本进行代码优化
       run: |
         python '.github/Code_Optimize.py'
     - name: Commit
       id: commit
       run: |
-        git config --global user.email ${{secrets.BOTEMALI}}
+        git config --global user.email ${{ secrets.BOTEMALI}}
         git config --global user.name xianyongjian080402-Bot
         git add .
         git commit -m "[Bot]-[Code_OptimizeBot]"
@@ -30,4 +30,4 @@ jobs:
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
-        github_token: $\{{ secrets.CODEOPTIMIZE}}
+        github_token: ${{ secrets.CODEOPTIMIZE}}
