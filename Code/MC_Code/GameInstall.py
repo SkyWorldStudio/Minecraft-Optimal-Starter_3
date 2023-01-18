@@ -565,11 +565,13 @@ class GameInstall():
             ErrorCause = '出现系统代理错误，请关闭代理再试'
             ErrorInfo = traceback.format_exc()
             self.Progress(['error', self.Name, self.V, ErrorKind, ErrorCause, ErrorInfo])
+            self.Stop()
         except:
             ErrorKind = sys.exc_info()[1]
             ErrorCause = 'None'
             ErrorInfo = traceback.format_exc()
             self.Progress(['error', self.Name, self.V,ErrorKind, ErrorCause, ErrorInfo])
+            self.Stop()
 
 
     async def DownloadTaskMake(self, i: int):
