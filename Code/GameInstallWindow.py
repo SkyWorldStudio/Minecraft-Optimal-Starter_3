@@ -12,6 +12,7 @@ import UI.Dialog_All_rc
 class Dialog_GameInstallWindows_(QDialog, Ui_Dialog_GameInstall):
     #sinOut_Win_XY = pyqtSignal(int, int)
     sinOut_OK = pyqtSignal()
+    sinOut_Close = pyqtSignal()
     sinOut_Error = pyqtSignal()
 
     def __init__(self, GameFile_M, GameFile_V, File, Download_Source, V_JsonFile,
@@ -148,11 +149,10 @@ class Dialog_GameInstallWindows_(QDialog, Ui_Dialog_GameInstall):
                 ErrorInfo = a[3]
                 self.ErrorModule(GameName,Game_V,ErrorKind,ErrorCause,ErrorInfo)
 
-
-
         elif text[0] == 'ok':
             # 完成
             self.sinOut_OK.emit()
+            self.sinOut_Close.emit()
             self.close_()
 
         elif text[0] == 'error':
@@ -191,6 +191,7 @@ class Dialog_GameInstallWindows_(QDialog, Ui_Dialog_GameInstall):
             self.label_Sidebar_B_QTime.stop()
         except AttributeError:
             pass
+        self.sinOut_Close.emit()
         self.anim = QPropertyAnimation(self, b"windowOpacity")  # 设置动画对象
         self.anim.setDuration(300)  # 设置动画时长
         self.anim.setStartValue(1)  # 设置初始属性，1.0为不透明

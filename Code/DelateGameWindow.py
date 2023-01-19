@@ -14,6 +14,7 @@ from PyQt6.QtWidgets import QDialog, QGraphicsDropShadowEffect
 class Dialog_DelateGameWindows_(QDialog, Ui_Dialog_DelateGame):
     #sinOut_Win_XY = pyqtSignal(int, int)
     sinOut_OK = pyqtSignal()
+    sinOut_Cancel = pyqtSignal()
 
     def __init__(self, GameFile, GameName, GameFileName):
         """
@@ -52,10 +53,12 @@ class Dialog_DelateGameWindows_(QDialog, Ui_Dialog_DelateGame):
         from shutil import rmtree
         print(file)
         rmtree(file)
-        self.pushButton_Cancel_Clicked()  # 关闭窗口
+        self.sinOut_OK.emit()
+        self.clicked_pushButton_close()  # 关闭窗口
 
     def pushButton_Cancel_Clicked(self):
         """点击取消按钮"""
+        self.sinOut_Cancel.emit()
         self.clicked_pushButton_close()
 
     def clicked_pushButton_close(self):

@@ -11,13 +11,12 @@ from PyQt6.QtWidgets import QDialog, QGraphicsDropShadowEffect
 class Dialog_AddUserWindows_(QDialog, Ui_Dialog_AddUserWindows):
     #sinOut_Win_XY = pyqtSignal(int, int)
     sinOut_OK = pyqtSignal()
+    sinOut_Cancel = pyqtSignal()
 
     def __init__(self, JsonFile):
         super(Dialog_AddUserWindows_, self).__init__()
         self.setupUi(self)
         self.show()
-
-
 
         self.JsonFile = JsonFile
 
@@ -71,9 +70,10 @@ class Dialog_AddUserWindows_(QDialog, Ui_Dialog_AddUserWindows):
                 R = UserAdd(self.JsonFile).UserAdd_OffLine(User_Name,UUID)
                 if R == 'OK':
                     self.sinOut_OK.emit()
-                    self.pushButton_Cancel_Clicked()  # 关闭窗口
+                    self.clicked_pushButton_close()  # 关闭窗口
 
     def pushButton_Cancel_Clicked(self):
+        self.sinOut_Cancel.emit()
         self.clicked_pushButton_close()
 
     def clicked_pushButton_close(self):
