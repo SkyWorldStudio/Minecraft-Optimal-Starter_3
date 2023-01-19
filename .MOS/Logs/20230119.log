@@ -1,0 +1,629 @@
+[11:25:33.780942][INFO]程序启动(UI显示): 程序已开始运行！
+[11:25:34.584018][INFO]程序启动(UI显示): 创建窗口对象成功！
+[11:25:37.843761][INFO]程序启动(UI显示): 已成功显示窗体
+[11:25:37.949053][INFO]程序启动(UI显示): 创建PyQt窗口对象成功！
+[11:25:37.950661][INFO]程序启动(初始化设置): 引入库
+[11:25:41.071873][INFO]程序启动(初始化设置): 引入库
+[11:25:41.074014][INFO]系统检测: 系统：Linux
+[11:25:41.074244][INFO]程序启动(初始化设置): Json读取完成
+[11:25:41.074411][INFO]程序启动(初始化设置:Json检查): Json完整
+[11:25:41.074444][INFO]程序启动(初始化设置:Json检查): Json验证完成
+[11:25:41.272370][INFO]程序启动(初始化设置): 设置背景……
+[11:25:42.898172][INFO]写入Json(启动器配置Json) 目录: .MOS/MOS.json 内容:
+{'BackGround': False, 'Download_Source': 'MCBBS', 'Download_Source_ExceptionHandling': True, 'GameFile': {'当前目录': {'File': '.minecraft', 'Name': '当前目录'}}, 'GameFile_List': ['当前目录'], 'GameFile_List_Clicked': 0, 'Game_List_Clicked': 0, 'Sidebar_Sidebar_Time': 15, 'Subject': 'Light', 'System': 'Linux', 'System_Places': 64, 'System_V': '5.15.85-1-MANJARO', 'UserPage_setChoice': 'Choices', 'Users': {}}
+[11:25:42.898807][INFO]写入Json(启动器配置Json) 目录: .MOS/MOS.json 内容:
+{'BackGround': False, 'Download_Source': 'MCBBS', 'Download_Source_ExceptionHandling': True, 'GameFile': {'当前目录': {'File': '.minecraft', 'Name': '当前目录'}}, 'GameFile_List': ['当前目录'], 'GameFile_List_Clicked': 0, 'Game_List_Clicked': 0, 'Sidebar_Sidebar_Time': 15, 'Subject': 'Light', 'System': 'Linux', 'System_Places': 64, 'System_V': '5.15.85-1-MANJARO', 'UserPage_setChoice': 'Choices', 'Users': {}}
+[11:25:42.898860][INFO]程序启动(初始化设置): 读取用户账户
+[11:25:42.898916][INFO]账户: 刷新账户列表
+[11:25:42.899273][INFO]账户: 刷新账户列表完成
+[11:25:42.899304][INFO]程序启动(初始化设置): 读取游戏目录列表
+[11:25:42.900002][INFO]程序启动(初始化设置): 设置完成
+[11:25:43.292095][INFO]用户点击: 左边栏按钮 -> Home
+[11:26:10.011486][INFO]用户点击: 左边栏按钮 -> Download
+[11:26:11.707648][INFO]在加载版本列表时出错
+11:26:11.707709ERROR在加载版本列表时出现异常,异常关键字:
+HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 500 Internal Server Error')))
+异常输出:
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 700, in urlopen
+    self._prepare_proxy(conn)
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 996, in _prepare_proxy
+    conn.connect()
+  File "/usr/lib/python3.10/site-packages/urllib3/connection.py", line 369, in connect
+    self._tunnel()
+  File "/usr/lib/python3.10/http/client.py", line 924, in _tunnel
+    raise OSError(f"Tunnel connection failed: {code} {message.strip()}")
+OSError: Tunnel connection failed: 500 Internal Server Error
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/usr/lib/python3.10/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 500 Internal Server Error')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/asriel/Minecraft-Optimal-Starter_3/Code/MC_Code/GamePublishListReturn.py", line 38, in ListReturn
+    r = requests.get(URL, headers=headers)
+  File "/usr/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/adapters.py", line 559, in send
+    raise ProxyError(e, request=request)
+requests.exceptions.ProxyError: HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 500 Internal Server Error')))
+
+[11:26:14.331451][INFO]用户点击: 左边栏按钮 -> Download
+[11:26:38.303387][INFO][有可能导致错误]开始进行强制内存清理
+[11:26:38.316599][INFO][有可能导致错误]强制内存清理完成
+[11:27:38.299929][INFO][有可能导致错误]开始进行强制内存清理
+[11:27:38.308085][INFO][有可能导致错误]强制内存清理完成
+[11:28:38.299924][INFO][有可能导致错误]开始进行强制内存清理
+[11:28:38.318767][INFO][有可能导致错误]强制内存清理完成
+[11:29:38.299885][INFO][有可能导致错误]开始进行强制内存清理
+[11:29:38.313908][INFO][有可能导致错误]强制内存清理完成
+[11:30:03.852385][INFO]用户点击: 左边栏按钮 -> Download
+[11:30:06.959543][INFO]在加载版本列表时出错
+11:30:06.959639ERROR在加载版本列表时出现异常,异常关键字:
+HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 500 Internal Server Error')))
+异常输出:
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 700, in urlopen
+    self._prepare_proxy(conn)
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 996, in _prepare_proxy
+    conn.connect()
+  File "/usr/lib/python3.10/site-packages/urllib3/connection.py", line 369, in connect
+    self._tunnel()
+  File "/usr/lib/python3.10/http/client.py", line 924, in _tunnel
+    raise OSError(f"Tunnel connection failed: {code} {message.strip()}")
+OSError: Tunnel connection failed: 500 Internal Server Error
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/usr/lib/python3.10/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 500 Internal Server Error')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/asriel/Minecraft-Optimal-Starter_3/Code/MC_Code/GamePublishListReturn.py", line 38, in ListReturn
+    r = requests.get(URL, headers=headers)
+  File "/usr/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/adapters.py", line 559, in send
+    raise ProxyError(e, request=request)
+requests.exceptions.ProxyError: HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 500 Internal Server Error')))
+
+[11:30:08.876573][INFO]用户点击: 左边栏按钮 -> Download
+[11:30:09.716983][INFO]用户点击: 左边栏按钮 -> Download
+[11:30:14.814247][INFO]程序启动(UI显示): 程序已开始运行！
+[11:30:15.140466][INFO]程序启动(UI显示): 创建窗口对象成功！
+[11:30:16.425559][INFO]程序启动(UI显示): 已成功显示窗体
+[11:30:16.445550][INFO]程序启动(UI显示): 创建PyQt窗口对象成功！
+[11:30:16.447106][INFO]程序启动(初始化设置): 引入库
+[11:30:16.449076][INFO]系统检测: 系统：Linux
+[11:30:16.449262][INFO]程序启动(初始化设置): Json读取完成
+[11:30:16.449382][INFO]程序启动(初始化设置:Json检查): Json完整
+[11:30:16.449411][INFO]程序启动(初始化设置:Json检查): Json验证完成
+[11:30:16.456282][INFO]程序启动(初始化设置): 设置背景……
+[11:30:17.984536][INFO]写入Json(启动器配置Json) 目录: .MOS/MOS.json 内容:
+{'BackGround': False, 'Download_Source': 'MCBBS', 'Download_Source_ExceptionHandling': True, 'GameFile': {'当前目录': {'File': '.minecraft', 'Name': '当前目录'}}, 'GameFile_List': ['当前目录'], 'GameFile_List_Clicked': 0, 'Game_List_Clicked': 0, 'Sidebar_Sidebar_Time': 15, 'Subject': 'Light', 'System': 'Linux', 'System_Places': 64, 'System_V': '5.15.85-1-MANJARO', 'UserPage_setChoice': 'Choices', 'Users': {}}
+[11:30:17.985144][INFO]写入Json(启动器配置Json) 目录: .MOS/MOS.json 内容:
+{'BackGround': False, 'Download_Source': 'MCBBS', 'Download_Source_ExceptionHandling': True, 'GameFile': {'当前目录': {'File': '.minecraft', 'Name': '当前目录'}}, 'GameFile_List': ['当前目录'], 'GameFile_List_Clicked': 0, 'Game_List_Clicked': 0, 'Sidebar_Sidebar_Time': 15, 'Subject': 'Light', 'System': 'Linux', 'System_Places': 64, 'System_V': '5.15.85-1-MANJARO', 'UserPage_setChoice': 'Choices', 'Users': {}}
+[11:30:17.985201][INFO]程序启动(初始化设置): 读取用户账户
+[11:30:17.985262][INFO]账户: 刷新账户列表
+[11:30:17.985783][INFO]账户: 刷新账户列表完成
+[11:30:17.985817][INFO]程序启动(初始化设置): 读取游戏目录列表
+[11:30:17.986511][INFO]程序启动(初始化设置): 设置完成
+[11:30:18.385745][INFO]用户点击: 左边栏按钮 -> Home
+[11:30:19.501018][INFO]用户点击: 左边栏按钮 -> Download
+[11:30:19.690762][INFO]在加载版本列表时出错
+11:30:19.690872ERROR在加载版本列表时出现异常,异常关键字:
+HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 500 Internal Server Error')))
+异常输出:
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 700, in urlopen
+    self._prepare_proxy(conn)
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 996, in _prepare_proxy
+    conn.connect()
+  File "/usr/lib/python3.10/site-packages/urllib3/connection.py", line 369, in connect
+    self._tunnel()
+  File "/usr/lib/python3.10/http/client.py", line 924, in _tunnel
+    raise OSError(f"Tunnel connection failed: {code} {message.strip()}")
+OSError: Tunnel connection failed: 500 Internal Server Error
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/usr/lib/python3.10/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 500 Internal Server Error')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/asriel/Minecraft-Optimal-Starter_3/Code/MC_Code/GamePublishListReturn.py", line 38, in ListReturn
+    r = requests.get(URL, headers=headers)
+  File "/usr/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/adapters.py", line 559, in send
+    raise ProxyError(e, request=request)
+requests.exceptions.ProxyError: HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 500 Internal Server Error')))
+
+[11:31:05.475829][INFO]程序启动(UI显示): 程序已开始运行！
+[11:31:05.550504][INFO]程序启动(UI显示): 创建窗口对象成功！
+[11:31:06.752918][INFO]程序启动(UI显示): 已成功显示窗体
+[11:31:06.791298][INFO]程序启动(UI显示): 创建PyQt窗口对象成功！
+[11:31:06.793346][INFO]程序启动(初始化设置): 引入库
+[11:31:06.803340][INFO]系统检测: 系统：Linux
+[11:31:06.803618][INFO]程序启动(初始化设置): Json读取完成
+[11:31:06.803753][INFO]程序启动(初始化设置:Json检查): Json完整
+[11:31:06.803782][INFO]程序启动(初始化设置:Json检查): Json验证完成
+[11:31:06.828748][INFO]程序启动(初始化设置): 设置背景……
+[11:31:08.369015][INFO]写入Json(启动器配置Json) 目录: .MOS/MOS.json 内容:
+{'BackGround': False, 'Download_Source': 'MCBBS', 'Download_Source_ExceptionHandling': True, 'GameFile': {'当前目录': {'File': '.minecraft', 'Name': '当前目录'}}, 'GameFile_List': ['当前目录'], 'GameFile_List_Clicked': 0, 'Game_List_Clicked': 0, 'Sidebar_Sidebar_Time': 15, 'Subject': 'Light', 'System': 'Linux', 'System_Places': 64, 'System_V': '5.15.85-1-MANJARO', 'UserPage_setChoice': 'Choices', 'Users': {}}
+[11:31:08.369433][INFO]写入Json(启动器配置Json) 目录: .MOS/MOS.json 内容:
+{'BackGround': False, 'Download_Source': 'MCBBS', 'Download_Source_ExceptionHandling': True, 'GameFile': {'当前目录': {'File': '.minecraft', 'Name': '当前目录'}}, 'GameFile_List': ['当前目录'], 'GameFile_List_Clicked': 0, 'Game_List_Clicked': 0, 'Sidebar_Sidebar_Time': 15, 'Subject': 'Light', 'System': 'Linux', 'System_Places': 64, 'System_V': '5.15.85-1-MANJARO', 'UserPage_setChoice': 'Choices', 'Users': {}}
+[11:31:08.369478][INFO]程序启动(初始化设置): 读取用户账户
+[11:31:08.369542][INFO]账户: 刷新账户列表
+[11:31:08.370100][INFO]账户: 刷新账户列表完成
+[11:31:08.370142][INFO]程序启动(初始化设置): 读取游戏目录列表
+[11:31:08.370822][INFO]程序启动(初始化设置): 设置完成
+[11:31:08.820988][INFO]用户点击: 左边栏按钮 -> Home
+[11:31:10.814918][INFO]用户点击: 左边栏按钮 -> Download
+[11:31:11.164633][INFO]在加载版本列表时出错
+11:31:11.164788ERROR在加载版本列表时出现异常,异常关键字:
+HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ffb40239a80>: Failed to establish a new connection: [Errno 111] 拒绝连接')))
+异常输出:
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/site-packages/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/usr/lib/python3.10/site-packages/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/usr/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] 拒绝连接
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 700, in urlopen
+    self._prepare_proxy(conn)
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 996, in _prepare_proxy
+    conn.connect()
+  File "/usr/lib/python3.10/site-packages/urllib3/connection.py", line 358, in connect
+    self.sock = conn = self._new_conn()
+  File "/usr/lib/python3.10/site-packages/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x7ffb40239a80>: Failed to establish a new connection: [Errno 111] 拒绝连接
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/usr/lib/python3.10/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ffb40239a80>: Failed to establish a new connection: [Errno 111] 拒绝连接')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/asriel/Minecraft-Optimal-Starter_3/Code/MC_Code/GamePublishListReturn.py", line 38, in ListReturn
+    r = requests.get(URL, headers=headers)
+  File "/usr/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/adapters.py", line 559, in send
+    raise ProxyError(e, request=request)
+requests.exceptions.ProxyError: HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ffb40239a80>: Failed to establish a new connection: [Errno 111] 拒绝连接')))
+
+[11:32:06.299934][INFO][有可能导致错误]开始进行强制内存清理
+[11:32:06.314252][INFO][有可能导致错误]强制内存清理完成
+[11:33:06.301219][INFO][有可能导致错误]开始进行强制内存清理
+[11:33:06.315261][INFO][有可能导致错误]强制内存清理完成
+[11:34:02.557232][INFO]用户点击: 左边栏按钮 -> Download
+[11:34:05.685491][INFO]用户点击: 左边栏按钮 -> Download
+[11:34:06.299937][INFO][有可能导致错误]开始进行强制内存清理
+[11:34:06.313733][INFO][有可能导致错误]强制内存清理完成
+[11:34:18.407365][INFO]程序启动(UI显示): 程序已开始运行！
+[11:34:18.481165][INFO]程序启动(UI显示): 创建窗口对象成功！
+[11:34:19.611538][INFO]程序启动(UI显示): 已成功显示窗体
+[11:34:19.630714][INFO]程序启动(UI显示): 创建PyQt窗口对象成功！
+[11:34:19.632133][INFO]程序启动(初始化设置): 引入库
+[11:34:19.634520][INFO]系统检测: 系统：Linux
+[11:34:19.634764][INFO]程序启动(初始化设置): Json读取完成
+[11:34:19.634908][INFO]程序启动(初始化设置:Json检查): Json完整
+[11:34:19.634937][INFO]程序启动(初始化设置:Json检查): Json验证完成
+[11:34:19.644842][INFO]程序启动(初始化设置): 设置背景……
+[11:34:21.203606][INFO]写入Json(启动器配置Json) 目录: .MOS/MOS.json 内容:
+{'BackGround': False, 'Download_Source': 'MCBBS', 'Download_Source_ExceptionHandling': True, 'GameFile': {'当前目录': {'File': '.minecraft', 'Name': '当前目录'}}, 'GameFile_List': ['当前目录'], 'GameFile_List_Clicked': 0, 'Game_List_Clicked': 0, 'Sidebar_Sidebar_Time': 15, 'Subject': 'Light', 'System': 'Linux', 'System_Places': 64, 'System_V': '5.15.85-1-MANJARO', 'UserPage_setChoice': 'Choices', 'Users': {}}
+[11:34:21.204243][INFO]写入Json(启动器配置Json) 目录: .MOS/MOS.json 内容:
+{'BackGround': False, 'Download_Source': 'MCBBS', 'Download_Source_ExceptionHandling': True, 'GameFile': {'当前目录': {'File': '.minecraft', 'Name': '当前目录'}}, 'GameFile_List': ['当前目录'], 'GameFile_List_Clicked': 0, 'Game_List_Clicked': 0, 'Sidebar_Sidebar_Time': 15, 'Subject': 'Light', 'System': 'Linux', 'System_Places': 64, 'System_V': '5.15.85-1-MANJARO', 'UserPage_setChoice': 'Choices', 'Users': {}}
+[11:34:21.204288][INFO]程序启动(初始化设置): 读取用户账户
+[11:34:21.204351][INFO]账户: 刷新账户列表
+[11:34:21.204946][INFO]账户: 刷新账户列表完成
+[11:34:21.204986][INFO]程序启动(初始化设置): 读取游戏目录列表
+[11:34:21.205673][INFO]程序启动(初始化设置): 设置完成
+[11:34:21.617204][INFO]用户点击: 左边栏按钮 -> Home
+[11:34:22.902031][INFO]用户点击: 左边栏按钮 -> Download
+[11:34:23.367747][INFO]在加载版本列表时出错
+11:34:23.367847ERROR在加载版本列表时出现异常,异常关键字:
+HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 500 Internal Server Error')))
+异常输出:
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 700, in urlopen
+    self._prepare_proxy(conn)
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 996, in _prepare_proxy
+    conn.connect()
+  File "/usr/lib/python3.10/site-packages/urllib3/connection.py", line 369, in connect
+    self._tunnel()
+  File "/usr/lib/python3.10/http/client.py", line 924, in _tunnel
+    raise OSError(f"Tunnel connection failed: {code} {message.strip()}")
+OSError: Tunnel connection failed: 500 Internal Server Error
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/usr/lib/python3.10/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 500 Internal Server Error')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/asriel/Minecraft-Optimal-Starter_3/Code/MC_Code/GamePublishListReturn.py", line 38, in ListReturn
+    r = requests.get(URL, headers=headers)
+  File "/usr/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/adapters.py", line 559, in send
+    raise ProxyError(e, request=request)
+requests.exceptions.ProxyError: HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 500 Internal Server Error')))
+
+[11:36:27.476330][INFO]程序启动(UI显示): 程序已开始运行！
+[11:36:27.568036][INFO]程序启动(UI显示): 创建窗口对象成功！
+[11:36:28.834053][INFO]程序启动(UI显示): 已成功显示窗体
+[11:36:28.857554][INFO]程序启动(UI显示): 创建PyQt窗口对象成功！
+[11:36:28.859381][INFO]程序启动(初始化设置): 引入库
+[11:36:28.862268][INFO]系统检测: 系统：Linux
+[11:36:28.862514][INFO]程序启动(初始化设置): Json读取完成
+[11:36:28.862669][INFO]程序启动(初始化设置:Json检查): Json完整
+[11:36:28.862700][INFO]程序启动(初始化设置:Json检查): Json验证完成
+[11:36:28.873737][INFO]程序启动(初始化设置): 设置背景……
+[11:36:30.418085][INFO]写入Json(启动器配置Json) 目录: .MOS/MOS.json 内容:
+{'BackGround': False, 'Download_Source': 'MCBBS', 'Download_Source_ExceptionHandling': True, 'GameFile': {'当前目录': {'File': '.minecraft', 'Name': '当前目录'}}, 'GameFile_List': ['当前目录'], 'GameFile_List_Clicked': 0, 'Game_List_Clicked': 0, 'Sidebar_Sidebar_Time': 15, 'Subject': 'Light', 'System': 'Linux', 'System_Places': 64, 'System_V': '5.15.85-1-MANJARO', 'UserPage_setChoice': 'Choices', 'Users': {}}
+[11:36:30.418765][INFO]写入Json(启动器配置Json) 目录: .MOS/MOS.json 内容:
+{'BackGround': False, 'Download_Source': 'MCBBS', 'Download_Source_ExceptionHandling': True, 'GameFile': {'当前目录': {'File': '.minecraft', 'Name': '当前目录'}}, 'GameFile_List': ['当前目录'], 'GameFile_List_Clicked': 0, 'Game_List_Clicked': 0, 'Sidebar_Sidebar_Time': 15, 'Subject': 'Light', 'System': 'Linux', 'System_Places': 64, 'System_V': '5.15.85-1-MANJARO', 'UserPage_setChoice': 'Choices', 'Users': {}}
+[11:36:30.418817][INFO]程序启动(初始化设置): 读取用户账户
+[11:36:30.418863][INFO]账户: 刷新账户列表
+[11:36:30.419354][INFO]账户: 刷新账户列表完成
+[11:36:30.419387][INFO]程序启动(初始化设置): 读取游戏目录列表
+[11:36:30.420065][INFO]程序启动(初始化设置): 设置完成
+[11:36:30.814998][INFO]用户点击: 左边栏按钮 -> Home
+[11:36:31.914852][INFO]用户点击: 左边栏按钮 -> Download
+[11:36:32.153216][INFO]在加载版本列表时出错
+11:36:32.153310ERROR在加载版本列表时出现异常,异常关键字:
+HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 500 Internal Server Error')))
+异常输出:
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 700, in urlopen
+    self._prepare_proxy(conn)
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 996, in _prepare_proxy
+    conn.connect()
+  File "/usr/lib/python3.10/site-packages/urllib3/connection.py", line 369, in connect
+    self._tunnel()
+  File "/usr/lib/python3.10/http/client.py", line 924, in _tunnel
+    raise OSError(f"Tunnel connection failed: {code} {message.strip()}")
+OSError: Tunnel connection failed: 500 Internal Server Error
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/usr/lib/python3.10/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 500 Internal Server Error')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/asriel/Minecraft-Optimal-Starter_3/Code/MC_Code/GamePublishListReturn.py", line 38, in ListReturn
+    r = requests.get(URL, headers=headers)
+  File "/usr/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/adapters.py", line 559, in send
+    raise ProxyError(e, request=request)
+requests.exceptions.ProxyError: HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 500 Internal Server Error')))
+
+[11:36:53.246233][INFO]程序启动(UI显示): 程序已开始运行！
+[11:36:53.319932][INFO]程序启动(UI显示): 创建窗口对象成功！
+[11:36:54.476144][INFO]程序启动(UI显示): 已成功显示窗体
+[11:36:54.493368][INFO]程序启动(UI显示): 创建PyQt窗口对象成功！
+[11:36:54.496417][INFO]程序启动(初始化设置): 引入库
+[11:36:54.498647][INFO]系统检测: 系统：Linux
+[11:36:54.498884][INFO]程序启动(初始化设置): Json读取完成
+[11:36:54.499016][INFO]程序启动(初始化设置:Json检查): Json完整
+[11:36:54.499046][INFO]程序启动(初始化设置:Json检查): Json验证完成
+[11:36:54.508522][INFO]程序启动(初始化设置): 设置背景……
+[11:36:56.040247][INFO]写入Json(启动器配置Json) 目录: .MOS/MOS.json 内容:
+{'BackGround': False, 'Download_Source': 'MCBBS', 'Download_Source_ExceptionHandling': True, 'GameFile': {'当前目录': {'File': '.minecraft', 'Name': '当前目录'}}, 'GameFile_List': ['当前目录'], 'GameFile_List_Clicked': 0, 'Game_List_Clicked': 0, 'Sidebar_Sidebar_Time': 15, 'Subject': 'Light', 'System': 'Linux', 'System_Places': 64, 'System_V': '5.15.85-1-MANJARO', 'UserPage_setChoice': 'Choices', 'Users': {}}
+[11:36:56.054408][INFO]写入Json(启动器配置Json) 目录: .MOS/MOS.json 内容:
+{'BackGround': False, 'Download_Source': 'MCBBS', 'Download_Source_ExceptionHandling': True, 'GameFile': {'当前目录': {'File': '.minecraft', 'Name': '当前目录'}}, 'GameFile_List': ['当前目录'], 'GameFile_List_Clicked': 0, 'Game_List_Clicked': 0, 'Sidebar_Sidebar_Time': 15, 'Subject': 'Light', 'System': 'Linux', 'System_Places': 64, 'System_V': '5.15.85-1-MANJARO', 'UserPage_setChoice': 'Choices', 'Users': {}}
+[11:36:56.054482][INFO]程序启动(初始化设置): 读取用户账户
+[11:36:56.054557][INFO]账户: 刷新账户列表
+[11:36:56.055170][INFO]账户: 刷新账户列表完成
+[11:36:56.055222][INFO]程序启动(初始化设置): 读取游戏目录列表
+[11:36:56.055940][INFO]程序启动(初始化设置): 设置完成
+[11:36:56.458463][INFO]用户点击: 左边栏按钮 -> Home
+[11:36:57.731723][INFO]用户点击: 左边栏按钮 -> Download
+[11:36:57.923344][INFO]在加载版本列表时出错
+11:36:57.923446ERROR在加载版本列表时出现异常,异常关键字:
+HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f2a4433c550>: Failed to establish a new connection: [Errno 111] 拒绝连接')))
+异常输出:
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/site-packages/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/usr/lib/python3.10/site-packages/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/usr/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] 拒绝连接
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 700, in urlopen
+    self._prepare_proxy(conn)
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 996, in _prepare_proxy
+    conn.connect()
+  File "/usr/lib/python3.10/site-packages/urllib3/connection.py", line 358, in connect
+    self.sock = conn = self._new_conn()
+  File "/usr/lib/python3.10/site-packages/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x7f2a4433c550>: Failed to establish a new connection: [Errno 111] 拒绝连接
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/usr/lib/python3.10/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f2a4433c550>: Failed to establish a new connection: [Errno 111] 拒绝连接')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/asriel/Minecraft-Optimal-Starter_3/Code/MC_Code/GamePublishListReturn.py", line 38, in ListReturn
+    r = requests.get(URL, headers=headers)
+  File "/usr/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/adapters.py", line 559, in send
+    raise ProxyError(e, request=request)
+requests.exceptions.ProxyError: HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f2a4433c550>: Failed to establish a new connection: [Errno 111] 拒绝连接')))
+
+[11:37:54.299740][INFO][有可能导致错误]开始进行强制内存清理
+[11:37:54.308788][INFO][有可能导致错误]强制内存清理完成
+[11:38:54.299739][INFO][有可能导致错误]开始进行强制内存清理
+[11:38:54.309472][INFO][有可能导致错误]强制内存清理完成
+[11:39:54.299262][INFO][有可能导致错误]开始进行强制内存清理
+[11:39:54.317163][INFO][有可能导致错误]强制内存清理完成
+[11:40:54.299538][INFO][有可能导致错误]开始进行强制内存清理
+[11:40:54.319572][INFO][有可能导致错误]强制内存清理完成
+[11:41:54.299783][INFO][有可能导致错误]开始进行强制内存清理
+[11:41:54.317429][INFO][有可能导致错误]强制内存清理完成
+[11:42:54.301987][INFO][有可能导致错误]开始进行强制内存清理
+[11:42:54.315235][INFO][有可能导致错误]强制内存清理完成
+[11:43:54.299713][INFO][有可能导致错误]开始进行强制内存清理
+[11:43:54.314729][INFO][有可能导致错误]强制内存清理完成
+[11:44:54.301823][INFO][有可能导致错误]开始进行强制内存清理
+[11:44:54.315512][INFO][有可能导致错误]强制内存清理完成
+[11:45:54.299933][INFO][有可能导致错误]开始进行强制内存清理
+[11:45:54.311385][INFO][有可能导致错误]强制内存清理完成
+[11:47:53.440374][INFO]程序启动(UI显示): 程序已开始运行！
+[11:47:53.513578][INFO]程序启动(UI显示): 创建窗口对象成功！
+[11:47:54.610435][INFO]程序启动(UI显示): 已成功显示窗体
+[11:47:54.628369][INFO]程序启动(UI显示): 创建PyQt窗口对象成功！
+[11:47:54.630989][INFO]程序启动(初始化设置): 引入库
+[11:47:54.633359][INFO]系统检测: 系统：Linux
+[11:47:54.633611][INFO]程序启动(初始化设置): Json读取完成
+[11:47:54.633748][INFO]程序启动(初始化设置:Json检查): Json完整
+[11:47:54.633786][INFO]程序启动(初始化设置:Json检查): Json验证完成
+[11:47:54.643672][INFO]程序启动(初始化设置): 设置背景……
+[11:47:56.249316][INFO]写入Json(启动器配置Json) 目录: .MOS/MOS.json 内容:
+{'BackGround': False, 'Download_Source': 'MCBBS', 'Download_Source_ExceptionHandling': True, 'GameFile': {'当前目录': {'File': '.minecraft', 'Name': '当前目录'}}, 'GameFile_List': ['当前目录'], 'GameFile_List_Clicked': 0, 'Game_List_Clicked': 0, 'Sidebar_Sidebar_Time': 15, 'Subject': 'Light', 'System': 'Linux', 'System_Places': 64, 'System_V': '5.15.85-1-MANJARO', 'UserPage_setChoice': 'Choices', 'Users': {}}
+[11:47:56.249965][INFO]写入Json(启动器配置Json) 目录: .MOS/MOS.json 内容:
+{'BackGround': False, 'Download_Source': 'MCBBS', 'Download_Source_ExceptionHandling': True, 'GameFile': {'当前目录': {'File': '.minecraft', 'Name': '当前目录'}}, 'GameFile_List': ['当前目录'], 'GameFile_List_Clicked': 0, 'Game_List_Clicked': 0, 'Sidebar_Sidebar_Time': 15, 'Subject': 'Light', 'System': 'Linux', 'System_Places': 64, 'System_V': '5.15.85-1-MANJARO', 'UserPage_setChoice': 'Choices', 'Users': {}}
+[11:47:56.250039][INFO]程序启动(初始化设置): 读取用户账户
+[11:47:56.250097][INFO]账户: 刷新账户列表
+[11:47:56.250634][INFO]账户: 刷新账户列表完成
+[11:47:56.250679][INFO]程序启动(初始化设置): 读取游戏目录列表
+[11:47:56.251374][INFO]程序启动(初始化设置): 设置完成
+[11:47:56.648155][INFO]用户点击: 左边栏按钮 -> Home
+[11:48:12.684675][INFO]用户点击: 左边栏按钮 -> Download
+[11:48:12.896252][INFO]在加载版本列表时出错
+11:48:12.896407ERROR在加载版本列表时出现异常,异常关键字:
+HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f17ac334220>: Failed to establish a new connection: [Errno 111] 拒绝连接')))
+异常输出:
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/site-packages/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/usr/lib/python3.10/site-packages/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/usr/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] 拒绝连接
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 700, in urlopen
+    self._prepare_proxy(conn)
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 996, in _prepare_proxy
+    conn.connect()
+  File "/usr/lib/python3.10/site-packages/urllib3/connection.py", line 358, in connect
+    self.sock = conn = self._new_conn()
+  File "/usr/lib/python3.10/site-packages/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x7f17ac334220>: Failed to establish a new connection: [Errno 111] 拒绝连接
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/usr/lib/python3.10/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f17ac334220>: Failed to establish a new connection: [Errno 111] 拒绝连接')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/asriel/Minecraft-Optimal-Starter_3/Code/MC_Code/GamePublishListReturn.py", line 38, in ListReturn
+    r = requests.get(URL, headers=headers,verify=False)
+  File "/usr/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/adapters.py", line 559, in send
+    raise ProxyError(e, request=request)
+requests.exceptions.ProxyError: HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f17ac334220>: Failed to establish a new connection: [Errno 111] 拒绝连接')))
+
+[11:48:30.709561][INFO]程序启动(UI显示): 程序已开始运行！
+[11:48:30.785170][INFO]程序启动(UI显示): 创建窗口对象成功！
+[11:48:31.889314][INFO]程序启动(UI显示): 已成功显示窗体
+[11:48:31.908771][INFO]程序启动(UI显示): 创建PyQt窗口对象成功！
+[11:48:31.910497][INFO]程序启动(初始化设置): 引入库
+[11:48:31.912685][INFO]系统检测: 系统：Linux
+[11:48:31.912998][INFO]程序启动(初始化设置): Json读取完成
+[11:48:31.913124][INFO]程序启动(初始化设置:Json检查): Json完整
+[11:48:31.913154][INFO]程序启动(初始化设置:Json检查): Json验证完成
+[11:48:31.921979][INFO]程序启动(初始化设置): 设置背景……
+[11:48:33.599105][INFO]写入Json(启动器配置Json) 目录: .MOS/MOS.json 内容:
+{'BackGround': False, 'Download_Source': 'MCBBS', 'Download_Source_ExceptionHandling': True, 'GameFile': {'当前目录': {'File': '.minecraft', 'Name': '当前目录'}}, 'GameFile_List': ['当前目录'], 'GameFile_List_Clicked': 0, 'Game_List_Clicked': 0, 'Sidebar_Sidebar_Time': 15, 'Subject': 'Light', 'System': 'Linux', 'System_Places': 64, 'System_V': '5.15.85-1-MANJARO', 'UserPage_setChoice': 'Choices', 'Users': {}}
+[11:48:33.599766][INFO]写入Json(启动器配置Json) 目录: .MOS/MOS.json 内容:
+{'BackGround': False, 'Download_Source': 'MCBBS', 'Download_Source_ExceptionHandling': True, 'GameFile': {'当前目录': {'File': '.minecraft', 'Name': '当前目录'}}, 'GameFile_List': ['当前目录'], 'GameFile_List_Clicked': 0, 'Game_List_Clicked': 0, 'Sidebar_Sidebar_Time': 15, 'Subject': 'Light', 'System': 'Linux', 'System_Places': 64, 'System_V': '5.15.85-1-MANJARO', 'UserPage_setChoice': 'Choices', 'Users': {}}
+[11:48:33.599813][INFO]程序启动(初始化设置): 读取用户账户
+[11:48:33.599867][INFO]账户: 刷新账户列表
+[11:48:33.600409][INFO]账户: 刷新账户列表完成
+[11:48:33.600456][INFO]程序启动(初始化设置): 读取游戏目录列表
+[11:48:33.601084][INFO]程序启动(初始化设置): 设置完成
+[11:48:34.019270][INFO]用户点击: 左边栏按钮 -> Home
+[11:48:35.733699][INFO]用户点击: 左边栏按钮 -> Download
+[11:48:36.209468][INFO]在加载版本列表时出错
+11:48:36.209725ERROR在加载版本列表时出现异常,异常关键字:
+HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 500 Internal Server Error')))
+异常输出:
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 700, in urlopen
+    self._prepare_proxy(conn)
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 996, in _prepare_proxy
+    conn.connect()
+  File "/usr/lib/python3.10/site-packages/urllib3/connection.py", line 369, in connect
+    self._tunnel()
+  File "/usr/lib/python3.10/http/client.py", line 924, in _tunnel
+    raise OSError(f"Tunnel connection failed: {code} {message.strip()}")
+OSError: Tunnel connection failed: 500 Internal Server Error
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/usr/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/usr/lib/python3.10/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 500 Internal Server Error')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/asriel/Minecraft-Optimal-Starter_3/Code/MC_Code/GamePublishListReturn.py", line 38, in ListReturn
+    r = requests.get(URL, headers=headers,verify=False)
+  File "/usr/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python3.10/site-packages/requests/adapters.py", line 559, in send
+    raise ProxyError(e, request=request)
+requests.exceptions.ProxyError: HTTPSConnectionPool(host='download.mcbbs.net', port=443): Max retries exceeded with url: /mc/game/version_manifest_v2.json (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 500 Internal Server Error')))
+
+[11:49:32.299695][INFO][有可能导致错误]开始进行强制内存清理
+[11:49:32.309296][INFO][有可能导致错误]强制内存清理完成

@@ -1,0 +1,23 @@
+{
+    "BackGround": false,
+    "Download_Source": "MCBBS",
+    "Download_Source_ExceptionHandling": true,
+    "GameFile": {
+        "当前目录": {
+            "File": ".minecraft",
+            "Name": "当前目录"
+        }
+    },
+    "GameFile_List": [
+        "当前目录"
+    ],
+    "GameFile_List_Clicked": 0,
+    "Game_List_Clicked": 0,
+    "Sidebar_Sidebar_Time": 15,
+    "Subject": "Light",
+    "System": "Linux",
+    "System_Places": 64,
+    "System_V": "5.15.85-1-MANJARO",
+    "UserPage_setChoice": "Choices",
+    "Users": {}
+}

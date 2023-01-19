@@ -35,7 +35,7 @@ class GamePublishListReturn:
                 'User-Agent': 'Mozilla/55.0 (Macintosh; Intel Mac OS X 55.55; rv:101.0) Gecko/20100101 Firefox/101.0'
                 }
         try:
-            r = requests.get(URL, headers=headers)
+            r = requests.get(URL, headers=headers,verify=False)
             J = r.json()['versions']
             File_ = os.path.join(self.File, 'Versions')
             os.makedirs(File_, exist_ok=True)
