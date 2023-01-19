@@ -12,10 +12,13 @@ from pytz import timezone
 
 from Code.Log import print_, Log_Clear, Log_Return
 from UI.MainWindow.MainWindow import Ui_MainWindow
-from Code.Code import JsonRead, JsonFile, Systeam, JsonWrite, File, Json_Cheak
+from Code.Code import JsonRead, JsonFile, System, JsonWrite, File, Json_Cheak
 
 
 class RunUi(QMainWindow, Ui_MainWindow):
+
+    SinOut_moveEvent = pyqtSignal(int,int)
+
     def __init__(self):
         super(RunUi, self).__init__()
 
@@ -23,6 +26,10 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         # self.setWindowFlags(Qt.WindowType.MacWindowToolBarButtonHint)
         self.show()
+        self.L_XY = {'X':self.x(),
+                     'Y':self.y()
+        }
+        self.SinOut_moveEvent.connect(self.L_XY_)
 
         print_('Info', "程序启动(UI显示): 已成功显示窗体")
         self.__init__setAll()
@@ -33,26 +40,39 @@ class RunUi(QMainWindow, Ui_MainWindow):
         global Win_XY
         Win_XY = self.geometry()
 
+        self.MEM_Clear_QTime = QTimer()
+        self.MEM_Clear_QTime.start(60000)  # 60s一次
+        self.MEM_Clear_QTime.timeout.connect(self.MEM_Clear_)
+
+
+    def MEM_Clear_(self):
+        print_('Info','[有可能导致错误]开始进行强制内存清理')
+        import gc
+        gc.collect()
+        print_('Info', '[有可能导致错误]强制内存清理完成')
+
     # 左边栏"按钮"被点击后（槽）
     def Back_Clicked(self):
         # self.Sidebar_Clicked(Want='Back')
         try:
             print_('Info', '返回系统: 开始返回上一个')
+            print(self.H_B)
             if self.label_Sidebar_QTime_Ok and self.label_Sidebar_B_QTime_Ok:
                 if len(self.H_B) > 2:
                     B = self.H_B[-1]
-                    if B['Left'] != False:
-                        B_1 = B['Index_L']
-                        if B_1 == 0:
-                            self.Sidebar_Clicked(Want='User', H=False)
-                        elif B_1 == 1:
-                            self.Sidebar_Clicked(Want='Home', H=False)
-                        elif B_1 == 2:
-                            self.Sidebar_Clicked(Want='Online', H=False)
-                        elif B_1 == 3:
-                            self.Sidebar_Clicked(Want='Download', H=False)
-                        elif B_1 == 4:
-                            self.Sidebar_Clicked(Want='Settings', H=False)
+                    if 'Left' in B and 'Left_L' in B:
+                        if B['Left'] != False:
+                            B_1 = B['Left_L']
+                            if B_1 == 0:
+                                self.Sidebar_Clicked(Want='User', H=False)
+                            elif B_1 == 1:
+                                self.Sidebar_Clicked(Want='Home', H=False)
+                            elif B_1 == 2:
+                                self.Sidebar_Clicked(Want='Online', H=False)
+                            elif B_1 == 3:
+                                self.Sidebar_Clicked(Want='Download', H=False)
+                            elif B_1 == 4:
+                                self.Sidebar_Clicked(Want='Settings', H=False)
                     if B['Name'] != False:
                         B_1 = B['Index_L']
                         if B_1 == 0:
@@ -67,6 +87,18 @@ class RunUi(QMainWindow, Ui_MainWindow):
                             self.Sidebar_Clicked(Want='Settings', H=False)
                         B['Name'].setCurrentIndex(B['Index_L'])
                     # B['Name'].setCurrentIndex(B['Index_L'])
+
+                    if B['And_'] != None:
+                        for a in B['And_']:
+                            a_1 = a[0]
+                            a_1.setCurrentIndex(a[1])
+                        self.Sidebar_Clicked(Want='Home', H=False)
+
+
+                    if B['And__'] != None:
+                        a = B['And__']
+                        a()
+
                     print_('Info', '返回系统: 返回完成 本次执行配置值: ' + str(self.H_B[-1]))
                     self.H_B.remove(self.H_B[-1])
 
@@ -76,12 +108,23 @@ class RunUi(QMainWindow, Ui_MainWindow):
                     if B['Name'] != False:
                         B['Name'].setCurrentIndex(B['Index_L'])
                     self.Sidebar_Clicked(Want='Home', H=False)
+
+                    if B['And_'] != None:
+                        for a in B['And_']:
+                            a_1 = a[0]
+                            a_1.setCurrentIndex(a[1])
+                        self.Sidebar_Clicked(Want='Home', H=False)
+
+                    if B['And__'] != None:
+                        a = B['And__']
+                        a()
+
+
                     print_('Info', '返回系统: 返回完成 本次执行配置值: ' + str(self.H_B[-1]))
                     self.H_B.remove(self.H_B[-1])
 
-                print(self.H_B)
 
-                if len(self.H_B) == 1:
+                if len(self.H_B)+1 == 1:
                     self.label_Sidebar_Back.setEnabled(False)
                     print_('Info', '返回系统: 返回失败, 无需返回 已将按钮改为禁用')
 
@@ -98,7 +141,15 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.Sidebar_Clicked(Want='Online')
 
     def Download_Clicked(self):
+        if self.stackedWidget_page_download.currentIndex() == 0:
+            self.stackedWidget_page_download_1.setCurrentIndex(0)
+        self.stackedWidget_2.setCurrentIndex(0)
         self.Sidebar_Clicked(Want='Download')
+
+    def DownloadPage_Cheak(self):
+        """下载页面,在合适的时候对部分控件进行翻页"""
+        if self.stackedWidget_page_download.currentIndex() == 0:
+            self.stackedWidget_2.setCurrentIndex(0)
 
     def Settings_Clicked(self):
         self.Sidebar_Clicked(Want='Settings')
@@ -108,8 +159,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
         i = self.stackedWidget_main_2.currentIndex()
         if i == 3:
             # 如果切换到了下载页后
-            print('knskldnaklsdnaksndlkasdnalskd')
-            self.DownloadPage_stackedWidget_GetGameList_()
+            if self.listWidget_page_1_download.count() == 0:
+                self.DownloadPage_stackedWidget_GetGameList_()
 
     def UserPage_Up_AddUser(self):
         icon2 = QtGui.QIcon()
@@ -127,9 +178,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
         # 显示窗口
         from Code.AddUserWindow import Dialog_AddUserWindows_
         self.Dialog_AddUserWindows_ = Dialog_AddUserWindows_(self.JsonFile)
-        self.Dialog_AddUserWindows_.sinOut_Win_XY.connect(self.Window_XY)
+        #self.Dialog_AddUserWindows_.sinOut_Win_XY.connect(self.Window_XY)
         self.Dialog_AddUserWindows_.sinOut_OK.connect(self.AddUserWindow_OK)
-        self.Dialog_AddUserWindows_.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
         self.Dialog_AddUserWindows_.setWindowFlags(
             Qt.WindowType.Popup |  # 表示该窗口小部件是一个弹出式顶层窗口，即它是模态的，但有一个适合弹出式菜单的窗口系统框架。
             Qt.WindowType.Tool |  # 表示小部件是一个工具窗口,如果有父级，则工具窗口将始终保留在其顶部,在 macOS 上，工具窗口对应于窗口的NSPanel类。这意味着窗口位于普通窗口之上，因此无法在其顶部放置普通窗口。默认情况下，当应用程序处于非活动状态时，工具窗口将消失。这可以通过WA_MacAlwaysShowToolWindow属性来控制。
@@ -138,7 +188,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             Qt.WindowType.Dialog |  # 指示该小部件是一个应装饰为对话框的窗口（即，通常在标题栏中没有最大化或最小化按钮）。这是 的默认类型QDialog。如果要将其用作模式对话框，则应从另一个窗口启动它，或者具有父级并与该windowModality属性一起使用。如果将其设为模态，对话框将阻止应用程序中的其他顶级窗口获得任何输入。我们将具有父级的顶级窗口称为辅助窗口。
             Qt.WindowType.NoDropShadowWindowHint  # 禁用支持平台上的窗口投影。
         )
-
+        self.Dialog_AddUserWindows_.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground,True)
         self.Dialog_AddUserWindows_.setWindowModality(
             Qt.WindowModality.ApplicationModal  # 该窗口对应用程序是模态的，并阻止对所有窗口的输入。
         )
@@ -149,6 +199,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             round(self.MainWindow_xy_size.y() + (self.size().height()/3)
         ))  # 子界面移动到 居中
         self.UserPage_Up_AddUser()  # 窗口弹出后，主页面不再刷新，所以在窗口弹出前改变
+        self.SinOut_moveEvent.connect(self.Dialog_AddUserWindows_.MoveXY)
 
         self.Dialog_AddUserWindows_.show()
 
@@ -321,38 +372,50 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
     def DownloadPage_Game_Clicked(self):
         """下载页 -> 游戏本体"""
+        self.stackedWidget_2.setCurrentIndex(0)
         if self.stackedWidget_page_download.currentIndex() == 0:
             pass
         else:
-            self.SetCurrentIndex(self.stackedWidget_page_download, 0, 3, True)
+            self.SetCurrentIndex(self.stackedWidget_page_download, 0, 3, True, And__=self.DownloadPage_Cheak)
+        self.stackedWidget_page_download_1.setCurrentIndex(0)
+        self.stackedWidget_page_download_1_main.setCurrentIndex(0)
+
+    def DownloadPage_Game_Refresh_Clicked(self):
+        """下载页 -> 刷新"""
+        self.pushButton_page_download_mc_refresh.setEnabled(False)
+        self.DownloadPage_stackedWidget_GetGameList_()
 
     def DownloadPage_Word_Clicked(self):
-        """下载页 -> 游戏本体"""
+        """下载页 -> 世界存档"""
+        self.stackedWidget_2.setCurrentIndex(1)
         if self.stackedWidget_page_download.currentIndex() == 1:
             pass
         else:
-            self.SetCurrentIndex(self.stackedWidget_page_download, 1, 3, True)
+            self.SetCurrentIndex(self.stackedWidget_page_download, 1, 3, True, And__=self.DownloadPage_Cheak)
 
     def DownloadPage_Mode_Clicked(self):
-        """下载页 -> 游戏本体"""
+        """下载页 -> mod"""
+        self.stackedWidget_2.setCurrentIndex(1)
         if self.stackedWidget_page_download.currentIndex() == 2:
             pass
         else:
-            self.SetCurrentIndex(self.stackedWidget_page_download, 2, 3, True)
+            self.SetCurrentIndex(self.stackedWidget_page_download, 2, 3, True, And__=self.DownloadPage_Cheak)
 
     def DownloadPage_Conformity_Clicked(self):
-        """下载页 -> 游戏本体"""
+        """下载页 -> 整合包"""
+        self.stackedWidget_2.setCurrentIndex(1)
         if self.stackedWidget_page_download.currentIndex() == 3:
             pass
         else:
-            self.SetCurrentIndex(self.stackedWidget_page_download, 3, 3, True)
+            self.SetCurrentIndex(self.stackedWidget_page_download, 3, 3, True, And__=self.DownloadPage_Cheak)
 
     def DownloadPage_Resource_Clicked(self):
-        """下载页 -> 游戏本体"""
+        """下载页 -> 资源包"""
+        self.stackedWidget_2.setCurrentIndex(1)
         if self.stackedWidget_page_download.currentIndex() == 4:
             pass
         else:
-            self.SetCurrentIndex(self.stackedWidget_page_download, 4, 3, True)
+            self.SetCurrentIndex(self.stackedWidget_page_download, 4, 3, True, And__=self.DownloadPage_Cheak)
 
     def DownloadPage_stackedWidget_setButtonStyleSheet(self,I):
         """
@@ -367,7 +430,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 self.label_page_download_2_mode.setStyleSheet('')
                 self.label_page_download_2_conformity.setStyleSheet('')
                 self.label_page_download_2_resource.setStyleSheet('')
-                self.DownloadPage_stackedWidget_GetGameList_()
+                if self.listWidget_page_1_download.count() == 0:
+                    self.DownloadPage_stackedWidget_GetGameList_()
         elif I == 1:
             if self.label_page_download_2_word.styleSheet() != S:
                 self.label_page_download_2_game.setStyleSheet('')
@@ -404,11 +468,21 @@ class RunUi(QMainWindow, Ui_MainWindow):
     def DownloadPage_stackedWidget_GetGameList_(self):
         """启动多线程请求版本列表"""
         # release: 原版 / Snapshot: 快照版/ old_alpha: 远古版本
+
+        self.pushButton_page_download_mc_refresh.setEnabled(False)
+
         self.label_page_download_loading_ = QtGui.QMovie(":/Gif/images/Gif/Loaging.gif")
         self.label_page_download_loading.setMovie(self.label_page_download_loading_)
         self.label_page_download_loading_.start()
         self.stackedWidget_page_download.setCurrentIndex(5)
 
+        try:
+            self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.quit()
+            self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.exit()
+            self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.wait()
+        except:
+            pass
+        self.listWidget_page_1_download.clear()
         if self.checkBox_page_download_mc_official.isChecked() == True:
             self.Download_MC_Kind = 'release'
             self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_Grass.png'
@@ -419,12 +493,17 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.Download_MC_Kind = 'old_alpha'
             self.Download_MC_Kind_IconFile = ':/widget_Sidebar/images/MC_CraftingTable.png'
         # print(self.File)
-        print('lllll')
-        self.DownloadPage_stackedWidget_GetGameList_Thread_Start_ = DownloadPage_stackedWidget_GetGameList_Thread( 'MCBBS',self.File,self.Download_MC_Kind)
-        self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.SinOut.connect(self.DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut)
-        self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.SinOut_OK.connect(self.DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut_OK)
         self.listWidget_page_1_download.clear()
+        self.DownloadPage_stackedWidget_GetGameList_Thread_Start_ = DownloadPage_stackedWidget_GetGameList_Thread(
+            'MCBBS', self.File, self.Download_MC_Kind)
+        self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.SinOut.connect(
+            self.DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut)
+        self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.SinOut_OK.connect(
+            self.DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut_OK)
+        self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.SinOut_Error.connect(
+            self.DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut_Error)
         self.DownloadPage_stackedWidget_GetGameList_Thread_Start_.start()
+
 
     def DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut(self,name,time):
         """
@@ -443,7 +522,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         l_l = QLabel()
         l_l.setText(name)
         font = QFont()
-        font.setPointSize(17)
+        font.setPixelSize(17)
         l_l.setFont(font)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -455,7 +534,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         l_l2 = QLabel()
         l_l2.setText(time)
         font = QFont()
-        font.setPointSize(11)
+        font.setPixelSize(11)
         l_l2.setFont(font)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -479,48 +558,504 @@ class RunUi(QMainWindow, Ui_MainWindow):
             得到"多线程请求版本列表"线程完成信号
         """
         self.stackedWidget_page_download.setCurrentIndex(0)
+        self.stackedWidget_page_download_1_main.setCurrentIndex(0)
+        self.label_page_download_loading_.stop()
+        self.pushButton_page_download_mc_refresh.setEnabled(True)
+
+    def DownloadPage_stackedWidget_GetGameList_Thread_Start_SinOut_Error(self):
+        """
+            得到"多线程请求版本列表"线程错误信号
+        """
+        self.stackedWidget_page_download.setCurrentIndex(0)
+        self.stackedWidget_page_download_1_main.setCurrentIndex(1)
         self.label_page_download_loading_.stop()
 
     def DownloadPage_stackedWidget_GameList_Clicked(self):
         """下载页面 -> 原版下载列表: 点击项目"""
+        self.stackedWidget_2.setCurrentIndex(1)
         item = self.listWidget_page_1_download.currentItem()
-        t = item.text()
-        self.label_page_download_1_install_bottom.setText(str(t) + '安装')
-        self.lineEdit_page_download_1_install_bottom_GameName.setPlaceholderText(str(t))
-        self.SetCurrentIndex(self.stackedWidget_page_download_1, 1, 3, True)
+        self.DownloadPage_V = item.text()
+        self.label_page_download_1_install_bottom.setText(str(self.DownloadPage_V) + '安装')
+        self.label_page_download_1_install_forge_up_state.setText('正在获取')
+        self.label_page_download_1_install_forge_up_state_2.setText('')
+        self.label_page_download_1_install_fabric_up_state.setText('正在获取')
+        self.label_page_download_1_install_fabric_up_state_2.setText('')
+        self.label_page_download_1_install_optifine_up_state.setText('正在获取')
+        self.label_page_download_1_install_optifine_up_state_2.setText('')
+        self.label_page_download_1_install_forge_up_state.setStyleSheet('')
+        self.label_page_download_1_install_fabric_up_state.setStyleSheet('')
+        self.label_page_download_1_install_optifine_up_state.setStyleSheet('')
+        self.pushButton_page_download_1_install_forge_up_close.setEnabled(False)
+        self.pushButton_page_download_1_install_fabric_up_close.setEnabled(False)
+        self.pushButton_page_download_1_install_optifine_up_close.setEnabled(False)
+        self.pushButton_page_download_1_install_bottom_ok.setEnabled(False)
+        self.lineEdit_page_download_1_install_bottom_GameName.setPlaceholderText(str(self.DownloadPage_V))
+        self.lineEdit_page_download_1_install_bottom_GameName.setText(str(self.DownloadPage_V))
+        self.SetCurrentIndex(self.stackedWidget_page_download_1, 1, 3, True, [[self.stackedWidget_2,0]])
+        self.listWidget_page_download_1_install_forge.clear()
+        self.listWidget_page_download_1_install_fabric.clear()
+        self.listWidget_page_download_1_install_optifine.clear()
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start(str(self.DownloadPage_V))
 
-    def DownloadPage_stackedWidget_install_fabric_list_bata(self):
-        """下载页面 -> 选择安装 -> Fabric -> 测试版"""
-        pass
-    def DownloadPage_stackedWidget_install_fabric_list_version(self):
-        """下载页面 -> 选择安装 -> Fabric -> 稳定版"""
-        pass
-    def DownloadPage_stackedWidget_install_fabric_up(self):
+    def DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start(self,MCName):
+        """启动 根据版本获取Forge,Fabric,Optifine列表"""
+        self.widget_page_download_1_install_forge.setEnabled(True)
+        self.widget_page_download_1_install_fabric.setEnabled(True)
+        self.widget_page_download_1_install_optifine.setEnabled(True)
+
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Forge = DownloadPage_stackedWidget_GameList_Clicked_Get_Thread('Forge',MCName)
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Forge.SinOut.connect(self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut)
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Forge.SinOut_OK.connect(self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut_OK)
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Forge.SinOut_Error.connect(self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut_Error)
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Forge.start()
+
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Fabric = DownloadPage_stackedWidget_GameList_Clicked_Get_Thread('Fabric', MCName)
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Fabric.SinOut.connect(self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut)
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Fabric.SinOut_OK.connect(self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut_OK)
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Fabric.SinOut_Error.connect(self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut_Error)
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Fabric.start()
+
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Optifine = DownloadPage_stackedWidget_GameList_Clicked_Get_Thread('Optifine', MCName)
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Optifine.SinOut.connect(self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut)
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Optifine.SinOut_OK.connect(self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut_OK)
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Optifine.SinOut_Error.connect(self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut_Error)
+        self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Optifine.start()
+
+    def DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut(self, Kind, Name, Time, State):
+        """
+            根据版本获取Forge,Fabric,Optifine列表线程的SinOut
+            :param Kind: 种类(Forge,Fabric,Optifine)
+            :param Name: 名字
+            :param Time: 时间
+            :param State: 状态(Stable,Bata)
+        """
+        # print(Kind + '|' + Name + '|' + Time + '|' + State)
+        if Kind == 'Forge':
+            U = self.listWidget_page_download_1_install_forge
+            IconFile = ':/widget_Sidebar/images/MC_Forge.png'
+            Layout_ = QVBoxLayout()
+        elif Kind == 'Fabric':
+            U = self.listWidget_page_download_1_install_fabric
+            IconFile = ':/widget_Sidebar/images/MC_Fabric.png'
+            Layout_ = QHBoxLayout()
+        elif Kind == 'Optifine':
+            U = self.listWidget_page_download_1_install_optifine
+            IconFile = ':/widget_Sidebar/images/MC_Optifine.png'
+            Layout_ = QHBoxLayout()
+
+        item = QListWidgetItem()
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(IconFile), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        item.setIcon(icon)
+        widget = QWidget()
+
+
+        # l_1
+        l_1 = QLabel()
+        l_1.setText(Name)
+        font = QFont()
+        font.setPixelSize(17)
+        l_1.setFont(font)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(l_1.sizePolicy().hasHeightForWidth())
+        l_1.setSizePolicy(sizePolicy)
+
+        if Time != '':
+            # l_2
+            l_2 = QLabel()
+            l_2.setText(Time)
+            font = QFont()
+            font.setPixelSize(11)
+            l_2.setFont(font)
+            sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+            sizePolicy.setHorizontalStretch(0)
+            sizePolicy.setVerticalStretch(0)
+            sizePolicy.setHeightForWidth(l_2.sizePolicy().hasHeightForWidth())
+            l_2.setSizePolicy(sizePolicy)
+
+        if State != '':
+            if State == 'Bata':
+                T = ' 测试版 '
+                S = "background-color: rgb(255, 147, 0);color: rgb(255, 255, 255);border-radius: 4px;"
+            else:
+                T = ' 稳定版 '
+                S = "background-color: rgb(94, 99, 204);color: rgb(255, 255, 255);border-radius: 4px;"
+            item.setText(Name + '|' + T)
+            l_3 = QLabel()
+            l_3.setText(T)
+            font = QFont()
+            font.setPixelSize(13)
+            l_3.setFont(font)
+            sizePolicy = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Fixed)
+            sizePolicy.setHorizontalStretch(0)
+            sizePolicy.setVerticalStretch(0)
+            sizePolicy.setHeightForWidth(l_3.sizePolicy().hasHeightForWidth())
+            l_3.setSizePolicy(sizePolicy)
+            l_3.setStyleSheet(S)
+            l_3.setMinimumSize(0,20)
+
+            l_4 = QLabel()
+            sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+            sizePolicy.setHorizontalStretch(0)
+            sizePolicy.setVerticalStretch(0)
+            sizePolicy.setHeightForWidth(l_3.sizePolicy().hasHeightForWidth())
+            l_4.setSizePolicy(sizePolicy)
+
+        else:
+            item.setText(Name)
+
+
+        # add in Widget
+        Layout_.addWidget(l_1)
+        if Time != '':
+            Layout_.addWidget(l_2)
+        if State != '':
+            Layout_.addWidget(l_3)
+            Layout_.addWidget(l_4)
+        Layout_.setContentsMargins(0, 0, 0, 0)
+        Layout_.setSpacing(3)
+        widget.setLayout(Layout_)
+        widget.setContentsMargins(0, 0, 0, 0)
+
+        # add in listWidget item
+        U.addItem(item)
+        U.setItemWidget(item, widget)
+
+    def DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut_OK(self,Kind,Z=True):
+        """
+            根据版本获取Forge,Fabric,Optifine列表线程的SinOut_OK
+            :param Kind: 种类(Forge,Fabric,Optifine)
+            :param Z: 有没项目(True:有)
+        """
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/MCDownloadPage_Close.png"),
+                       QtGui.QIcon.Mode.Normal,
+                       QtGui.QIcon.State.Off)
+        if Z:
+            if Kind == 'Forge':
+                self.label_page_download_1_install_forge_up_state.setText('')
+                self.pushButton_page_download_1_install_forge_up_close.setIcon(icon)
+                self.pushButton_page_download_1_install_forge_up_close.setEnabled(True)
+            elif Kind == 'Fabric':
+                self.label_page_download_1_install_fabric_up_state.setText('')
+                self.pushButton_page_download_1_install_fabric_up_close.setIcon(icon)
+                self.pushButton_page_download_1_install_fabric_up_close.setEnabled(True)
+            elif Kind == 'Optifine':
+                self.label_page_download_1_install_optifine_up_state.setText('')
+                self.pushButton_page_download_1_install_optifine_up_close.setIcon(icon)
+                self.pushButton_page_download_1_install_optifine_up_close.setEnabled(True)
+        else:
+            print('=========')
+            print(Kind)
+            if Kind == 'Forge':
+                self.label_page_download_1_install_forge_up_state.setText('无')
+                self.pushButton_page_download_1_install_forge_up_close.setEnabled(False)
+                self.widget_page_download_1_install_forge.setEnabled(False)
+                self.pushButton_page_download_1_install_forge_up_close.setIcon(icon)
+            elif Kind == 'Fabric':
+                self.label_page_download_1_install_fabric_up_state.setText('无')
+                self.pushButton_page_download_1_install_fabric_up_close.setEnabled(False)
+                self.widget_page_download_1_install_fabric.setEnabled(False)
+                self.pushButton_page_download_1_install_fabric_up_close.setIcon(icon)
+            elif Kind == 'Optifine':
+                self.label_page_download_1_install_optifine_up_state.setText('无')
+                self.pushButton_page_download_1_install_optifine_up_close.setEnabled(False)
+                self.widget_page_download_1_install_optifine.setEnabled(False)
+                self.pushButton_page_download_1_install_optifine_up_close.setIcon(icon)
+
+    def DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_SinOut_Error(self,Kind):
+        if Kind == 'Forge':
+            self.label_page_download_1_install_forge_up_state.setText('获取出错,点击右侧按钮重试')
+            icon = QtGui.QIcon()
+            icon.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_Refresh-pressed.png"),
+                             QtGui.QIcon.Mode.Normal,
+                             QtGui.QIcon.State.Off)
+            self.pushButton_page_download_1_install_forge_up_close.setIcon(icon)
+            self.pushButton_page_download_1_install_forge_up_close.setEnabled(True)
+            del icon
+        elif Kind == 'Fabric':
+            self.label_page_download_1_install_fabric_up_state.setText('获取出错,点击右侧按钮重试')
+            icon = QtGui.QIcon()
+            icon.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_Refresh-pressed.png"),
+                           QtGui.QIcon.Mode.Normal,
+                           QtGui.QIcon.State.Off)
+            self.pushButton_page_download_1_install_fabric_up_close.setIcon(icon)
+            self.pushButton_page_download_1_install_fabric_up_close.setEnabled(True)
+            del icon
+        elif Kind == 'Optifine':
+            self.label_page_download_1_install_optifine_up_state.setText('获取出错,点击右侧按钮重试')
+            icon = QtGui.QIcon()
+            icon.addPixmap(QtGui.QPixmap(":/widget_Sidebar/images/User_Page_Refresh-pressed.png"),
+                           QtGui.QIcon.Mode.Normal,
+                           QtGui.QIcon.State.Off)
+            self.pushButton_page_download_1_install_optifine_up_close.setIcon(icon)
+            self.pushButton_page_download_1_install_optifine_up_close.setEnabled(True)
+            del icon
+
+
+    def DownloadPage_stackedWidget_install_fabric(self):
         """下载页面 -> 选择安装 -> Fabric"""
-        pass
-    def DownloadPage_stackedWidget_install_forge_up(self):
+        self.SetCurrentIndex(self.stackedWidget_page_download_1, 3, 3, True)
+
+    def DownloadPage_stackedWidget_install_forge(self):
         """下载页面 -> 选择安装 -> Forge"""
-        pass
-    def DownloadPage_stackedWidget_install_optifine_list_bata(self):
-        """下载页面 -> 选择安装 -> Optifine -> 测试版"""
-        pass
-    def DownloadPage_stackedWidget_install_optifine_list_version(self):
-        """下载页面 -> 选择安装 -> Optifine -> 稳定版"""
-        pass
-    def DownloadPage_stackedWidget_install_optifine_up(self):
+        self.SetCurrentIndex(self.stackedWidget_page_download_1, 2, 3, True)
+    def DownloadPage_stackedWidget_install_optifine(self):
         """下载页面 -> 选择安装 -> Optifine"""
-        pass
+        self.SetCurrentIndex(self.stackedWidget_page_download_1, 4, 3, True)
+    def DownloadPage_stackedWidget_install_forge_itemPressed(self):
+        """下载页面 -> 选择安装 -> Forge -> 点击项目"""
+        item = self.listWidget_page_download_1_install_forge.currentItem()
+        self.label_page_download_1_install_forge_up_state.setText(item.text())
+        self.Back_Clicked()
+
+    def DownloadPage_stackedWidget_install_fabric_itemPressed(self):
+        """下载页面 -> 选择安装 -> Fabric -> 点击项目"""
+        item = self.listWidget_page_download_1_install_fabric.currentItem()
+        t = item.text().split('|')
+        t_n = t[0]
+        t_s = t[1]
+        self.label_page_download_1_install_fabric_up_state_2.setText(t_n)
+        if t_s == ' 测试版 ':
+            s = "background-color: rgb(255, 147, 0);color: rgb(255, 255, 255);border-radius: 4px;"
+        else:
+            s = "background-color: rgb(94, 99, 204);color: rgb(255, 255, 255);border-radius: 4px;"
+        self.label_page_download_1_install_fabric_up_state.setText(t_s)
+        self.label_page_download_1_install_fabric_up_state.setStyleSheet(s)
+        self.Back_Clicked()
+
+    def DownloadPage_stackedWidget_install_optifine_itemPressed(self):
+        """下载页面 -> 选择安装 -> Optifine -> 点击项目"""
+        item = self.listWidget_page_download_1_install_optifine.currentItem()
+        t = item.text().split('|')
+        t_n = t[0]
+        t_s = t[1]
+        self.label_page_download_1_install_optifine_up_state_2.setText(t_n)
+        if t_s == ' 测试版 ':
+            s = "background-color: rgb(255, 147, 0);color: rgb(255, 255, 255);border-radius: 4px;"
+        else:
+            s = "background-color: rgb(94, 99, 204);color: rgb(255, 255, 255);border-radius: 4px;"
+        self.label_page_download_1_install_optifine_up_state.setText(t_s)
+        self.label_page_download_1_install_optifine_up_state.setStyleSheet(s)
+        self.Back_Clicked()
+
+    def DownloadPage_stackedWidget_install_forge_close(self):
+        """下载页面 -> 选择安装 -> Forge -> 取消"""
+        if self.label_page_download_1_install_forge_up_state.text() != '获取出错,点击右侧按钮重试':
+            self.label_page_download_1_install_forge_up_state.setText('')
+            self.label_page_download_1_install_forge_up_state_2.setText('')
+        else:
+            self.pushButton_page_download_1_install_forge_up_close.setEnabled(False)
+            self.label_page_download_1_install_forge_up_state.setText('正在重试')
+            self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Forge.start()
+
+    def DownloadPage_stackedWidget_install_fabric_close(self):
+        """下载页面 -> 选择安装 -> Fabric -> 取消"""
+        if self.label_page_download_1_install_fabric_up_state.text() != '获取出错,点击右侧按钮重试':
+            self.label_page_download_1_install_fabric_up_state.setText('')
+            self.label_page_download_1_install_fabric_up_state_2.setText('')
+        else:
+            self.pushButton_page_download_1_install_fabric_up_close.setEnabled(False)
+            self.label_page_download_1_install_fabric_up_state.setText('正在重试')
+            self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Fabric.start()
+
+    def DownloadPage_stackedWidget_install_optifine_close(self):
+        """下载页面 -> 选择安装 -> Optifine -> 取消"""
+        if self.label_page_download_1_install_optifine_up_state.text() != '获取出错,点击右侧按钮重试':
+            self.label_page_download_1_install_optifine_up_state.setText('')
+            self.label_page_download_1_install_optifine_up_state_2.setText('')
+        else:
+            self.pushButton_page_download_1_install_optifine_up_close.setEnabled(False)
+            self.label_page_download_1_install_optifine_up_state.setText('正在重试')
+            self.DownloadPage_stackedWidget_GameList_Clicked_Get_Thread_Start_Optifine.start()
+
+    def DownloadPage_stackedWidget_install_ok(self):
+        """下载页面 -> 选择安装 -> 安装"""
+        if self.lineEdit_page_download_1_install_bottom_GameName.text() == '':
+            self.lineEdit_page_download_1_install_bottom_GameName.setStyleSheet("border: 2px solid rgb(255, 38, 0);")
+        else:
+            # 显示窗口
+            self.pushButton_page_download_1_install_bottom_ok.setEnabled(False)
+            from Code.GameInstallWindow import Dialog_GameInstallWindows_
+            GameFile_M = self.Json_MOS['GameFile_List'][self.Json_MOS['GameFile_List_Clicked']]
+            GameFile_M = self.Json_MOS['GameFile'][GameFile_M]['File']
+            Name = self.lineEdit_page_download_1_install_bottom_GameName.text()
+            GameFile_V  = os.path.join(GameFile_M,'versions',Name)
+            V_JsonFile = os.path.join(self.File,'Versions','Versions.json')
+            V_Forge = self.label_page_download_1_install_forge_up_state_2.text()
+            V_Fabric = self.label_page_download_1_install_fabric_up_state_2.text()
+            V_Optifine = self.label_page_download_1_install_optifine_up_state_2.text()
+            if V_Forge == '':
+                V_Forge = None
+            if V_Fabric == '':
+                V_Fabric = None
+            if V_Optifine == '':
+                V_Optifine = None
+            AssetsFileDownloadMethod = 'A'
+            Sha1Cleck = True
+            MaxConcurrence = 100
+            # ProgressGetModule = self.GameInstallWindow_Progress
+            self.Dialog_GameInstallWindows_ = Dialog_GameInstallWindows_(GameFile_M, GameFile_V, self.File, self.Json_MOS['Download_Source'], V_JsonFile,
+                                                                        self.DownloadPage_V, Name, V_Forge,V_Fabric,V_Optifine,
+                                                                        self.Json_MOS['System'],self.Json_MOS['System_V'],self.Json_MOS['System_Places'],
+                                                                        AssetsFileDownloadMethod,Sha1Cleck,MaxConcurrence,self.GameInstallError)
+            #self.Dialog_GameInstallWindows_.sinOut_Win_XY.connect(self.Window_XY)
+            self.Dialog_GameInstallWindows_.sinOut_OK.connect(self.GameInstallWindow_OK)
+            self.Dialog_GameInstallWindows_.sinOut_Error.connect(self.GameInstallWindow_Error)
+            self.Dialog_GameInstallWindows_.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
+            self.Dialog_GameInstallWindows_.setWindowFlags(
+                Qt.WindowType.Popup |  # 表示该窗口小部件是一个弹出式顶层窗口，即它是模态的，但有一个适合弹出式菜单的窗口系统框架。
+                Qt.WindowType.Tool |  # 表示小部件是一个工具窗口,如果有父级，则工具窗口将始终保留在其顶部,在 macOS 上，工具窗口对应于窗口的NSPanel类。这意味着窗口位于普通窗口之上，因此无法在其顶部放置普通窗口。默认情况下，当应用程序处于非活动状态时，工具窗口将消失。这可以通过WA_MacAlwaysShowToolWindow属性来控制。
+                Qt.WindowType.FramelessWindowHint |  # 生成无边框窗口
+                Qt.WindowType.MSWindowsFixedSizeDialogHint |  # 在 Windows 上为窗口提供一个细对话框边框。这种风格传统上用于固定大小的对话框。
+                Qt.WindowType.Dialog |  # 指示该小部件是一个应装饰为对话框的窗口（即，通常在标题栏中没有最大化或最小化按钮）。这是 的默认类型QDialog。如果要将其用作模式对话框，则应从另一个窗口启动它，或者具有父级并与该windowModality属性一起使用。如果将其设为模态，对话框将阻止应用程序中的其他顶级窗口获得任何输入。我们将具有父级的顶级窗口称为辅助窗口。
+                Qt.WindowType.NoDropShadowWindowHint  # 禁用支持平台上的窗口投影。
+            )
+
+            self.Dialog_GameInstallWindows_.setWindowModality(
+                Qt.WindowModality.ApplicationModal  # 该窗口对应用程序是模态的，并阻止对所有窗口的输入。
+            )
+
+            self.MainWindow_xy_size = self.geometry()  # 获取主界面 初始坐标
+            self.Dialog_GameInstallWindows_.move(
+                round(self.MainWindow_xy_size.x() + (
+                            self.size().width() / 2 - self.Dialog_GameInstallWindows_.size().width() / 2)),
+                round(self.MainWindow_xy_size.y() + (self.size().height() / 3)
+                      ))  # 子界面移动到 居中
+            self.SinOut_moveEvent.connect(self.Dialog_GameInstallWindows_.MoveXY)
+
+            self.pushButton_page_download_1_install_bottom_ok.setEnabled(True)
+            self.Dialog_GameInstallWindows_.show()
+
+            self.Dialog_GameInstallWindows_.Run()
+
+    def GameInstallError(self, GameName, Game_V, ErrorKind, ErrorCause, ErrorInfo):
+        """当游戏安装出现错误时, 调用错误弹框显示函数"""
+        self.GameInstallErrorWindow(GameName, Game_V, ErrorKind, ErrorCause, ErrorInfo)
+
+    def GameInstallErrorWindow(self, GameName, Game_V, ErrorKind, ErrorCause, ErrorInfo):
+        """显示游戏安装错误页面"""
+        from Code.GameInstallErrorWindow import Dialog_GameInstellErrorWindows_
+        self.Dialog_GameInstellErrorWindows_ = Dialog_GameInstellErrorWindows_(GameName, Game_V, ErrorKind, ErrorCause, ErrorInfo)
+        # self.Dialog_DelateGameWindows_.sinOut_Win_XY.connect(self.Window_XY)
+        self.Dialog_GameInstellErrorWindows_.sinOut_OK.connect(self.GameInstallErrorWindow_SinOut_OK)
+        self.Dialog_GameInstellErrorWindows_.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
+        self.Dialog_GameInstellErrorWindows_.setWindowFlags(
+            Qt.WindowType.Popup |  # 表示该窗口小部件是一个弹出式顶层窗口，即它是模态的，但有一个适合弹出式菜单的窗口系统框架。
+            Qt.WindowType.Tool |  # 表示小部件是一个工具窗口,如果有父级，则工具窗口将始终保留在其顶部,在 macOS 上，工具窗口对应于窗口的NSPanel类。这意味着窗口位于普通窗口之上，因此无法在其顶部放置普通窗口。默认情况下，当应用程序处于非活动状态时，工具窗口将消失。这可以通过WA_MacAlwaysShowToolWindow属性来控制。
+            Qt.WindowType.FramelessWindowHint |  # 生成无边框窗口
+            Qt.WindowType.MSWindowsFixedSizeDialogHint |  # 在 Windows 上为窗口提供一个细对话框边框。这种风格传统上用于固定大小的对话框。
+            Qt.WindowType.Dialog |  # 指示该小部件是一个应装饰为对话框的窗口（即，通常在标题栏中没有最大化或最小化按钮）。这是 的默认类型QDialog。如果要将其用作模式对话框，则应从另一个窗口启动它，或者具有父级并与该windowModality属性一起使用。如果将其设为模态，对话框将阻止应用程序中的其他顶级窗口获得任何输入。我们将具有父级的顶级窗口称为辅助窗口。
+            Qt.WindowType.NoDropShadowWindowHint  # 禁用支持平台上的窗口投影。
+        )
+
+        self.Dialog_GameInstellErrorWindows_.setWindowModality(
+            Qt.WindowModality.ApplicationModal  # 该窗口对应用程序是模态的，并阻止对所有窗口的输入。
+        )
+
+        self.MainWindow_xy_size = self.geometry()  # 获取主界面 初始坐标
+        self.Dialog_GameInstellErrorWindows_.move(
+            round(self.MainWindow_xy_size.x() + (
+                        self.size().width() / 2 - self.Dialog_GameInstellErrorWindows_.size().width() / 2)),
+            round(self.MainWindow_xy_size.y() + (self.size().height() / 3)
+                  ))  # 子界面移动到 居中
+        self.SinOut_moveEvent.connect(self.Dialog_GameInstellErrorWindows_.MoveXY)
+
+        self.Dialog_GameInstellErrorWindows_.show()
+
+    def GameInstallErrorWindow_SinOut_OK(self):
+        self.SinOut_moveEvent.disconnect(self.Dialog_GameInstellErrorWindows_.MoveXY)
+        self.pushButton_page_download_1_install_bottom_ok.setEnabled(True)
+
+    def GameInstallWindow_Error(self):
+        """安装时出现错误"""
+        self.listWidget_page_download_1_install_forge.clear()
+        self.listWidget_page_download_1_install_fabric.clear()
+        self.listWidget_page_download_1_install_optifine.clear()
+
+        self.SinOut_moveEvent.disconnect(self.Dialog_GameInstallWindows_.MoveXY)
+        self.stackedWidget_page_download_1.setCurrentIndex(0)
+        self.stackedWidget_2.setCurrentIndex(0)
+        self.pushButton_page_download_1_install_bottom_ok.setEnabled(True)
+
+    def GameInstallWindow_OK(self):
+        """安装完成"""
+        # 显示完成的窗口
+        # 切换页面
+        self.listWidget_page_download_1_install_forge.clear()
+        self.listWidget_page_download_1_install_fabric.clear()
+        self.listWidget_page_download_1_install_optifine.clear()
+
+        self.SinOut_moveEvent.disconnect(self.Dialog_GameInstallWindows_.MoveXY)
+        self.stackedWidget_page_download_1.setCurrentIndex(0)
+        self.stackedWidget_2.setCurrentIndex(0)
+
+    def DownloadPage_stackedWidget_install_lineEdit(self):
+        """下载页面 -> 选择安装 -> 输入游戏名"""
+        T = self.lineEdit_page_download_1_install_bottom_GameName.text()
+        i = self.Json_MOS['GameFile_List_Clicked']
+        text = self.Json_MOS['GameFile_List'][i]
+        F = self.Json_MOS['GameFile'][text]['File']
+        F = os.path.join(F,'versions',T)
+        if T != '':
+            if os.path.isdir(F):
+                self.label_page_download_1_install_bottom_GameName.setText('游戏名(版本名重复,请换一个名字)')
+                self.label_page_download_1_install_bottom_GameName.setStyleSheet("color: 2px solid rgb(255, 38, 0);")
+                self.lineEdit_page_download_1_install_bottom_GameName.setStyleSheet("border: 2px solid rgb(255, 38, 0);")
+            else:
+                if len(T.split('/')) == 1 and len(T.split('\\')) == 1 and len(T.split('\\')) == 1:
+                    if len(T.split(' 缺少Jar文件, 并且Json文件可能已损坏')) == 1 and len(T.split(' 缺少Jar文件')) == 1 and len(T.split(' 缺少Json文件')) == 1 and len(T.split(' Json文件可能已损坏')) == 1:
+                        self.label_page_download_1_install_bottom_GameName.setText('游戏名')
+                        self.lineEdit_page_download_1_install_bottom_GameName.setStyleSheet(
+                            "border: 2px solid rgb(56, 56, 56);")
+                        self.pushButton_page_download_1_install_bottom_ok.setEnabled(True)
+                    else:
+                        self.label_page_download_1_install_bottom_GameName.setText('游戏名(你隔着卡Bug呢?)')
+                        self.label_page_download_1_install_bottom_GameName.setStyleSheet(
+                            "color: 2px solid rgb(255, 38, 0);")
+                        self.lineEdit_page_download_1_install_bottom_GameName.setStyleSheet(
+                            "border: 2px solid rgb(255, 38, 0);")
+                        self.pushButton_page_download_1_install_bottom_ok.setEnabled(False)
+
+                else:
+                    self.label_page_download_1_install_bottom_GameName.setText('游戏名(含有特殊字符)')
+                    self.label_page_download_1_install_bottom_GameName.setStyleSheet(
+                        "color: 2px solid rgb(255, 38, 0);")
+                    self.lineEdit_page_download_1_install_bottom_GameName.setStyleSheet(
+                        "border: 2px solid rgb(255, 38, 0);")
+                    self.pushButton_page_download_1_install_bottom_ok.setEnabled(False)
+
+        else:
+            self.label_page_download_1_install_bottom_GameName.setText('游戏名')
+            self.lineEdit_page_download_1_install_bottom_GameName.setStyleSheet("border: 2px solid rgb(56, 56, 56);")
+            self.pushButton_page_download_1_install_bottom_ok.setEnabled(False)
+
 
     def DownloadPage_MC_Official(self):
+        self.checkBox_page_download_mc_official.setEnabled(False)
+        self.checkBox_page_download_mc_test.setEnabled(True)
+        self.checkBox_page_download_mc_previously.setEnabled(True)
+
         self.checkBox_page_download_mc_test.setChecked(False)
         self.checkBox_page_download_mc_previously.setChecked(False)
         self.DownloadPage_stackedWidget_GetGameList_()
     def DownloadPage_MC_Text(self):
+        self.checkBox_page_download_mc_official.setEnabled(True)
+        self.checkBox_page_download_mc_test.setEnabled(False)
+        self.checkBox_page_download_mc_previously.setEnabled(True)
+
         self.checkBox_page_download_mc_official.setChecked(False)
         self.checkBox_page_download_mc_previously.setChecked(False)
         self.DownloadPage_stackedWidget_GetGameList_()
 
     def DownloadPage_MC_Previously(self):
+        self.checkBox_page_download_mc_official.setEnabled(True)
+        self.checkBox_page_download_mc_test.setEnabled(True)
+        self.checkBox_page_download_mc_previously.setEnabled(False)
+
+        self.checkBox_page_download_mc_official.setEnabled(True)
         self.checkBox_page_download_mc_official.setChecked(False)
         self.checkBox_page_download_mc_test.setChecked(False)
         self.DownloadPage_stackedWidget_GetGameList_()
@@ -534,6 +1069,66 @@ class RunUi(QMainWindow, Ui_MainWindow):
             pass
         else:
             self.DownloadPage_stackedWidget_setButtonStyleSheet(I)
+
+    def SettingsPage_Page_Settings_Game_Settings(self):
+        """设置页面 -> 游戏全局设置"""
+        if self.stackedWidget_page_settings.currentIndex() == 0:
+            pass
+        else:
+            self.label_page_settings_game_settings.setStyleSheet("border-bottom: 2px solid rgb(0, 119, 225);")
+            self.label_page_settings_appearance.setStyleSheet('')
+            self.label_page_settings_download.setStyleSheet('')
+            self.label_page_settings_else.setStyleSheet('')
+            self.label_page_settings_about.setStyleSheet('')
+            self.SetCurrentIndex(self.stackedWidget_page_settings, 0, 4, True)
+
+    def SettingsPage_Page_Settings_Game_Appearance(self):
+        """设置页面 -> 外观"""
+        if self.stackedWidget_page_settings.currentIndex() == 1:
+            pass
+        else:
+            self.label_page_settings_game_settings.setStyleSheet('')
+            self.label_page_settings_appearance.setStyleSheet("border-bottom: 2px solid rgb(0, 119, 225);")
+            self.label_page_settings_download.setStyleSheet('')
+            self.label_page_settings_else.setStyleSheet('')
+            self.label_page_settings_about.setStyleSheet('')
+            self.SetCurrentIndex(self.stackedWidget_page_settings, 1, 4, True)
+
+    def SettingsPage_Page_Settings_Game_Download(self):
+        """设置页面 -> 下载"""
+        if self.stackedWidget_page_settings.currentIndex() == 2:
+            pass
+        else:
+            self.label_page_settings_game_settings.setStyleSheet('')
+            self.label_page_settings_appearance.setStyleSheet('')
+            self.label_page_settings_download.setStyleSheet("border-bottom: 2px solid rgb(0, 119, 225);")
+            self.label_page_settings_else.setStyleSheet('')
+            self.label_page_settings_about.setStyleSheet('')
+            self.SetCurrentIndex(self.stackedWidget_page_settings, 2, 4, True)
+
+    def SettingsPage_Page_Settings_Game_Else(self):
+        """设置页面 -> 其他"""
+        if self.stackedWidget_page_settings.currentIndex() == 3:
+            pass
+        else:
+            self.label_page_settings_game_settings.setStyleSheet('')
+            self.label_page_settings_appearance.setStyleSheet('')
+            self.label_page_settings_download.setStyleSheet('')
+            self.label_page_settings_else.setStyleSheet("border-bottom: 2px solid rgb(0, 119, 225);")
+            self.label_page_settings_about.setStyleSheet('')
+            self.SetCurrentIndex(self.stackedWidget_page_settings, 3, 4, True)
+
+    def SettingsPage_Page_Settings_Game_About(self):
+        """设置页面 -> 关于"""
+        if self.stackedWidget_page_settings.currentIndex() == 4:
+            pass
+        else:
+            self.label_page_settings_game_settings.setStyleSheet('')
+            self.label_page_settings_appearance.setStyleSheet('')
+            self.label_page_settings_download.setStyleSheet('')
+            self.label_page_settings_else.setStyleSheet('')
+            self.label_page_settings_about.setStyleSheet("border-bottom: 2px solid rgb(0, 119, 225);")
+            self.SetCurrentIndex(self.stackedWidget_page_settings, 4, 4, True)
 
     def SettingsPage_Background_None_Clicked(self):
         """设置页面 -> 背景设置:选择：无"""
@@ -598,6 +1193,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.SettingsPage_Sidebar_horizontalSlider_sliderReleased()
 
     def AddUserWindow_OK(self):
+        self.SinOut_moveEvent.disconnect(self.Dialog_AddUserWindows_.MoveXY)
         self.Users_List_Refresh()
 
     def Users_List_Refresh(self):
@@ -653,6 +1249,28 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 # 如果不是初始化 就改变json配置
                 self.Json_MOS['BackGround'] = Want
                 JsonWrite(self.Json_MOS, self.JsonFile)
+
+    def SettingsPage_Page_Download_Settings_Download(self):
+        """设置页面 -> 下载 -> 下载源选择"""
+        i = self.comboBox_page_settings_download.currentIndex()
+        if i == 0:
+            self.Json_MOS['Download_Source'] = 'MCBBS'
+            JsonWrite(self.Json_MOS, self.JsonFile)
+        elif i == 1:
+            self.Json_MOS['Download_Source'] = 'BMCLAPI'
+            JsonWrite(self.Json_MOS, self.JsonFile)
+        elif i == 2:
+            self.Json_MOS['Download_Source'] = 'MC'
+            JsonWrite(self.Json_MOS, self.JsonFile)
+
+    def SettingsPage_Page_Download_Settings_DownloadExceptionHandling(self,cb):
+        """设置页面 -> 下载 -> 节点文件出现问题时，自动尝试其他节点"""
+        if self.checkBox_page_settings_download_exceptionHandling.checkState() == 2:
+            self.Json_MOS['Download_Source_ExceptionHandling'] = True
+        else:
+            self.Json_MOS['Download_Source_ExceptionHandling'] = False
+        JsonWrite(self.Json_MOS, self.JsonFile)
+
 
     def Sidebar_Clicked(self, Want=None, H=True):
         """
@@ -868,8 +1486,8 @@ class RunUi(QMainWindow, Ui_MainWindow):
             """设置启动器"""
             # 导入
             # 读取阶段(读取配置等)
-            self.Systeam = Systeam()
-            print_('Info', '系统检测: 系统：' + self.Systeam)
+            self.System = System()
+            print_('Info', '系统检测: 系统：' + self.System)
             self.Json_MOS = JsonRead(self.JsonFile)
             print_('Info', '程序启动(初始化设置): Json读取完成')
             C = Json_Cheak(self.JsonFile)
@@ -882,9 +1500,33 @@ class RunUi(QMainWindow, Ui_MainWindow):
             print_('Info', '程序启动(初始化设置:Json检查): Json验证完成')
             self.label_loading_text_2.setText('正在设置启动器(4/7)')
             # 设置阶段
-            if self.Systeam != 'Mac':
+            if self.System != 'Mac':
                 self.radioButton_settings_subject_automatic.setEnabled(False)
                 self.radioButton_settings_subject_automatic.setToolTip('跟随系统(只限于Mac系统)-当前不可用')
+            if self.System == 'Mac':
+                # 如果是Mac
+                M = 'sw_vers'
+                import subprocess
+                M_ = subprocess.Popen(M,shell=True,encoding='utf-8',stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+                M_T = M_.communicate()
+                M_T = str(M_T[0]).split('\n')[1]
+                System_V = M_T.split('\t')[1]
+                self.Json_MOS['System_V'] = System_V
+                self.Json_MOS['System_Places'] = 64
+            elif self.System == 'Win':
+                import platform
+                M_T = platform.platform()
+                System_V = str(M_T).split('-')[1]
+                Places = int(str(platform.architecture()[0]).split('bit')[0])
+                self.Json_MOS['System_Places'] = Places
+                self.Json_MOS['System_V'] = System_V
+            else:
+                import platform
+                System_V = platform.release()
+                self.Json_MOS['System_Places'] = 64
+                self.Json_MOS['System_V'] = System_V
+
+            self.Json_MOS['System'] = self.System
 
             if self.Json_MOS['Subject'] == 'Light':
                 self.radioButton_settings_subject_light.setChecked(True)
@@ -925,6 +1567,16 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 elif self.Json_MOS['BackGround'] == 7:
                     self.radioButton_settings_background_7.setChecked(True)
 
+            if self.Json_MOS['Download_Source'] == 'MCBBS':
+                pass
+            elif self.Json_MOS['Download_Source'] == 'BMCLAPI':
+                self.comboBox_page_settings_download.setCurrentIndex(1)
+            elif self.Json_MOS['Download_Source'] == 'MC':
+                self.comboBox_page_settings_download.setCurrentIndex(2)
+
+            if self.Json_MOS['Download_Source_ExceptionHandling'] == False:
+                self.checkBox_page_settings_download_exceptionHandling.setChecked(False)
+
         if First == True:
             self.RunInitialize_.stop()
 
@@ -954,6 +1606,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             # 如果有 就进行下一步
             self.label_loading_text_2.setText('正在设置启动器(3/7)')
             Settings_()
+            JsonWrite(self.Json_MOS, self.JsonFile)
 
             print_('Info', '程序启动(初始化设置): 读取用户账户')
             self.label_loading_text_2.setText('正在设置启动器(6/7)')
@@ -1092,6 +1745,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
         # 下载页面
         self.label_page_download_2_game.clicked.connect(self.DownloadPage_Game_Clicked)
+        self.pushButton_page_download_mc_refresh.clicked.connect(self.DownloadPage_Game_Refresh_Clicked)
         self.label_page_download_2_word.clicked.connect(self.DownloadPage_Word_Clicked)
         self.label_page_download_2_mode.clicked.connect(self.DownloadPage_Mode_Clicked)
         self.label_page_download_2_conformity.clicked.connect(self.DownloadPage_Conformity_Clicked)
@@ -1101,13 +1755,18 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.checkBox_page_download_mc_test.clicked.connect(self.DownloadPage_MC_Text)
         self.checkBox_page_download_mc_previously.clicked.connect(self.DownloadPage_MC_Previously)
         self.listWidget_page_1_download.itemPressed.connect(self.DownloadPage_stackedWidget_GameList_Clicked)
-        self.widget_page_download_1_install_fabric_list_bata.clicked.connect(self.DownloadPage_stackedWidget_install_fabric_list_bata)
-        self.widget_page_download_1_install_fabric_list_version.clicked.connect(self.DownloadPage_stackedWidget_install_fabric_list_version)
-        self.widget_page_download_1_install_fabric_up.clicked.connect(self.DownloadPage_stackedWidget_install_fabric_up)
-        self.widget_page_download_1_install_forge_up.clicked.connect(self.DownloadPage_stackedWidget_install_forge_up)
-        self.widget_page_download_1_install_optifine_list_bata.clicked.connect(self.DownloadPage_stackedWidget_install_optifine_list_bata)
-        self.widget_page_download_1_install_optifine_list_version.clicked.connect(self.DownloadPage_stackedWidget_install_optifine_list_version)
-        self.widget_page_download_1_install_optifine_up.clicked.connect(self.DownloadPage_stackedWidget_install_optifine_up)
+        self.widget_page_download_1_install_fabric_up.clicked.connect(self.DownloadPage_stackedWidget_install_fabric)
+        self.widget_page_download_1_install_forge_up.clicked.connect(self.DownloadPage_stackedWidget_install_forge)
+        self.widget_page_download_1_install_optifine_up.clicked.connect(self.DownloadPage_stackedWidget_install_optifine)
+        self.listWidget_page_download_1_install_forge.itemPressed.connect(self.DownloadPage_stackedWidget_install_forge_itemPressed)
+        self.listWidget_page_download_1_install_fabric.itemPressed.connect(self.DownloadPage_stackedWidget_install_fabric_itemPressed)
+        self.listWidget_page_download_1_install_optifine.itemPressed.connect(self.DownloadPage_stackedWidget_install_optifine_itemPressed)
+        self.pushButton_page_download_1_install_forge_up_close.clicked.connect(self.DownloadPage_stackedWidget_install_forge_close)
+        self.pushButton_page_download_1_install_fabric_up_close.clicked.connect(self.DownloadPage_stackedWidget_install_fabric_close)
+        self.pushButton_page_download_1_install_optifine_up_close.clicked.connect(self.DownloadPage_stackedWidget_install_optifine_close)
+        self.pushButton_page_download_1_install_bottom_ok.clicked.connect(self.DownloadPage_stackedWidget_install_ok)
+        self.lineEdit_page_download_1_install_bottom_GameName.textChanged.connect(self.DownloadPage_stackedWidget_install_lineEdit)
+        self.listWidget_page_1_download_errorText.clicked.connect(self.DownloadPage_Game_Refresh_Clicked)
 
         # 设置页面
         self.radioButton_settings_background_none.clicked.connect(self.SettingsPage_Background_None_Clicked)
@@ -1118,6 +1777,13 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.radioButton_settings_background_5.clicked.connect(self.SettingsPage_Background_5_Clicked)
         self.radioButton_settings_background_6.clicked.connect(self.SettingsPage_Background_6_Clicked)
         self.radioButton_settings_background_7.clicked.connect(self.SettingsPage_Background_7_Clicked)
+        self.label_page_settings_game_settings.clicked.connect(self.SettingsPage_Page_Settings_Game_Settings)
+        self.label_page_settings_appearance.clicked.connect(self.SettingsPage_Page_Settings_Game_Appearance)
+        self.label_page_settings_download.clicked.connect(self.SettingsPage_Page_Settings_Game_Download)
+        self.label_page_settings_else.clicked.connect(self.SettingsPage_Page_Settings_Game_Else)
+        self.label_page_settings_about.clicked.connect(self.SettingsPage_Page_Settings_Game_About)
+        self.comboBox_page_settings_download.currentIndexChanged.connect(self.SettingsPage_Page_Download_Settings_Download)
+        self.checkBox_page_settings_download_exceptionHandling.stateChanged.connect(self.SettingsPage_Page_Download_Settings_DownloadExceptionHandling)
 
         self.horizontalSlider_page_settings_sidebar.sliderMoved.connect(self.SettingsPage_Sidebar_horizontalSlider)
         self.horizontalSlider_page_settings_sidebar.sliderPressed.connect(self.SettingsPage_Sidebar_horizontalSlider)
@@ -1181,7 +1847,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
                     f.write(log_)
         Log_Clear()
 
-    def SetCurrentIndex(self, U, I, L=False, H=True):
+    def SetCurrentIndex(self, U, I, L=False, H=True, And_=None, And__=None):
         """
             更改控件的页数，并记录历史
             参数:
@@ -1189,24 +1855,59 @@ class RunUi(QMainWindow, Ui_MainWindow):
                 I: 要将控件更改为第……页 \n
                 L: 是否需要更改左边边栏显示(False, 如果更改->int) \n
                 H: 是否记录(True False)
+                And_: 如果记录,在返回的时候同时执行的其他翻页[[执行控件,页码],[执行控件,页码],[执行控件,页码]]
+                And__: 如果记录,在返回后执行的函数
         """
+
+
+        if U != False:
+            if U.currentIndex() == I:
+                H = False
+        else:
+            if L != False:
+                if L == 0 and U == False:
+                    if L == self.stackedWidget_main_2.currentIndex():
+                        H=False
+                elif L == 1 and U == False and len(self.H_B)!=0:
+                    if L == self.stackedWidget_main_2.currentIndex():
+                        H=False
+                elif L == 2 and U == False:
+                    if L == self.stackedWidget_main_2.currentIndex():
+                        H=False
+                elif L == 3 and U == False:
+                    if L == self.stackedWidget_main_2.currentIndex():
+                        H=False
+                elif L == 4 and U == False:
+                    if L == self.stackedWidget_main_2.currentIndex():
+                        H=False
+
+
         if H == True and U == False:
-            self.H_B.append({
+            a = {
                 "Name": U,  # 控件名
                 "Index_L": int(self.stackedWidget_main_2.currentIndex()),  # 原来页码
-                "Left": L  # 是否更改左边 如果改 值为改为多少 如果不改 值为False
-            })
+                "Left": L,  # 是否更改左边 如果改 值为改为多少 如果不改 值为False
+                "Left_L": int(self.stackedWidget_main_2.currentIndex()),  # 原来左边页码
+                "And_": And_,
+                "And__": And__
+            }
+            self.H_B.append(a)
             self.stackedWidget_main_2.setCurrentIndex(I)
         elif H == True and U != False:
-            self.H_B.append({
+            a = {
                 "Name": U,  # 控件名
                 "Index": I,  # 页码
                 "Index_L": int(U.currentIndex()),  # 原来页码
                 "Left": L,  # 是否更改左边 如果改 值为改为多少 如果不改 值为False
-                "Left_L": int(self.stackedWidget_main_2.currentIndex())  # 原来左边页码
-            })
+                "Left_L": int(self.stackedWidget_main_2.currentIndex()),  # 原来左边页码
+                "And_" : And_,
+                "And__": And__
+            }
+            self.H_B.append(a)
             self.stackedWidget_main_2.setCurrentIndex(L)
             U.setCurrentIndex(I)
+        elif H == False:
+            self.stackedWidget_main_2.setCurrentIndex(L)
         if len(self.H_B) > 1 and self.label_Sidebar_QTime_Ok and self.label_Sidebar_B_QTime_Ok:
             self.label_Sidebar_Back.setEnabled(True)
         else:
@@ -1269,6 +1970,10 @@ class RunUi(QMainWindow, Ui_MainWindow):
         """检测游戏目录下的游戏线程 输出处理"""
         item = QListWidgetItem()
         item.setText(Name)
+        font = QFont()
+        font.setPixelSize(13)
+        item.setFont(font)
+        print(Name)
         widget = QWidget()
         hLayout = QHBoxLayout()
 
@@ -1354,7 +2059,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             N,
             gamefile_name
         )
-        self.Dialog_DelateGameWindows_.sinOut_Win_XY.connect(self.Window_XY)
+        #self.Dialog_DelateGameWindows_.sinOut_Win_XY.connect(self.Window_XY)
         self.Dialog_DelateGameWindows_.sinOut_OK.connect(self.AddUserWindow_OK)
         self.Dialog_DelateGameWindows_.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
         self.Dialog_DelateGameWindows_.setWindowFlags(
@@ -1375,8 +2080,18 @@ class RunUi(QMainWindow, Ui_MainWindow):
             round(self.MainWindow_xy_size.x() + (self.size().width()/2 - self.Dialog_DelateGameWindows_.size().width()/2)),
             round(self.MainWindow_xy_size.y() + (self.size().height()/3)
         ))  # 子界面移动到 居中
+        self.SinOut_moveEvent.connect(self.Dialog_DelateGameWindows_.MoveXY)
 
         self.Dialog_DelateGameWindows_.show()
+
+
+    def setUIFondSize(self,UI,followSystem=False):
+        """
+            设置制定Ui的字体大小
+            :param UI: 控件
+            :param followSystem:是否跟随系统,如果是Mac就使用
+        """
+        pass
 
 
     def Window_XY(self, X, Y):
@@ -1427,6 +2142,23 @@ class RunUi(QMainWindow, Ui_MainWindow):
 
         return super().eventFilter(obj, e)
 
+
+    def L_XY_(self,x,y):
+        """刷新XY坐标缓存"""
+        self.L_XY = {
+            'X': self.x(),
+            'Y': self.y()
+        }
+    def moveEvent(self, a0: QtGui.QMoveEvent):
+        """重写坐标变化信号"""
+        # 获取XY的变化
+        try:
+            x = self.x() - self.L_XY['X']
+            y = self.y() - self.L_XY['Y']
+            self.SinOut_moveEvent.emit(x,y)
+            #print([x,y])
+        except AttributeError:
+            pass
 
 class GameFiles_Read_Thread(QThread):
     SinOut = pyqtSignal(str)
@@ -1487,6 +2219,7 @@ class GameFiles_ReturnGameList_Thread(QThread):
 
 class DownloadPage_stackedWidget_GetGameList_Thread(QThread):
     SinOut = pyqtSignal(str,str)
+    SinOut_Error = pyqtSignal()
     SinOut_OK = pyqtSignal()
     def __init__(self,Source,File,Kind):
         """多线程获取版本列表"""
@@ -1499,15 +2232,83 @@ class DownloadPage_stackedWidget_GetGameList_Thread(QThread):
         a = GamePublishListReturn(self.Source,self.File)
         b = a.ListReturn(self.Kind)
         # print(b)
-        l = []
-        for b_1 in b:
-            N = b_1['id']
-            T = b_1['time']
-            self.SinOut.emit(N,T)
-        self.SinOut_OK.emit()
+        if b != 'Error':
+            l = []
+            for b_1 in b:
+                N = b_1['id']
+                T = b_1['time']
+                self.SinOut.emit(N, T)
+            self.SinOut_OK.emit()
+            del a, b, l, N, T
+        else:
+            self.SinOut_Error.emit()
+            del a, b
         import gc
-        del a,b,l,N,T
         gc.collect()
+
+class DownloadPage_stackedWidget_GameList_Clicked_Get_Thread(QThread):
+    SinOut = pyqtSignal(str,str,str,str)
+    SinOut_Error = pyqtSignal(str)
+    SinOut_OK = pyqtSignal(str,bool)
+    def __init__(self, Kind, V):
+        """
+            多线程 根据版本获取Forge,Fabric,Optifine列表
+            :param Kind: 种类(Forge,Fabric,Optifine)
+            :param V: 版本号
+        """
+        super(DownloadPage_stackedWidget_GameList_Clicked_Get_Thread, self).__init__()
+        self.Kind = Kind
+        self.V = V
+    def run(self):
+        try:
+            print('start')
+            if self.Kind == 'Forge':
+                self.URL = 'https://bmclapi2.bangbang93.com/forge/minecraft/' + str(self.V)
+            elif self.Kind == 'Fabric':
+                self.URL = 'https://bmclapi2.bangbang93.com/fabric-meta/v2/versions/loader/' + str(self.V)
+            elif self.Kind == 'Optifine':
+                self.URL = 'https://bmclapi2.bangbang93.com/optifine/' + str(self.V)
+            import requests, gc
+            print(self.URL)
+            r = requests.get(self.URL)
+
+            if r.text != '[]':
+                try:
+                    j = r.json()
+                    print(self.URL)
+                    for a in j:
+                        if self.Kind == 'Forge':
+                            n = a['version']
+                            t = a['modified']
+                            k = None
+                        elif self.Kind == 'Fabric':
+                            n = a['loader']['version']
+                            t = None
+                            if a['loader']['stable'] == True:
+                                k = 'Stable'
+                            else:
+                                k = 'Bata'
+                        elif self.Kind == 'Optifine':
+                            n = a['type']
+                            t = None
+                            if 'forge' in a:
+                                k = 'Stable'
+                            else:
+                                k = 'Bata'
+                                n = n + '_' + a['patch']
+                        self.SinOut.emit(self.Kind, n, t, k)
+                    self.SinOut_OK.emit(self.Kind, True)
+                except requests.exceptions.JSONDecodeError:
+                    self.SinOut_OK.emit(self.Kind, False)
+            else:
+                self.SinOut_OK.emit(self.Kind, False)
+        except:
+            self.SinOut_Error.emit(self.Kind)
+
+        gc.collect()
+
+
+
 
 def Return_Window_XY():
     """返回窗口的坐标"""

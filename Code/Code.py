@@ -2,6 +2,8 @@
 import json
 import os
 from sys import platform
+from hashlib import new as hashlib_new
+from hashlib import md5 as hashlib_md5
 from .Log import print_
 
 
@@ -32,12 +34,12 @@ def JsonWrite(Json_, JsonFile_,BuBug = False):
         json.dump(Json_, f, ensure_ascii=False, sort_keys=True, indent=4, separators=(',', ': '))
     if JsonFile_ == JsonFile():
         if BuBug == True:
-            print_('BeBug', str('写入Json(启动器配置Json) 目录: ' + JsonFile_ + ' 内容:\n') + str(Json_))
+            print_('DeBug', str('写入Json(启动器配置Json) 目录: ' + JsonFile_ + ' 内容:\n') + str(Json_))
         else:
             print_('Info',str('写入Json(启动器配置Json) 目录: ' + JsonFile_ + ' 内容:\n') + str(Json_))
     else:
         if BuBug == True:
-            print_('BeBug', str('写入Json 目录: ' + JsonFile_ + ' 内容:\n') + str(Json_))
+            print_('DeBug', str('写入Json 目录: ' + JsonFile_ + ' 内容:\n') + str(Json_))
         else:
             print_('Info', str('写入Json 目录: ' + JsonFile_ + ' 内容:\n') + str(Json_))
 
@@ -77,7 +79,12 @@ def Json_InitializeFirst():
         },
         'GameFile_List':['当前目录'],
         'GameFile_List_Clicked': 0,
-        'Game_List_Clicked': 0
+        'Game_List_Clicked': 0,
+        'Download_Source':'MCBBS',
+        'Download_Source_ExceptionHandling':True,
+        'System':'',
+        'System_Places':'',
+        'System_V':''
     }
     return J
 
@@ -100,7 +107,7 @@ def InitializeFirst():
 
 def File():
     """获取缓存目录"""
-    s = Systeam()
+    s = System()
     if s == 'Mac':
         # 获取当前系统用户目录
         UserFile = os.path.expanduser('~')
@@ -110,7 +117,7 @@ def File():
     return file
 
 
-def Systeam():
+def System():
     """
         return: Mac Win Linux
 
@@ -131,3 +138,34 @@ def Systeam():
     elif a == 'linux' or a == 'aix':
         s = 'Linux'
     return s
+
+
+
+
+def Sha1(File) -> str:
+    """
+        文件Sha1值计算
+        :param File: 文件路径
+        :return: Sha1值(str)
+    """
+    with open(File, 'rb') as f:
+        return hashlib_new('sha1', f.read()).hexdigest()
+
+def Hash(File,Bytes=1024) -> str:
+    """
+        文件Hash值计算
+        :param File: 文件路径
+        :param Bytes: 阅读……字节
+        :return: Sha1值(str)
+    """
+    md5_1 = hashlib_md5()  # 创建一个md5算法对象
+    with open(File, 'rb') as f:  # 打开一个文件，必须是'rb'模式打开
+        while 1:
+            data = f.read(Bytes)  # 由于是一个文件，每次只读取固定字节
+            if data:  # 当读取内容不为空时对读取内容进行update
+                md5_1.update(data)
+            else:  # 当整个文件读完之后停止update
+                break
+    ret = md5_1.hexdigest()  # 获取这个文件的MD5值
+    return ret
+

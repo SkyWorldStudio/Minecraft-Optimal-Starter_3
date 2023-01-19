@@ -1,0 +1,33 @@
+name: Code_Optimize
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment:
+      name: Configure Code_Optimize
+    strategy:
+      matrix:
+        python-version: ["3.8"]
+    steps:
+    - uses: actions/checkout@v3
+    - name: 设置Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: 运行脚本进行代码优化
+      run: |
+        python '.github/Code_Optimize.py'
+    - name: Commit
+      id: commit
+      run: |
+        git config --global user.email xianyongjian080402@126.com
+        git config --global user.name xianyongjian080402-Bot
+        git add .
+        git commit -m "[Bot]-[Code_OptimizeBot]"
+      continue-on-error: true
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}

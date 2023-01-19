@@ -63,11 +63,11 @@ def print_(Type, Text, Log=True):
         print(p)
         p_1 = '[' + Time + '][' + Tybe_1 + ']' + MOS_print + '\n'
 
-    elif Type == 'BeBug':
-        Tybe_1 = 'BEBUG'
+    elif Type == 'DeBug':
+        Tybe_1 = 'DEBUG'
         left = Print_Colour.ENDC + '[' + Print_Colour.ENDC
         right = Print_Colour.ENDC + ']' + Print_Colour.ENDC
-        Tybe_2 = Print_Colour.WARNING_2 + 'INFO' + Print_Colour.ENDC
+        Tybe_2 = Print_Colour.WARNING_2 + 'DEBUG' + Print_Colour.ENDC
         # Time_2 = Print_Colour.UNDERLINE + Time + Print_Colour.ENDC
         Time_2 = Time
         p = left + Time_2 + right + left + Tybe_2 + right + Print_Colour.ENDC + MOS_print + Print_Colour.ENDC
