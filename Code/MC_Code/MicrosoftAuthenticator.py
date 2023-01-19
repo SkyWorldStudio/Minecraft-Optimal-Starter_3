@@ -45,7 +45,7 @@ class MicrosoftAuthenticator:
         context = json.loads(res.text)
         return context
     
-    #第四个验证,XSTS验证
+    #第四个验证,XSTS验证,XBLToken:XBL验证结果中的Token
     #返回值:验证结果
     def XSTSAuthToken(self, XBLToken:str) -> dict:
         RequestParams:dict = {
