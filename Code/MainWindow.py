@@ -936,9 +936,10 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.SinOut_moveEvent.connect(self.Dialog_GameInstallWindows_.MoveXY)
 
             self.pushButton_page_download_1_install_bottom_ok.setEnabled(True)
-            self.Dialog_GameInstallWindows_.exec()
 
             self.Dialog_GameInstallWindows_.Run()
+
+            self.Dialog_GameInstallWindows_.exec()
 
     def GameInstallError(self, GameName, Game_V, ErrorKind, ErrorCause, ErrorInfo):
         """当游戏安装出现错误时, 调用错误弹框显示函数"""
