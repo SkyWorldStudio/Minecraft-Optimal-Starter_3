@@ -29,7 +29,7 @@ class Dialog_GameInstellErrorWindows_(QDialog, Ui_Dialog_GameInstallError):
         """
         super(Dialog_GameInstellErrorWindows_, self).__init__()
         self.setupUi(self)
-        self.show()
+        #self.show()
 
         self.GameName = GameName
         self.Game_V = Game_V

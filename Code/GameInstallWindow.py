@@ -42,7 +42,7 @@ class Dialog_GameInstallWindows_(QDialog, Ui_Dialog_GameInstall):
 
         super(Dialog_GameInstallWindows_, self).__init__()
         self.setupUi(self)
-        self.show()
+        #self.show()
 
         self.pushButton_bottom_cancel.clicked.connect(self.stop)
         #self.pushButton_OffLine_Advanced.clicked.connect(self.pushButton_OffLine_Advanced_Clicked)

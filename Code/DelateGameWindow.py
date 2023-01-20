@@ -25,7 +25,7 @@ class Dialog_DelateGameWindows_(QDialog, Ui_Dialog_DelateGame):
         """
         super(Dialog_DelateGameWindows_, self).__init__()
         self.setupUi(self)
-        self.show()
+        #self.show()
 
         self.GameFile = GameFile
         self.GameName = GameName

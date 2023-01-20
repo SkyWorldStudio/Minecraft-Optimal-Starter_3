@@ -211,7 +211,7 @@ class GameInstall():
                                                     b = L['natives']['windows']
                                                     if self.System_Places == 64:
                                                         # 如果为60位
-                                                        c = 'natives-windows-64"'
+                                                        c = 'natives-windows-64'
                                                     else:
                                                         c = 'natives-windows-32'
                                                     if b != 'natives-windows-${arch}':
@@ -346,7 +346,7 @@ class GameInstall():
                                                     b = L['natives']['windows']
                                                     if self.System_Places == 64:
                                                         # 如果为60位
-                                                        c = 'natives-windows-64"'
+                                                        c = 'natives-windows-64'
                                                     else:
                                                         c = 'natives-windows-32'
                                                     if b != 'natives-windows-${arch}':
