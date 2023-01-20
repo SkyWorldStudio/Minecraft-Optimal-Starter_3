@@ -370,12 +370,6 @@ class GameInstall():
                                                             self.Libraries.append(
                                                                 ['Libraries', URL, Path_Up, Path, A['size'], Sh, Zip])
                                                 else:
-                                                    if 'artifact' in L['downloads']:
-                                                        A = L['downloads']['artifact']
-                                                        Zip = False
-                                                    else:
-                                                        A = L['downloads']['classifiers']['natives-windows']
-                                                        Zip = True
                                                     self.Size_All += A['size']
                                                     self.Libraries.append(
                                                         ['Libraries', URL, Path_Up, Path, A['size'], Sh, Zip])
