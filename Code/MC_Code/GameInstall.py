@@ -211,7 +211,7 @@ class GameInstall():
                                                     b = L['natives']['windows']
                                                     if self.System_Places == 64:
                                                         # 如果为60位
-                                                        c = 'natives-windows-64"'
+                                                        c = 'natives-windows-64'
                                                     else:
                                                         c = 'natives-windows-32'
                                                     if b != 'natives-windows-${arch}':
@@ -346,7 +346,7 @@ class GameInstall():
                                                     b = L['natives']['windows']
                                                     if self.System_Places == 64:
                                                         # 如果为60位
-                                                        c = 'natives-windows-64"'
+                                                        c = 'natives-windows-64'
                                                     else:
                                                         c = 'natives-windows-32'
                                                     if b != 'natives-windows-${arch}':
@@ -370,12 +370,6 @@ class GameInstall():
                                                             self.Libraries.append(
                                                                 ['Libraries', URL, Path_Up, Path, A['size'], Sh, Zip])
                                                 else:
-                                                    if 'artifact' in L['downloads']:
-                                                        A = L['downloads']['artifact']
-                                                        Zip = False
-                                                    else:
-                                                        A = L['downloads']['classifiers']['natives-windows']
-                                                        Zip = True
                                                     self.Size_All += A['size']
                                                     self.Libraries.append(
                                                         ['Libraries', URL, Path_Up, Path, A['size'], Sh, Zip])
@@ -625,6 +619,15 @@ class GameInstall():
 
         if One:
             try:
+                if self.Download_Source == 'MC':
+                    #print(url)
+                    # 如果是tm官方源，就把http改成https（**官方源用http会出问题，谢谢官方*）
+                    a = url[0:5]
+                    if a == 'https':
+                        pass
+                    else:
+                        url = 'https' + url.split('http')[1]
+                #print(url)
                 async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(connect=4), trust_env=True) as session:
                     async with session.get(url, headers=headers, ssl=False, timeout=timeOut) as response:
                         async with aiofiles.open(path, 'wb') as f:

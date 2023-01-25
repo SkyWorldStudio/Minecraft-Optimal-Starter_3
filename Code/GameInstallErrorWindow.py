@@ -29,7 +29,7 @@ class Dialog_GameInstellErrorWindows_(QDialog, Ui_Dialog_GameInstallError):
         """
         super(Dialog_GameInstellErrorWindows_, self).__init__()
         self.setupUi(self)
-        self.show()
+        #self.show()
 
         self.GameName = GameName
         self.Game_V = Game_V
@@ -73,6 +73,7 @@ class Dialog_GameInstellErrorWindows_(QDialog, Ui_Dialog_GameInstallError):
 
 
     def clicked_pushButton_close(self):
+        self.sinOut_OK.emit()
         self.pushButton_ok.setEnabled(False)  # 为了防止重复操作 直接禁用按钮
         self.pushButton_copy.setEnabled(False)  # 为了防止重复操作 直接禁用按钮
         self.anim = QPropertyAnimation(self, b"windowOpacity")  # 设置动画对象

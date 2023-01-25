@@ -146,14 +146,14 @@ class Download:
         while True:
             try:
                 os.makedirs(self.parh_cache_, exist_ok=True)
-                async with aiohttp.ClientSession(timeout = aiohttp.ClientTimeout(connect=3)) as session:
-                    async with session.get(self.url, headers=headers, ssl=False, timeout=4) as response:
+                async with aiohttp.ClientSession(timeout = aiohttp.ClientTimeout(connect=4)) as session:
+                    async with session.get(self.url, headers=headers, ssl=False, timeout=5) as response:
                         async with aiofiles.open(Download_Subsection['file'], 'wb') as f:
                             await f.write(await response.content.read())
 
-                    self.Download_Subsection_[Download_Subsection['Download_Number']] = None
-                    print(self.Download_Subsection_)
-                    break
+                self.Download_Subsection_[Download_Subsection['Download_Number']] = None
+                print(self.Download_Subsection_)
+                break
 
             except aiohttp.client_exceptions.ClientConnectorError:
                 print('客户端链接错误'+str(self.error_quantity))

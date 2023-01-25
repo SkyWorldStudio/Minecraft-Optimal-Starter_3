@@ -259,11 +259,11 @@
 	padding: 8px;
 }
 #pushButton_page_download_1_install_bottom_ok{
-	background-color: rgb(135, 180, 235);
+    background-color: rgb(56, 130, 221);
 	color: rgb(255, 255, 255);
 }
 #pushButton_page_download_1_install_bottom_ok:disabled{
-	background-color: rgb(56, 130, 221);
+	background-color: rgb(135, 180, 235);
 }
 #pushButton_page_download_1_install_bottom_ok:hover{
 	background-color: rgb(74, 146, 228);
@@ -2441,6 +2441,9 @@ Line{
                            </property>
                            <item>
                             <widget class="MyQWidget" name="widget_page_download_1_install_forge" native="true">
+                             <property name="enabled">
+                              <bool>false</bool>
+                             </property>
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                                <horstretch>0</horstretch>
@@ -2626,6 +2629,9 @@ Line{
                            </item>
                            <item>
                             <widget class="MyQWidget" name="widget_page_download_1_install_fabric" native="true">
+                             <property name="enabled">
+                              <bool>false</bool>
+                             </property>
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                                <horstretch>0</horstretch>
@@ -2799,6 +2805,9 @@ Line{
                            </item>
                            <item>
                             <widget class="MyQWidget" name="widget_page_download_1_install_optifine" native="true">
+                             <property name="enabled">
+                              <bool>false</bool>
+                             </property>
                              <property name="sizePolicy">
                               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                                <horstretch>0</horstretch>

@@ -255,11 +255,11 @@ class Ui_MainWindow(object):
 "    padding: 8px;\n"
 "}\n"
 "#pushButton_page_download_1_install_bottom_ok{\n"
-"    background-color: rgb(135, 180, 235);\n"
+"    background-color: rgb(56, 130, 221);\n"
 "    color: rgb(255, 255, 255);\n"
 "}\n"
 "#pushButton_page_download_1_install_bottom_ok:disabled{\n"
-"    background-color: rgb(56, 130, 221);\n"
+"    background-color: rgb(135, 180, 235);\n"
 "}\n"
 "#pushButton_page_download_1_install_bottom_ok:hover{\n"
 "    background-color: rgb(74, 146, 228);\n"
@@ -1400,6 +1400,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_12.setSpacing(10)
         self.verticalLayout_12.setObjectName("verticalLayout_12")
         self.widget_page_download_1_install_forge = MyQWidget(self.scrollAreaWidgetContents_page_download_1_install)
+        self.widget_page_download_1_install_forge.setEnabled(False)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -1476,6 +1477,7 @@ class Ui_MainWindow(object):
         self.gridLayout_11.addWidget(self.widget_page_download_1_install_forge_up, 0, 0, 1, 1)
         self.verticalLayout_12.addWidget(self.widget_page_download_1_install_forge)
         self.widget_page_download_1_install_fabric = MyQWidget(self.scrollAreaWidgetContents_page_download_1_install)
+        self.widget_page_download_1_install_fabric.setEnabled(False)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -1544,6 +1546,7 @@ class Ui_MainWindow(object):
         self.gridLayout_14.addWidget(self.widget_page_download_1_install_fabric_up, 0, 0, 1, 1)
         self.verticalLayout_12.addWidget(self.widget_page_download_1_install_fabric)
         self.widget_page_download_1_install_optifine = MyQWidget(self.scrollAreaWidgetContents_page_download_1_install)
+        self.widget_page_download_1_install_optifine.setEnabled(False)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
