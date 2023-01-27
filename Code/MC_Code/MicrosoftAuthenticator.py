@@ -116,3 +116,18 @@ class MicrosoftAuthenticator:
                 return True
             else:
                 if(resjson["error"] != "authorization_pending"):return False
+
+    #刷新令牌,进行设备代码流成功后可以调用
+    def StartRefreshToken(self) -> bool:
+        RequestParams:dict = {
+            "grant_type": "refresh_token",
+            "client_id": self.ClientId,
+            "refresh_token": self.RefreshToken
+        }
+        result = requests.post("https://login.live.com/oauth20_token.srf", data=RequestParams)
+        if(result.text == ""):return False
+        resjson = json.loads(result.text)
+        self.AccessToken = resjson["access_token"]
+        self.RefreshToken = resjson["refresh_token"]
+        return True
+
