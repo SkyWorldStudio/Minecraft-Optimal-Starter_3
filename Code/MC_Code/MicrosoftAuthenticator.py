@@ -146,7 +146,7 @@ class MicrosoftAuthenticator:
                 "device_code": self.DeviceCode
             }
             result = requests.post("https://login.microsoftonline.com/consumers/oauth2/v2.0/token", data=RequestParams)
-            if result.text == "": 
+            if result.text == "":
                 return None
             returnJson = json.loads(result.text)
             if result.status_code >= 200 and result.status_code < 300:
@@ -156,6 +156,26 @@ class MicrosoftAuthenticator:
             else:
                 if returnJson["error"] != "authorization_pending":
                     return False
+
+    def StartRefreshToken(self) -> list:
+        """
+            刷新令牌,进行设备代码流成功后可以调用
+            :return [True,AccessToken,RefreshToken] or [False]
+        """
+        RequestParams:dict = {
+            "grant_type": "refresh_token",
+            "client_id": self.ClientId,
+            "refresh_token": self.RefreshToken
+        }
+        result = requests.post("https://login.live.com/oauth20_token.srf", data=RequestParams)
+        if result.text == "":
+            return [False]
+        resjson = json.loads(result.text)
+        self.AccessToken = resjson["access_token"]
+        self.RefreshToken = resjson["refresh_token"]
+        return [True,self.AccessToken,self.RefreshToken]
+
+
 
 if __name__ == "__main__":
     arg1 = MicrosoftAuthenticator('35402e6c-8e66-4bf2-8f9b-a1de642db842')
@@ -174,3 +194,4 @@ if __name__ == "__main__":
     arg8 = arg1.GetPlayerProfile(arg6["access_token"])
     print('验证结果' + str(arg8))
     access_token = arg6['access_token']
+
