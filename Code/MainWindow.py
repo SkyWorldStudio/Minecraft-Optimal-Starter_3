@@ -978,7 +978,10 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.Dialog_GameInstellErrorWindows_.exec()
 
     def GameInstallErrorWindow_SinOut_OK(self):
-        self.SinOut_moveEvent.disconnect(self.Dialog_GameInstellErrorWindows_.MoveXY)
+        try:
+            self.SinOut_moveEvent.disconnect(self.Dialog_GameInstellErrorWindows_.MoveXY)
+        except TypeError:
+            pass
         self.pushButton_page_download_1_install_bottom_ok.setEnabled(True)
         self.stackedWidget_main.setEnabled(True)
 
@@ -988,7 +991,10 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.listWidget_page_download_1_install_fabric.clear()
         self.listWidget_page_download_1_install_optifine.clear()
 
-        self.SinOut_moveEvent.disconnect(self.Dialog_GameInstallWindows_.MoveXY)
+        try:
+            self.SinOut_moveEvent.disconnect(self.Dialog_GameInstallWindows_.MoveXY)
+        except TypeError:
+            pass
         self.stackedWidget_main.setEnabled(False)
         self.stackedWidget_page_download_1.setCurrentIndex(0)
         self.stackedWidget_2.setCurrentIndex(0)
@@ -1005,7 +1011,10 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.listWidget_page_download_1_install_fabric.clear()
         self.listWidget_page_download_1_install_optifine.clear()
 
-        self.SinOut_moveEvent.disconnect(self.Dialog_GameInstallWindows_.MoveXY)
+        try:
+            self.SinOut_moveEvent.disconnect(self.Dialog_GameInstallWindows_.MoveXY)
+        except TypeError:
+            pass
         self.stackedWidget_main.setEnabled(True)
         self.stackedWidget_page_download_1.setCurrentIndex(0)
         self.stackedWidget_2.setCurrentIndex(0)
@@ -1211,12 +1220,18 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.SettingsPage_Sidebar_horizontalSlider_sliderReleased()
 
     def AddUserWindow_OK(self):
-        self.SinOut_moveEvent.disconnect(self.Dialog_AddUserWindows_.MoveXY)
+        try:
+            self.SinOut_moveEvent.disconnect(self.Dialog_AddUserWindows_.MoveXY)
+        except TypeError:
+            pass
         self.Users_List_Refresh()
         self.stackedWidget_main.setEnabled(True)
 
     def AddUserWindow_Cancel(self):
-        self.SinOut_moveEvent.disconnect(self.Dialog_AddUserWindows_.MoveXY)
+        try:
+            self.SinOut_moveEvent.disconnect(self.Dialog_AddUserWindows_.MoveXY)
+        except TypeError:
+            pass
         self.stackedWidget_main.setEnabled(True)
 
     def Users_List_Refresh(self):
@@ -2111,11 +2126,17 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.Dialog_DelateGameWindows_.exec()
 
     def DelateGameWindow_OK(self):
-        self.SinOut_moveEvent.disconnect(self.Dialog_DelateGameWindows_.MoveXY)
+        try:
+            self.SinOut_moveEvent.disconnect(self.Dialog_DelateGameWindows_.MoveXY)
+        except TypeError:
+            pass
         self.stackedWidget_main.setEnabled(True)
 
     def DelateGameWindow_Cancel(self):
-        self.SinOut_moveEvent.disconnect(self.Dialog_DelateGameWindows_.MoveXY)
+        try:
+            self.SinOut_moveEvent.disconnect(self.Dialog_DelateGameWindows_.MoveXY)
+        except TypeError:
+            pass
         self.stackedWidget_main.setEnabled(True)
 
 

@@ -92,6 +92,12 @@ class Dialog_AddUserWindows_(QDialog, Ui_Dialog_AddUserWindows):
         y_ = y_ + y
         self.move(x_,y_)
 
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key.Key_Escape:
+            # 后期这个要加一个判断,如果是在进行登陆操作,esc按键直接忽略
+            self.pushButton_Cancel_Clicked()
+
+
     #def mousePressEvent(self, a0: QtGui.QMouseEvent):
     #    self.Is_Drag_ = True
     #    self.Mouse_Start_Point_ = a0.globalPosition()  # 获得鼠标的初始位置

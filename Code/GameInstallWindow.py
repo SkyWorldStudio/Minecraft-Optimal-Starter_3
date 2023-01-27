@@ -216,6 +216,10 @@ class Dialog_GameInstallWindows_(QDialog, Ui_Dialog_GameInstall):
         y_ = y_ + y
         self.move(x_,y_)
 
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key.Key_Escape:
+            pass
+
     # def mousePressEvent(self, a0: QtGui.QMouseEvent):
     #    self.Is_Drag_ = True
     #    self.Mouse_Start_Point_ = a0.globalPosition()  # 获得鼠标的初始位置

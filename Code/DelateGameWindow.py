@@ -78,6 +78,10 @@ class Dialog_DelateGameWindows_(QDialog, Ui_Dialog_DelateGame):
         y_ = y_ + y
         self.move(x_, y_)
 
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key.Key_Escape:
+            self.pushButton_Cancel_Clicked()
+
     # def mousePressEvent(self, a0: QtGui.QMouseEvent):
     #    self.Is_Drag_ = True
     #    self.Mouse_Start_Point_ = a0.globalPosition()  # 获得鼠标的初始位置
