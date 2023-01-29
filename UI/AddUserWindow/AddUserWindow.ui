@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>585</width>
-    <height>263</height>
+    <height>190</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>585</width>
-    <height>180</height>
+    <height>165</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -66,7 +66,7 @@
 	border-radius: 8px;
 	background-color: rgb(255, 255, 255);
 }
-#widget_2{
+#page_widget_2{
 	background-color: rgba(255, 255, 255, 0);
 }
 QLineEdit{
@@ -172,7 +172,7 @@ QLineEdit{
              <number>0</number>
             </property>
             <item>
-             <widget class="MyQLabel" name="label_2">
+             <widget class="MyQLabel" name="label_OffLine">
               <property name="font">
                <font>
                 <pointsize>15</pointsize>
@@ -193,7 +193,7 @@ QLineEdit{
              </widget>
             </item>
             <item>
-             <widget class="MyQLabel" name="label_3">
+             <widget class="MyQLabel" name="label_Microsoft">
               <property name="font">
                <font>
                 <pointsize>15</pointsize>
@@ -211,7 +211,7 @@ QLineEdit{
              </widget>
             </item>
             <item>
-             <widget class="MyQLabel" name="label_4">
+             <widget class="MyQLabel" name="label_else">
               <property name="font">
                <font>
                 <pointsize>15</pointsize>
@@ -271,21 +271,33 @@ QLineEdit{
       <item>
        <widget class="QStackedWidget" name="stackedWidget_main">
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="page_OffLine">
          <layout class="QGridLayout" name="gridLayout_2">
+          <property name="topMargin">
+           <number>10</number>
+          </property>
           <property name="rightMargin">
            <number>12</number>
           </property>
           <property name="bottomMargin">
-           <number>10</number>
+           <number>0</number>
+          </property>
+          <property name="horizontalSpacing">
+           <number>-1</number>
           </property>
           <property name="verticalSpacing">
            <number>0</number>
           </property>
           <item row="1" column="0" colspan="3">
            <widget class="QWidget" name="widget_OffLine_1" native="true">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>38</height>
+             </size>
+            </property>
             <layout class="QHBoxLayout" name="horizontalLayout_3">
              <property name="spacing">
               <number>5</number>
@@ -310,6 +322,12 @@ QLineEdit{
                  <height>38</height>
                 </size>
                </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>38</height>
+                </size>
+               </property>
                <property name="font">
                 <font>
                  <pointsize>13</pointsize>
@@ -328,6 +346,12 @@ QLineEdit{
                <property name="minimumSize">
                 <size>
                  <width>0</width>
+                 <height>35</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
                  <height>35</height>
                 </size>
                </property>
@@ -368,7 +392,7 @@ QLineEdit{
              </size>
             </property>
             <property name="currentIndex">
-             <number>1</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="page_widget_2">
              <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -499,7 +523,7 @@ QLineEdit{
              <string>高级设置</string>
             </property>
             <property name="icon">
-             <iconset>
+             <iconset resource="../MainWindow/img.qrc">
               <normaloff>:/widget_Sidebar/images/TriangleUp.png</normaloff>:/widget_Sidebar/images/TriangleUp.png</iconset>
             </property>
             <property name="iconSize">
@@ -534,10 +558,13 @@ QLineEdit{
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
-              <height>40</height>
+              <height>3</height>
              </size>
             </property>
            </spacer>
@@ -575,6 +602,12 @@ QLineEdit{
              </property>
              <item row="0" column="0">
               <widget class="QLabel" name="label_7">
+               <property name="minimumSize">
+                <size>
+                 <width>22</width>
+                 <height>22</height>
+                </size>
+               </property>
                <property name="maximumSize">
                 <size>
                  <width>22</width>
@@ -585,7 +618,7 @@ QLineEdit{
                 <string/>
                </property>
                <property name="pixmap">
-                <pixmap resource="../../../../Documents/ssh_2/UI/Dialog_All.qrc">:/image/images/Hint.png</pixmap>
+                <pixmap resource="../Dialog_All.qrc">:/image/images/Hint.png</pixmap>
                </property>
                <property name="scaledContents">
                 <bool>true</bool>
@@ -594,6 +627,18 @@ QLineEdit{
              </item>
              <item row="0" column="1">
               <widget class="QLabel" name="label_h1">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>22</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>22</height>
+                </size>
+               </property>
                <property name="font">
                 <font>
                  <pointsize>14</pointsize>
@@ -640,7 +685,7 @@ QLineEdit{
                     </font>
                    </property>
                    <property name="text">
-                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;请点击&amp;quot;登陆&amp;quot;按钮开始进行微软登陆。在您点击登录按钮后，启动器会弹出一个窗口，并同时复制设备代码到您的剪贴板内(可以点击下方设备代码显示处重新复制), 您需要在窗口中完成登录(关闭登陆窗口意味着取消微软登陆)，并输入在此处显示的设备代码。若发现账号头像是默认头像、进入游戏后皮肤为默认皮肤或者无法进入开启正版认证的服务器，则可能需要重新添加微软账户。&lt;br&gt;- 如果网站提示&amp;quot;出现错误&amp;quot;，请关闭弹出窗口，重新开始进行微软登陆&lt;br&gt;如果您没有正版账户，请&lt;a href=&quot;https://www.minecraft.net/store/minecraft-java-bedrock-edition-pc&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0068da;&quot;&gt;购买正版Minecraft&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;请点击&amp;quot;登陆&amp;quot;按钮开始进行微软登陆。在您点击登录按钮后，启动器会为您打开默认浏览器，并同时复制设备代码到您的剪贴板内(可以点击下方设备代码显示处重新复制), 您需要在浏览器中完成登录，并输入在此处显示的设备代码。若发现账号头像是默认头像、进入游戏后皮肤为默认皮肤或者无法进入开启正版认证的服务器，则可能需要重新添加微软账户。&lt;br/&gt;- 如果网站提示&amp;quot;出现错误&amp;quot;，请重新开始进行微软登陆&lt;br/&gt;如果您没有正版账户，请&lt;a href=&quot;https://www.minecraft.net/store/minecraft-java-bedrock-edition-pc&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0068da;&quot;&gt;购买正版Minecraft&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -738,7 +783,7 @@ QLineEdit{
             </sizepolicy>
            </property>
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="page_OffLine_Bottom">
             <layout class="QHBoxLayout" name="horizontalLayout_9">
@@ -884,7 +929,7 @@ QLineEdit{
                    </font>
                   </property>
                   <property name="cursor">
-                   <cursorShape>PointingHandCursor</cursorShape>
+                   <cursorShape>ForbiddenCursor</cursorShape>
                   </property>
                   <property name="text">
                    <string>请先点击&quot;登陆&quot;按钮开始进行登陆</string>
@@ -919,7 +964,7 @@ QLineEdit{
                 </sizepolicy>
                </property>
                <property name="currentIndex">
-                <number>1</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="page_Microsoft_Bottom_1">
                 <layout class="QHBoxLayout" name="horizontalLayout_12">
@@ -1020,7 +1065,7 @@ QLineEdit{
                     <string/>
                    </property>
                    <property name="pixmap">
-                    <pixmap resource="../../../../Documents/ssh_2/UI/Dialog_All.qrc">:/image/images/loading_Window.gif</pixmap>
+                    <pixmap resource="../Dialog_All.qrc">:/image/images/loading_Window.gif</pixmap>
                    </property>
                    <property name="scaledContents">
                     <bool>true</bool>
@@ -1078,7 +1123,8 @@ QLineEdit{
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../../../Documents/ssh_2/UI/Dialog_All.qrc"/>
+  <include location="../Dialog_All.qrc"/>
+  <include location="../MainWindow/img.qrc"/>
  </resources>
  <connections/>
 </ui>

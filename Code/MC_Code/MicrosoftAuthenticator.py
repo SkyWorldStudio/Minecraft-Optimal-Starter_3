@@ -13,6 +13,7 @@ class MicrosoftAuthenticator:
             :return: None
         """
         self.ClientId = ClientId
+        self.Quit_ = False
 
     def StartDeviceFlowRequest(self):
         """
@@ -139,23 +140,31 @@ class MicrosoftAuthenticator:
             :return: True or False
         """
         while True:
-            time.sleep(self.Interval)
-            RequestParams: dict = {
-                "grant_type": "urn:ietf:params:oauth:grant-type:device_code",
-                "client_id": self.ClientId,
-                "device_code": self.DeviceCode
-            }
-            result = requests.post("https://login.microsoftonline.com/consumers/oauth2/v2.0/token", data=RequestParams)
-            if result.text == "":
-                return None
-            returnJson = json.loads(result.text)
-            if result.status_code >= 200 and result.status_code < 300:
-                self.AccessToken = returnJson["access_token"]
-                self.RefreshToken = returnJson["refresh_token"]
-                return True
+            if self.Quit_:
+                break
             else:
-                if returnJson["error"] != "authorization_pending":
-                    return False
+                time.sleep(self.Interval)
+                RequestParams: dict = {
+                    "grant_type": "urn:ietf:params:oauth:grant-type:device_code",
+                    "client_id": self.ClientId,
+                    "device_code": self.DeviceCode
+                }
+                result = requests.post("https://login.microsoftonline.com/consumers/oauth2/v2.0/token",
+                                       data=RequestParams)
+                if result.text == "":
+                    return None
+                returnJson = json.loads(result.text)
+                if result.status_code >= 200 and result.status_code < 300:
+                    self.AccessToken = returnJson["access_token"]
+                    self.RefreshToken = returnJson["refresh_token"]
+                    return True
+                else:
+                    if returnJson["error"] != "authorization_pending":
+                        return False
+
+
+    def Quit(self):
+        self.Quit_ = True
 
     def StartRefreshToken(self) -> list:
         """

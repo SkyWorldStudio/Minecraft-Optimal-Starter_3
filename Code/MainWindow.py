@@ -181,6 +181,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         #self.Dialog_AddUserWindows_.sinOut_Win_XY.connect(self.Window_XY)
         self.Dialog_AddUserWindows_.sinOut_OK.connect(self.AddUserWindow_OK)
         self.Dialog_AddUserWindows_.sinOut_Cancel.connect(self.AddUserWindow_Cancel)
+        self.Dialog_AddUserWindows_.sinOut_MicrosoftNoUser.connect(self.AddUserWindow_MicrosoftNoUser)
         self.Dialog_AddUserWindows_.setWindowFlags(Qt.WindowType.FramelessWindowHint)
         #self.Dialog_AddUserWindows_.setWindowFlags(
         #    Qt.WindowType.Popup |  # 表示该窗口小部件是一个弹出式顶层窗口，即它是模态的，但有一个适合弹出式菜单的窗口系统框架。
@@ -1233,6 +1234,35 @@ class RunUi(QMainWindow, Ui_MainWindow):
         except TypeError:
             pass
         self.stackedWidget_main.setEnabled(True)
+
+    def AddUserWindow_MicrosoftNoUser(self):
+        """添加账户窗口返回 -> 微软账户下没有正版MC"""
+        from Code.AddUserMicrosoftNoUserWindow import Dialog_AddUserMicrosoftNoUserWindow_
+        self.Dialog_AddUserMicrosoftNoUserWindow__ = Dialog_AddUserMicrosoftNoUserWindow_()
+        self.Dialog_AddUserMicrosoftNoUserWindow__.sinOut_OK.connect(self.Dialog_AddUserMicrosoftNoUserWindow_OK)
+        self.Dialog_AddUserMicrosoftNoUserWindow__.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
+        self.Dialog_AddUserMicrosoftNoUserWindow__.setWindowFlags(Qt.WindowType.FramelessWindowHint)
+
+        self.stackedWidget_main.setEnabled(False)
+
+        self.MainWindow_xy_size = self.geometry()  # 获取主界面 初始坐标
+        self.Dialog_AddUserMicrosoftNoUserWindow__.move(
+            round(self.MainWindow_xy_size.x() + (
+                        self.size().width() / 2 - self.Dialog_AddUserMicrosoftNoUserWindow__.size().width() / 2)),
+            round(self.MainWindow_xy_size.y() + (self.size().height() / 3)
+                  ))  # 子界面移动到 居中
+        self.SinOut_moveEvent.connect(self.Dialog_AddUserMicrosoftNoUserWindow__.MoveXY)
+
+        self.Dialog_AddUserMicrosoftNoUserWindow__.exec()
+
+    def Dialog_AddUserMicrosoftNoUserWindow_OK(self):
+        """提示微软账户下没有正版账户弹框关闭后触发"""
+        try:
+            self.SinOut_moveEvent.disconnect(self.Dialog_AddUserMicrosoftNoUserWindow__.MoveXY)
+        except TypeError:
+            pass
+        self.stackedWidget_main.setEnabled(True)
+
 
     def Users_List_Refresh(self):
         """读取账户列表并反馈在控件上"""
