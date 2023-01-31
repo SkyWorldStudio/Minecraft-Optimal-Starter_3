@@ -182,6 +182,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         self.Dialog_AddUserWindows_.sinOut_OK.connect(self.AddUserWindow_OK)
         self.Dialog_AddUserWindows_.sinOut_Cancel.connect(self.AddUserWindow_Cancel)
         self.Dialog_AddUserWindows_.sinOut_MicrosoftNoUser.connect(self.AddUserWindow_MicrosoftNoUser)
+        self.Dialog_AddUserWindows_.sinOut_MicrosoftError.connect(self.AddUserWindow_MicrosoftError)
         self.Dialog_AddUserWindows_.setWindowFlags(Qt.WindowType.FramelessWindowHint)
         #self.Dialog_AddUserWindows_.setWindowFlags(
         #    Qt.WindowType.Popup |  # 表示该窗口小部件是一个弹出式顶层窗口，即它是模态的，但有一个适合弹出式菜单的窗口系统框架。
@@ -204,6 +205,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
         ))  # 子界面移动到 居中
         self.UserPage_Up_AddUser()  # 窗口弹出后，主页面不再刷新，所以在窗口弹出前改变
         self.SinOut_moveEvent.connect(self.Dialog_AddUserWindows_.MoveXY)
+        print_('Info','显示AddUser窗口')
 
         self.Dialog_AddUserWindows_.exec()
 
@@ -939,6 +941,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             self.pushButton_page_download_1_install_bottom_ok.setEnabled(True)
 
             self.Dialog_GameInstallWindows_.Run()
+            print_('Info','显示GameInstall窗口')
 
             self.Dialog_GameInstallWindows_.exec()
 
@@ -975,6 +978,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             round(self.MainWindow_xy_size.y() + (self.size().height() / 3)
                   ))  # 子界面移动到 居中
         self.SinOut_moveEvent.connect(self.Dialog_GameInstellErrorWindows_.MoveXY)
+        print_('Info','显示GameInstallError窗口')
 
         self.Dialog_GameInstellErrorWindows_.exec()
 
@@ -1252,8 +1256,40 @@ class RunUi(QMainWindow, Ui_MainWindow):
             round(self.MainWindow_xy_size.y() + (self.size().height() / 3)
                   ))  # 子界面移动到 居中
         self.SinOut_moveEvent.connect(self.Dialog_AddUserMicrosoftNoUserWindow__.MoveXY)
+        print_('Info','显示AddUserMicroftNoUserWindow窗口')
 
         self.Dialog_AddUserMicrosoftNoUserWindow__.exec()
+
+    def AddUserWindow_MicrosoftError(self, ErrorKind, ErrorCause, ErrorInfo):
+
+        from Code.AddUserMicrosoftError import Dialog_AddUserMicrosoftErrorWindow_
+        self.Dialog_AddUserMicrosoftError__ = Dialog_AddUserMicrosoftErrorWindow_(ErrorKind, ErrorCause, ErrorInfo)
+        self.Dialog_AddUserMicrosoftError__.sinOut_OK.connect(self.Dialog_AddUserMicrosoftError_OK)
+        self.Dialog_AddUserMicrosoftError__.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground, True)
+        self.Dialog_AddUserMicrosoftError__.setWindowFlags(Qt.WindowType.FramelessWindowHint)
+
+        self.stackedWidget_main.setEnabled(False)
+
+        self.MainWindow_xy_size = self.geometry()  # 获取主界面 初始坐标
+        self.Dialog_AddUserMicrosoftError__.move(
+            round(self.MainWindow_xy_size.x() + (
+                        self.size().width() / 2 - self.Dialog_AddUserMicrosoftError__.size().width() / 2)),
+            round(self.MainWindow_xy_size.y() + (self.size().height() / 3)
+                  ))  # 子界面移动到 居中
+        self.SinOut_moveEvent.connect(self.Dialog_AddUserMicrosoftError__.MoveXY)
+        print_('Info','显示微软登陆Error窗口')
+
+        self.Dialog_AddUserMicrosoftError__.exec()
+
+
+    def Dialog_AddUserMicrosoftError_OK(self):
+        """提示微软账户下没有正版账户弹框关闭后触发"""
+        try:
+            self.SinOut_moveEvent.disconnect(self.Dialog_AddUserMicrosoftError__.MoveXY)
+        except TypeError:
+            pass
+        self.stackedWidget_main.setEnabled(True)
+
 
     def Dialog_AddUserMicrosoftNoUserWindow_OK(self):
         """提示微软账户下没有正版账户弹框关闭后触发"""
@@ -2152,6 +2188,7 @@ class RunUi(QMainWindow, Ui_MainWindow):
             round(self.MainWindow_xy_size.y() + (self.size().height()/3)
         ))  # 子界面移动到 居中
         self.SinOut_moveEvent.connect(self.Dialog_DelateGameWindows_.MoveXY)
+        print_('Info','显示DelateGame窗口')
 
         self.Dialog_DelateGameWindows_.exec()
 

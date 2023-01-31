@@ -204,3 +204,7 @@ if __name__ == "__main__":
     print('验证结果' + str(arg8))
     access_token = arg6['access_token']
 
+    arg_again = arg1.StartRefreshToken()
+    print(arg_again)
+
+

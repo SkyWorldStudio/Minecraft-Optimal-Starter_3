@@ -6,33 +6,26 @@ from PyQt6.QtCore import QPropertyAnimation, Qt, pyqtSignal, QRect
 from PyQt6.QtGui import QColor
 
 from Code.Log import print_
-from UI.GameInstallErrorWindow.GameInstallErrorWindow import Ui_Dialog_GameInstallError
+from UI.AddUserWindow.AddUserMicrosoftError import Ui_Dialog_AddUserMicrosoftError
 import UI.Dialog_All_rc
 from Code.MainWindow import Return_Window_XY
 from PyQt6.QtWidgets import QDialog, QGraphicsDropShadowEffect, QApplication
 
 
-class Dialog_GameInstellErrorWindows_(QDialog, Ui_Dialog_GameInstallError):
-    #sinOut_Win_XY = pyqtSignal(int, int)
+class Dialog_AddUserMicrosoftErrorWindow_(QDialog, Ui_Dialog_AddUserMicrosoftError):
     sinOut_OK = pyqtSignal()
 
-    def __init__(self, GameName, Game_V,
-                 ErrorKind, ErrorCause, ErrorInfo
-                 ):
+    def __init__(self, ErrorKind, ErrorCause, ErrorInfo):
         """
-            游戏安装出错
-            :param GameName: 游戏名
-            :param Game_V: 游戏版本
+            微软登陆出错
             :param ErrorKind: 报错关键字（种类）
             :param ErrorCause: 报错原因(str,None)
             :param ErrorInfo: 报错信息(Py的输出)
         """
-        super(Dialog_GameInstellErrorWindows_, self).__init__()
+        super(Dialog_AddUserMicrosoftErrorWindow_, self).__init__()
         self.setupUi(self)
         #self.show()
 
-        self.GameName = GameName
-        self.Game_V = Game_V
         self.ErrorKind = ErrorKind
         self.ErrorCause = ErrorCause
         self.ErrorInfo = ErrorInfo
@@ -42,10 +35,10 @@ class Dialog_GameInstellErrorWindows_(QDialog, Ui_Dialog_GameInstallError):
         else:
             a = '可能是由于您' + self.ErrorCause + '所导致的。'
 
-        self.info = '在安装"' + str(self.GameName) + '"(' + str(self.Game_V) + ')' + '时出现错误，部分文件安装/下载失败，'+ a + '\n错误关键字: \n'+ str(self.ErrorKind) +'\n\n您可以复制详细信息并在关于中进行反馈'
-        self.label_3.setText(self.info)
+        self.info = '在进行微软登陆时出现错误, '+ a + '\n错误关键字: \n'+ str(self.ErrorKind) +'\n\n您可以复制详细信息并在关于中进行反馈'
+        self.label_h1.setText(self.info)
 
-        self.copt_info = '在安装"' + str(self.GameName) + '"(' + str(self.Game_V) + ')' + '时出现错误，部分文件安装/下载失败，'+ a + '\n错误关键字: \n'+ str(self.ErrorKind) + '\n\n异常输出: \n' + str(self.ErrorInfo) + '\n\n建议在反馈时附带日志文件，您可以在设置中打开日志文件夹'
+        self.copt_info = '在进行微软登陆时出现错误, '+ a + '\n错误关键字: \n'+ str(self.ErrorKind) + '\n\n异常输出: \n' + str(self.ErrorInfo) + '\n\n建议在反馈时附带日志文件，您可以在设置中打开日志文件夹'
         print_('Error',self.copt_info)
 
 
@@ -93,33 +86,6 @@ class Dialog_GameInstellErrorWindows_(QDialog, Ui_Dialog_GameInstallError):
     def keyPressEvent(self, event):
         if event.key() == Qt.Key.Key_Escape:
             self.clicked_pushButton_close()
-
-    # def mousePressEvent(self, a0: QtGui.QMouseEvent):
-    #    self.Is_Drag_ = True
-    #    self.Mouse_Start_Point_ = a0.globalPosition()  # 获得鼠标的初始位置
-    #    self.Window_Start_Point_ = self.frameGeometry().topLeft()  # 获得窗口的初始位置
-
-    # def mouseMoveEvent(self, a0: QtGui.QMouseEvent):
-    #    # 判断是否在拖拽移动
-    #    if self.Is_Drag_:
-    #        # 获得鼠标移动的距离
-    #        self.Move_Distance = a0.globalPosition() - self.Mouse_Start_Point_
-    #        # 改变窗口的位置
-    #        Main_XY = Return_Window_XY()
-    #        self.sinOut_Win_XY.emit(
-    #            round(Main_XY.x() + self.Move_Distance.x()),
-    #            round(Main_XY.y() + self.Move_Distance.y())
-    #        )
-    #        x_c_m = self.Move_Distance.x()
-    #        y_c_m = self.Move_Distance.y()
-    #        x = self.Window_Start_Point_.x() + x_c_m
-    #        y = self.Window_Start_Point_.y() + y_c_m
-    #        self.move(round(x), round(y))
-
-    # def mouseReleaseEvent(self, a0: QtGui.QMouseEvent):
-    #    # 放下左键即停止移动
-    #    if a0.button() == Qt.MouseButton.LeftButton:
-    #        self.Is_Drag_ = False
 
     def close_(self):
         self.close()

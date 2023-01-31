@@ -16,6 +16,7 @@ class Dialog_AddUserWindows_(QDialog, Ui_Dialog_AddUserWindows):
     sinOut_OK = pyqtSignal()
     sinOut_Cancel = pyqtSignal()
     sinOut_MicrosoftNoUser = pyqtSignal()
+    sinOut_MicrosoftError = pyqtSignal(str,str,str)
 
     def __init__(self, JsonFile):
         super(Dialog_AddUserWindows_, self).__init__()
@@ -79,6 +80,7 @@ class Dialog_AddUserWindows_(QDialog, Ui_Dialog_AddUserWindows):
         self.Microsoft_L_Thread_Start_.SinOut_Code.connect(self.Microsoft_L_Thread_SinOut_Code)
         self.Microsoft_L_Thread_Start_.SinOut_UserOK.connect(self.Microsoft_L_Thread_SinOut_UserOK)
         self.Microsoft_L_Thread_Start_.SinOut_NoMicrosoft.connect(self.Microsoft_L_Thread_SinOut_NoMicrosoft)
+        self.Microsoft_L_Thread_Start_.SinOut_Error.connect(self.Microsoft_L_Thread_SinOut_Error)
         self.Microsoft_L_Thread_Start_.start()
 
     def Microsoft_L_Thread_SinOut_Code(self,Code):
@@ -97,7 +99,13 @@ class Dialog_AddUserWindows_(QDialog, Ui_Dialog_AddUserWindows):
 
     def Microsoft_L_Thread_SinOut_NoMicrosoft(self):
         """微软登陆线程返回 账户中没有MC"""
+        self.clicked_pushButton_close()  # 关闭窗口
         self.sinOut_MicrosoftNoUser.emit()
+
+    def Microsoft_L_Thread_SinOut_Error(self, ErrorKind, ErrorCause, ErrorInfo):
+        """微软登陆线程返回 Error"""
+        self.clicked_pushButton_close()  # 关闭窗口
+        self.sinOut_MicrosoftError.emit(ErrorKind, ErrorCause, ErrorInfo)
 
     def Microsoft_L_Code_Copy(self):
         if self.Microsoft_L_Code is not None:
@@ -230,42 +238,52 @@ class Microsoft_L_Thread(QThread):
     SinOut_Code = pyqtSignal(list)
     SinOut_UserOK = pyqtSignal()
     SinOut_NoMicrosoft = pyqtSignal()
+    SinOut_Error = pyqtSignal(str,str,str)
     def __init__(self):
         """微软登陆线程"""
         super(Microsoft_L_Thread, self).__init__()
 
     def run(self):
         from Code.MC_Code.MicrosoftAuthenticator import MicrosoftAuthenticator
-        self.arg1 = MicrosoftAuthenticator('35402e6c-8e66-4bf2-8f9b-a1de642db842')
-        self.arg2 = self.arg1.StartDeviceFlowRequest()
-        self.SinOut_Code.emit(self.arg2)
-        print_('DeBug','[微软登陆]开启设备代码流验证' + str(self.arg2))
+        try:
+            self.arg1 = MicrosoftAuthenticator('35402e6c-8e66-4bf2-8f9b-a1de642db842')
+            self.arg2 = self.arg1.StartDeviceFlowRequest()
+            self.SinOut_Code.emit(self.arg2)
+            print_('DeBug','[微软登陆]开启设备代码流验证' + str(self.arg2))
 
-        self.arg3 = self.arg1.WaitForUserCompletedAuth()
-        self.SinOut_UserOK.emit()
-        print_('DeBug','[微软登陆]用户登陆完成：' + str(self.arg3))
+            self.arg3 = self.arg1.WaitForUserCompletedAuth()
+            self.SinOut_UserOK.emit()
+            print_('DeBug','[微软登陆]用户登陆完成：' + str(self.arg3))
 
-        if self.arg3:
-            self.arg4 = self.arg1.XBLAuthToken()
-            print_('DeBug','[微软登陆]XBL验证结果' + str(self.arg4))
+            if self.arg3:
+                self.arg4 = self.arg1.XBLAuthToken()
+                print_('DeBug','[微软登陆]XBL验证结果' + str(self.arg4))
+    
+                self.arg5 = self.arg1.XSTSAuthToken(self.arg4["Token"])
+                print_('DeBug', '[微软登陆]XSTS验证结果' + str(self.arg5))
+    
+                self.arg6 = self.arg1.LoginWithXbox(self.arg5)
+                print_('DeBug', '[微软登陆]登录Xbox结果' + str(self.arg6))
 
-            self.arg5 = self.arg1.XSTSAuthToken(self.arg4["Token"])
-            print_('DeBug', '[微软登陆]XSTS验证结果' + str(self.arg5))
+                if self.arg6:
+                    self.arg7 = self.arg1.isTheAccountHasMinecraft(self.arg6["access_token"])
+                    print_('DeBug', '[微软登陆]账号是否有正版mc' + str(self.arg7))
 
-            self.arg6 = self.arg1.LoginWithXbox(self.arg5)
-            print_('DeBug', '[微软登陆]登录Xbox结果' + str(self.arg6))
+                    self.arg8 = self.arg1.GetPlayerProfile(self.arg6["access_token"])
+                    print_('DeBug', '[微软登陆]玩家信息: ' + str(self.arg8))
 
-            if self.arg6:
-                self.arg7 = self.arg1.isTheAccountHasMinecraft(self.arg6["access_token"])
-                print_('DeBug', '[微软登陆]账号是否有正版mc' + str(self.arg7))
-
-                self.arg8 = self.arg1.GetPlayerProfile(self.arg6["access_token"])
-                print_('DeBug', '[微软登陆]玩家信息: ' + str(self.arg8))
-
-                access_token = self.arg6['access_token']
-
+                    Tokens = [self.arg6['access_token'],self.arg6['access_token']]
+ 
+        except :
+            from sys import exc_info
+            from traceback import format_exc
+            ErrorKind = str(exc_info()[1])
+            ErrorCause = 'None'
+            ErrorInfo = str(format_exc())
+            print_('Error', '在微软登陆时出现异常')
+            self.SinOut_Error.emit(ErrorKind, ErrorCause, ErrorInfo)
 
 
     def Quit(self):
         self.arg1.Quit()
-    
+        
