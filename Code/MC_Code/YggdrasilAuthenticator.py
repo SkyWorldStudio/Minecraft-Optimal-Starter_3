@@ -3,12 +3,18 @@ import json
 import Accounts
 from PyJsonEntity import PyJsonEntity
 
+# YggdrasilAuthenticator 外置登录验证类
 class YggdrasilAuthenticator:
+    # authserver:外置登录提供商提供的api认证地址
+    # mail:用户名(邮件)
+    # password:密码
     def __init__(self, authserver:str, mail:str, password:str) -> None:
         self.mail = mail
         self.password = password
         self.authserver = authserver.strip("/")
 
+    # 登录
+    # return value:YggdrasilAccount类
     def Login(self):
         account = Accounts.YggdrasilAccount()
         RequestParams:dict = {
@@ -28,6 +34,8 @@ class YggdrasilAuthenticator:
         else:
             return PyJsonEntity.JsonToEntity(result.text, account)
         
+    # 刷新令牌
+    # return value:YggdrasilAccount类
     def Refresh(self, account:Accounts.YggdrasilAccount):
         raccount = Accounts.YggdrasilAccount()
         RequestParams:dict = {
@@ -42,6 +50,8 @@ class YggdrasilAuthenticator:
         else:
             return PyJsonEntity.JsonToEntity(result.text, raccount)
         
+    # 登出
+    # return value:bool,是否成功
     def Signout(self) -> bool:
         RequestParams:dict = {
             "username": self.mail,
