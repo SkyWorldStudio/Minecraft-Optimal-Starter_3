@@ -1,6 +1,8 @@
 import requests
 import json
 import time
+from PyJsonEntity import PyJsonEntity
+import Accounts
 
 
 # MicrosoftAuthenticator 微软登录类
@@ -93,8 +95,7 @@ class MicrosoftAuthenticator:
         headers = {"Authorization":"Bearer " + AuthToken}
         res = requests.get("https://api.minecraftservices.com/minecraft/profile", headers=headers)
         if(res.text == ""):return None
-        context = json.loads(res.text)
-        return context
+        return json.loads(res.text)
     
 
     #第二个调用，等待用户完成验证
