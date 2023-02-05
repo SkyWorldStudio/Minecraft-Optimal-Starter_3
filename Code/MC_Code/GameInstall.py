@@ -539,8 +539,11 @@ class GameInstall():
                 self.Libraries = ''
                 self.Assets = ''
 
-                self.loop.close()
-                self.new_loop.close()
+                try:
+                    self.loop.close()
+                    self.new_loop.close()
+                except AttributeError:
+                    pass
 
                 del self.AllList, a, time_stop, time_, self.new_loop, self.loop, self.Assets, self.Libraries
                 print_('Info', '[有可能导致错误]开始进行强制内存清理')

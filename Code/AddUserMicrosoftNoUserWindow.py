@@ -1,55 +1,31 @@
 # coding=utf-8
-import os.path
-
-from PyQt6 import QtGui, QtCore
-from PyQt6.QtCore import QPropertyAnimation, Qt, pyqtSignal, QRect
+from PyQt6.QtCore import QPropertyAnimation, Qt, pyqtSignal
 from PyQt6.QtGui import QColor
 
 from Code.Log import print_
-from UI.GameInstallErrorWindow.GameInstallErrorWindow import Ui_Dialog_GameInstallError
+from UI.AddUserWindow.AddUserMicrosoftNoUserWindow import Ui_Dialog_AddUserMicrosoftNoUserWindow
 import UI.Dialog_All_rc
 from Code.MainWindow import Return_Window_XY
-from PyQt6.QtWidgets import QDialog, QGraphicsDropShadowEffect, QApplication
+from PyQt6.QtWidgets import QDialog, QGraphicsDropShadowEffect
 
 
-class Dialog_GameInstellErrorWindows_(QDialog, Ui_Dialog_GameInstallError):
+class Dialog_AddUserMicrosoftNoUserWindow_(QDialog, Ui_Dialog_AddUserMicrosoftNoUserWindow):
     #sinOut_Win_XY = pyqtSignal(int, int)
     sinOut_OK = pyqtSignal()
 
-    def __init__(self, GameName, Game_V,
-                 ErrorKind, ErrorCause, ErrorInfo
-                 ):
+    def __init__(self):
         """
-            游戏安装出错
+            删除游戏确认
             :param GameName: 游戏名
             :param Game_V: 游戏版本
             :param ErrorKind: 报错关键字（种类）
             :param ErrorCause: 报错原因(str,None)
             :param ErrorInfo: 报错信息(Py的输出)
         """
-        super(Dialog_GameInstellErrorWindows_, self).__init__()
+        super(Dialog_AddUserMicrosoftNoUserWindow_, self).__init__()
         self.setupUi(self)
         #self.show()
 
-        self.GameName = GameName
-        self.Game_V = Game_V
-        self.ErrorKind = ErrorKind
-        self.ErrorCause = ErrorCause
-        self.ErrorInfo = ErrorInfo
-
-        if self.ErrorCause == 'None':
-            a = '报错原因未知'
-        else:
-            a = '可能是由于您' + self.ErrorCause + '所导致的。'
-
-        self.info = '在安装"' + str(self.GameName) + '"(' + str(self.Game_V) + ')' + '时出现错误，部分文件安装/下载失败，'+ a + '\n错误关键字: \n'+ str(self.ErrorKind) +'\n\n您可以复制详细信息并在关于中进行反馈'
-        self.label_3.setText(self.info)
-
-        self.copt_info = '在安装"' + str(self.GameName) + '"(' + str(self.Game_V) + ')' + '时出现错误，部分文件安装/下载失败，'+ a + '\n错误关键字: \n'+ str(self.ErrorKind) + '\n\n异常输出: \n' + str(self.ErrorInfo) + '\n\n建议在反馈时附带日志文件，您可以在设置中打开日志文件夹'
-        print_('Error',self.copt_info)
-
-
-        self.pushButton_copy.clicked.connect(self.pushButton_Copy_Clicked)
         self.pushButton_ok.clicked.connect(self.pushButton_OK_Clicked)
 
         # 添加阴影
@@ -63,13 +39,6 @@ class Dialog_GameInstellErrorWindows_(QDialog, Ui_Dialog_GameInstallError):
     def pushButton_OK_Clicked(self):
         """点击确定按钮"""
         self.clicked_pushButton_close()  # 关闭窗口
-
-    def pushButton_Copy_Clicked(self):
-        """点击复制按钮"""
-        # 实例化剪切板，标签设置为剪切板的文本并显示
-        clipboard = QApplication.clipboard()
-        clipboard.setText(self.copt_info)
-
 
 
     def clicked_pushButton_close(self):

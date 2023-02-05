@@ -7,19 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>585</width>
-    <height>180</height>
+    <height>190</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>585</width>
-    <height>180</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>585</width>
-    <height>220</height>
+    <height>165</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -53,11 +47,17 @@
 	border-radius: 5px;
 }
 
-#widget_bottom &gt; QPushButton{
+#widget_bottom *,
+#stackedWidget_widget_page_Microsoft_Top *{
+	background-color: rgba(255, 255, 255, 0);
+}
+
+#widget_bottom QPushButton{
 	border-radius: 5px;
 }
 
-#pushButton_bottom_cancel_confirm{
+#pushButton_bottom_cancel_confirm,
+#pushButton_bottom_cancel_confirm_Microsoft{
 	color: rgb(0, 119, 255);
 }
 
@@ -66,14 +66,31 @@
 	border-radius: 8px;
 	background-color: rgb(255, 255, 255);
 }
-#widget_2{
+#page_widget_2{
 	background-color: rgba(255, 255, 255, 0);
 }
 QLineEdit{
 	background-color: rgba(204, 204, 255, 26);
 	border-style:none;
 }
-</string>
+
+/*微软*/
+#widget_page_Microsoft_Top{
+	background-color: rgb(198, 223, 252);
+	border-radius: 8px;
+}
+#widget_page_Microsoft_Top  QLabel{
+	color: rgb(0, 96, 207);
+}
+#label_h1{
+	color: rgb(42, 130, 228);
+}
+
+#label_Microsoft_Code{
+	background-color: rgba(128, 128, 128, 46);
+	border-radius: 5px;
+	color: rgb(56, 56, 56);
+}</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -155,10 +172,10 @@ QLineEdit{
              <number>0</number>
             </property>
             <item>
-             <widget class="MyQLabel" name="label_2">
+             <widget class="MyQLabel" name="label_OffLine">
               <property name="font">
                <font>
-                <pointsize>14</pointsize>
+                <pointsize>15</pointsize>
                </font>
               </property>
               <property name="styleSheet">
@@ -176,10 +193,10 @@ QLineEdit{
              </widget>
             </item>
             <item>
-             <widget class="MyQLabel" name="label_3">
+             <widget class="MyQLabel" name="label_Microsoft">
               <property name="font">
                <font>
-                <pointsize>14</pointsize>
+                <pointsize>15</pointsize>
                </font>
               </property>
               <property name="text">
@@ -194,10 +211,10 @@ QLineEdit{
              </widget>
             </item>
             <item>
-             <widget class="MyQLabel" name="label_4">
+             <widget class="MyQLabel" name="label_else">
               <property name="font">
                <font>
-                <pointsize>14</pointsize>
+                <pointsize>15</pointsize>
                </font>
               </property>
               <property name="text">
@@ -258,14 +275,29 @@ QLineEdit{
         </property>
         <widget class="QWidget" name="page_OffLine">
          <layout class="QGridLayout" name="gridLayout_2">
+          <property name="topMargin">
+           <number>10</number>
+          </property>
           <property name="rightMargin">
            <number>12</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <property name="horizontalSpacing">
+           <number>-1</number>
           </property>
           <property name="verticalSpacing">
            <number>0</number>
           </property>
           <item row="1" column="0" colspan="3">
            <widget class="QWidget" name="widget_OffLine_1" native="true">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>38</height>
+             </size>
+            </property>
             <layout class="QHBoxLayout" name="horizontalLayout_3">
              <property name="spacing">
               <number>5</number>
@@ -290,6 +322,12 @@ QLineEdit{
                  <height>38</height>
                 </size>
                </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>38</height>
+                </size>
+               </property>
                <property name="font">
                 <font>
                  <pointsize>13</pointsize>
@@ -308,6 +346,12 @@ QLineEdit{
                <property name="minimumSize">
                 <size>
                  <width>0</width>
+                 <height>35</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
                  <height>35</height>
                 </size>
                </property>
@@ -514,22 +558,206 @@ QLineEdit{
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
-              <height>40</height>
+              <height>3</height>
              </size>
             </property>
            </spacer>
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="page_3"/>
-        <widget class="QWidget" name="page_2"/>
+        <widget class="QWidget" name="page_Microsoft">
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <property name="spacing">
+           <number>10</number>
+          </property>
+          <property name="topMargin">
+           <number>10</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QWidget" name="widget_page_Microsoft_Top" native="true">
+            <layout class="QGridLayout" name="gridLayout_4">
+             <property name="leftMargin">
+              <number>8</number>
+             </property>
+             <property name="topMargin">
+              <number>4</number>
+             </property>
+             <property name="rightMargin">
+              <number>8</number>
+             </property>
+             <property name="bottomMargin">
+              <number>4</number>
+             </property>
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_7">
+               <property name="minimumSize">
+                <size>
+                 <width>22</width>
+                 <height>22</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>22</width>
+                 <height>22</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="pixmap">
+                <pixmap resource="../Dialog_All.qrc">:/image/images/Hint.png</pixmap>
+               </property>
+               <property name="scaledContents">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_h1">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>22</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>22</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>提示</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0" colspan="2">
+              <widget class="QStackedWidget" name="stackedWidget_widget_page_Microsoft_Top">
+               <property name="currentIndex">
+                <number>0</number>
+               </property>
+               <widget class="QWidget" name="page_page_Microsoft_Top_1">
+                <layout class="QHBoxLayout" name="horizontalLayout_7">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QLabel" name="label_8">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>13</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;请点击&amp;quot;登陆&amp;quot;按钮开始进行微软登陆。在您点击登录按钮后，启动器会为您打开默认浏览器，并同时复制设备代码到您的剪贴板内(可以点击下方设备代码显示处重新复制), 您需要在浏览器中完成登录，并输入在此处显示的设备代码。若发现账号头像是默认头像、进入游戏后皮肤为默认皮肤或者无法进入开启正版认证的服务器，则可能需要重新添加微软账户。&lt;br/&gt;- 如果网站提示&amp;quot;出现错误&amp;quot;，请重新开始进行微软登陆&lt;br/&gt;如果您没有正版账户，请&lt;a href=&quot;https://www.minecraft.net/store/minecraft-java-bedrock-edition-pc&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0068da;&quot;&gt;购买正版Minecraft&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+               <widget class="QWidget" name="page_page_Microsoft_Top_2">
+                <layout class="QHBoxLayout" name="horizontalLayout_6">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QLabel" name="label_10">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>13</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>您已经完成了在弹出窗口中的登陆，请等待MOS完成验证操作......</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="page_4"/>
        </widget>
       </item>
       <item>
        <widget class="QWidget" name="widget_bottom" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <layout class="QHBoxLayout" name="horizontalLayout_4">
          <property name="spacing">
           <number>20</number>
@@ -547,55 +775,336 @@ QLineEdit{
           <number>0</number>
          </property>
          <item>
-          <spacer name="horizontalSpacer_3">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+          <widget class="QStackedWidget" name="stackedWidget_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
            </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
+           <property name="currentIndex">
+            <number>0</number>
            </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_bottom_cancel">
-           <property name="minimumSize">
-            <size>
-             <width>26</width>
-             <height>19</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>13</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>取消</string>
-           </property>
-           <property name="autoDefault">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_bottom_cancel_confirm">
-           <property name="font">
-            <font>
-             <pointsize>13</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>登陆</string>
-           </property>
-           <property name="shortcut">
-            <string>Return</string>
-           </property>
-           <property name="autoDefault">
-            <bool>false</bool>
-           </property>
+           <widget class="QWidget" name="page_OffLine_Bottom">
+            <layout class="QHBoxLayout" name="horizontalLayout_9">
+             <property name="spacing">
+              <number>20</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <spacer name="horizontalSpacer_3">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>458</width>
+                 <height>18</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_bottom_cancel">
+               <property name="minimumSize">
+                <size>
+                 <width>26</width>
+                 <height>19</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>13</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>取消</string>
+               </property>
+               <property name="autoDefault">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_bottom_cancel_confirm">
+               <property name="font">
+                <font>
+                 <pointsize>13</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>登陆</string>
+               </property>
+               <property name="shortcut">
+                <string>Return</string>
+               </property>
+               <property name="autoDefault">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="page_Microsoft_Bottom">
+            <layout class="QHBoxLayout" name="horizontalLayout_10">
+             <property name="leftMargin">
+              <number>10</number>
+             </property>
+             <property name="topMargin">
+              <number>10</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QWidget" name="widget_page_Microsoft" native="true">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_8">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="label_9">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>16</pointsize>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>设备代码：</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="MyQLabel" name="label_Microsoft_Code">
+                  <property name="minimumSize">
+                   <size>
+                    <width>250</width>
+                    <height>28</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>250</width>
+                    <height>28</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>14</pointsize>
+                   </font>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>ForbiddenCursor</cursorShape>
+                  </property>
+                  <property name="text">
+                   <string>请先点击&quot;登陆&quot;按钮开始进行登陆</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_6">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>102</width>
+                 <height>18</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QStackedWidget" name="stackedWidget_3">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="currentIndex">
+                <number>0</number>
+               </property>
+               <widget class="QWidget" name="page_Microsoft_Bottom_1">
+                <layout class="QHBoxLayout" name="horizontalLayout_12">
+                 <property name="spacing">
+                  <number>20</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QPushButton" name="pushButton_bottom_cancel_Microsoft">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>26</width>
+                     <height>19</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>13</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>取消</string>
+                   </property>
+                   <property name="autoDefault">
+                    <bool>false</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButton_bottom_cancel_confirm_Microsoft">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>13</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>登陆</string>
+                   </property>
+                   <property name="shortcut">
+                    <string>Return</string>
+                   </property>
+                   <property name="autoDefault">
+                    <bool>false</bool>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+               <widget class="QWidget" name="page_Microsoft_Bottom_2">
+                <layout class="QHBoxLayout" name="horizontalLayout_11">
+                 <property name="spacing">
+                  <number>5</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QLabel" name="label_Microsoft_Bottom_2_Loading">
+                   <property name="maximumSize">
+                    <size>
+                     <width>19</width>
+                     <height>19</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="pixmap">
+                    <pixmap resource="../Dialog_All.qrc">:/image/images/loading_Window.gif</pixmap>
+                   </property>
+                   <property name="scaledContents">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButton_bottom_cancel_5">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>26</width>
+                     <height>19</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>13</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>取消</string>
+                   </property>
+                   <property name="autoDefault">
+                    <bool>false</bool>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </widget>
+             </item>
+            </layout>
+           </widget>
           </widget>
          </item>
         </layout>
@@ -614,6 +1123,7 @@ QLineEdit{
   </customwidget>
  </customwidgets>
  <resources>
+  <include location="../Dialog_All.qrc"/>
   <include location="../MainWindow/img.qrc"/>
  </resources>
  <connections/>

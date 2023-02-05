@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="image">
+    <file>../images/loading_Window.gif</file>
+    <file>../images/Hint.png</file>
     <file>../images/Error.png</file>
     <file>../images/PopUpWindow.png</file>
     <file>../images/Warning.png</file>

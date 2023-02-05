@@ -24,8 +24,8 @@ numpy==1.24.1
 platformdirs==2.5.2
 Pygments==2.14.0
 pylint==2.15.3
-PyQt6==6.3.1
-PyQt6-Qt6==6.3.1
+PyQt6==6.4.1
+PyQt6-Qt6==6.4.2
 PyQt6-sip==13.4.0
 python-dotenv==0.21.0
 pytz==2022.5
